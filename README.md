@@ -112,6 +112,9 @@ which has its own `Index` view.
   - [ ] fetching bookmarks for current user
   - [ ] adding bookmarks to events
 - [ ] Style new elements
+- [ ] create `Ticket` model and join table
+- build out API, Flux loop, and components for:
+  - [ ] fetching tickets for current user
 
 ### Phase 7: Styling Cleanup and Seeding (1 day, W2 F 6pm)
 
