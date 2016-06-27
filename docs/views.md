@@ -6,7 +6,7 @@
 ## New Session
 ![new-session]
 
-## EventsIndex / EventIndexItem / EventForm
+## EventsIndex
 ![events]
 
 ## EventsIndex / EventIndexItem
@@ -15,12 +15,12 @@
 ## EventForm
 ![event-form]
 
-## BookmarkEvents
-![bookmark]
+## UserShow
+![user-show]
 
 [new-user]: ./wireframes/new_user.png
 [new-session]: ./wireframes/new_session.png
-[events]: ./wireframes/root_events.png
-[event]: ./wireframes/root_event.png
-[bookmark]: ./wireframes/root_bookmark.png
+[events]: ./wireframes/root_index.png
+[event]: ./wireframes/event_modal.png
+[user-show]: ./wireframes/user_show.png
 [event-form]: ./wireframes/event_form.png
