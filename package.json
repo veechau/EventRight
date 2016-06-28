@@ -1,0 +1,32 @@
+{
+  "name": "EventBrite",
+  "version": "1.0.0",
+  "description": "[Heroku link][heroku] **Note:** This should be a link to your production site",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "engines": {
+  "node": "6.2.1", 
+  "npm": "3.9.3"
+},
+
+"scripts": {
+  "postinstall": "./node_modules/.bin/webpack"
+},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/veechau/EventRight.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/veechau/EventRight/issues"
+  },
+  "homepage": "https://github.com/veechau/EventRight#readme"
+}
