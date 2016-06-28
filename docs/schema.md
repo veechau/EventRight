@@ -13,14 +13,20 @@ description | text      | not null
 organizer_id| integer   | not null, foreign key (references users), indexed
 price       | integer   | not null
 category_id | integer   | not null, foreign key (references categories), indexed
-private     | boolean   | not null, default: false
 
 ## categories
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 title       | string    | not null
-description | string    |
+description | text    |
+
+## event_categories
+column name | data type | details
+------------|-----------|-----------------------
+event_id    | integer   | not null, foreign key (references events), index
+category_id | integer   | not null, foreign key (references categories), indexed
+
 
 ## bookmarks
 column name | data type | details

@@ -8,15 +8,15 @@
 
 ### Users
 
-- `GET /users/new`
-- `POST /users`
-- `PATCH /users`
+- `GET /api/users/new`
+- `POST /api/users`
+- `PATCH /api/users`
 
 ### Session
 
-- `GET /session/new`
-- `POST /session`
-- `DELETE /session`
+- `GET /api/session/new`
+- `POST /api/session`
+- `DELETE /api/session`
 
 ## JSON API
 
@@ -30,7 +30,7 @@
 - `PATCH /api/events/:id`
 - `DELETE /api/events/:id`
 
-### Notebooks
+### Categories
 
 - `GET /api/categories`
 - `POST /api/categories`
@@ -43,13 +43,13 @@
 ### Bookmarks
 
 - Bookmarked events will be included in the user show page
-- `GET /api/users/:userId/bookmarks`
-- `POST /api/users/:userId/bookmarks/`: add bookmarks to user bookmarks by eventId
-- `DELETE /api/users/:userId/bookmarks/:eventId`: remove bookmark from user bookmarks by eventId
+- `GET /api/bookmarks` current user and event passed in as params
+- `POST /api/bookmarks/`: add bookmarks to user bookmarks by eventId
+- `DELETE /api/bookmarks/:eventId`: remove bookmark from user bookmarks by eventId
 
 
-### Bookmarks
+### Tickets
 - Purchased events will be included in the user show page
-- `GET /api/users/:userId/tickets`
-- `POST /api/users/:userId/tickets/`: add ticket to user bookmarks by eventId
-- `DELETE /api/users/:userId/bookmarks/:eventId`: remove ticket from user tickets by eventId
+- `GET /api/tickets` current user and event passed in as params
+- `POST /api/tickets/`: add ticket to user bookmarks by eventId
+- `DELETE /api/tickets/:eventId`: remove ticket from user tickets by eventId
