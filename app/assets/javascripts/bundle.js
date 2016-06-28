@@ -62,12 +62,8 @@
 	  React.createElement(Route, { path: '/', component: App })
 	);
 
-	document.addEventListener("DOMContentoaded", function () {
-	  ReactDOM.render(React.createElement(
-	    'div',
-	    null,
-	    'Hello'
-	  ), document.findByElementId("content"));
+	document.addEventListener("DOMContentLoaded", function () {
+	  ReactDOM.render(routes, document.getElementById("content"));
 	});
 
 /***/ },
@@ -25939,9 +25935,29 @@
 
 /***/ },
 /* 230 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var App = React.createClass({
+	  displayName: 'App',
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'header',
+	        null,
+	        'Welcome to EventRight'
+	      ),
+	      this.props.children
+	    );
+	  }
+	});
+
+	module.exports = App;
 
 /***/ }
 /******/ ]);
