@@ -7,14 +7,31 @@ const IndexRoute = ReactRouter.IndexRoute;
 const hashHistory = ReactRouter.hashHistory;
 
 const App = require('./components/app.jsx');
+const LoginForm = require('./components/login_form.jsx');
+
+const SessionStore = require('./stores/session_store');
+const SessionActions = require('./actions/session_actions');
 
 const routes = (
-  <Router history={ hashHistory }>
-    <Route path="/" component={ App }>
+    <Router history={ hashHistory }>
+      <Route path="/" component={ App }>
+        <IndexRoute component={ LoginForm } />
+        <Route path="/login" component={ LoginForm } />
+        <Route path="/signup" component={ LoginForm } />
     </Route>
   </Router>
 );
 
+function _ensureLoggedIn(nextState, replace) {
+    if (!SessionStore.isUserLoggedIn()) {
+      replace('/login');
+    }
+}
+
+
 document.addEventListener("DOMContentLoaded", function(){
+  if (window.currentUser) {
+    SessionActions.receiveCurrentUser(window.currentUser);
+  }
   ReactDOM.render( routes, document.getElementById("content") );
 });

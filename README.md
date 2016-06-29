@@ -47,10 +47,10 @@ EventRight is a web application inspired by Eventbrite that will be build using 
 
 **Objective:** Functioning rails project with front-end Authentication
 
-- [ ] create new project
-- [ ] create `User` model
-- [ ] authentication backend setup
-- [ ] create StaticPages controller and root view
+- [x] create new project
+- [x] create `User` model
+- [x] authentication backend setup
+- [x] create StaticPages controller and root view
 - [ ] set up webpack & flux scaffold with skeleton files
 - [ ] setup APIUtil to interact with the API
 - [ ] set up flux cycle for frontend auth
