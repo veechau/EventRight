@@ -8,8 +8,9 @@ class Api::SessionsController < ApplicationController
       login(@user)
       render "api/users/show"
     else
-      @errors = ['Invalid credentials']
-			render "api/shared/error", status: 401
+			render json: {
+          base: ["Invalid username/password combination"]
+        }, status: 401
     end
 
   end
@@ -20,8 +21,7 @@ class Api::SessionsController < ApplicationController
 			logout
 			render "api/users/show"
 		else
-			@errors = ['No one logged in']
-			render "api/shared/error", status: 404
+			render json @user.errors, status: 404
 		end
 	end
 

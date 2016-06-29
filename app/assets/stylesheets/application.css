@@ -14,21 +14,136 @@
  *= require_self
  */
 
- #content {
- 	margin: 0;
- 	padding: 0;
- 	border: 0;
- 	font-size: 100%;
- 	vertical-align: baseline;
+ html, body, header, nav, h1, a,
+ ul, li, strong, main, i,
+ section, img, div, h2, p, form,
+ fieldset, label, textarea,
+ span, article, footer, time, small {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   outline: 0;
+   font: inherit;
+   /*color: inherit;*/
+   text-align: inherit;
+   text-decoration: inherit;
+   vertical-align: inherit;
+   box-sizing: inherit;
+   background: transparent;
+ }
+
+ ul {
+   list-style: none;
+ }
+
+ img {
+   display: block;
+   width: 100%;
+   height: auto;
+ }
+
+ input[type="password"],
+ input[type="email"],
+ input[type="text"],
+ input[type="submit"],
+ textarea,
+ button {
+   /*
+   Get rid of native styling. Read more here:
+   http://css-tricks.com/almanac/properties/a/appearance/
+   */
+   -webkit-appearance: none;
+   -moz-appearance: none;
+ }
+
+ button,
+ input[type="submit"] {
+   cursor: pointer;
+ }
+
+ /* Clearfix */
+
+ .group:after {
+   content: "";
+   display: block;
+   clear: both;
  }
 
 
- #header-group {
+#content {
+  font-family: 'Roboto', sans-serif;
+	font-size: inherit;
+	vertical-align: baseline;
+}
 
- }
-  div.user-login > header {
-    display: block;
-    font-family: 'Pacifico', sans-serif;
-    font: #f6682f;
-    align-self: center;
-  }
+/* Header Group */
+
+.header-group {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  width: 100%;
+  border: 1px solid #D2D6DF;
+  align-items: center;
+}
+
+.header-link {
+  display: flex;
+  font-family: 'Pacifico', sans-serif;
+  color: #f6682f;
+  font-size: 28px;
+  align-self: center;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+}
+
+.current {
+  color: #D2D6DF;
+  font-size: 14px;
+  padding-right: 10px
+}
+
+.current:hover {
+  color: #00a8f2;
+}
+
+
+/*App Slider*/
+
+.slider {
+    background-color: #ffffff;;
+    height: 70%;
+    width: 100%;
+    position: relative;
+    z-index: -1;
+}
+.slider li {
+    list-style: none;
+    position: relative;;
+}
+
+
+/*Login Form*/
+.login-form-container {
+  display: block;
+  position: absolute;
+  margin: auto;
+  top: 20%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 40px;
+}
+
+
+/*User Landing Page*/
+.user-landing-page {
+  display: block;
+  position: absolute;
+  align-self: center;
+  top: 51px;
+  font-size: 30px;
+  color: #ffffff;
+}

@@ -35,6 +35,10 @@ const LoginForm = React.createClass({
     }
   },
 
+	_handleLogIn(){
+    SessionActions.logIn({username: "Demo_User", password: "Password"});
+	},
+
 	handleSubmit(e) {
 		e.preventDefault();
 
@@ -109,6 +113,7 @@ const LoginForm = React.createClass({
 
 		        <br />
 						<input type="submit" value="Submit" />
+						<button onClick={ this._handleLogIn }>Demo User</button>
 					</div>
 				</form>
 			</div>

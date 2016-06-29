@@ -19,44 +19,36 @@ const Nav = React.createClass({
     // implement later
   },
   greeting() {
-    let welcomeMessage = "Welcome to EventRight!";
     let nav = (
-      <nav className="login-signup">
-        <Link to="/login" activeClassName="current" onClick={ this._handleLogIn }>Demo User</Link>
-        &nbsp;or&nbsp;
-        <Link to="/login" activeClassName="current">Login</Link>
-        &nbsp;or&nbsp;
-        <Link to="/signup" activeClassName="current">Sign up!</Link>
+      <nav className="nav-links">
+        <Link to="/login" className="current" onClick={ this._handleLogIn }>Demo User</Link>
+
+        <Link to="/login" className="current">Login</Link>
+
+        <Link to="/signup" className="current">Sign up!</Link>
       </nav>
     );
 
     if (SessionStore.isUserLoggedIn()) {
-      welcomeMessage = `Welcome back, ${SessionStore.currentUser().username}!`;
       nav = (
-        <nav className="login-signup">
+        <nav className="nav-links">
           <Link to="/"
-                activeClassName="current"
+                className="current"
                 onClick={this._handleLogOut}>Log Out</Link>
-        &nbsp;or&nbsp;
           <Link to="/"
-                activeClassName="current"
+                className="current"
                 onClick={this._accountInfo}>Account Information</Link>
         </nav>
       );
     }
 
     return(
-      <hgroup className="header-group">
-        <h2 className="header-name">{welcomeMessage}</h2>
-        {nav}
-      </hgroup>
+        nav
     );
   },
   render() {
     return (
-      <div className="user-login">
-        {this.greeting()}
-    </div>
+      this.greeting()
     );
   }
 });
