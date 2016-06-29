@@ -55,7 +55,7 @@
 	var hashHistory = ReactRouter.hashHistory;
 
 	var App = __webpack_require__(230);
-	var LoginForm = __webpack_require__(258);
+	var LoginForm = __webpack_require__(256);
 
 	var SessionStore = __webpack_require__(231);
 	var SessionActions = __webpack_require__(254);
@@ -32864,7 +32864,7 @@
 	var AppDispatcher = __webpack_require__(232);
 	var SessionConstants = __webpack_require__(253);
 	var SessionApiUtil = __webpack_require__(255);
-	var ErrorActions = __webpack_require__(256);
+	var ErrorActions = __webpack_require__(259);
 	var hashHistory = __webpack_require__(168).hashHistory;
 
 	var SessionActions = {
@@ -32962,52 +32962,13 @@
 
 	"use strict";
 
-	var AppDispatcher = __webpack_require__(232);
-	var ErrorConstants = __webpack_require__(257);
-
-	var ErrorActions = {
-	  setErrors: function setErrors(form, errors) {
-	    AppDispatcher.dispatch({
-	      actionType: ErrorConstants.SET_ERRORS,
-	      form: form,
-	      errors: errors
-	    });
-	  },
-	  clearErrors: function clearErrors() {
-	    AppDispatcher.dispatch({
-	      actionType: ErrorConstants.CLEAR_ERRORS
-	    });
-	  }
-	};
-
-	module.exports = ErrorActions;
-
-/***/ },
-/* 257 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	var ErrorConstants = {
-	  SET_ERRORS: "SET_ERRORS",
-	  CLEAR_ERRORS: "CLEAR_ERRORS"
-	};
-
-	module.exports = ErrorConstants;
-
-/***/ },
-/* 258 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	var React = __webpack_require__(1);
 	var Link = __webpack_require__(168).Link;
 	var SessionActions = __webpack_require__(254);
 	var SessionStore = __webpack_require__(231);
-	var ErrorStore = __webpack_require__(259);
+	var ErrorStore = __webpack_require__(257);
 
 	var LoginForm = React.createClass({
 	  displayName: 'LoginForm',
@@ -33147,14 +33108,14 @@
 	module.exports = LoginForm;
 
 /***/ },
-/* 259 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var Store = __webpack_require__(236).Store;
 	var AppDispatcher = __webpack_require__(232);
-	var ErrorConstants = __webpack_require__(257);
+	var ErrorConstants = __webpack_require__(258);
 
 	var ErrorStore = new Store(AppDispatcher);
 
@@ -33203,6 +33164,45 @@
 	};
 
 	module.exports = ErrorStore;
+
+/***/ },
+/* 258 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var ErrorConstants = {
+	  SET_ERRORS: "SET_ERRORS",
+	  CLEAR_ERRORS: "CLEAR_ERRORS"
+	};
+
+	module.exports = ErrorConstants;
+
+/***/ },
+/* 259 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var AppDispatcher = __webpack_require__(232);
+	var ErrorConstants = __webpack_require__(258);
+
+	var ErrorActions = {
+	  setErrors: function setErrors(form, errors) {
+	    AppDispatcher.dispatch({
+	      actionType: ErrorConstants.SET_ERRORS,
+	      form: form,
+	      errors: errors
+	    });
+	  },
+	  clearErrors: function clearErrors() {
+	    AppDispatcher.dispatch({
+	      actionType: ErrorConstants.CLEAR_ERRORS
+	    });
+	  }
+	};
+
+	module.exports = ErrorActions;
 
 /***/ }
 /******/ ]);
