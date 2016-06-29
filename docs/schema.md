@@ -11,6 +11,7 @@ end_date    | datetime  | not null
 description | text      | not null
 image       | string    |
 price       | float     | not null
+status      | string    | not null (inclusion: [:in_progress, :completed, :incomplete])
 organizer_id| integer   | not null, foreign key (references users), indexed
 category_id | integer   | not null, foreign key (references categories), indexed
 
@@ -27,7 +28,6 @@ column name | data type | details
 ------------|-----------|-----------------------
 event_id    | integer   | not null, foreign key (references events), index
 category_id | integer   | not null, foreign key (references categories), indexed
-
 
 ## bookmarks
 column name | data type | details

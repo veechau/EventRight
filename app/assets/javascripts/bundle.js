@@ -25965,6 +25965,8 @@
 	var SessionStore = __webpack_require__(231);
 	var SessionActions = __webpack_require__(254);
 
+	var Nav = __webpack_require__(260);
+
 	var App = React.createClass({
 	  displayName: 'App',
 	  componentDidMount: function componentDidMount() {
@@ -26046,13 +26048,6 @@
 	    // }
 	  },
 	  render: function render() {
-	    var greeting = void 0;
-	    if (SessionStore.isUserLoggedIn()) {
-	      greeting = this.greetUser();
-	    } else {
-	      greeting = this.greetGuest();
-	    }
-
 	    return React.createElement(
 	      'div',
 	      { className: 'user-login' },
@@ -26067,9 +26062,10 @@
 	            null,
 	            'EventRight'
 	          )
-	        ),
-	        greeting
-	      )
+	        )
+	      ),
+	      React.createElement(Nav, null),
+	      this.props.children
 	    );
 	  }
 	});
@@ -33252,6 +33248,100 @@
 	};
 
 	module.exports = ErrorStore;
+
+/***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Link = __webpack_require__(168).Link;
+	var SessionStore = __webpack_require__(231);
+	var SessionActions = __webpack_require__(254);
+
+	var Nav = React.createClass({
+	  displayName: 'Nav',
+	  componentDidMount: function componentDidMount() {
+	    SessionStore.addListener(this.forceUpdate.bind(this));
+	  },
+	  _handleLogOut: function _handleLogOut() {
+	    SessionActions.logOut();
+	  },
+	  _handleLogIn: function _handleLogIn() {
+	    SessionActions.logIn({ username: "Demo_User", password: "Password" });
+	  },
+	  _accountInfo: function _accountInfo() {
+	    // implement later
+	  },
+	  greeting: function greeting() {
+	    var welcomeMessage = "Welcome to EventRight!";
+	    var nav = React.createElement(
+	      'nav',
+	      { className: 'login-signup' },
+	      React.createElement(
+	        Link,
+	        { to: '/login', activeClassName: 'current', onClick: this._handleLogIn },
+	        'Demo User'
+	      ),
+	      ' or ',
+	      React.createElement(
+	        Link,
+	        { to: '/login', activeClassName: 'current' },
+	        'Login'
+	      ),
+	      ' or ',
+	      React.createElement(
+	        Link,
+	        { to: '/signup', activeClassName: 'current' },
+	        'Sign up!'
+	      )
+	    );
+
+	    if (SessionStore.isUserLoggedIn()) {
+	      welcomeMessage = 'Welcome back, ' + SessionStore.currentUser().username + '!';
+	      nav = React.createElement(
+	        'nav',
+	        { className: 'login-signup' },
+	        React.createElement(
+	          Link,
+	          { to: '/',
+	            activeClassName: 'current',
+	            onClick: this._handleLogOut },
+	          'Log Out'
+	        ),
+	        ' or ',
+	        React.createElement(
+	          Link,
+	          { to: '/',
+	            activeClassName: 'current',
+	            onClick: this._accountInfo },
+	          'Account Information'
+	        )
+	      );
+	    }
+
+	    return React.createElement(
+	      'hgroup',
+	      { className: 'header-group' },
+	      React.createElement(
+	        'h2',
+	        { className: 'header-name' },
+	        welcomeMessage
+	      ),
+	      nav
+	    );
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'user-login' },
+	      this.greeting()
+	    );
+	  }
+	});
+
+	module.exports = Nav;
 
 /***/ }
 /******/ ]);

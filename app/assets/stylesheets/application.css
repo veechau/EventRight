@@ -22,8 +22,10 @@
  	vertical-align: baseline;
  }
 
- 
 
+ #header-group {
+
+ }
   div.user-login > header {
     display: block;
     font-family: 'Pacifico', sans-serif;

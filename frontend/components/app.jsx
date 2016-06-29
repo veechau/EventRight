@@ -5,6 +5,8 @@ const Link = require('react-router').Link;
 const SessionStore = require('../stores/session_store');
 const SessionActions = require('../actions/session_actions');
 
+const Nav = require('./nav.jsx');
+
 
 const App = React.createClass({
   componentDidMount() {
@@ -23,7 +25,7 @@ const App = React.createClass({
     		<hgroup className="header-group">
     			<h2 className="header-name">Welcome back, {SessionStore.currentUser().username}!</h2>
 
-    			{ /* <input className="header-button" type="submit" value="Log Out" onClick={ this._handleLogOut } /> */}
+
           <nav className="login-signup">
 
           <Link to="/" activeClassName="current" onClick={this._handleLogOut}>Log Out</Link>
@@ -55,19 +57,13 @@ const App = React.createClass({
     // }
   },
   render() {
-    let greeting;
-    if (SessionStore.isUserLoggedIn()) {
-      greeting = this.greetUser();
-    } else {
-      greeting = this.greetGuest();
-    }
-
     return (
       <div className="user-login">
-      <header>
-        <Link to="/" className="header-link"><h1>EventRight</h1></Link>
-        { greeting }
-      </header>
+        <header>
+          <Link to="/" className="header-link"><h1>EventRight</h1></Link>
+        </header>
+        < Nav />
+        {this.props.children}
     </div>
     );
   }
