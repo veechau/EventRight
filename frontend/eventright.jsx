@@ -18,6 +18,7 @@ const routes = (
         <IndexRoute component={ LoginForm } />
         <Route path="/login" component={ LoginForm } />
         <Route path="/signup" component={ LoginForm } />
+    
     </Route>
   </Router>
 );

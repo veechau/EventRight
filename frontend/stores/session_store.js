@@ -7,6 +7,7 @@ const SessionConstants = require('../constants/session_constants');
 const SessionStore = new Store(AppDispatcher);
 
 let _currentUser = {};
+//REMOVE THIS
 let _currentUserHasBeenFetched = false;
 
 const _login = function(currentUser) {
@@ -36,6 +37,7 @@ SessionStore.currentUser = function() {
   return Object.assign({}, _currentUser);
 };
 
+//REMOVE THIS
 SessionStore.currentUserHasBeenFetched = function () {
   return !!_currentUserHasBeenFetched;
 };

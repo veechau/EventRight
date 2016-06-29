@@ -55,7 +55,7 @@
 	var hashHistory = ReactRouter.hashHistory;
 
 	var App = __webpack_require__(230);
-	var LoginForm = __webpack_require__(256);
+	var LoginForm = __webpack_require__(258);
 
 	var SessionStore = __webpack_require__(231);
 	var SessionActions = __webpack_require__(254);
@@ -25958,6 +25958,8 @@
 
 	'use strict';
 
+	/* eslint max-len: "off" */
+
 	var React = __webpack_require__(1);
 	var Link = __webpack_require__(168).Link;
 	var SessionStore = __webpack_require__(231);
@@ -25971,9 +25973,8 @@
 	  _handleLogOut: function _handleLogOut() {
 	    SessionActions.logOut();
 	  },
-	  greeting: function greeting() {
+	  greetUser: function greetUser() {
 	    if (SessionStore.isUserLoggedIn()) {
-
 	      return React.createElement(
 	        'hgroup',
 	        { className: 'header-group' },
@@ -25986,7 +25987,10 @@
 	        ),
 	        React.createElement('input', { className: 'header-button', type: 'submit', value: 'logout', onClick: this._handleLogOut })
 	      );
-	    } else if (!["/login", "/signup"].includes(this.props.location.pathname)) {
+	    }
+	  },
+	  greetGuest: function greetGuest() {
+	    if (!["/login", "/signup"].includes(this.props.location.pathname)) {
 	      return React.createElement(
 	        'nav',
 	        { className: 'login-signup' },
@@ -26005,24 +26009,51 @@
 	    }
 	  },
 	  render: function render() {
+	    var greeting = void 0;
+	    if (SessionStore.isUserLoggedIn()) {
+	      greeting = React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'header',
+	          null,
+	          React.createElement(
+	            Link,
+	            { to: '/', className: 'header-link' },
+	            React.createElement(
+	              'h1',
+	              null,
+	              'EventRight'
+	            )
+	          ),
+	          this.greetUser()
+	        )
+	      );
+	    } else {
+	      greeting = React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'header',
+	          null,
+	          React.createElement(
+	            Link,
+	            { to: '/', className: 'header-link' },
+	            React.createElement(
+	              'h1',
+	              null,
+	              'EventRight'
+	            )
+	          ),
+	          this.greetGuest()
+	        ),
+	        this.props.children
+	      );
+	    }
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(
-	        'header',
-	        null,
-	        React.createElement(
-	          Link,
-	          { to: '/', className: 'header-link' },
-	          React.createElement(
-	            'h1',
-	            null,
-	            'EventRight'
-	          )
-	        ),
-	        this.greeting()
-	      ),
-	      this.props.children
+	      greeting
 	    );
 	  }
 	});
@@ -26042,6 +26073,7 @@
 	var SessionStore = new Store(AppDispatcher);
 
 	var _currentUser = {};
+	//REMOVE THIS
 	var _currentUserHasBeenFetched = false;
 
 	var _login = function _login(currentUser) {
@@ -26071,6 +26103,7 @@
 	  return Object.assign({}, _currentUser);
 	};
 
+	//REMOVE THIS
 	SessionStore.currentUserHasBeenFetched = function () {
 	  return !!_currentUserHasBeenFetched;
 	};
@@ -32864,7 +32897,7 @@
 	var AppDispatcher = __webpack_require__(232);
 	var SessionConstants = __webpack_require__(253);
 	var SessionApiUtil = __webpack_require__(255);
-	var ErrorActions = __webpack_require__(259);
+	var ErrorActions = __webpack_require__(256);
 	var hashHistory = __webpack_require__(168).hashHistory;
 
 	var SessionActions = {
@@ -32962,13 +32995,52 @@
 
 	"use strict";
 
+	var AppDispatcher = __webpack_require__(232);
+	var ErrorConstants = __webpack_require__(257);
+
+	var ErrorActions = {
+	  setErrors: function setErrors(form, errors) {
+	    AppDispatcher.dispatch({
+	      actionType: ErrorConstants.SET_ERRORS,
+	      form: form,
+	      errors: errors
+	    });
+	  },
+	  clearErrors: function clearErrors() {
+	    AppDispatcher.dispatch({
+	      actionType: ErrorConstants.CLEAR_ERRORS
+	    });
+	  }
+	};
+
+	module.exports = ErrorActions;
+
+/***/ },
+/* 257 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var ErrorConstants = {
+	  SET_ERRORS: "SET_ERRORS",
+	  CLEAR_ERRORS: "CLEAR_ERRORS"
+	};
+
+	module.exports = ErrorConstants;
+
+/***/ },
+/* 258 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	var React = __webpack_require__(1);
 	var Link = __webpack_require__(168).Link;
 	var SessionActions = __webpack_require__(254);
 	var SessionStore = __webpack_require__(231);
-	var ErrorStore = __webpack_require__(257);
+	var ErrorStore = __webpack_require__(259);
 
 	var LoginForm = React.createClass({
 	  displayName: 'LoginForm',
@@ -33108,14 +33180,14 @@
 	module.exports = LoginForm;
 
 /***/ },
-/* 257 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var Store = __webpack_require__(236).Store;
 	var AppDispatcher = __webpack_require__(232);
-	var ErrorConstants = __webpack_require__(258);
+	var ErrorConstants = __webpack_require__(257);
 
 	var ErrorStore = new Store(AppDispatcher);
 
@@ -33164,45 +33236,6 @@
 	};
 
 	module.exports = ErrorStore;
-
-/***/ },
-/* 258 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	var ErrorConstants = {
-	  SET_ERRORS: "SET_ERRORS",
-	  CLEAR_ERRORS: "CLEAR_ERRORS"
-	};
-
-	module.exports = ErrorConstants;
-
-/***/ },
-/* 259 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var AppDispatcher = __webpack_require__(232);
-	var ErrorConstants = __webpack_require__(258);
-
-	var ErrorActions = {
-	  setErrors: function setErrors(form, errors) {
-	    AppDispatcher.dispatch({
-	      actionType: ErrorConstants.SET_ERRORS,
-	      form: form,
-	      errors: errors
-	    });
-	  },
-	  clearErrors: function clearErrors() {
-	    AppDispatcher.dispatch({
-	      actionType: ErrorConstants.CLEAR_ERRORS
-	    });
-	  }
-	};
-
-	module.exports = ErrorActions;
 
 /***/ }
 /******/ ]);
