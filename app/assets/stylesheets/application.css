@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+ #content {
+ 	margin: 0;
+ 	padding: 0;
+ 	border: 0;
+ 	font-size: 100%;
+ 	vertical-align: baseline;
+ }
+
+ 
+
+  div.user-login > header {
+    display: block;
+    font-family: 'Pacifico', sans-serif;
+    font: #f6682f;
+    align-self: center;
+  }

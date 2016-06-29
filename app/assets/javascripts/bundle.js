@@ -25973,6 +25973,9 @@
 	  _handleLogOut: function _handleLogOut() {
 	    SessionActions.logOut();
 	  },
+	  _handleLogIn: function _handleLogIn() {
+	    SessionActions.logIn({ username: "Demo_User", password: "Password" });
+	  },
 	  greetUser: function greetUser() {
 	    if (SessionStore.isUserLoggedIn()) {
 	      return React.createElement(
@@ -25985,15 +25988,43 @@
 	          SessionStore.currentUser().username,
 	          '!'
 	        ),
-	        React.createElement('input', { className: 'header-button', type: 'submit', value: 'logout', onClick: this._handleLogOut })
+	        React.createElement('input', { className: 'header-button', type: 'submit', value: 'Log Out', onClick: this._handleLogOut }),
+	        React.createElement(
+	          'nav',
+	          { className: 'login-signup' },
+	          React.createElement(
+	            'button',
+	            { className: 'header-button', onClick: this._handleLogOut, activeClassName: 'current' },
+	            'Log Out'
+	          ),
+	          ' or ',
+	          React.createElement(
+	            Link,
+	            { to: '/user', activeClassName: 'current' },
+	            'Account Information'
+	          )
+	        )
 	      );
 	    }
 	  },
 	  greetGuest: function greetGuest() {
-	    if (!["/login", "/signup"].includes(this.props.location.pathname)) {
-	      return React.createElement(
+	    // if ( !["/login", "/signup"].includes(this.props.location.pathname) ) {
+	    return React.createElement(
+	      'hgroup',
+	      { className: 'header-group' },
+	      React.createElement(
+	        'h2',
+	        { className: 'header-name' },
+	        'Welcome to EventRight!'
+	      ),
+	      React.createElement(
 	        'nav',
 	        { className: 'login-signup' },
+	        React.createElement(
+	          'button',
+	          { className: 'login-signup-buttons', value: 'Demo User', onClick: this._handleLogIn },
+	          'Demo User'
+	        ),
 	        React.createElement(
 	          Link,
 	          { to: '/login', activeClassName: 'current' },
@@ -26005,15 +26036,16 @@
 	          { to: '/signup', activeClassName: 'current' },
 	          'Sign up!'
 	        )
-	      );
-	    }
+	      )
+	    );
+	    // }
 	  },
 	  render: function render() {
 	    var greeting = void 0;
 	    if (SessionStore.isUserLoggedIn()) {
 	      greeting = React.createElement(
 	        'div',
-	        null,
+	        { className: 'user-login' },
 	        React.createElement(
 	          'header',
 	          null,
@@ -26032,7 +26064,7 @@
 	    } else {
 	      greeting = React.createElement(
 	        'div',
-	        null,
+	        { className: 'user-login' },
 	        React.createElement(
 	          'header',
 	          null,
