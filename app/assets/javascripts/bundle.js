@@ -25988,19 +25988,18 @@
 	          SessionStore.currentUser().username,
 	          '!'
 	        ),
-	        React.createElement('input', { className: 'header-button', type: 'submit', value: 'Log Out', onClick: this._handleLogOut }),
 	        React.createElement(
 	          'nav',
 	          { className: 'login-signup' },
 	          React.createElement(
-	            'button',
-	            { className: 'header-button', onClick: this._handleLogOut, activeClassName: 'current' },
+	            Link,
+	            { to: '/', activeClassName: 'current', onClick: this._handleLogOut },
 	            'Log Out'
 	          ),
 	          ' or ',
 	          React.createElement(
 	            Link,
-	            { to: '/user', activeClassName: 'current' },
+	            { to: '/', activeClassName: 'current' },
 	            'Account Information'
 	          )
 	        )
@@ -26010,82 +26009,67 @@
 	  greetGuest: function greetGuest() {
 	    // if ( !["/login", "/signup"].includes(this.props.location.pathname) ) {
 	    return React.createElement(
-	      'hgroup',
-	      { className: 'header-group' },
+	      'div',
+	      null,
 	      React.createElement(
-	        'h2',
-	        { className: 'header-name' },
-	        'Welcome to EventRight!'
-	      ),
-	      React.createElement(
-	        'nav',
-	        { className: 'login-signup' },
+	        'hgroup',
+	        { className: 'header-group' },
 	        React.createElement(
-	          'button',
-	          { className: 'login-signup-buttons', value: 'Demo User', onClick: this._handleLogIn },
-	          'Demo User'
+	          'h2',
+	          { className: 'header-name' },
+	          'Welcome to EventRight!'
 	        ),
 	        React.createElement(
-	          Link,
-	          { to: '/login', activeClassName: 'current' },
-	          'Login'
-	        ),
-	        ' or ',
-	        React.createElement(
-	          Link,
-	          { to: '/signup', activeClassName: 'current' },
-	          'Sign up!'
+	          'nav',
+	          { className: 'login-signup' },
+	          React.createElement(
+	            Link,
+	            { to: '/login', activeClassName: 'current', onClick: this._handleLogIn },
+	            'Demo User'
+	          ),
+	          ' or ',
+	          React.createElement(
+	            Link,
+	            { to: '/login', activeClassName: 'current' },
+	            'Login'
+	          ),
+	          ' or ',
+	          React.createElement(
+	            Link,
+	            { to: '/signup', activeClassName: 'current' },
+	            'Sign up!'
+	          )
 	        )
-	      )
+	      ),
+	      this.props.children
 	    );
 	    // }
 	  },
 	  render: function render() {
 	    var greeting = void 0;
 	    if (SessionStore.isUserLoggedIn()) {
-	      greeting = React.createElement(
-	        'div',
-	        { className: 'user-login' },
-	        React.createElement(
-	          'header',
-	          null,
-	          React.createElement(
-	            Link,
-	            { to: '/', className: 'header-link' },
-	            React.createElement(
-	              'h1',
-	              null,
-	              'EventRight'
-	            )
-	          ),
-	          this.greetUser()
-	        )
-	      );
+	      greeting = this.greetUser();
 	    } else {
-	      greeting = React.createElement(
-	        'div',
-	        { className: 'user-login' },
-	        React.createElement(
-	          'header',
-	          null,
-	          React.createElement(
-	            Link,
-	            { to: '/', className: 'header-link' },
-	            React.createElement(
-	              'h1',
-	              null,
-	              'EventRight'
-	            )
-	          ),
-	          this.greetGuest()
-	        ),
-	        this.props.children
-	      );
+	      greeting = this.greetGuest();
 	    }
+
 	    return React.createElement(
 	      'div',
-	      null,
-	      greeting
+	      { className: 'user-login' },
+	      React.createElement(
+	        'header',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/', className: 'header-link' },
+	          React.createElement(
+	            'h1',
+	            null,
+	            'EventRight'
+	          )
+	        ),
+	        greeting
+	      )
 	    );
 	  }
 	});
