@@ -38,8 +38,8 @@
 
  img {
    display: block;
-   width: 100%;
    height: auto;
+   width: 100%;
  }
 
  input[type="password"],
@@ -68,7 +68,6 @@
    display: block;
    clear: both;
  }
-
 
 #content {
   font-family: 'Roboto', sans-serif;
@@ -113,24 +112,88 @@
   color: #00a8f2;
 }
 
+/*Banner*/
 
-/*App Slider*/
-
-.slider {
-    background-color: #ffffff;
-    position: relative;
-    z-index: 0;
-}
-.slider li {
-    list-style: none;
-    position: relative;;
+#photobanner-container {
+ width: 100%;
+ overflow: hidden;
+ background: white;
 }
 
+.photobanner {
+ height: 70%;
+ width: 600%;
+ margin-bottom: 80px;
+}
+
+
+/*keyframe animations*/
+.first-picture-photobanner {
+ -webkit-animation: 3s linear 1s slidein; infinite;
+    -moz-animation: 3s linear 1s slidein; infinite;
+     -ms-animation: 3s linear 1s slidein; infinite;
+      -o-animation: 3s linear 1s slidein; infinite;
+         animation: 3s linear 1s slidein; infinite;
+
+}
+
+animation-duration: 3s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+@keyframes "slidein" {
+ 0% {
+    margin-left: 0%;
+ }
+ 100% {
+    margin-left: 100%;
+ }
+
+}
+
+@-moz-keyframes slidein {
+ 0% {
+   margin-left: 0%;
+ }
+ 100% {
+   margin-left: 100%;
+ }
+
+}
+
+@-webkit-keyframes "slidein" {
+ 0% {
+   margin-left: 0%;
+ }
+ 100% {
+   margin-left: 100%;
+ }
+
+}
+
+@-ms-keyframes "slidein" {
+ 0% {
+   margin-left: 0%;
+ }
+ 100% {
+   margin-left: 100%;
+ }
+
+}
+
+@-o-keyframes "slidein" {
+ 0% {
+   margin-left: 0%;
+ }
+ 100% {
+   margin-left: 100%;
+ }
+
+}
 
 /*Login Form*/
 .login-form-container {
   display: flex;
-  position: relative;;
+  position: relative;
   justify-content: center;
   margin: auto;
   background-color: red;

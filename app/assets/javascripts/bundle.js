@@ -33063,15 +33063,16 @@
 	  render: function render() {
 	    return React.createElement(
 	      "div",
-	      null,
+	      { id: "photobanner-container" },
 	      React.createElement(
-	        "ul",
-	        { className: "slider" },
-	        React.createElement(
-	          "li",
-	          null,
-	          React.createElement("img", { src: "https://iso.500px.com/wp-content/uploads/2014/12/concert.jpg" })
-	        )
+	        "div",
+	        { "class": "photobanner" },
+	        React.createElement("img", { "class": "first-picture-photobanner", src: "http://res.cloudinary.com/vechau/image/upload/v1467271000/photo-1453090927415-5f45085b65c0_o2iojc.jpg", alt: "Pick your show" }),
+	        React.createElement("img", { src: "http://res.cloudinary.com/vechau/image/upload/v1467272765/photo-1445965752525-ac2d3c195ffe_qdcaum.jpg", alt: "Fund your artist" }),
+	        React.createElement("img", { src: "http://res.cloudinary.com/vechau/image/upload/v1467272522/photo-1450859018738-29f67b1a6102_mmvfxu.jpg", alt: "Share your music" }),
+	        React.createElement("img", { src: "http://res.cloudinary.com/vechau/image/upload/v1467272182/photo-1415886541506-6efc5e4b1786_fmkcyh.jpg", alt: "Watch them Perform" }),
+	        React.createElement("img", { src: "http://res.cloudinary.com/vechau/image/upload/v1467270960/concert_lwmxi5.jpg", alt: "Live your Life" }),
+	        React.createElement("img", { src: "http://res.cloudinary.com/vechau/image/upload/v1467272192/photo-1459749411175-04bf5292ceea_zm9a2g.jpg", alt: "Join EventRite" })
 	      )
 	    );
 	  }
