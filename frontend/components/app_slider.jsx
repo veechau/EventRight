@@ -7,18 +7,18 @@ const AppSlider = React.createClass({
   render(){
     const settings = {
       className: "app-slider-div",
-      adaptiveHeight: false,
+      adaptiveHeight: true,
       arrows: true,
       dots: true,
       autoplaySpeed: 5000,
       autoplay: true,
-      initialSlide: 1,
+      initialSlide: 0,
       infinite: true,
+      focusOnSelect: true,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      swipeToSlide: true,
-      variableWidth: false
+      variableWidth: true
     };
     return (
       <Slider {...settings}>

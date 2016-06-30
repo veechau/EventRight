@@ -1,0 +1,2 @@
+module Api::GatheringsHelper
+end

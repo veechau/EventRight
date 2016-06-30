@@ -58,6 +58,11 @@
 	var Landing = __webpack_require__(280);
 	var LoginForm = __webpack_require__(281);
 	var SignupForm = __webpack_require__(283);
+	var EventsIndex = __webpack_require__(284);
+	var EventIndex = __webpack_require__(284);
+	var EventIndexItem = __webpack_require__(286);
+	var CategoriesIndex = __webpack_require__(285);
+	var CategoryIndexItem = __webpack_require__(287);
 
 	var SessionStore = __webpack_require__(231);
 	var SessionActions = __webpack_require__(255);
@@ -70,7 +75,17 @@
 	    { path: '/', component: App },
 	    React.createElement(IndexRoute, { component: Landing }),
 	    React.createElement(Route, { path: '/login', component: LoginForm }),
-	    React.createElement(Route, { path: '/signup', component: SignupForm })
+	    React.createElement(Route, { path: '/signup', component: SignupForm }),
+	    React.createElement(
+	      Route,
+	      { path: '/events', component: EventsIndex },
+	      React.createElement(Route, { path: '/events/:eventId', component: EventIndexItem })
+	    ),
+	    React.createElement(
+	      Route,
+	      { path: '/categories', component: CategoriesIndex },
+	      React.createElement(Route, { path: '/categories/:catId', component: CategoryIndexItem })
+	    )
 	  )
 	);
 
@@ -33064,18 +33079,18 @@
 	  render: function render() {
 	    var settings = {
 	      className: "app-slider-div",
-	      adaptiveHeight: false,
+	      adaptiveHeight: true,
 	      arrows: true,
 	      dots: true,
 	      autoplaySpeed: 5000,
 	      autoplay: true,
-	      initialSlide: 1,
+	      initialSlide: 0,
 	      infinite: true,
+	      focusOnSelect: true,
 	      speed: 500,
 	      slidesToShow: 1,
 	      slidesToScroll: 1,
-	      swipeToSlide: true,
-	      variableWidth: false
+	      variableWidth: true
 	    };
 	    return React.createElement(
 	      Slider,
@@ -35551,6 +35566,30 @@
 	});
 
 	module.exports = SignupForm;
+
+/***/ },
+/* 284 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+/***/ },
+/* 285 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+/***/ },
+/* 286 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+/***/ },
+/* 287 */
+/***/ function(module, exports) {
+
+	"use strict";
 
 /***/ }
 /******/ ]);

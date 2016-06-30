@@ -1,2 +1,0 @@
-class GatheringsController < ApplicationController
-end

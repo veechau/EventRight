@@ -1,2 +1,0 @@
-module GatheringsHelper
-end

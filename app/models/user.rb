@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
   before_validation :ensure_session_token_uniqueness
 
+  has_many :gatherings
+  # has_many :tickets
+  # has_many :bookmarks
+
   attr_reader :password
 
   def password=(password)

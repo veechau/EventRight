@@ -24,7 +24,7 @@
    border: 0;
    outline: 0;
    font: inherit;
-   /*color: inherit;*/
+   color: inherit;
    text-align: inherit;
    text-decoration: inherit;
    vertical-align: inherit;
@@ -114,9 +114,22 @@
 
 /*Banner / Slider*/
 
-.app-slider-div div img{
-  height: 80vh;
-  align-self: center;
+.app-slider-div {
+  height: 70vh
+}
+
+.app-slider-div div{
+  overflow: hidden;
+  height: 70vh;
+  align-items: center;
+}
+
+
+.app-slider-div div img {
+  height: auto;
+  width: 100vw;
+  top: calc(-90vh/3);
+  position: relative;
 }
 
 /*Login Form*/
