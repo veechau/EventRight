@@ -20,7 +20,7 @@ const Nav = React.createClass({
   _accountInfo(){
     // implement later
   },
-  
+
   greeting() {
     let nav = (
       <nav className="nav-links">

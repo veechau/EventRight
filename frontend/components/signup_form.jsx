@@ -23,6 +23,10 @@ const SignupForm = React.createClass({
     };
   },
 
+	componentWillMount() {
+		this.redirectIfLoggedIn();
+	},
+
   componentDidMount() {
     this.errorListener = ErrorStore.addListener(this.forceUpdate.bind(this));
     this.sessionListener = SessionStore.addListener(this.redirectIfLoggedIn);

@@ -13,11 +13,13 @@ let _currentUserHasBeenFetched = false;
 const _login = function(currentUser) {
   _currentUser = currentUser;
   _currentUserHasBeenFetched = true;
+  window.currentUser = currentUser;
 };
 
 const _logout = function() {
   _currentUser = {};
   _currentUserHasBeenFetched = true;
+  window.currentUser = undefined;
 };
 
 SessionStore.__onDispatch = payload => {
@@ -39,11 +41,11 @@ SessionStore.currentUser = function() {
 
 //REMOVE THIS
 SessionStore.currentUserHasBeenFetched = function () {
-  return !!_currentUserHasBeenFetched;
+  return Boolean(_currentUserHasBeenFetched);
 };
 
 SessionStore.isUserLoggedIn = function() {
-  return !!_currentUser.id;
+  return Boolean(_currentUser.id);
 };
 
 module.exports = SessionStore;
