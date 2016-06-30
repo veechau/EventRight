@@ -12,20 +12,23 @@ const Nav = React.createClass({
   _handleLogOut(){
     SessionActions.logOut();
   },
+
   _handleLogIn(){
     SessionActions.logIn({username: "Demo_User", password: "Password"});
   },
+
   _accountInfo(){
     // implement later
   },
+  
   greeting() {
     let nav = (
       <nav className="nav-links">
-        <Link to="/login" className="current" onClick={ this._handleLogIn }>Demo User</Link>
+        <Link to="/login" className="nav-links-item" onClick={ this._handleLogIn }>Demo User</Link>
 
-        <Link to="/login" className="current">Login</Link>
+        <Link to="/login" className="nav-links-item">Login</Link>
 
-        <Link to="/signup" className="current">Sign up!</Link>
+        <Link to="/signup" className="nav-links-item">Sign up!</Link>
       </nav>
     );
 
@@ -33,10 +36,10 @@ const Nav = React.createClass({
       nav = (
         <nav className="nav-links">
           <Link to="/"
-                className="current"
+                className="nav-links-item"
                 onClick={this._handleLogOut}>Log Out</Link>
           <Link to="/"
-                className="current"
+                className="nav-links-item"
                 onClick={this._accountInfo}>Account Information</Link>
         </nav>
       );

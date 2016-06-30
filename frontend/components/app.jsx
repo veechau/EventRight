@@ -23,9 +23,8 @@ const App = React.createClass({
           < Nav />
         </div>
 
-        <div className="slider-container">
-          <AppSlider />
-        </div>
+        <AppSlider />
+
         {this.props.children}
 
       </div>

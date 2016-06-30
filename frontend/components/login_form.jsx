@@ -84,6 +84,7 @@ const LoginForm = React.createClass({
     }
 
 		return (
+
 			<div className="login-form-container">
 				<form onSubmit={this.handleSubmit} className="login-form-box">
 	        Hello there!
@@ -113,7 +114,7 @@ const LoginForm = React.createClass({
 
 		        <br />
 						<input type="submit" value="Submit" />
-						<button onClick={ this._handleLogIn }>Demo User</button>
+						<button onClick={this._handleLogIn}>Demo User</button>
 					</div>
 				</form>
 			</div>

@@ -25996,11 +25996,7 @@
 	        ),
 	        React.createElement(Nav, null)
 	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'slider-container' },
-	        React.createElement(AppSlider, null)
-	      ),
+	      React.createElement(AppSlider, null),
 	      this.props.children
 	    );
 	  }
@@ -32867,17 +32863,17 @@
 	      { className: 'nav-links' },
 	      React.createElement(
 	        Link,
-	        { to: '/login', className: 'current', onClick: this._handleLogIn },
+	        { to: '/login', className: 'nav-links-item', onClick: this._handleLogIn },
 	        'Demo User'
 	      ),
 	      React.createElement(
 	        Link,
-	        { to: '/login', className: 'current' },
+	        { to: '/login', className: 'nav-links-item' },
 	        'Login'
 	      ),
 	      React.createElement(
 	        Link,
-	        { to: '/signup', className: 'current' },
+	        { to: '/signup', className: 'nav-links-item' },
 	        'Sign up!'
 	      )
 	    );
@@ -32889,14 +32885,14 @@
 	        React.createElement(
 	          Link,
 	          { to: '/',
-	            className: 'current',
+	            className: 'nav-links-item',
 	            onClick: this._handleLogOut },
 	          'Log Out'
 	        ),
 	        React.createElement(
 	          Link,
 	          { to: '/',
-	            className: 'current',
+	            className: 'nav-links-item',
 	            onClick: this._accountInfo },
 	          'Account Information'
 	        )
@@ -33073,11 +33069,6 @@
 	          "li",
 	          null,
 	          React.createElement("img", { src: "https://iso.500px.com/wp-content/uploads/2014/12/concert.jpg" })
-	        ),
-	        React.createElement(
-	          "li",
-	          null,
-	          React.createElement("img", { src: "http://az616578.vo.msecnd.net/files/2016/03/23/635943566212276867210249251_concert-crowd.jpg" })
 	        )
 	      )
 	    );
