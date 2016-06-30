@@ -4,13 +4,15 @@
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-title       | string    | not null
+artist      | string    | not null
 location    | text      | not null
 start_date  | datetime  | not null
 end_date    | datetime  | not null
 description | text      | not null
 image       | string    |
-price       | float     | not null
+tix_price   | float     | not null
+funds       | float     | not null
+goal        | float     | not null
 status      | string    | not null (inclusion: [:in_progress, :completed, :incomplete])
 organizer_id| integer   | not null, foreign key (references users), indexed
 category_id | integer   | not null, foreign key (references categories), indexed

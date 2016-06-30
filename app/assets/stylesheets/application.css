@@ -112,82 +112,11 @@
   color: #00a8f2;
 }
 
-/*Banner*/
+/*Banner / Slider*/
 
-#photobanner-container {
- width: 100%;
- overflow: hidden;
- background: white;
-}
-
-.photobanner {
- height: 70%;
- width: 600%;
- margin-bottom: 80px;
-}
-
-
-/*keyframe animations*/
-.first-picture-photobanner {
- -webkit-animation: 3s linear 1s slidein; infinite;
-    -moz-animation: 3s linear 1s slidein; infinite;
-     -ms-animation: 3s linear 1s slidein; infinite;
-      -o-animation: 3s linear 1s slidein; infinite;
-         animation: 3s linear 1s slidein; infinite;
-
-}
-
-animation-duration: 3s;
-  animation-name: slidein;
-  animation-iteration-count: infinite;
-@keyframes "slidein" {
- 0% {
-    margin-left: 0%;
- }
- 100% {
-    margin-left: 100%;
- }
-
-}
-
-@-moz-keyframes slidein {
- 0% {
-   margin-left: 0%;
- }
- 100% {
-   margin-left: 100%;
- }
-
-}
-
-@-webkit-keyframes "slidein" {
- 0% {
-   margin-left: 0%;
- }
- 100% {
-   margin-left: 100%;
- }
-
-}
-
-@-ms-keyframes "slidein" {
- 0% {
-   margin-left: 0%;
- }
- 100% {
-   margin-left: 100%;
- }
-
-}
-
-@-o-keyframes "slidein" {
- 0% {
-   margin-left: 0%;
- }
- 100% {
-   margin-left: 100%;
- }
-
+.app-slider-div div img{
+  height: 80vh;
+  align-self: center;
 }
 
 /*Login Form*/
@@ -196,7 +125,8 @@ animation-duration: 3s;
   position: relative;
   justify-content: center;
   margin: auto;
-  background-color: red;
+  background-color: transparent;
+  border: 1px solid #D2D6DF;
   border-radius: 10px;
   padding: 40px;
 }
@@ -208,7 +138,6 @@ animation-duration: 3s;
   justify-content: center;
   z-index: 2;
 }
-
 
 /*User Landing Page*/
 .landing-page {

@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630010125) do
+ActiveRecord::Schema.define(version: 20160630084623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "gatherings", force: :cascade do |t|
+    t.string   "artist",       null: false
+    t.text     "location",     null: false
+    t.datetime "start_date",   null: false
+    t.datetime "end_date",     null: false
+    t.text     "description"
+    t.string   "image"
+    t.float    "tix_price",    null: false
+    t.float    "funds",        null: false
+    t.float    "goal",         null: false
+    t.string   "status",       null: false
+    t.integer  "organizer_id", null: false
+    t.integer  "category_id",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "gatherings", ["category_id"], name: "index_gatherings_on_category_id", using: :btree
+  add_index "gatherings", ["organizer_id"], name: "index_gatherings_on_organizer_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",                      null: false

@@ -1,5 +1,3 @@
-/* eslint max-len: "off" */
-
 const React = require('react');
 const Link = require('react-router').Link;
 const SessionStore = require('../stores/session_store');
@@ -23,9 +21,9 @@ const App = React.createClass({
           < Nav />
         </div>
 
-        <AppSlider />
-
         {this.props.children}
+
+        <AppSlider />
 
       </div>
     );

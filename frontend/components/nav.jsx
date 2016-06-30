@@ -24,7 +24,7 @@ const Nav = React.createClass({
   greeting() {
     let nav = (
       <nav className="nav-links">
-        <Link to="/login" className="nav-links-item" onClick={ this._handleLogIn }>Demo User</Link>
+        <Link to="/" className="nav-links-item" onClick={ this._handleLogIn }>Demo User</Link>
 
         <Link to="/login" className="nav-links-item">Login</Link>
 

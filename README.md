@@ -145,6 +145,7 @@ which has its own `Index` view.
 - [ ] Pagination / infinite scroll for Events Index
 - [ ] Search by events or categories
 - [ ] Set reminders on events
+- [ ] add artists show page
 
 [phase-one]: docs/phases/phase1.md
 [phase-two]: docs/phases/phase2.md
