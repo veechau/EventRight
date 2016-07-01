@@ -60,12 +60,11 @@ const SignupForm = React.createClass({
 		};
 
     SessionActions.signUp(formData);
-    SessionActions.logIn({username: formData.username, password: formData.password});
 
 	},
 
   fieldErrors(field) {
-    const errors = ErrorStore.formErrors(this.formType());
+    const errors = ErrorStore.formErrors("signup");
 
     if (!errors[field]) { return; }
 
@@ -76,32 +75,20 @@ const SignupForm = React.createClass({
     return <ul>{ messages }</ul>;
   },
 
-  formType() {
-    return this.props.location.pathname.slice(1);
-  },
-
   update(property) {
     return (e) => this.setState({[property]: e.target.value});
   },
 
 	render() {
 
-    let navLink;
-    if (this.formType() === "login") {
-      navLink = <Link to="/signup">sign up instead</Link>;
-    } else {
-      navLink = <Link to="/login">log in instead</Link>;
-    }
-
 		return (
 			<div className="login-form-container">
 				<form onSubmit={this._handleSubmit} className="login-form-box">
 
         <div className="login-form-header">
-	        Hello there!
+	        Sign Up
         </div>
 					<br/>
-					Please { this.formType() } or { navLink }
 
 	        { this.fieldErrors("base") }
 					<div className="login-form">

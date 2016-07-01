@@ -6,6 +6,10 @@ const Nav = require('./nav.jsx');
 const AppSlider = require('./app_slider.jsx');
 
 
+
+const SessionModal = require('./session_modal');
+
+
 const App = React.createClass({
   componentDidMount() {
     SessionStore.addListener(this.forceUpdate.bind(this));
@@ -21,9 +25,9 @@ const App = React.createClass({
           < Nav />
         </div>
 
-        {this.props.children}
-
         <AppSlider />
+        
+        {this.props.children}
 
       </div>
     );

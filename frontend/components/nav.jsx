@@ -3,6 +3,10 @@ const Link = require('react-router').Link;
 const SessionStore = require('../stores/session_store');
 const SessionActions = require('../actions/session_actions');
 
+const SessionModal = require('./session_modal');
+const LoginForm = require('./login_form');
+const SignupForm = require('./signup_form');
+
 
 const Nav = React.createClass({
   componentDidMount() {
@@ -21,26 +25,26 @@ const Nav = React.createClass({
     // implement later
   },
 
+
   greeting() {
     let nav = (
       <nav className="nav-links">
-        <Link to="/" className="nav-links-item" onClick={ this._handleLogIn }>Demo User</Link>
-
-        <Link to="/login" className="nav-links-item">Login</Link>
-
-        <Link to="/signup" className="nav-links-item">Sign up!</Link>
+        <div className="nav-links-item" onClick={ this._handleLogIn }>
+        Demo User</div>
+        <SessionModal content="login"/>
+        <SessionModal content="signup"/>
       </nav>
     );
 
     if (SessionStore.isUserLoggedIn()) {
       nav = (
         <nav className="nav-links">
-          <Link to="/"
+          <div
                 className="nav-links-item"
-                onClick={this._handleLogOut}>Logout</Link>
-          <Link to="/"
+                onClick={this._handleLogOut}>Logout</div>
+          <div
                 className="nav-links-item"
-                onClick={this._accountInfo}>Account Information</Link>
+                onClick={this._accountInfo}>Account Information</div>
         </nav>
       );
     }
@@ -49,6 +53,8 @@ const Nav = React.createClass({
         nav
     );
   },
+
+
   render() {
     return (
       this.greeting()

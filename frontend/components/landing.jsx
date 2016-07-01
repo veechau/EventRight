@@ -2,7 +2,8 @@
 
 const React = require('react');
 const SessionStore = require('../stores/session_store');
-const EventIndex = require('./gatherings_index');
+const GatheringsIndex = require('./gatherings_index');
+
 
 const Landing = React.createClass({
   render(){
@@ -13,8 +14,7 @@ const Landing = React.createClass({
     return(
       <div className="landing-page">
         {welcomeMessage}
-
-        <EventIndex />
+        <GatheringsIndex />
       </div>
     );
   }

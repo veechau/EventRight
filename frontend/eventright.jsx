@@ -24,8 +24,8 @@ const routes = (
     <Router history={ hashHistory }>
       <Route path="/" component={ App }>
         <IndexRoute component={ Landing } />
-        <Route path="/login" component={ LoginForm } />
-        <Route path="/signup" component={ SignupForm } />
+        <Route path="/login" component={ LoginForm} />
+        <Route path="/signup" component={ SignupForm} />
         <Route path="/events" component={ GatheringsIndex} >
           <Route path="/events/:eventId" component={ GatheringIndexItem } />
         </Route>
@@ -38,7 +38,7 @@ const routes = (
 
 function _ensureLoggedIn(nextState, replace) {
     if (!SessionStore.isUserLoggedIn()) {
-      replace('/login');
+      replace('/');
     }
 }
 

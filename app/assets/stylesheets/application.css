@@ -42,19 +42,16 @@
    width: 100%;
  }
 
+/* INPUT RESET
  input[type="password"],
  input[type="email"],
  input[type="text"],
  input[type="submit"],
  textarea,
  button {
-   /*
-   Get rid of native styling. Read more here:
-   http://css-tricks.com/almanac/properties/a/appearance/
-   */
    -webkit-appearance: none;
    -moz-appearance: none;
- }
+ }*/
 
  button,
  input[type="submit"] {
@@ -75,6 +72,21 @@
 	vertical-align: baseline;
 }
 
+/*Button Group
+button {
+    background-color: transparent;
+    border: 1px solid #2FBDF6;
+    border-radius: 8px;
+    color: #666A73;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: #2FBDF6;
+    color: white;
+} */
+
 /* Header Group */
 
 .header-group {
@@ -92,9 +104,13 @@
   padding-top: 2px;
   padding-bottom: 2px;
   font-family: 'Pacifico', sans-serif;
-  color: #f6682f;
+  color: #F6682F;
   font-size: 28px;
   align-self: center;
+}
+
+.header-link:hover {
+  color: #F69A2F;
 }
 
 .nav-links {
@@ -102,15 +118,16 @@
   justify-content: space-around;
 }
 
-.nav-links-item {
+div.nav-links-item{
   color: #666A73;
   font-size: 14px;
   padding-right: 10px
 }
 
-.nav-links-item:hover {
+div.nav-links-item:hover {
   color: #00a8f2;
 }
+
 
 /*Banner / Slider*/
 
@@ -133,14 +150,21 @@
 }
 
 /*Login Form*/
+
+.session-modal-content{
+  background-color: #FFFFFF;
+  color: #666A73;
+}
+
+.session-modal-link{
+  color: #00a8f2;
+}
+
 .login-form-container {
   display: flex;
   position: relative;
   justify-content: center;
   margin: auto;
-  background-color: transparent;
-  border: 1px solid #D2D6DF;
-  border-radius: 10px;
   padding: 40px;
 }
 
@@ -151,6 +175,12 @@
   justify-content: center;
   z-index: 2;
 }
+
+/*SessionModal*/
+.session-modal {
+  position: relative;
+}
+
 
 /*User Landing Page*/
 .landing-page {

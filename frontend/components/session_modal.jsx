@@ -1,19 +1,26 @@
 const React = require('react');
 const Modal = require('boron/DropModal');
 
+const LoginForm = require('./login_form');
+const SignupForm = require('./signup_form');
+
 const modalStyle = {
   width: '100%',
   height: '100%',
-  backgroundColor: '#000000',
-  opacity: '0.8',
+  backgroundColor: 'fade(#4B4E4F, 80%)',
+  opacity: '0.3',
 };
 
 const backdropStyle = {
-  backgroundColor: '#4b4e4f'
+  border: '0px solid transparent',
 };
 
 const contentStyle = {
-
+  width: '60%',
+  margin: 'auto',
+  marginTop: 'calc(100vh/5)',
+  border: '1px solid #D2D6DF',
+  borderRadius: '8px'
 };
 
 const SessionModal = React.createClass({
@@ -24,14 +31,27 @@ const SessionModal = React.createClass({
         this.refs.modal.hide();
     },
     render: function() {
+      let formContent = "";
+      let buttontext = "";
+      if (this.props.content === "login"){
+        formContent = < LoginForm />;
+        buttontext = "Login";
+      } else {
+        formContent = < SignupForm />;
+        buttontext = "Signup";
+      }
         return (
-            <div>
-              <button onClick={this.showModal}>Open</button>
-              <Modal ref="modal" modalStyle={modalStyle} backdropStyle={backdropStyle} contentStyle={contentStyle}>
-                <h2>I am a dialog</h2>
-                <button onClick={this.hideModal}>Close</button>
+            <div className="nav-links-item">
+              <div onClick={this.showModal}>{buttontext}</div>
+              <Modal ref="modal" className="session-modal" modalStyle={modalStyle} backdropStyle={backdropStyle} contentStyle={contentStyle}>
+                <div className="session-modal-content">
+                  <div onClick={this.hideModal}>X</div>
+                  {formContent}
+                </div>
               </Modal>
             </div>
         );
     }
 });
+
+module.exports = SessionModal;

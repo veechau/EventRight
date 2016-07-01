@@ -43,7 +43,7 @@ const LoginForm = React.createClass({
     SessionActions.logIn({username: "Demo_User", password: "Password"});
 	},
 
-	handleSubmit(e) {
+	_handleSubmit(e) {
 		e.preventDefault();
 
 		const formData = {
@@ -51,15 +51,11 @@ const LoginForm = React.createClass({
 			password: this.state.password
 		};
 
-    if (this.props.location.pathname === "/login") {
-      SessionActions.logIn(formData);
-    } else {
-      SessionActions.signUp(formData);
-    }
+		SessionActions.logIn(formData);
 	},
 
   fieldErrors(field) {
-    const errors = ErrorStore.formErrors(this.formType());
+    const errors = ErrorStore.formErrors("login");
 
     if (!errors[field]) { return; }
 
@@ -80,21 +76,12 @@ const LoginForm = React.createClass({
 
 	render() {
 
-    let navLink;
-    if (this.formType() === "login") {
-      navLink = <Link to="/signup">sign up instead</Link>;
-    } else {
-      navLink = <Link to="/login">log in instead</Link>;
-    }
-
 		return (
 
 			<div className="login-form-container">
-				<form onSubmit={this.handleSubmit} className="login-form-box">
-	        Hello there!
+				<form onSubmit={this._handleSubmit} className="login-form-box">
+	        Sign In
 					<br/>
-					Please { this.formType() } or { navLink }
-
 
 	        { this.fieldErrors("base") }
 					<div className="login-form">
