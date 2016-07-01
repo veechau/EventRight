@@ -1,12 +1,26 @@
 const React = require('react');
 const Modal = require('boron/DropModal');
 
+const modalStyle = {
+  width: '100%',
+  height: '100%',
+  backgroundColor: '#000000',
+  opacity: '0.8',
+};
+
+const backdropStyle = {
+  backgroundColor: '#4b4e4f'
+};
+
+const contentStyle = {
+
+};
 
 const SessionModal = React.createClass({
-    showModal: function(){
+    showModal(){
         this.refs.modal.show();
     },
-    hideModal: function(){
+    hideModal(){
         this.refs.modal.hide();
     },
     render: function() {

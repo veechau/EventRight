@@ -1,1 +1,1 @@
-json.array! @category, :title, :description, :image
+json.extract! @category, :title, :description, :image
