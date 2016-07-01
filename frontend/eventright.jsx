@@ -18,6 +18,8 @@ const CategoryIndexItem = require('./components/category_index_item');
 const SessionStore = require('./stores/session_store');
 const SessionActions = require('./actions/session_actions');
 
+
+
 const routes = (
     <Router history={ hashHistory }>
       <Route path="/" component={ App }>

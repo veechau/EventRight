@@ -43,19 +43,19 @@ const GatheringActions = {
   // Server-side
   receiveAll(gatherings){
     AppDispatcher.dispatch({
-      actionType: GatheringConstants.EVENTS_RECEIVED,
+      actionType: GatheringConstants.GATHERINGS_RECEIVED,
       gatherings: gatherings
     });
   },
   receiveGathering(gathering){
     AppDispatcher.dispatch({
-      actionType: GatheringConstants.EVENT_RECEIVED,
+      actionType: GatheringConstants.GATHERING_RECEIVED,
       gathering: gathering
     });
   },
   removeGathering(gathering){
     AppDispatcher.dispatch({
-      actionType: GatheringConstants.EVENT_REMOVED,
+      actionType: GatheringConstants.GATHERING_REMOVED,
       gathering: gathering
     });
   }
