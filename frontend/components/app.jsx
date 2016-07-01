@@ -23,8 +23,6 @@ const App = React.createClass({
           < Nav />
         </div>
 
-        < GatheringsIndex />
-
         {this.props.children}
 
       </div>

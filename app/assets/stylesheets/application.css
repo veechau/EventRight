@@ -36,11 +36,11 @@
    list-style: none;
  }
 
- img {
+ /*img {
    display: block;
    height: auto;
    width: 100%;
- }
+ }*/
 
 /* INPUT RESET
  input[type="password"],
@@ -145,7 +145,7 @@ div.nav-links-item:hover {
 .app-slider-div div img {
   height: auto;
   width: 100vw;
-  top: calc(-90vh/3);
+  top: calc(-85vh/3);
   position: relative;
 }
 
@@ -184,10 +184,54 @@ div.nav-links-item:hover {
 
 /*User Landing Page*/
 .landing-page {
-  display: block;
-  position: absolute;
-  align-self: center;
-  top: 51px;
-  font-size: 30px;
-  /*color: #ffffff;*/
+
+}
+/*Events Index*/
+
+div.gatherings-index ul{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: space-between;
+}
+
+
+div.gatherings-index {
+
+}
+
+div.gathering-index-item-image {
+  display: flex;
+  float: left;
+  width: 300px;
+  margin: 10px;
+}
+
+.gathering-index-item {
+
+}
+
+.gathering-index-item-title {
+
+}
+
+.gathering-index-item-artist {
+
+}
+
+.gathering-index-item-location {
+
+}
+
+.gathering-index-item-start-date {
+
+}
+
+.gathering-index-item-end-date {
+
+}
+
+.gathering-index-item-description {
+
 }

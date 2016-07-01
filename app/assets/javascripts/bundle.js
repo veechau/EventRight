@@ -76,7 +76,6 @@
 	    Route,
 	    { path: '/', component: App },
 	    React.createElement(IndexRoute, { component: Landing }),
-	    React.createElement(Route, { path: '/home', component: Landing }),
 	    React.createElement(Route, { path: '/login', component: LoginForm }),
 	    React.createElement(Route, { path: '/signup', component: SignupForm }),
 	    React.createElement(
@@ -26014,7 +26013,6 @@
 	        ),
 	        React.createElement(Nav, null)
 	      ),
-	      React.createElement(GatheringsIndex, null),
 	      this.props.children
 	    );
 	  }
@@ -36177,6 +36175,10 @@
 	var GatheringActions = __webpack_require__(296);
 	var GatheringIndexItem = __webpack_require__(298);
 
+	var App = __webpack_require__(272);
+
+	var AppSlider = __webpack_require__(272);
+
 	var GatheringsIndex = React.createClass({
 	  displayName: 'GatheringsIndex',
 	  getInitialState: function getInitialState() {
@@ -36200,9 +36202,11 @@
 	        'ul',
 	        null,
 	        this.state.gatherings.map(function (gathering) {
-	          return React.createElement(GatheringIndexItem, {
-	            key: gathering.id,
-	            gathering: gathering });
+	          return React.createElement(
+	            'div',
+	            { className: 'gathering-index-item-image', key: gathering.id },
+	            React.createElement('img', { src: gathering.image })
+	          );
 	        })
 	      )
 	    );
@@ -36419,72 +36423,76 @@
 /* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	/* eslint max-len: "off" */
 
 	var React = __webpack_require__(1);
+	var ReactRouter = __webpack_require__(168);
+	var hashHistory = ReactRouter.hashHistory;
 
 	var GatheringIndexItem = React.createClass({
-	  displayName: "GatheringIndexItem",
+	  displayName: 'GatheringIndexItem',
+	  _handleImgClick: function _handleImgClick() {
+	    hashHistory.push('this.props.gathering.id');
+	  },
 	  render: function render() {
-	    // return(
-	    //   <div className="test">Hello from Gathering Item Index </div>
-	    // );
 	    return React.createElement(
-	      "div",
-	      { className: "gathering-index-container" },
+	      'div',
+	      { className: 'gathering-index-item' },
 	      React.createElement(
-	        "p",
-	        null,
+	        'div',
+	        { className: 'gathering-index-item-title' },
 	        this.props.gathering.title
 	      ),
 	      React.createElement(
-	        "p",
-	        null,
+	        'div',
+	        { className: 'gathering-index-item-artist' },
 	        this.props.gathering.artist
 	      ),
 	      React.createElement(
-	        "p",
-	        null,
+	        'div',
+	        { className: 'gathering-index-item-location' },
 	        this.props.gathering.location
 	      ),
 	      React.createElement(
-	        "p",
-	        null,
+	        'div',
+	        { className: 'gathering-index-item-start-date' },
 	        this.props.gathering.start_date
 	      ),
 	      React.createElement(
-	        "p",
-	        null,
+	        'div',
+	        { className: 'gathering-index-item-end-date' },
 	        this.props.gathering.end_date
 	      ),
 	      React.createElement(
-	        "p",
-	        null,
+	        'div',
+	        { className: 'gathering-index-item-description' },
 	        this.props.gathering.description
 	      ),
 	      React.createElement(
-	        "p",
-	        null,
-	        React.createElement("img", { src: this.props.gathering.image })
+	        'div',
+	        { className: 'gathering-index-item-image', onClick: this._handleImgClick },
+	        React.createElement('img', { src: this.props.gathering.image })
 	      ),
 	      React.createElement(
-	        "p",
-	        null,
+	        'div',
+	        { className: 'gathering-index-item-ticket-price' },
 	        this.props.gathering.tix_price
 	      ),
 	      React.createElement(
-	        "p",
-	        null,
+	        'div',
+	        { className: 'gathering-index-item-goal' },
 	        this.props.gathering.goal
 	      ),
 	      React.createElement(
-	        "p",
-	        null,
+	        'div',
+	        { className: 'gathering-index-item-status' },
 	        this.props.gathering.status
 	      ),
 	      React.createElement(
-	        "p",
-	        null,
+	        'div',
+	        { className: 'gathering-index-item-category' },
 	        this.props.gathering.category_id
 	      )
 	    );
@@ -36499,23 +36507,18 @@
 
 	'use strict';
 
-	/* eslint max-len: "off" */
-
 	var React = __webpack_require__(1);
 	var SessionStore = __webpack_require__(231);
+	var AppSlider = __webpack_require__(272);
 	var GatheringsIndex = __webpack_require__(293);
 
 	var Landing = React.createClass({
 	  displayName: 'Landing',
 	  render: function render() {
-	    var welcomeMessage = "Welcome to EventRight!";
-	    if (SessionStore.isUserLoggedIn()) {
-	      welcomeMessage = 'Welcome back, ' + SessionStore.currentUser().first_name + ' ' + SessionStore.currentUser().last_name + '!';
-	    }
 	    return React.createElement(
 	      'div',
 	      { className: 'landing-page' },
-	      welcomeMessage,
+	      React.createElement(AppSlider, null),
 	      React.createElement(GatheringsIndex, null)
 	    );
 	  }
@@ -36549,7 +36552,7 @@
 
 	var AppDispatcher = __webpack_require__(232);
 	var Store = __webpack_require__(236).Store;
-	var CategoryConstants = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../constants/category_constants\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var CategoryConstants = __webpack_require__(302);
 
 	var CategoryStore = new Store(AppDispatcher);
 
@@ -36600,14 +36603,27 @@
 	module.exports = CategoryStore;
 
 /***/ },
-/* 302 */,
+/* 302 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var CategoryConstants = {
+			CATEGORIES_RECEIVED: "CATEGORIES_RECEIVED",
+			CATEGORY_RECEIVED: "CATEGORY_RECEIVED",
+			CATEGORY_REMOVED: "CATEGORY_REMOVED"
+	};
+
+	module.exports = CategoryConstants;
+
+/***/ },
 /* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var AppDispatcher = __webpack_require__(232);
-	var CategoryConstants = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../constants/category_constants\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var CategoryConstants = __webpack_require__(302);
 	var CategoryApiUtil = __webpack_require__(304);
 	var ErrorActions = __webpack_require__(257);
 	var hashHistory = __webpack_require__(168).hashHistory;
@@ -36663,7 +36679,7 @@
 	"use strict";
 
 	var AppDispatcher = __webpack_require__(232);
-	var CategoryConstants = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../constants/category_constants\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var CategoryConstants = __webpack_require__(302);
 
 	var CategoryApiUtil = {
 	  fetchCategories: function fetchCategories(success, _error) {

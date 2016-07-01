@@ -1,23 +1,49 @@
+/* eslint max-len: "off" */
+
 const React = require('react');
+const ReactRouter = require('react-router');
+const hashHistory = ReactRouter.hashHistory;
 
 const GatheringIndexItem = React.createClass({
+  _handleImgClick(){
+    hashHistory.push('this.props.gathering.id');
+  },
   render(){
-    // return(
-    //   <div className="test">Hello from Gathering Item Index </div>
-    // );
     return (
-      <div className="gathering-index-container">
-        <p>{this.props.gathering.title}</p>
-        <p>{this.props.gathering.artist}</p>
-        <p>{this.props.gathering.location}</p>
-        <p>{this.props.gathering.start_date}</p>
-        <p>{this.props.gathering.end_date}</p>
-        <p>{this.props.gathering.description}</p>
-        <p><img src={this.props.gathering.image}/></p>
-        <p>{this.props.gathering.tix_price}</p>
-        <p>{this.props.gathering.goal}</p>
-        <p>{this.props.gathering.status}</p>
-        <p>{this.props.gathering.category_id}</p>
+      <div className="gathering-index-item">
+        <div className="gathering-index-item-title">
+          {this.props.gathering.title}
+        </div>
+        <div className="gathering-index-item-artist">
+          {this.props.gathering.artist}
+        </div>
+        <div className="gathering-index-item-location">
+          {this.props.gathering.location}
+        </div>
+        <div className="gathering-index-item-start-date">
+          {this.props.gathering.start_date}
+        </div>
+        <div className="gathering-index-item-end-date">
+          {this.props.gathering.end_date}
+        </div>
+        <div className="gathering-index-item-description">
+          {this.props.gathering.description}
+        </div>
+        <div className="gathering-index-item-image" onClick={this._handleImgClick}>
+          <img src={this.props.gathering.image}/>
+        </div>
+        <div className="gathering-index-item-ticket-price">
+          {this.props.gathering.tix_price}
+        </div>
+        <div className="gathering-index-item-goal">
+          {this.props.gathering.goal}
+          </div>
+        <div className="gathering-index-item-status">
+          {this.props.gathering.status}
+        </div>
+        <div className="gathering-index-item-category">
+          {this.props.gathering.category_id}
+        </div>
       </div>
     );
   }

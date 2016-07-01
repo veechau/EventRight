@@ -3,6 +3,10 @@ const GatheringStore = require('../stores/gathering_store');
 const GatheringActions = require('../actions/gathering_actions');
 const GatheringIndexItem = require('./gathering_index_item');
 
+const App = require('./app_slider');
+
+const AppSlider = require('./app_slider');
+
 const GatheringsIndex = React.createClass({
   getInitialState(){
     return { gatherings: [] };
@@ -22,9 +26,11 @@ const GatheringsIndex = React.createClass({
       <div className="gatherings-index">
         <ul>
           {this.state.gatherings.map( (gathering) => {
-            return <GatheringIndexItem
-                      key={gathering.id}
-                      gathering={gathering} />;
+            return (
+              <div className="gathering-index-item-image" key={gathering.id}>
+                <img src={gathering.image}/>
+              </div>
+            );
           })}
         </ul>
       </div>

@@ -27,9 +27,8 @@ const routes = (
     <Router history={ hashHistory }>
       <Route path="/" component={ App }>
         <IndexRoute component={ Landing } />
-        <Route path='/home' component={Landing} />
         <Route path="/login" component={ LoginForm} />
-        <Route path="/signup" component={ SignupForm} />
+        <Route path="/signup" component={ SignupForm } />
         <Route path="/events" component={ GatheringsIndex } >
           <Route path="/events/:eventId" component={ GatheringIndexItem } />
         </Route>
