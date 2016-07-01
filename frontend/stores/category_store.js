@@ -35,15 +35,15 @@ const deleteCategory = function(gathering) {
 
 CategoryStore.__onDispatch = payload => {
   switch (payload.actionType) {
-    case CategoryConstants.EVENTS_RECEIVED:
+    case CategoryConstants.CATEGORIES_RECEIVED:
 
     CategoryStore.__emitChange();
       break;
-    case CategoryConstants.EVENT_RECEIVED:
+    case CategoryConstants.CATEGORY_RECEIVED:
 
     CategoryStore.__emitChange();
       break;
-    case CategoryConstants.EVENT_REMOVED:
+    case CategoryConstants.CATEGORY_REMOVED:
 
     CategoryStore.__emitChange();
       break;

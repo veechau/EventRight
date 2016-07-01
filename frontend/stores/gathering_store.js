@@ -21,7 +21,7 @@ GatheringStore.find = function(gatheringId){
 const resetGatherings = function(gatherings) {
   _gatherings = {};
   gatherings.forEach( (gathering) => {
-    gatherings[gathering.id] = gathering;
+    _gatherings[gathering.id] = gathering;
   });
 };
 
@@ -35,16 +35,16 @@ const deleteGathering = function(gathering) {
 
 GatheringStore.__onDispatch = payload => {
   switch (payload.actionType) {
-    case GatheringConstants.EVENTS_RECEIVED:
-
+    case GatheringConstants.GATHERINGS_RECEIVED:
+    resetGatherings(payload.gatherings);
     GatheringStore.__emitChange();
       break;
-    case GatheringConstants.EVENT_RECEIVED:
-
+    case GatheringConstants.GATHERING_RECEIVED:
+    setGathering(payload.gathering);
     GatheringStore.__emitChange();
       break;
-    case GatheringConstants.EVENT_REMOVED:
-
+    case GatheringConstants.GATHERING_REMOVED:
+    deleteGathering(payload.gathering);
     GatheringStore.__emitChange();
       break;
   }

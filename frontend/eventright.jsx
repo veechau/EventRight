@@ -18,15 +18,19 @@ const CategoryIndexItem = require('./components/category_index_item');
 const SessionStore = require('./stores/session_store');
 const SessionActions = require('./actions/session_actions');
 
+const GatheringStore = require('./stores/gathering_store')
+window.GatheringStore = GatheringStore;
+
 
 
 const routes = (
     <Router history={ hashHistory }>
       <Route path="/" component={ App }>
         <IndexRoute component={ Landing } />
+        <Route path='/home' component={Landing} />
         <Route path="/login" component={ LoginForm} />
         <Route path="/signup" component={ SignupForm} />
-        <Route path="/events" component={ GatheringsIndex} >
+        <Route path="/events" component={ GatheringsIndex } >
           <Route path="/events/:eventId" component={ GatheringIndexItem } />
         </Route>
         <Route path="/categories" component={ CategoriesIndex} >

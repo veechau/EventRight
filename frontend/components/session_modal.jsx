@@ -16,7 +16,7 @@ const backdropStyle = {
 };
 
 const contentStyle = {
-  width: '60%',
+  width: '40%',
   margin: 'auto',
   marginTop: 'calc(100vh/5)',
   border: '1px solid #D2D6DF',

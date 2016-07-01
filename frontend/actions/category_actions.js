@@ -43,19 +43,19 @@ const CategoryActions = {
   // Server-side
   receiveAll(categories){
     AppDispatcher.dispatch({
-      actionType: CategoryConstants.GATHERINGS_RECEIVED,
+      actionType: CategoryConstants.CATEGORIES_RECEIVED,
       categories: categories
     });
   },
   receiveCategory(category){
     AppDispatcher.dispatch({
-      actionType: CategoryConstants.GATHERING_RECEIVED,
+      actionType: CategoryConstants.CATEGORY_RECEIVED,
       category: category
     });
   },
   removeCategory(category){
     AppDispatcher.dispatch({
-      actionType: CategoryConstants.GATHERING_REMOVED,
+      actionType: CategoryConstants.CATEGORY_REMOVED,
       category: category
     });
   }

@@ -11,7 +11,7 @@ const GatheringActions = {
   // Client-side
 
   fetchGatherings(){
-    GatheringApiUtil.fetchAllGatherings(
+    GatheringApiUtil.fetchGatherings(
       GatheringActions.receiveAll,
       ErrorActions.setErrors);
   },
