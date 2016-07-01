@@ -41,7 +41,7 @@ const AppSlider = React.createClass({
           <img src="http://res.cloudinary.com/vechau/image/upload/v1467270960/concert_lwmxi5.jpg" alt="Live your Life" />
         <div>
           <img src="http://res.cloudinary.com/vechau/image/upload/v1467272192/photo-1459749411175-04bf5292ceea_zm9a2g.jpg"
-          alt="Join EventRite" />
+          alt="Join EventRight" />
         </div>
       </Slider>
     );

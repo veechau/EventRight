@@ -1,12 +1,15 @@
 const React = require('react');
 
-const EventIndexItem = React.createClass({
+const GatheringsIndex = React.createClass({
   getInitialState(){
     return { post: {} };
   },
   componentDidMount(){
-  
+
+  },
+  render(){
+    
   }
 });
 
-module.exports = EventIndexItem;
+module.exports = GatheringsIndex;

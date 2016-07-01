@@ -51,21 +51,21 @@ EventRight is a web application inspired by Eventbrite with a crowdfunding flair
 - [x] create `User` model
 - [x] authentication backend setup
 - [x] create StaticPages controller and root view
-- [ ] set up webpack & flux scaffold with skeleton files
-- [ ] setup APIUtil to interact with the API
-- [ ] set up flux cycle for frontend auth
-- [ ] user signup/signin pages
-- [ ] blank landing page after signin
-- [ ] style signin/signup components
+- [x] set up webpack & flux scaffold with skeleton files
+- [x] setup APIUtil to interact with the API
+- [x] set up flux cycle for frontend auth
+- [x] user signup/signin pages
+- [x] blank landing page after signin
+- [x] style signin/signup components
 
 ### Phase 2: Events Model, API, and basic APIUtil (1 day, W1 W 6pm)
 
 **Objective:** Events can be created, read, edited and destroyed through
 the API.
 
-- [ ] create `Event` model
+- [x] create `Event` model
 - [ ] seed the database with a small amount of test data
-- [ ] CRUD API for events (`EventsController`)
+- [x] CRUD API for events (`EventsController`)
 - [ ] jBuilder views for events
 - [ ] test out API interaction in the console.
 - [ ] basic styling for existing components
@@ -110,7 +110,7 @@ user interface.
 
 **Objective:** Events belong to Categories, and can be viewed by Category.
 
-- [ ] create `Category` model
+- [x] create `Category` model
 - build out API, Flux loop, and components for:
   - [ ] Category CRUD
   - [ ] adding events requires a category

@@ -58,10 +58,9 @@
 	var Landing = __webpack_require__(280);
 	var LoginForm = __webpack_require__(281);
 	var SignupForm = __webpack_require__(283);
-	var EventsIndex = __webpack_require__(284);
-	var EventIndex = __webpack_require__(284);
-	var EventIndexItem = __webpack_require__(286);
-	var CategoriesIndex = __webpack_require__(285);
+	var GatheringsIndex = __webpack_require__(284);
+	var GatheringIndexItem = __webpack_require__(285);
+	var CategoriesIndex = __webpack_require__(286);
 	var CategoryIndexItem = __webpack_require__(287);
 
 	var SessionStore = __webpack_require__(231);
@@ -78,8 +77,8 @@
 	    React.createElement(Route, { path: '/signup', component: SignupForm }),
 	    React.createElement(
 	      Route,
-	      { path: '/events', component: EventsIndex },
-	      React.createElement(Route, { path: '/events/:eventId', component: EventIndexItem })
+	      { path: '/events', component: GatheringsIndex },
+	      React.createElement(Route, { path: '/events/:eventId', component: GatheringIndexItem })
 	    ),
 	    React.createElement(
 	      Route,
@@ -32902,7 +32901,7 @@
 	          { to: '/',
 	            className: 'nav-links-item',
 	            onClick: this._handleLogOut },
-	          'Log Out'
+	          'Logout'
 	        ),
 	        React.createElement(
 	          Link,
@@ -33124,7 +33123,7 @@
 	        'div',
 	        null,
 	        React.createElement('img', { src: 'http://res.cloudinary.com/vechau/image/upload/v1467272192/photo-1459749411175-04bf5292ceea_zm9a2g.jpg',
-	          alt: 'Join EventRite' })
+	          alt: 'Join EventRight' })
 	      )
 	    );
 	  }
@@ -35569,27 +35568,73 @@
 
 /***/ },
 /* 284 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var GatheringsIndex = React.createClass({
+	  displayName: 'GatheringsIndex',
+	  getInitialState: function getInitialState() {
+	    return { post: {} };
+	  },
+	  componentDidMount: function componentDidMount() {},
+	  render: function render() {}
+	});
+
+	module.exports = GatheringsIndex;
 
 /***/ },
 /* 285 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var GatheringIndexItem = React.createClass({
+	  displayName: 'GatheringIndexItem',
+	  getInitialState: function getInitialState() {
+	    return { post: {} };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.gatheringIndexItemListener = GatheringStore.addListener();
+	  },
+	  render: function render() {}
+	});
+
+	module.exports = GatheringIndexItem;
 
 /***/ },
 /* 286 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var CategoriesIndex = React.createClass({
+	  displayName: 'CategoriesIndex',
+	  render: function render() {}
+	});
+
+	module.exports = CategoriesIndex;
 
 /***/ },
 /* 287 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var CategoriesIndexItem = React.createClass({
+	  displayName: 'CategoriesIndexItem',
+	  render: function render() {}
+	});
+
+	module.exports = CategoriesIndexItem;
 
 /***/ }
 /******/ ]);
