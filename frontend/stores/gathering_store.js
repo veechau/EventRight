@@ -2,7 +2,7 @@
 
 const AppDispatcher = require('../dispatcher/dispatcher.js');
 const Store = require('flux/utils').Store;
-const GatheringConstants = require('../constants/session_constants');
+const GatheringConstants = require('../constants/gathering_constants');
 
 const GatheringStore = new Store(AppDispatcher);
 

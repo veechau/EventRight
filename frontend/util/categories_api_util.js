@@ -1,13 +1,13 @@
 "use strict";
 
 const AppDispatcher = require('../dispatcher/dispatcher');
-const GatheringConstants = require('../constants/gathering_constants');
+const CategoryConstants = require('../constants/category_constants');
 
-const GatheringApiUtil = {
+const CategoryApiUtil = {
 
-  fetchGatherings(success, error){
+  fetchCategories(success, error){
     $.ajax({
-      url: '/api/gatherings',
+      url: '/api/categories',
       type: 'GET',
       success,
       error(xhr) {
@@ -20,7 +20,7 @@ const GatheringApiUtil = {
 
   getGathering(id, success, error){
     $.ajax({
-      url: `/api/gatherings/${id}`,
+      url: `/api/categories/${id}`,
       type: 'GET',
       success,
       error(xhr) {
@@ -31,11 +31,11 @@ const GatheringApiUtil = {
     });
   },
 
-  createGathering(gathering, success, error){
+  createGathering(category, success, error){
     $.ajax({
-      url: '/api/gatherings',
+      url: '/api/categories',
       type: 'POST',
-      data: gathering,
+      data: category,
       success,
       error(xhr) {
         const errors = xhr.responseJSON;
@@ -45,11 +45,11 @@ const GatheringApiUtil = {
     });
   },
 
-  updateGathering(gathering, success, error){
+  updateGathering(category, success, error){
     $.ajax({
-      url: `/api/gatherings/${gathering.id}`,
+      url: `/api/categories/${category.id}`,
       type: 'PATCH',
-      data: gathering,
+      data: category,
       success,
       error(xhr) {
         const errors = xhr.responseJSON;
@@ -61,7 +61,7 @@ const GatheringApiUtil = {
 
   deleteGathering(id, success, error){
     $.ajax({
-      url: `/api/gatherings/${id}`,
+      url: `/api/categories/${id}`,
       type: 'DELETE',
       success,
       error(xhr) {
@@ -73,4 +73,5 @@ const GatheringApiUtil = {
   },
 };
 
-module.exports = GatheringApiUtil;
+
+module.exports = CategoryApiUtil;

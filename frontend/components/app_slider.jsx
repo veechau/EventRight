@@ -10,7 +10,7 @@ const AppSlider = React.createClass({
       adaptiveHeight: true,
       arrows: true,
       dots: true,
-      autoplaySpeed: 5000,
+      autoplaySpeed: 4000,
       autoplay: true,
       initialSlide: 0,
       infinite: true,

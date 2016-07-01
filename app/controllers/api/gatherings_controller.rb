@@ -1,6 +1,5 @@
-require 'byebug'
-
 class Api::GatheringsController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
 
   def index
       @gatherings = Gathering.all
@@ -9,12 +8,12 @@ class Api::GatheringsController < ApplicationController
 
   def create
     @gathering = Gathering.new(gathering_params)
-    debugger
     if @gathering.save
       render :show
     else
       @errors = @gathering.errors.full_messages
       render 'api/shared/error', status: 422
+    end
   end
 
   def update
@@ -35,6 +34,7 @@ class Api::GatheringsController < ApplicationController
       render :index
     else
       render json: @gathering.errors
+    end
   end
 
   private

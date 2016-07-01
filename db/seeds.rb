@@ -40,7 +40,7 @@ end
   Gathering.create({
     artist: Faker::Hipster.word,
     location: Faker::Address.street_address + ", " + Faker::Address.city + ", " + Faker::Address.state_abbr + ", " + Faker::Address.country,
-    start_date: DateTime.now,
+    start_date: Faker::Date.between(2.days.ago, Date.today),
     end_date: Faker::Date.between(2.days.from_now, 1.year.from_now),
     description: Faker::Hacker.say_something_smart,
     image: "http://holder.ninja/300x300,,8bd,fff.svg",

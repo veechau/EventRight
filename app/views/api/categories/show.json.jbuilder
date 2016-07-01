@@ -1,1 +1,1 @@
-json.partial! 'categories/category', category: @category
+json.array! @category, :title, :description, :image

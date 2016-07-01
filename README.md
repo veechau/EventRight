@@ -64,10 +64,10 @@ EventRight is a web application inspired by Eventbrite with a crowdfunding flair
 the API.
 
 - [x] create `Event` model
-- [ ] seed the database with a small amount of test data
+- [x] seed the database with a small amount of test data
 - [x] CRUD API for events (`EventsController`)
-- [ ] jBuilder views for events
-- [ ] test out API interaction in the console.
+- [x] jBuilder views for events
+- [x] test out API interaction in the console.
 - [ ] basic styling for existing components
 
 ### Phase 3: Flux Architecture and Router (1.5 days, W1 Th 10pm)
@@ -112,7 +112,7 @@ user interface.
 
 - [x] create `Category` model
 - build out API, Flux loop, and components for:
-  - [ ] Category CRUD
+  - [x] Category CRUD
   - [ ] adding events requires a category
   - [ ] moving events to a different category
   - [ ] viewing events by category

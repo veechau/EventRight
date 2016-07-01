@@ -33081,7 +33081,7 @@
 	      adaptiveHeight: true,
 	      arrows: true,
 	      dots: true,
-	      autoplaySpeed: 5000,
+	      autoplaySpeed: 4000,
 	      autoplay: true,
 	      initialSlide: 0,
 	      infinite: true,
@@ -35613,6 +35613,9 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
+	var CategoryStore = __webpack_require__(288);
+	var CategoryActions = __webpack_require__(290);
+	var CategoryIndexItem = __webpack_require__(287);
 
 	var CategoriesIndex = React.createClass({
 	  displayName: 'CategoriesIndex',
@@ -35635,6 +35638,208 @@
 	});
 
 	module.exports = CategoriesIndexItem;
+
+/***/ },
+/* 288 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var AppDispatcher = __webpack_require__(232);
+	var Store = __webpack_require__(236).Store;
+	var CategoryConstants = __webpack_require__(289);
+
+	var CategoryStore = new Store(AppDispatcher);
+
+	var _gatherings = {};
+
+	CategoryStore.all = function () {
+	  return Object.keys(_gatherings).map(function (gatheringId) {
+	    return _gatherings[gatheringId];
+	  });
+	};
+
+	CategoryStore.find = function (gatheringId) {
+	  return _gatherings[gatheringId];
+	};
+
+	var resetCategories = function resetCategories(gatherings) {
+	  _gatherings = {};
+	  gatherings.forEach(function (gathering) {
+	    gatherings[gathering.id] = gathering;
+	  });
+	};
+
+	var setCategory = function setCategory(gathering) {
+	  _gatherings[gathering.id] = gathering;
+	};
+
+	var deleteCategory = function deleteCategory(gathering) {
+	  delete _gatherings[gathering.id];
+	};
+
+	CategoryStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case CategoryConstants.EVENTS_RECEIVED:
+
+	      CategoryStore.__emitChange();
+	      break;
+	    case CategoryConstants.EVENT_RECEIVED:
+
+	      CategoryStore.__emitChange();
+	      break;
+	    case CategoryConstants.EVENT_REMOVED:
+
+	      CategoryStore.__emitChange();
+	      break;
+	  }
+	};
+
+	module.exports = CategoryStore;
+
+/***/ },
+/* 289 */
+/***/ function(module, exports) {
+
+	
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var AppDispatcher = __webpack_require__(232);
+	var CategoryConstants = __webpack_require__(289);
+	var CategoryApiUtil = __webpack_require__(297);
+	var ErrorActions = __webpack_require__(257);
+	var hashHistory = __webpack_require__(168).hashHistory;
+
+	var CategoryActions = {
+
+	  // Client-side
+
+	  fetchCategories: function fetchCategories() {
+	    CategoryApiUtil.fetchAllCategories(CategoryActions.receiveAll, ErrorActions.setErrors);
+	  },
+	  getCategory: function getCategory() {
+	    CategoryApiUtil.getCategory(CategoryActions.receiveCategory, ErrorActions.setErrors);
+	  },
+	  createCategory: function createCategory() {
+	    CategoryApiUtil.createCategory(CategoryActions.receiveCategory, ErrorActions.setErrors);
+	  },
+	  editCategory: function editCategory() {
+	    CategoryApiUtil.updateCategory(CategoryActions.receiveCategory, ErrorActions.setErrors);
+	  },
+	  deleteCategory: function deleteCategory() {
+	    CategoryApiUtil.deleteCategory(CategoryActions.removeCategory, ErrorActions.setErrors);
+	  },
+
+
+	  // Server-side
+	  receiveAll: function receiveAll(categories) {
+	    AppDispatcher.dispatch({
+	      actionType: CategoryConstants.GATHERINGS_RECEIVED,
+	      categories: categories
+	    });
+	  },
+	  receiveCategory: function receiveCategory(category) {
+	    AppDispatcher.dispatch({
+	      actionType: CategoryConstants.GATHERING_RECEIVED,
+	      category: category
+	    });
+	  },
+	  removeCategory: function removeCategory(category) {
+	    AppDispatcher.dispatch({
+	      actionType: CategoryConstants.GATHERING_REMOVED,
+	      category: category
+	    });
+	  }
+	};
+
+	module.exports = CategoryActions;
+
+/***/ },
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var AppDispatcher = __webpack_require__(232);
+	var CategoryConstants = __webpack_require__(289);
+
+	var CategoryApiUtil = {
+	  fetchCategories: function fetchCategories(success, _error) {
+	    $.ajax({
+	      url: '/api/categories',
+	      type: 'GET',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error("events", errors);
+	      }
+	    });
+	  },
+	  getGathering: function getGathering(id, success, _error2) {
+	    $.ajax({
+	      url: '/api/categories/' + id,
+	      type: 'GET',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error2("event", errors);
+	      }
+	    });
+	  },
+	  createGathering: function createGathering(category, success, _error3) {
+	    $.ajax({
+	      url: '/api/categories',
+	      type: 'POST',
+	      data: category,
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error3("creating event", errors);
+	      }
+	    });
+	  },
+	  updateGathering: function updateGathering(category, success, _error4) {
+	    $.ajax({
+	      url: '/api/categories/' + category.id,
+	      type: 'PATCH',
+	      data: category,
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error4("editing event", errors);
+	      }
+	    });
+	  },
+	  deleteGathering: function deleteGathering(id, success, _error5) {
+	    $.ajax({
+	      url: '/api/categories/' + id,
+	      type: 'DELETE',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error5("deleting event", errors);
+	      }
+	    });
+	  }
+	};
+
+	module.exports = CategoryApiUtil;
 
 /***/ }
 /******/ ]);
