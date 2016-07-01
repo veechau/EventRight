@@ -13,7 +13,7 @@ image       | string    |
 tix_price   | float     | not null
 funds       | float     | not null
 goal        | float     | not null
-status      | string    | not null (inclusion: [:in_progress, :completed, :incomplete])
+status      | string    | not null (inclusion: [:ongoing, :completed, :incomplete])
 organizer_id| integer   | not null, foreign key (references users), indexed
 category_id | integer   | not null, foreign key (references categories), indexed
 

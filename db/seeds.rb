@@ -6,11 +6,49 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+require 'faker'
+
  demo_user = User.create({
-                        username: "Demo_User",
-                        first_name: "Jane",
-                        last_name: "Doe",
-                        password: "Password",
-                        avatar: "http://res.cloudinary.com/vechau/image/upload/v1467219915/hipsterlogogenerator_1467219708604_ylgi5g.png",
-                        balance: 500
-                      });
+  username: "Demo_User",
+  first_name: "Jane",
+  last_name: "Doe",
+  password: "Password",
+  avatar: "http://holder.ninja/150x150,,8bd,fff.svg",
+  balance: 500
+});
+
+10.times do
+  User.create({
+    username: Faker::Name.name,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    password: "Password",
+    avatar: "http://holder.ninja/150x150,,8bd,fff.svg",
+    balance: rand(1000)
+    })
+end
+
+10.times do
+  Category.create({
+    title: Faker::Commerce.department(2, true),
+    description: Faker::Hipster.paragraphs,
+    image: "http://res.cloudinary.com/vechau/image/upload/c_scale,w_300/v1467336542/hipsterlogogenerator_1467177905639_r6sydm.png"
+    })
+end
+
+15.times do
+  Gathering.create({
+    artist: Faker::Hipster.word,
+    location: Faker::Address.street_address + ", " + Faker::Address.city + ", " + Faker::Address.state_abbr + ", " + Faker::Address.country,
+    start_date: DateTime.now,
+    end_date: Faker::Date.between(2.days.from_now, 1.year.from_now),
+    description: Faker::Hacker.say_something_smart,
+    image: "http://holder.ninja/300x300,,8bd,fff.svg",
+    tix_price: rand(100),
+    funds: rand(500...100000),
+    goal: rand(500...100000),
+    status: ["ongoing", "completed", "incomplete"].sample,
+    organizer_id: rand(User.all.count),
+    category_id: rand(Category.all.count)
+  })
+end

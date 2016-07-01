@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Api::GatheringsController < ApplicationController
 
   def index
@@ -7,7 +9,7 @@ class Api::GatheringsController < ApplicationController
 
   def create
     @gathering = Gathering.new(gathering_params)
-
+    debugger
     if @gathering.save
       render :show
     else
@@ -36,7 +38,7 @@ class Api::GatheringsController < ApplicationController
   end
 
   private
-  
+
   def gathering_params
     params.require(:gathering).permit(
       :artist,
@@ -48,7 +50,7 @@ class Api::GatheringsController < ApplicationController
       :tix_price,
       :goal,
       :status, #should be automatically set based on tix_price compared to goal
-      # :organizer_id, #get from current user
+      :organizer_id, #get from current user
       :category_id #from check boxes
       )
   end
