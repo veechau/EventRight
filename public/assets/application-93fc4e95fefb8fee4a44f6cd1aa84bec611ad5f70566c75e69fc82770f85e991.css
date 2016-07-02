@@ -1,0 +1,243 @@
+/* line 6, /Users/veronicachau/Documents/EventRight/app/assets/stylesheets/static_pages.scss */
+#content {
+  font-family: 'Roboto', sans-serif;
+  font-size: inherit;
+  vertical-align: baseline;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
+
+ html, body, header, nav, h1, a,
+ ul, li, strong, main, i,
+ section, img, div, h2, p, form,
+ fieldset, label, textarea,
+ span, article, footer, time, small {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   outline: 0;
+   font: inherit;
+   color: inherit;
+   text-align: inherit;
+   text-decoration: inherit;
+   vertical-align: inherit;
+   box-sizing: inherit;
+   background: transparent;
+ }
+
+ ul {
+   list-style: none;
+ }
+
+ /*img {
+   display: block;
+   height: auto;
+   width: 100%;
+ }*/
+
+/* INPUT RESET
+ input[type="password"],
+ input[type="email"],
+ input[type="text"],
+ input[type="submit"],
+ textarea,
+ button {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+ }*/
+
+ button,
+ input[type="submit"] {
+   cursor: pointer;
+ }
+
+ /* Clearfix */
+
+ .group:after {
+   content: "";
+   display: block;
+   clear: both;
+ }
+
+#content {
+  font-family: 'Roboto', sans-serif;
+	font-size: inherit;
+	vertical-align: baseline;
+}
+
+/*Button Group
+button {
+    background-color: transparent;
+    border: 1px solid #2FBDF6;
+    border-radius: 8px;
+    color: #666A73;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: #2FBDF6;
+    color: white;
+} */
+
+/* Header Group */
+
+.header-group {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  width: 100%;
+  border: 1px solid #D2D6DF;
+  align-items: center;
+}
+
+.header-link {
+  display: flex;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-family: 'Pacifico', sans-serif;
+  color: #F6682F;
+  font-size: 28px;
+  align-self: center;
+}
+
+.header-link:hover {
+  color: #F69A2F;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+}
+
+div.nav-links-item{
+  color: #666A73;
+  font-size: 14px;
+  padding-right: 10px
+}
+
+div.nav-links-item:hover {
+  color: #00a8f2;
+}
+
+
+/*Banner / Slider*/
+
+.app-slider-div {
+  height: 70vh
+}
+
+.app-slider-div div{
+  overflow: hidden;
+  height: 70vh;
+  align-items: center;
+}
+
+
+.app-slider-div div img {
+  height: auto;
+  width: 100vw;
+  top: calc(-85vh/3);
+  position: relative;
+}
+
+/*Login Form*/
+
+.session-modal-content{
+  background-color: #FFFFFF;
+  color: #666A73;
+}
+
+.session-modal-link{
+  color: #00a8f2;
+}
+
+.login-form-container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  margin: auto;
+  padding: 40px;
+}
+
+.login-form {
+  display: flex;
+  position: block;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+}
+
+/*SessionModal*/
+.session-modal {
+  position: relative;
+}
+
+
+/*User Landing Page*/
+.landing-page {
+
+}
+/*Events Index*/
+
+div.gatherings-index ul{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: center;
+}
+
+
+div.gatherings-index {
+
+}
+
+div.gathering-index-item-image {
+  display: flex;
+  float: left;
+  width: 300px;
+  margin: 10px;
+}
+
+.gathering-index-item {
+
+}
+
+.gathering-index-item-title {
+
+}
+
+.gathering-index-item-artist {
+
+}
+
+.gathering-index-item-location {
+
+}
+
+.gathering-index-item-start-date {
+
+}
+
+.gathering-index-item-end-date {
+
+}
+
+.gathering-index-item-description {
+
+}
