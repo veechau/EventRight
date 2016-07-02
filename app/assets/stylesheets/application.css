@@ -191,9 +191,8 @@ div.nav-links-item:hover {
 div.gatherings-index ul{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: left;
   align-items: center;
-  align-content: space-between;
 }
 
 

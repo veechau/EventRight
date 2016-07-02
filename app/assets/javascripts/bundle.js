@@ -36171,13 +36171,11 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
+	var ReactRouter = __webpack_require__(168);
+	var hashHistory = ReactRouter.hashHistory;
 	var GatheringStore = __webpack_require__(294);
 	var GatheringActions = __webpack_require__(296);
 	var GatheringIndexItem = __webpack_require__(298);
-
-	var App = __webpack_require__(272);
-
-	var AppSlider = __webpack_require__(272);
 
 	var GatheringsIndex = React.createClass({
 	  displayName: 'GatheringsIndex',
@@ -36194,7 +36192,12 @@
 	  _onChange: function _onChange() {
 	    this.setState({ gatherings: GatheringStore.all() });
 	  },
+	  _handleImgClick: function _handleImgClick() {
+	    hashHistory.push();
+	  },
 	  render: function render() {
+	    var _this = this;
+
 	    return React.createElement(
 	      'div',
 	      { className: 'gatherings-index' },
@@ -36203,9 +36206,11 @@
 	        null,
 	        this.state.gatherings.map(function (gathering) {
 	          return React.createElement(
-	            'div',
-	            { className: 'gathering-index-item-image', key: gathering.id },
-	            React.createElement('img', { src: gathering.image })
+	            'li',
+	            { key: gathering.id },
+	            React.createElement(GatheringIndexItem, {
+	              gathering: gathering,
+	              onClick: _this._handleImgClick })
 	          );
 	        })
 	      )
@@ -36434,67 +36439,14 @@
 	var GatheringIndexItem = React.createClass({
 	  displayName: 'GatheringIndexItem',
 	  _handleImgClick: function _handleImgClick() {
-	    hashHistory.push('this.props.gathering.id');
+	    hashHistory.push('events/' + this.props.gathering.id);
 	  },
 	  render: function render() {
 	    return React.createElement(
 	      'div',
-	      { className: 'gathering-index-item' },
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-item-title' },
-	        this.props.gathering.title
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-item-artist' },
-	        this.props.gathering.artist
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-item-location' },
-	        this.props.gathering.location
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-item-start-date' },
-	        this.props.gathering.start_date
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-item-end-date' },
-	        this.props.gathering.end_date
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-item-description' },
-	        this.props.gathering.description
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-item-image', onClick: this._handleImgClick },
-	        React.createElement('img', { src: this.props.gathering.image })
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-item-ticket-price' },
-	        this.props.gathering.tix_price
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-item-goal' },
-	        this.props.gathering.goal
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-item-status' },
-	        this.props.gathering.status
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-item-category' },
-	        this.props.gathering.category_id
-	      )
+	      { className: 'gathering-index-item-image',
+	        onClick: this._handleImgClick },
+	      React.createElement('img', { src: this.props.gathering.image })
 	    );
 	  }
 	});

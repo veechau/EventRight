@@ -1,11 +1,9 @@
 const React = require('react');
+const ReactRouter = require('react-router');
+const hashHistory = ReactRouter.hashHistory;
 const GatheringStore = require('../stores/gathering_store');
 const GatheringActions = require('../actions/gathering_actions');
 const GatheringIndexItem = require('./gathering_index_item');
-
-const App = require('./app_slider');
-
-const AppSlider = require('./app_slider');
 
 const GatheringsIndex = React.createClass({
   getInitialState(){
@@ -21,15 +19,20 @@ const GatheringsIndex = React.createClass({
   _onChange(){
     this.setState({ gatherings: GatheringStore.all() });
   },
+  _handleImgClick(){
+    hashHistory.push();
+  },
   render(){
     return (
       <div className="gatherings-index">
         <ul>
           {this.state.gatherings.map( (gathering) => {
             return (
-              <div className="gathering-index-item-image" key={gathering.id}>
-                <img src={gathering.image}/>
-              </div>
+              <li key={gathering.id}>
+                <GatheringIndexItem
+                  gathering={gathering}
+                  onClick={this._handleImgClick}/>
+              </li>
             );
           })}
         </ul>
