@@ -16,8 +16,13 @@ class Api::GatheringsController < ApplicationController
     end
   end
 
+  def show
+    @gathering = Gathering.find(params[:id])
+    render :show
+  end
+
   def update
-    @gathering.find(params[:id])
+    @gathering = Gathering.find(params[:id])
     if @gathering.update(gathering_params)
       render :show
     else

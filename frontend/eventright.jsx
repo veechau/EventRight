@@ -12,15 +12,12 @@ const LoginForm = require('./components/login_form');
 const SignupForm = require('./components/signup_form');
 const GatheringsIndex = require('./components/gatherings_index');
 const GatheringIndexItem = require('./components/gathering_index_item');
+const GatheringIndexShow = require('./components/gathering_index_show');
 const CategoriesIndex = require('./components/categories_index');
 const CategoryIndexItem = require('./components/category_index_item');
 
 const SessionStore = require('./stores/session_store');
 const SessionActions = require('./actions/session_actions');
-
-const GatheringStore = require('./stores/gathering_store')
-window.GatheringStore = GatheringStore;
-
 
 
 const routes = (
@@ -29,9 +26,8 @@ const routes = (
         <IndexRoute component={ Landing } />
         <Route path="/login" component={ LoginForm} />
         <Route path="/signup" component={ SignupForm } />
-        <Route path="/events" component={ GatheringsIndex } >
-          <Route path="/events/:eventId" component={ GatheringIndexItem } />
-        </Route>
+        <Route path="/events" component={ GatheringsIndex } />
+        <Route path="/events/:eventId" component={ GatheringIndexShow } />
         <Route path="/categories" component={ CategoriesIndex} >
           <Route path="/categories/:catId" component={ CategoryIndexItem } />
         </Route>

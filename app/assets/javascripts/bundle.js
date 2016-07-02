@@ -60,14 +60,12 @@
 	var SignupForm = __webpack_require__(271);
 	var GatheringsIndex = __webpack_require__(293);
 	var GatheringIndexItem = __webpack_require__(298);
-	var CategoriesIndex = __webpack_require__(300);
-	var CategoryIndexItem = __webpack_require__(305);
+	var GatheringIndexShow = __webpack_require__(300);
+	var CategoriesIndex = __webpack_require__(301);
+	var CategoryIndexItem = __webpack_require__(306);
 
 	var SessionStore = __webpack_require__(231);
 	var SessionActions = __webpack_require__(255);
-
-	var GatheringStore = __webpack_require__(294);
-	window.GatheringStore = GatheringStore;
 
 	var routes = React.createElement(
 	  Router,
@@ -78,11 +76,8 @@
 	    React.createElement(IndexRoute, { component: Landing }),
 	    React.createElement(Route, { path: '/login', component: LoginForm }),
 	    React.createElement(Route, { path: '/signup', component: SignupForm }),
-	    React.createElement(
-	      Route,
-	      { path: '/events', component: GatheringsIndex },
-	      React.createElement(Route, { path: '/events/:eventId', component: GatheringIndexItem })
-	    ),
+	    React.createElement(Route, { path: '/events', component: GatheringsIndex }),
+	    React.createElement(Route, { path: '/events/:eventId', component: GatheringIndexShow }),
 	    React.createElement(
 	      Route,
 	      { path: '/categories', component: CategoriesIndex },
@@ -36311,17 +36306,17 @@
 	  fetchGatherings: function fetchGatherings() {
 	    GatheringApiUtil.fetchGatherings(GatheringActions.receiveAll, ErrorActions.setErrors);
 	  },
-	  getGathering: function getGathering() {
-	    GatheringApiUtil.getGathering(GatheringActions.receiveGathering, ErrorActions.setErrors);
+	  getGathering: function getGathering(id) {
+	    GatheringApiUtil.getGathering(id, GatheringActions.receiveGathering, ErrorActions.setErrors);
 	  },
-	  createGathering: function createGathering() {
-	    GatheringApiUtil.createGathering(GatheringActions.receiveGathering, ErrorActions.setErrors);
+	  createGathering: function createGathering(gathering) {
+	    GatheringApiUtil.createGathering(gathering, GatheringActions.receiveGathering, ErrorActions.setErrors);
 	  },
-	  editGathering: function editGathering() {
-	    GatheringApiUtil.updateGathering(GatheringActions.receiveGathering, ErrorActions.setErrors);
+	  editGathering: function editGathering(gathering) {
+	    GatheringApiUtil.updateGathering(gathering, GatheringActions.receiveGathering, ErrorActions.setErrors);
 	  },
-	  deleteGathering: function deleteGathering() {
-	    GatheringApiUtil.deleteGathering(GatheringActions.removeGathering, ErrorActions.setErrors);
+	  deleteGathering: function deleteGathering(id) {
+	    GatheringApiUtil.deleteGathering(id, GatheringActions.removeGathering, ErrorActions.setErrors);
 	  },
 
 
@@ -36484,10 +36479,104 @@
 
 	'use strict';
 
+	/* eslint max-len: "off" */
+
 	var React = __webpack_require__(1);
-	var CategoryStore = __webpack_require__(301);
-	var CategoryActions = __webpack_require__(303);
-	var CategoryIndexItem = __webpack_require__(305);
+	var GatheringStore = __webpack_require__(294);
+	var GatheringActions = __webpack_require__(296);
+
+	var GatheringIndexShow = React.createClass({
+	  displayName: 'GatheringIndexShow',
+	  getInitialState: function getInitialState() {
+	    return { gathering: {} };
+	  },
+	  componentWillMount: function componentWillMount() {
+	    GatheringActions.getGathering(this.props.params.eventId);
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.gatheringIndexShowListener = GatheringStore.addListener(this._onChange);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.gatheringIndexShowListener.remove();
+	  },
+	  _onChange: function _onChange() {
+	    this.setState({ gathering: GatheringStore.find(this.props.params.eventId) });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'gathering-index-show' },
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-title' },
+	        this.state.gathering.title
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-artist' },
+	        this.state.gathering.artist
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-location' },
+	        this.state.gathering.location
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-start-date' },
+	        this.state.gathering.start_date
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-end-date' },
+	        this.state.gathering.end_date
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-description' },
+	        this.state.gathering.description
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-image' },
+	        React.createElement('img', { src: this.state.gathering.image })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-ticket-price' },
+	        this.state.gathering.tix_price
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-goal' },
+	        this.state.gathering.goal
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-status' },
+	        this.state.gathering.status
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-category' },
+	        this.state.gathering.category_id
+	      )
+	    );
+	  }
+	});
+
+	module.exports = GatheringIndexShow;
+
+/***/ },
+/* 301 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var CategoryStore = __webpack_require__(302);
+	var CategoryActions = __webpack_require__(304);
+	var CategoryIndexItem = __webpack_require__(306);
 
 	var CategoriesIndex = React.createClass({
 	  displayName: 'CategoriesIndex',
@@ -36497,14 +36586,14 @@
 	module.exports = CategoriesIndex;
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var AppDispatcher = __webpack_require__(232);
 	var Store = __webpack_require__(236).Store;
-	var CategoryConstants = __webpack_require__(302);
+	var CategoryConstants = __webpack_require__(303);
 
 	var CategoryStore = new Store(AppDispatcher);
 
@@ -36555,7 +36644,7 @@
 	module.exports = CategoryStore;
 
 /***/ },
-/* 302 */
+/* 303 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -36569,14 +36658,14 @@
 	module.exports = CategoryConstants;
 
 /***/ },
-/* 303 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var AppDispatcher = __webpack_require__(232);
-	var CategoryConstants = __webpack_require__(302);
-	var CategoryApiUtil = __webpack_require__(304);
+	var CategoryConstants = __webpack_require__(303);
+	var CategoryApiUtil = __webpack_require__(305);
 	var ErrorActions = __webpack_require__(257);
 	var hashHistory = __webpack_require__(168).hashHistory;
 
@@ -36625,13 +36714,13 @@
 	module.exports = CategoryActions;
 
 /***/ },
-/* 304 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var AppDispatcher = __webpack_require__(232);
-	var CategoryConstants = __webpack_require__(302);
+	var CategoryConstants = __webpack_require__(303);
 
 	var CategoryApiUtil = {
 	  fetchCategories: function fetchCategories(success, _error) {
@@ -36701,7 +36790,7 @@
 	module.exports = CategoryApiUtil;
 
 /***/ },
-/* 305 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

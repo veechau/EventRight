@@ -1,49 +1,60 @@
 /* eslint max-len: "off" */
 
 const React = require('react');
-const ReactRouter = require('react-router');
-const hashHistory = ReactRouter.hashHistory;
+const GatheringStore = require('../stores/gathering_store');
+const GatheringActions = require('../actions/gathering_actions');
 
 const GatheringIndexShow = React.createClass({
   getInitialState(){
     return { gathering: {} };
   },
+  componentWillMount(){
+    GatheringActions.getGathering(this.props.params.eventId);
+  },
+  componentDidMount(){
+    this.gatheringIndexShowListener = GatheringStore.addListener(this._onChange);
+  },
+  componentWillUnmount(){
+    this.gatheringIndexShowListener.remove();
+  },
+  _onChange(){
+    this.setState({ gathering: GatheringStore.find(this.props.params.eventId) });
+  },
   render(){
     return (
-      <div className="gathering-index-item">
-        <div className="gathering-index-item-title">
-          {this.props.gathering.title}
+      <div className="gathering-index-show">
+        <div className="gathering-index-show-title">
+          {this.state.gathering.title}
         </div>
-        <div className="gathering-index-item-artist">
-          {this.props.gathering.artist}
+        <div className="gathering-index-show-artist">
+          {this.state.gathering.artist}
         </div>
-        <div className="gathering-index-item-location">
-          {this.props.gathering.location}
+        <div className="gathering-index-show-location">
+          {this.state.gathering.location}
         </div>
-        <div className="gathering-index-item-start-date">
-          {this.props.gathering.start_date}
+        <div className="gathering-index-show-start-date">
+          {this.state.gathering.start_date}
         </div>
-        <div className="gathering-index-item-end-date">
-          {this.props.gathering.end_date}
+        <div className="gathering-index-show-end-date">
+          {this.state.gathering.end_date}
         </div>
-        <div className="gathering-index-item-description">
-          {this.props.gathering.description}
+        <div className="gathering-index-show-description">
+          {this.state.gathering.description}
         </div>
-        <div className="gathering-index-item-image"
-             onClick={this._handleImgClick}>
-          <img src={this.props.gathering.image}/>
+        <div className="gathering-index-show-image">
+          <img src={this.state.gathering.image}/>
         </div>
-        <div className="gathering-index-item-ticket-price">
-          {this.props.gathering.tix_price}
+        <div className="gathering-index-show-ticket-price">
+          {this.state.gathering.tix_price}
         </div>
-        <div className="gathering-index-item-goal">
-          {this.props.gathering.goal}
+        <div className="gathering-index-show-goal">
+          {this.state.gathering.goal}
           </div>
-        <div className="gathering-index-item-status">
-          {this.props.gathering.status}
+        <div className="gathering-index-show-status">
+          {this.state.gathering.status}
         </div>
-        <div className="gathering-index-item-category">
-          {this.props.gathering.category_id}
+        <div className="gathering-index-show-category">
+          {this.state.gathering.category_id}
         </div>
       </div>
     );

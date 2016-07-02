@@ -16,26 +16,30 @@ const GatheringActions = {
       ErrorActions.setErrors);
   },
 
-  getGathering(){
+  getGathering(id){
     GatheringApiUtil.getGathering(
+      id,
       GatheringActions.receiveGathering,
       ErrorActions.setErrors);
   },
 
-  createGathering(){
+  createGathering(gathering){
     GatheringApiUtil.createGathering(
+      gathering,
       GatheringActions.receiveGathering,
       ErrorActions.setErrors);
   },
 
-  editGathering(){
+  editGathering(gathering){
     GatheringApiUtil.updateGathering(
+      gathering,
       GatheringActions.receiveGathering,
       ErrorActions.setErrors);
   },
 
-  deleteGathering(){
+  deleteGathering(id){
     GatheringApiUtil.deleteGathering(
+      id,
       GatheringActions.removeGathering,
       ErrorActions.setErrors);
   },
