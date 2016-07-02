@@ -1,8 +1,8 @@
 /* eslint max-len: "off" */
 
 const React = require('react');
-const GatheringStore = require('../stores/gathering_store');
-const GatheringActions = require('../actions/gathering_actions');
+const GatheringStore = require('../../stores/gathering_store');
+const GatheringActions = require('../../actions/gathering_actions');
 
 const GatheringIndexShow = React.createClass({
   getInitialState(){

@@ -1,8 +1,5 @@
 "use strict";
 
-const AppDispatcher = require('../dispatcher/dispatcher');
-const GatheringConstants = require('../constants/gathering_constants');
-
 const GatheringApiUtil = {
 
   fetchGatherings(success, error){

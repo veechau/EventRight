@@ -5,7 +5,7 @@ const SessionStore = require('../stores/session_store');
 const Nav = require('./nav.jsx');
 const AppSlider = require('./app_slider');
 
-const GatheringsIndex = require('./gatherings_index');
+const GatheringsIndex = require('./gatherings/gatherings_index');
 
 
 const App = React.createClass({

@@ -1,3 +1,5 @@
+/* eslint max-len: "off" */
+
 const React = require('react');
 const ReactDOM = require('react-dom');
 const ReactRouter = require('react-router');
@@ -8,13 +10,13 @@ const hashHistory = ReactRouter.hashHistory;
 
 const App = require('./components/app');
 const Landing = require('./components/landing');
-const LoginForm = require('./components/login_form');
-const SignupForm = require('./components/signup_form');
-const GatheringsIndex = require('./components/gatherings_index');
-const GatheringIndexItem = require('./components/gathering_index_item');
-const GatheringIndexShow = require('./components/gathering_index_show');
-const CategoriesIndex = require('./components/categories_index');
-const CategoryIndexItem = require('./components/category_index_item');
+const LoginForm = require('./components/auth/login_form');
+const SignupForm = require('./components/auth/signup_form');
+const GatheringsIndex = require('./components/gatherings/gatherings_index');
+const GatheringIndexItem = require('./components/gatherings/gathering_index_item');
+const GatheringIndexShow = require('./components/gatherings/gathering_index_show');
+const CategoriesIndex = require('./components/categories/categories_index');
+const CategoryIndexItem = require('./components/categories/category_index_item');
 
 const SessionStore = require('./stores/session_store');
 const SessionActions = require('./actions/session_actions');

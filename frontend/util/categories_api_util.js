@@ -1,7 +1,5 @@
 "use strict";
 
-const AppDispatcher = require('../dispatcher/dispatcher');
-const CategoryConstants = require('../constants/category_constants');
 
 const CategoryApiUtil = {
 
@@ -18,7 +16,7 @@ const CategoryApiUtil = {
     });
   },
 
-  getGathering(id, success, error){
+  getCategory(id, success, error){
     $.ajax({
       url: `/api/categories/${id}`,
       type: 'GET',
@@ -31,7 +29,7 @@ const CategoryApiUtil = {
     });
   },
 
-  createGathering(category, success, error){
+  createCategory(category, success, error){
     $.ajax({
       url: '/api/categories',
       type: 'POST',
@@ -45,7 +43,7 @@ const CategoryApiUtil = {
     });
   },
 
-  updateGathering(category, success, error){
+  updateCategory(category, success, error){
     $.ajax({
       url: `/api/categories/${category.id}`,
       type: 'PATCH',
@@ -59,7 +57,7 @@ const CategoryApiUtil = {
     });
   },
 
-  deleteGathering(id, success, error){
+  deleteCategory(id, success, error){
     $.ajax({
       url: `/api/categories/${id}`,
       type: 'DELETE',

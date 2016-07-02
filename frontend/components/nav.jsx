@@ -3,9 +3,9 @@ const Link = require('react-router').Link;
 const SessionStore = require('../stores/session_store');
 const SessionActions = require('../actions/session_actions');
 
-const SessionModal = require('./session_modal');
-const LoginForm = require('./login_form');
-const SignupForm = require('./signup_form');
+const SessionModal = require('./auth/session_modal');
+const LoginForm = require('./auth/login_form');
+const SignupForm = require('./auth/signup_form');
 
 
 const Nav = React.createClass({

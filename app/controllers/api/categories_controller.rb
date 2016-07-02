@@ -18,6 +18,7 @@ class Api::CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+    render :show
   end
 
   def update
@@ -28,7 +29,8 @@ class Api::CategoriesController < ApplicationController
       @errors = @category.errors.full_messages
       render 'api/shared/error', status: 422
     end
-  end.
+  end
+
   def destroy
     @category = Category.find(param[:id])
 

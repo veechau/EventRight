@@ -1,6 +1,6 @@
 "use strict";
 
-const AppDispatcher = require('../dispatcher/dispatcher.js');
+const AppDispatcher = require('../dispatcher/dispatcher');
 const Store = require('flux/utils').Store;
 const GatheringConstants = require('../constants/gathering_constants');
 

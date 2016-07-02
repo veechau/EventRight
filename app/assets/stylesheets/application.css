@@ -36,13 +36,13 @@
    list-style: none;
  }
 
- /*img {
+ img {
    display: block;
    height: auto;
    width: 100%;
- }*/
-
-/* INPUT RESET
+ }
+/*
+ INPUT RESET
  input[type="password"],
  input[type="email"],
  input[type="text"],
@@ -72,8 +72,8 @@
 	vertical-align: baseline;
 }
 
-/*Button Group
-button {
+/*Button Group*/
+/*button {
     background-color: transparent;
     border: 1px solid #2FBDF6;
     border-radius: 8px;
@@ -85,7 +85,7 @@ button {
 button:hover {
     background-color: #2FBDF6;
     color: white;
-} */
+}*/
 
 /* Header Group */
 

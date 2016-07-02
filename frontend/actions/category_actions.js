@@ -11,31 +11,35 @@ const CategoryActions = {
   // Client-side
 
   fetchCategories(){
-    CategoryApiUtil.fetchAllCategories(
+    CategoryApiUtil.fetchCategories(
       CategoryActions.receiveAll,
       ErrorActions.setErrors);
   },
 
-  getCategory(){
+  getCategory(id){
     CategoryApiUtil.getCategory(
+      id,
       CategoryActions.receiveCategory,
       ErrorActions.setErrors);
   },
 
-  createCategory(){
+  createCategory(category){
     CategoryApiUtil.createCategory(
+      category,
       CategoryActions.receiveCategory,
       ErrorActions.setErrors);
   },
 
-  editCategory(){
+  editCategory(category){
     CategoryApiUtil.updateCategory(
+      category,
       CategoryActions.receiveCategory,
       ErrorActions.setErrors);
   },
 
-  deleteCategory(){
+  deleteCategory(id){
     CategoryApiUtil.deleteCategory(
+      id,
       CategoryActions.removeCategory,
       ErrorActions.setErrors);
   },

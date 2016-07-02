@@ -13,7 +13,7 @@ EventRight is a web application inspired by Eventbrite with a crowdfunding flair
 - [ ] A production README, replacing this README (**NB**: check out the [sample production README](docs/production_readme.md) -- you'll write this later)
 - [ ] Events
   - [ ] Events index page sorted by crowdfunding status (in_progress, incomplete and completed)
-  - [ ] Only the events that are within current user's city is included
+  - [ ] Only the events that are within current user's city are included
   - [ ] Bonus: Events displayed are based off of user's subscribed categories/bookmarks
 - [ ] Registration/Tickets
   - [ ] Only registered/signed-in users are able to create new events
@@ -76,10 +76,10 @@ the API.
 user interface.
 
 - [ ] setup the flux loop with skeleton files
-- [ ] setup React Router
+- [x] setup React Router
 - implement each note component, building out the flux loop as needed.
-  - [ ] `EventsIndex`
-  - [ ] `EventIndexItem`
+  - [x] `EventsIndex`
+  - [x] `EventIndexItem`
   - [ ] `EventForm`
 
 ### Phase 4: Tickets Model, API, and basic APIUtil (1.5 day, W1 F 10pm)
