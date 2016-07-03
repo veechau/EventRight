@@ -4,6 +4,8 @@ const AppSlider = require('./app_slider');
 const GatheringsIndex = require('./gatherings/gatherings_index');
 const CategoriesIndex = require('./categories/categories_index');
 
+const GatheringForm = require('./gatherings/gathering_form');
+
 const Landing = React.createClass({
   render(){
     return(
@@ -11,6 +13,7 @@ const Landing = React.createClass({
         <AppSlider />
         <CategoriesIndex />
         <GatheringsIndex />
+        <GatheringForm />
       </div>
     );
   }

@@ -15,9 +15,11 @@ const SignupForm = require('./components/auth/signup_form');
 const GatheringsIndex = require('./components/gatherings/gatherings_index');
 const GatheringIndexItem = require('./components/gatherings/gathering_index_item');
 const GatheringIndexShow = require('./components/gatherings/gathering_index_show');
+const GatheringForm = require('./components/gatherings/gathering_form');
 const CategoriesIndex = require('./components/categories/categories_index');
 const CategoryIndexItem = require('./components/categories/category_index_item');
 const CategoryIndexShow = require('./components/categories/category_index_show');
+
 
 const SessionStore = require('./stores/session_store');
 const SessionActions = require('./actions/session_actions');
@@ -31,6 +33,7 @@ const routes = (
         <Route path="/signup" component={ SignupForm } />
         <Route path="/events" component={ GatheringsIndex } />
         <Route path="/events/:eventId" component={ GatheringIndexShow } />
+        <Route path="/events/new" component={ GatheringForm} />
         <Route path="/categories" component={ CategoriesIndex} />
         <Route path="/categories/:catId" component={ CategoryIndexShow } />
     </Route>

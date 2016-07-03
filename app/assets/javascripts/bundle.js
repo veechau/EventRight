@@ -63,6 +63,7 @@
 	var GatheringsIndex = __webpack_require__(293);
 	var GatheringIndexItem = __webpack_require__(298);
 	var GatheringIndexShow = __webpack_require__(306);
+	var GatheringForm = __webpack_require__(308);
 	var CategoriesIndex = __webpack_require__(300);
 	var CategoryIndexItem = __webpack_require__(305);
 	var CategoryIndexShow = __webpack_require__(307);
@@ -81,6 +82,7 @@
 	    React.createElement(Route, { path: '/signup', component: SignupForm }),
 	    React.createElement(Route, { path: '/events', component: GatheringsIndex }),
 	    React.createElement(Route, { path: '/events/:eventId', component: GatheringIndexShow }),
+	    React.createElement(Route, { path: '/events/new', component: GatheringForm }),
 	    React.createElement(Route, { path: '/categories', component: CategoriesIndex }),
 	    React.createElement(Route, { path: '/categories/:catId', component: CategoryIndexShow })
 	  )
@@ -33930,7 +33932,6 @@
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	var React = __webpack_require__(1);
-	var Link = __webpack_require__(168).Link;
 	var SessionActions = __webpack_require__(255);
 	var SessionStore = __webpack_require__(231);
 	var ErrorActions = __webpack_require__(257);
@@ -36448,6 +36449,8 @@
 	var GatheringsIndex = __webpack_require__(293);
 	var CategoriesIndex = __webpack_require__(300);
 
+	var GatheringForm = __webpack_require__(308);
+
 	var Landing = React.createClass({
 	  displayName: 'Landing',
 	  render: function render() {
@@ -36456,7 +36459,8 @@
 	      { className: 'landing-page' },
 	      React.createElement(AppSlider, null),
 	      React.createElement(CategoriesIndex, null),
-	      React.createElement(GatheringsIndex, null)
+	      React.createElement(GatheringsIndex, null),
+	      React.createElement(GatheringForm, null)
 	    );
 	  }
 	});
@@ -36889,6 +36893,247 @@
 	});
 
 	module.exports = CategoryIndexShow;
+
+/***/ },
+/* 308 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var React = __webpack_require__(1);
+	var GatheringActions = __webpack_require__(296);
+	var GatheringStore = __webpack_require__(294);
+	var ErrorActions = __webpack_require__(257);
+	var ErrorStore = __webpack_require__(270);
+	var SessionStore = __webpack_require__(231);
+
+	var GatheringForm = React.createClass({
+	  displayName: 'GatheringForm',
+
+
+	  contextTypes: {
+	    router: React.PropTypes.object.isRequired
+	  },
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      artist: "",
+	      location: "",
+	      start_date: new Date(),
+	      end_date: "",
+	      description: "",
+	      image: "",
+	      tix_price: 0,
+	      funds: 0,
+	      goal: 0,
+	      status: "ongoing",
+	      organizer_id: SessionStore.currentUser.id,
+	      category_id: ""
+	    };
+	  },
+	  componentWillMount: function componentWillMount() {
+	    ErrorActions.clearErrors();
+	    this.redirectIfNotLoggedIn();
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.errorListener = ErrorStore.addListener(this.forceUpdate.bind(this));
+	    this.sessionListener = SessionStore.addListener(this.redirectIfLoggedIn);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.errorListener.remove();
+	    this.sessionListener.remove();
+	  },
+	  redirectIfNotLoggedIn: function redirectIfNotLoggedIn() {
+	    if (!SessionStore.isUserLoggedIn()) {
+	      this.context.router.push("/");
+	    }
+	  },
+	  _handleSubmit: function _handleSubmit(e) {
+	    e.preventDefault();
+
+	    var formData = {
+	      artist: this.state.artist,
+	      location: this.state.location,
+	      start_date: this.state.start_date,
+	      end_date: this.state.end_date,
+	      description: this.state.description,
+	      image: this.state.image,
+	      tix_price: parseInt(this.state.tix_price),
+	      funds: parseInt(this.state.funds),
+	      goal: parseInt(this.state.goal),
+	      status: this.state.status,
+	      organizer_id: this.state.organizer_id,
+	      category_id: this.state.category_id
+	    };
+
+	    GatheringActions.createGathering(formData);
+	  },
+	  fieldErrors: function fieldErrors(field) {
+	    var errors = ErrorStore.formErrors("create_event");
+
+	    if (!errors[field]) {
+	      return;
+	    }
+
+	    var messages = errors[field].map(function (errorMsg, i) {
+	      return React.createElement(
+	        'li',
+	        { key: i },
+	        errorMsg
+	      );
+	    });
+
+	    return React.createElement(
+	      'ul',
+	      null,
+	      messages
+	    );
+	  },
+	  update: function update(property) {
+	    var _this = this;
+
+	    return function (e) {
+	      return _this.setState(_defineProperty({}, property, e.target.value));
+	    };
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'gathering-form-container' },
+	      React.createElement(
+	        'form',
+	        { onSubmit: this._handleSubmit, className: 'gathering-form-box' },
+	        React.createElement(
+	          'div',
+	          { className: 'gathering-form-header' },
+	          'Create an Event'
+	        ),
+	        React.createElement('br', null),
+	        this.fieldErrors("base"),
+	        React.createElement(
+	          'div',
+	          { className: 'gathering-form' },
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Artist:',
+	            this.fieldErrors("artist"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.artist,
+	              onChange: this.update("artist"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Location:',
+	            this.fieldErrors("location"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.location,
+	              onChange: this.update("location"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Start Date:',
+	            this.fieldErrors("start_date"),
+	            React.createElement('input', { type: 'hidden',
+	              value: this.state.start_date,
+	              onChange: this.update("start_date"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' End Date:',
+	            this.fieldErrors("end_date"),
+	            React.createElement('input', { type: 'datetime',
+	              value: this.state.end_date,
+	              onChange: this.update("end_date"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Description:',
+	            this.fieldErrors("description"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.description,
+	              onChange: this.update("description"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Image:',
+	            this.fieldErrors("image"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.image,
+	              onChange: this.update("image"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Ticket Price:',
+	            this.fieldErrors("tix_price"),
+	            React.createElement('input', { type: 'number',
+	              value: this.state.tix_price,
+	              onChange: this.update("tix_price"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Goal:',
+	            this.fieldErrors("goal"),
+	            React.createElement('input', { type: 'number',
+	              value: this.state.goal,
+	              onChange: this.update("goal"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Status:',
+	            this.fieldErrors("status"),
+	            React.createElement('input', { type: 'hidden',
+	              value: this.state.status,
+	              onChange: this.update("status"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Category:',
+	            this.fieldErrors("category_id"),
+	            React.createElement('input', { type: 'number',
+	              value: this.state.category_id,
+	              onChange: this.update("category_id"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement('input', { type: 'submit', value: 'Submit' })
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = GatheringForm;
 
 /***/ }
 /******/ ]);

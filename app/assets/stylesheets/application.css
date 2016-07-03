@@ -268,6 +268,6 @@ div.category-index-item-image {
   display: flex;
   float: left;
   width: 300px;
-  height: auto;
+  height: 300px;
   margin: 10px;
 }

@@ -36,14 +36,14 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 user_id     | integer   | not null, foreign key (references users), indexed
-event_id    | string    | not null, foreign key (references bookmarked events), indexed
+gathering_id| string    | not null, foreign key (references bookmarked events), indexed
 
 ## tickets
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 attendee_id | integer   | not null, foreign key (references users), indexed
-event_id    | string    | not null, foreign key (references purchased events), indexed
+gathering_id| string    | not null, foreign key (references purchased events), indexed
 
 ## users
 column name     | data type | details
