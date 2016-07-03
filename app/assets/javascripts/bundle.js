@@ -62,11 +62,11 @@
 	var SignupForm = __webpack_require__(271);
 	var GatheringsIndex = __webpack_require__(293);
 	var GatheringIndexItem = __webpack_require__(298);
-	var GatheringIndexShow = __webpack_require__(306);
-	var GatheringForm = __webpack_require__(308);
+	var GatheringIndexShow = __webpack_require__(307);
+	var GatheringForm = __webpack_require__(306);
 	var CategoriesIndex = __webpack_require__(300);
 	var CategoryIndexItem = __webpack_require__(305);
-	var CategoryIndexShow = __webpack_require__(307);
+	var CategoryIndexShow = __webpack_require__(308);
 
 	var SessionStore = __webpack_require__(231);
 	var SessionActions = __webpack_require__(255);
@@ -36449,7 +36449,7 @@
 	var GatheringsIndex = __webpack_require__(293);
 	var CategoriesIndex = __webpack_require__(300);
 
-	var GatheringForm = __webpack_require__(308);
+	var GatheringForm = __webpack_require__(306);
 
 	var Landing = React.createClass({
 	  displayName: 'Landing',
@@ -36750,154 +36750,6 @@
 /* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	/* eslint max-len: "off" */
-
-	var React = __webpack_require__(1);
-	var GatheringStore = __webpack_require__(294);
-	var GatheringActions = __webpack_require__(296);
-
-	var GatheringIndexShow = React.createClass({
-	  displayName: 'GatheringIndexShow',
-	  getInitialState: function getInitialState() {
-	    return { gathering: {} };
-	  },
-	  componentWillMount: function componentWillMount() {
-	    GatheringActions.getGathering(this.props.params.eventId);
-	  },
-	  componentDidMount: function componentDidMount() {
-	    this.gatheringIndexShowListener = GatheringStore.addListener(this._onChange);
-	  },
-	  componentWillUnmount: function componentWillUnmount() {
-	    this.gatheringIndexShowListener.remove();
-	  },
-	  _onChange: function _onChange() {
-	    this.setState({ gathering: GatheringStore.find(this.props.params.eventId) });
-	  },
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'gathering-index-show' },
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-title' },
-	        this.state.gathering.title
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-artist' },
-	        this.state.gathering.artist
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-location' },
-	        this.state.gathering.location
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-start-date' },
-	        this.state.gathering.start_date
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-end-date' },
-	        this.state.gathering.end_date
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-description' },
-	        this.state.gathering.description
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-image' },
-	        React.createElement('img', { src: this.state.gathering.image })
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-ticket-price' },
-	        this.state.gathering.tix_price
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-goal' },
-	        this.state.gathering.goal
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-status' },
-	        this.state.gathering.status
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-category' },
-	        this.state.gathering.category_id
-	      )
-	    );
-	  }
-	});
-
-	module.exports = GatheringIndexShow;
-
-/***/ },
-/* 307 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	/* eslint max-len: "off" */
-
-	var React = __webpack_require__(1);
-	var CategoryStore = __webpack_require__(301);
-	var CategoryActions = __webpack_require__(303);
-
-	var CategoryIndexShow = React.createClass({
-	  displayName: 'CategoryIndexShow',
-	  getInitialState: function getInitialState() {
-	    return { category: {} };
-	  },
-	  componentWillMount: function componentWillMount() {
-	    CategoryActions.getCategory(this.props.params.catId);
-	  },
-	  componentDidMount: function componentDidMount() {
-	    this.categoryIndexShowListener = CategoryStore.addListener(this._onChange);
-	  },
-	  componentWillUnmount: function componentWillUnmount() {
-	    this.categoryIndexShowListener.remove();
-	  },
-	  _onChange: function _onChange() {
-	    this.setState({ category: CategoryStore.find(this.props.params.catId) });
-	  },
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'category-index-show' },
-	      React.createElement(
-	        'div',
-	        { className: 'category-index-show-title' },
-	        this.state.category.title
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'category-index-show-description' },
-	        this.state.category.description
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'category-index-show-image' },
-	        React.createElement('img', { src: this.state.category.image })
-	      )
-	    );
-	  }
-	});
-
-	module.exports = CategoryIndexShow;
-
-/***/ },
-/* 308 */
-/***/ function(module, exports, __webpack_require__) {
-
 	"use strict";
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -37134,6 +36986,154 @@
 	});
 
 	module.exports = GatheringForm;
+
+/***/ },
+/* 307 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	/* eslint max-len: "off" */
+
+	var React = __webpack_require__(1);
+	var GatheringStore = __webpack_require__(294);
+	var GatheringActions = __webpack_require__(296);
+
+	var GatheringIndexShow = React.createClass({
+	  displayName: 'GatheringIndexShow',
+	  getInitialState: function getInitialState() {
+	    return { gathering: {} };
+	  },
+	  componentWillMount: function componentWillMount() {
+	    GatheringActions.getGathering(this.props.params.eventId);
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.gatheringIndexShowListener = GatheringStore.addListener(this._onChange);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.gatheringIndexShowListener.remove();
+	  },
+	  _onChange: function _onChange() {
+	    this.setState({ gathering: GatheringStore.find(this.props.params.eventId) });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'gathering-index-show' },
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-title' },
+	        this.state.gathering.title
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-artist' },
+	        this.state.gathering.artist
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-location' },
+	        this.state.gathering.location
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-start-date' },
+	        this.state.gathering.start_date
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-end-date' },
+	        this.state.gathering.end_date
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-description' },
+	        this.state.gathering.description
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-image' },
+	        React.createElement('img', { src: this.state.gathering.image })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-ticket-price' },
+	        this.state.gathering.tix_price
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-goal' },
+	        this.state.gathering.goal
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-status' },
+	        this.state.gathering.status
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-category' },
+	        this.state.gathering.category_id
+	      )
+	    );
+	  }
+	});
+
+	module.exports = GatheringIndexShow;
+
+/***/ },
+/* 308 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	/* eslint max-len: "off" */
+
+	var React = __webpack_require__(1);
+	var CategoryStore = __webpack_require__(301);
+	var CategoryActions = __webpack_require__(303);
+
+	var CategoryIndexShow = React.createClass({
+	  displayName: 'CategoryIndexShow',
+	  getInitialState: function getInitialState() {
+	    return { category: {} };
+	  },
+	  componentWillMount: function componentWillMount() {
+	    CategoryActions.getCategory(this.props.params.catId);
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.categoryIndexShowListener = CategoryStore.addListener(this._onChange);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.categoryIndexShowListener.remove();
+	  },
+	  _onChange: function _onChange() {
+	    this.setState({ category: CategoryStore.find(this.props.params.catId) });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'category-index-show' },
+	      React.createElement(
+	        'div',
+	        { className: 'category-index-show-title' },
+	        this.state.category.title
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'category-index-show-description' },
+	        this.state.category.description
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'category-index-show-image' },
+	        React.createElement('img', { src: this.state.category.image })
+	      )
+	    );
+	  }
+	});
+
+	module.exports = CategoryIndexShow;
 
 /***/ }
 /******/ ]);
