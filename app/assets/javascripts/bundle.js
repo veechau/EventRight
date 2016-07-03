@@ -33935,6 +33935,7 @@
 	var Link = __webpack_require__(168).Link;
 	var SessionActions = __webpack_require__(255);
 	var SessionStore = __webpack_require__(231);
+	var ErrorActions = __webpack_require__(257);
 	var ErrorStore = __webpack_require__(270);
 
 	var SignupForm = React.createClass({
@@ -33956,6 +33957,7 @@
 	    };
 	  },
 	  componentWillMount: function componentWillMount() {
+	    ErrorActions.clearErrors();
 	    this.redirectIfLoggedIn();
 	  },
 	  componentDidMount: function componentDidMount() {

@@ -7,11 +7,20 @@ class Gathering < ActiveRecord::Base
   belongs_to :organizer, class_name: 'User'
 
   after_initialize :set_start_fund_date
+  after_initialize :set_status
+
+  private
+
+  def find_events_by_category(category_name)
+  end
 
   def set_start_fund_date
     self.start_date = Time.now
   end
 
+  def set_status
+    self.status = "ongoing"
+  end
 
 
   # def find_events_by_category(cate_name)

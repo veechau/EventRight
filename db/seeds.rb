@@ -32,7 +32,7 @@ end
   Category.create({
     title: Faker::Commerce.department(2, true),
     description: Faker::Hipster.paragraphs,
-    image: "http://res.cloudinary.com/vechau/image/upload/c_scale,w_300/v1467336542/hipsterlogogenerator_1467177905639_r6sydm.png"
+    image: "http://res.cloudinary.com/vechau/image/upload/v1467336543/hipsterlogogenerator_1467179075788_bcicqj.png"
     })
 end
 
