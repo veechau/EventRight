@@ -19,6 +19,9 @@ const GatheringForm = React.createClass({
       category: ""
     };
   },
+  componentWillMount(){
+
+  },
   render(){
     return (
       <div>

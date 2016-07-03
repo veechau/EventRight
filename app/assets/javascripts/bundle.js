@@ -65,6 +65,7 @@
 	var GatheringIndexShow = __webpack_require__(306);
 	var CategoriesIndex = __webpack_require__(300);
 	var CategoryIndexItem = __webpack_require__(305);
+	var CategoryIndexShow = __webpack_require__(307);
 
 	var SessionStore = __webpack_require__(231);
 	var SessionActions = __webpack_require__(255);
@@ -80,11 +81,8 @@
 	    React.createElement(Route, { path: '/signup', component: SignupForm }),
 	    React.createElement(Route, { path: '/events', component: GatheringsIndex }),
 	    React.createElement(Route, { path: '/events/:eventId', component: GatheringIndexShow }),
-	    React.createElement(
-	      Route,
-	      { path: '/categories', component: CategoriesIndex },
-	      React.createElement(Route, { path: '/categories/:catId', component: CategoryIndexItem })
-	    )
+	    React.createElement(Route, { path: '/categories', component: CategoriesIndex }),
+	    React.createElement(Route, { path: '/categories/:catId', component: CategoryIndexShow })
 	  )
 	);
 
@@ -36837,6 +36835,60 @@
 	});
 
 	module.exports = GatheringIndexShow;
+
+/***/ },
+/* 307 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	/* eslint max-len: "off" */
+
+	var React = __webpack_require__(1);
+	var CategoryStore = __webpack_require__(301);
+	var CategoryActions = __webpack_require__(303);
+
+	var CategoryIndexShow = React.createClass({
+	  displayName: 'CategoryIndexShow',
+	  getInitialState: function getInitialState() {
+	    return { category: {} };
+	  },
+	  componentWillMount: function componentWillMount() {
+	    CategoryActions.getCategory(this.props.params.catId);
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.categoryIndexShowListener = CategoryStore.addListener(this._onChange);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.categoryIndexShowListener.remove();
+	  },
+	  _onChange: function _onChange() {
+	    this.setState({ category: CategoryStore.find(this.props.params.catId) });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'category-index-show' },
+	      React.createElement(
+	        'div',
+	        { className: 'category-index-show-title' },
+	        this.state.category.title
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'category-index-show-description' },
+	        this.state.category.description
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'category-index-show-image' },
+	        React.createElement('img', { src: this.state.category.image })
+	      )
+	    );
+	  }
+	});
+
+	module.exports = CategoryIndexShow;
 
 /***/ }
 /******/ ]);
