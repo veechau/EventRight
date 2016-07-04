@@ -196,7 +196,7 @@ div.nav-links-item:hover {
 div.gatherings-index ul{
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -206,7 +206,7 @@ div.gatherings-index {
 
 div.gathering-index-item-image {
   display: flex;
-  float: left;
+  float: space;
   width: 300px;
   height: auto;
   margin: 10px;
@@ -263,7 +263,7 @@ div.gathering-index-item-image {
 div.categories-index ul{
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: space-around;
   align-items: center;
 }
 

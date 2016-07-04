@@ -11596,6 +11596,14 @@ return jQuery;
 
 
 }).call(this);
+(function() {
+
+
+}).call(this);
+(function() {
+
+
+}).call(this);
 /******/
  (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -11661,11 +11669,15 @@ return jQuery;
 	var SignupForm = __webpack_require__(271);
 	var GatheringsIndex = __webpack_require__(293);
 	var GatheringIndexItem = __webpack_require__(298);
-	var GatheringIndexShow = __webpack_require__(306);
-	var GatheringForm = __webpack_require__(308);
+	var GatheringIndexShow = __webpack_require__(307);
+	var GatheringForm = __webpack_require__(306);
 	var CategoriesIndex = __webpack_require__(300);
 	var CategoryIndexItem = __webpack_require__(305);
-	var CategoryIndexShow = __webpack_require__(307);
+	var CategoryIndexShow = __webpack_require__(308);
+	var BookmarksIndex = __webpack_require__(309);
+	var BookmarkIndexItem = __webpack_require__(316);
+	var TicketsIndex = __webpack_require__(317);
+	var TicketIndexItem = __webpack_require__(322);
 
 	var SessionStore = __webpack_require__(231);
 	var SessionActions = __webpack_require__(255);
@@ -11683,7 +11695,11 @@ return jQuery;
 	    React.createElement(Route, { path: '/events/:eventId', component: GatheringIndexShow }),
 	    React.createElement(Route, { path: '/events/new', component: GatheringForm }),
 	    React.createElement(Route, { path: '/categories', component: CategoriesIndex }),
-	    React.createElement(Route, { path: '/categories/:catId', component: CategoryIndexShow })
+	    React.createElement(Route, { path: '/categories/:catId', component: CategoryIndexShow }),
+	    React.createElement(Route, { path: '/bookmarks/', component: BookmarksIndex }),
+	    React.createElement(Route, { path: '/bookmarks/:bookmarkId', component: BookmarkIndexItem }),
+	    React.createElement(Route, { path: '/tickets/', component: TicketsIndex }),
+	    React.createElement(Route, { path: '/ticket/:ticketId', component: TicketIndexItem })
 	  )
 	);
 
@@ -45531,7 +45547,6 @@ return jQuery;
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	var React = __webpack_require__(1);
-	var Link = __webpack_require__(168).Link;
 	var SessionActions = __webpack_require__(255);
 	var SessionStore = __webpack_require__(231);
 	var ErrorActions = __webpack_require__(257);
@@ -48048,6 +48063,10 @@ return jQuery;
 	var AppSlider = __webpack_require__(272);
 	var GatheringsIndex = __webpack_require__(293);
 	var CategoriesIndex = __webpack_require__(300);
+	var TicketsIndex = __webpack_require__(317);
+	var BookmarksIndex = __webpack_require__(309);
+
+	var GatheringForm = __webpack_require__(306);
 
 	var Landing = React.createClass({
 	  displayName: 'Landing',
@@ -48057,7 +48076,10 @@ return jQuery;
 	      { className: 'landing-page' },
 	      React.createElement(AppSlider, null),
 	      React.createElement(CategoriesIndex, null),
-	      React.createElement(GatheringsIndex, null)
+	      React.createElement(GatheringsIndex, null),
+	      React.createElement(GatheringForm, null),
+	      React.createElement(TicketsIndex, null),
+	      React.createElement(BookmarksIndex, null)
 	    );
 	  }
 	});
@@ -48094,8 +48116,6 @@ return jQuery;
 	    return React.createElement(
 	      'div',
 	      { className: 'categories-index' },
-	      'CATEGORIES',
-	      console.log(this.state.categories),
 	      React.createElement(
 	        'ul',
 	        null,
@@ -48106,8 +48126,7 @@ return jQuery;
 	            React.createElement(CategoryIndexItem, {
 	              category: category })
 	          );
-	        }),
-	        'END OF CATEGORIES'
+	        })
 	      )
 	    );
 	  }
@@ -48347,6 +48366,247 @@ return jQuery;
 /* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var React = __webpack_require__(1);
+	var GatheringActions = __webpack_require__(296);
+	var GatheringStore = __webpack_require__(294);
+	var ErrorActions = __webpack_require__(257);
+	var ErrorStore = __webpack_require__(270);
+	var SessionStore = __webpack_require__(231);
+
+	var GatheringForm = React.createClass({
+	  displayName: 'GatheringForm',
+
+
+	  contextTypes: {
+	    router: React.PropTypes.object.isRequired
+	  },
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      artist: "",
+	      location: "",
+	      start_date: new Date(),
+	      end_date: "",
+	      description: "",
+	      image: "",
+	      tix_price: 0,
+	      funds: 0,
+	      goal: 0,
+	      status: "ongoing",
+	      organizer_id: SessionStore.currentUser.id,
+	      category_id: ""
+	    };
+	  },
+	  componentWillMount: function componentWillMount() {
+	    ErrorActions.clearErrors();
+	    this.redirectIfNotLoggedIn();
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.errorListener = ErrorStore.addListener(this.forceUpdate.bind(this));
+	    this.sessionListener = SessionStore.addListener(this.redirectIfLoggedIn);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.errorListener.remove();
+	    this.sessionListener.remove();
+	  },
+	  redirectIfNotLoggedIn: function redirectIfNotLoggedIn() {
+	    if (!SessionStore.isUserLoggedIn()) {
+	      this.context.router.push("/");
+	    }
+	  },
+	  _handleSubmit: function _handleSubmit(e) {
+	    e.preventDefault();
+
+	    var formData = {
+	      artist: this.state.artist,
+	      location: this.state.location,
+	      start_date: this.state.start_date,
+	      end_date: this.state.end_date,
+	      description: this.state.description,
+	      image: this.state.image,
+	      tix_price: parseInt(this.state.tix_price),
+	      funds: parseInt(this.state.funds),
+	      goal: parseInt(this.state.goal),
+	      status: this.state.status,
+	      organizer_id: this.state.organizer_id,
+	      category_id: this.state.category_id
+	    };
+
+	    GatheringActions.createGathering(formData);
+	  },
+	  fieldErrors: function fieldErrors(field) {
+	    var errors = ErrorStore.formErrors("create_event");
+
+	    if (!errors[field]) {
+	      return;
+	    }
+
+	    var messages = errors[field].map(function (errorMsg, i) {
+	      return React.createElement(
+	        'li',
+	        { key: i },
+	        errorMsg
+	      );
+	    });
+
+	    return React.createElement(
+	      'ul',
+	      null,
+	      messages
+	    );
+	  },
+	  update: function update(property) {
+	    var _this = this;
+
+	    return function (e) {
+	      return _this.setState(_defineProperty({}, property, e.target.value));
+	    };
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'gathering-form-container' },
+	      React.createElement(
+	        'form',
+	        { onSubmit: this._handleSubmit, className: 'gathering-form-box' },
+	        React.createElement(
+	          'div',
+	          { className: 'gathering-form-header' },
+	          'Create an Event'
+	        ),
+	        React.createElement('br', null),
+	        this.fieldErrors("base"),
+	        React.createElement(
+	          'div',
+	          { className: 'gathering-form' },
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Artist:',
+	            this.fieldErrors("artist"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.artist,
+	              onChange: this.update("artist"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Location:',
+	            this.fieldErrors("location"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.location,
+	              onChange: this.update("location"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Start Date:',
+	            this.fieldErrors("start_date"),
+	            React.createElement('input', { type: 'hidden',
+	              value: this.state.start_date,
+	              onChange: this.update("start_date"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' End Date:',
+	            this.fieldErrors("end_date"),
+	            React.createElement('input', { type: 'datetime',
+	              value: this.state.end_date,
+	              onChange: this.update("end_date"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Description:',
+	            this.fieldErrors("description"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.description,
+	              onChange: this.update("description"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Image:',
+	            this.fieldErrors("image"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.image,
+	              onChange: this.update("image"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Ticket Price:',
+	            this.fieldErrors("tix_price"),
+	            React.createElement('input', { type: 'number',
+	              value: this.state.tix_price,
+	              onChange: this.update("tix_price"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Goal:',
+	            this.fieldErrors("goal"),
+	            React.createElement('input', { type: 'number',
+	              value: this.state.goal,
+	              onChange: this.update("goal"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Status:',
+	            this.fieldErrors("status"),
+	            React.createElement('input', { type: 'hidden',
+	              value: this.state.status,
+	              onChange: this.update("status"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Category:',
+	            this.fieldErrors("category_id"),
+	            React.createElement('input', { type: 'number',
+	              value: this.state.category_id,
+	              onChange: this.update("category_id"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement('input', { type: 'submit', value: 'Submit' })
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = GatheringForm;
+
+/***/ },
+/* 307 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	/* eslint max-len: "off" */
@@ -48438,7 +48698,7 @@ return jQuery;
 	module.exports = GatheringIndexShow;
 
 /***/ },
-/* 307 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48492,201 +48752,569 @@ return jQuery;
 	module.exports = CategoryIndexShow;
 
 /***/ },
-/* 308 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	'use strict';
 
 	var React = __webpack_require__(1);
-	var GatheringActions = __webpack_require__(296);
-	var GatheringStore = __webpack_require__(294);
-	var ErrorActions = __webpack_require__(257);
-	var ErrorStore = __webpack_require__(270);
+	var BookmarkStore = __webpack_require__(311);
+	var BookmarkActions = __webpack_require__(315);
+	var BookmarkIndexItem = __webpack_require__(316);
 
-	var GatheringForm = React.createClass({
-	  displayName: 'GatheringForm',
+	var BookmarksIndex = React.createClass({
+	  displayName: 'BookmarksIndex',
 	  getInitialState: function getInitialState() {
-	    return {
-	      artist: "",
-	      location: "",
-	      end_date: "",
-	      description: "",
-	      image: "",
-	      tix_price: 0,
-	      funds: 0,
-	      goal: 0,
-	      category: ""
-	    };
-	  },
-	  componentWillMount: function componentWillMount() {
-	    ErrorActions.clearErrors();
+	    return { bookmarks: [] };
 	  },
 	  componentDidMount: function componentDidMount() {
-	    this.errorListener = ErrorStore.addListener(this.forceUpdate.bind(this));
+	    this.bookmarkListener = BookmarkStore.addListener(this._onChange);
+	    BookmarkActions.fetchBookmarks();
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
-	    this.errorListener.remove();
+	    this.bookmarkListener.remove();
 	  },
-	  _handleSubmit: function _handleSubmit(e) {
-	    e.preventDefault();
-
-	    var formData = {
-	      artist: this.state.artist,
-	      location: this.state.location,
-	      end_date: this.state.end_date,
-	      description: this.state.description,
-	      image: this.state.image,
-	      tix_price: parseInt(this.state.tix_price),
-	      goal: parseInt(this.state.goal),
-	      category: this.state.category
-	    };
-
-	    GatheringActions.createGathering();
-	  },
-	  fieldErrors: function fieldErrors(field) {
-	    var errors = ErrorStore.formErrors("create_event");
-
-	    if (!errors[field]) {
-	      return;
-	    }
-
-	    var messages = errors[field].map(function (errorMsg, i) {
-	      return React.createElement(
-	        'li',
-	        { key: i },
-	        errorMsg
-	      );
-	    });
-
-	    return React.createElement(
-	      'ul',
-	      null,
-	      messages
-	    );
-	  },
-	  update: function update(property) {
-	    var _this = this;
-
-	    return function (e) {
-	      return _this.setState(_defineProperty({}, property, e.target.value));
-	    };
+	  _onChange: function _onChange() {
+	    this.setState({ bookmarks: BookmarkStore.all() });
 	  },
 	  render: function render() {
 	    return React.createElement(
 	      'div',
-	      { className: 'gathering-form-container' },
+	      { className: 'bookmarks-index' },
+	      'BOOKMARKS',
 	      React.createElement(
-	        'form',
-	        { onSubmit: this._handleSubmit, className: 'gathering-form-box' },
-	        React.createElement(
-	          'div',
-	          { className: 'gathering-form-header' },
-	          'Create an Event'
-	        ),
-	        React.createElement('br', null),
-	        this.fieldErrors("base"),
-	        React.createElement(
-	          'div',
-	          { className: 'gathering-form' },
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Artist:',
-	            this.fieldErrors("artist"),
-	            React.createElement('input', { type: 'text',
-	              value: this.state.artist,
-	              onChange: this.update("artist"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Location:',
-	            this.fieldErrors("location"),
-	            React.createElement('input', { type: 'text',
-	              value: this.state.location,
-	              onChange: this.update("location"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' End Date:',
-	            this.fieldErrors("end_date"),
-	            React.createElement('input', { type: 'datetime',
-	              value: this.state.end_date,
-	              onChange: this.update("end_date"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Description:',
-	            this.fieldErrors("description"),
-	            React.createElement('input', { type: 'text',
-	              value: this.state.description,
-	              onChange: this.update("description"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Image:',
-	            this.fieldErrors("image"),
-	            React.createElement('input', { type: 'text',
-	              value: this.state.image,
-	              onChange: this.update("image"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Ticket Price:',
-	            this.fieldErrors("tix_price"),
-	            React.createElement('input', { type: 'number',
-	              value: this.state.tix_price,
-	              onChange: this.update("tix_price"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Goal:',
-	            this.fieldErrors("goal"),
-	            React.createElement('input', { type: 'number',
-	              value: this.state.goal,
-	              onChange: this.update("goal"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Category:',
-	            this.fieldErrors("category"),
-	            React.createElement('input', { type: 'text',
-	              value: this.state.category,
-	              onChange: this.update("category"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement('input', { type: 'submit', value: 'Submit' })
-	        )
+	        'ul',
+	        null,
+	        this.state.bookmarks.map(function (bookmark) {
+	          return React.createElement(
+	            'li',
+	            { key: bookmark.id },
+	            React.createElement(BookmarkIndexItem, {
+	              bookmark: bookmark })
+	          );
+	        }),
+	        'END OF BOOKMARKS'
 	      )
 	    );
 	  }
 	});
 
-	module.exports = GatheringForm;
+	module.exports = BookmarksIndex;
+
+/***/ },
+/* 310 */,
+/* 311 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var AppDispatcher = __webpack_require__(232);
+	var Store = __webpack_require__(236).Store;
+	var BookmarkConstants = __webpack_require__(313);
+
+	var BookmarkStore = new Store(AppDispatcher);
+
+	var _bookmarks = {};
+
+	BookmarkStore.all = function () {
+	  return Object.keys(_bookmarks).map(function (bookmarkId) {
+	    return _bookmarks[bookmarkId];
+	  });
+	};
+
+	BookmarkStore.find = function (bookmarkId) {
+	  return _bookmarks[bookmarkId];
+	};
+
+	var resetBookmarks = function resetBookmarks(bookmarks) {
+	  _bookmarks = {};
+	  bookmarks.forEach(function (bookmark) {
+	    _bookmarks[bookmark.id] = bookmark;
+	  });
+	};
+
+	var setBookmark = function setBookmark(bookmark) {
+	  _bookmarks[bookmark.id] = bookmark;
+	};
+
+	var deleteBookmark = function deleteBookmark(bookmark) {
+	  delete _bookmarks[bookmark.id];
+	};
+
+	BookmarkStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case BookmarkConstants.BOOKMARKS_RECEIVED:
+	      resetBookmarks(payload.bookmarks);
+	      BookmarkStore.__emitChange();
+	      break;
+	    case BookmarkConstants.BOOKMARK_RECEIVED:
+	      setBookmark(payload.bookmark);
+	      BookmarkStore.__emitChange();
+	      break;
+	    case BookmarkConstants.BOOKMARK_REMOVED:
+	      deleteBookmark(payload.bookmark);
+	      BookmarkStore.__emitChange();
+	      break;
+	  }
+	};
+
+	module.exports = BookmarkStore;
+
+/***/ },
+/* 312 */,
+/* 313 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var BookmarkConstants = {
+	  BOOKMARKS_RECEIVED: "BOOKMARKS_RECEIVED",
+	  BOOKMARK_RECEIVED: "BOOKMARK_RECEIVED",
+	  BOOKMARK_REMOVED: "BOOKMARK_REMOVED"
+	};
+
+	module.exports = BookmarkConstants;
+
+/***/ },
+/* 314 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var BookmarkApiUtil = {
+	  fetchBookmarks: function fetchBookmarks(success, _error) {
+	    $.ajax({
+	      url: "api/bookmarks",
+	      method: 'GET',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error("bookmarks", errors);
+	      }
+	    });
+	  },
+	  getBookmark: function getBookmark(id, success, _error2) {
+	    $.ajax({
+	      url: "api/bookmarks/" + id,
+	      method: 'GET',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error2("bookmarks", errors);
+	      }
+	    });
+	  },
+	  createBookmark: function createBookmark(bookmark, success, _error3) {
+	    $.ajax({
+	      url: "api/bookmarks",
+	      method: 'POST',
+	      data: { bookmark: bookmark },
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error3("bookmarks", errors);
+	      }
+	    });
+	  },
+	  updateBookmark: function updateBookmark(bookmark, success, _error4) {
+	    $.ajax({
+	      url: "api/bookmarks/" + bookmark.id,
+	      method: 'PATCH',
+	      data: { bookmark: bookmark },
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error4("bookmarks", errors);
+	      }
+	    });
+	  },
+	  deleteBookmark: function deleteBookmark(id, success, _error5) {
+	    $.ajax({
+	      url: "api/bookmarks/" + id,
+	      method: 'DELETE',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error5("bookmarks", errors);
+	      }
+	    });
+	  }
+	};
+
+	module.exports = BookmarkApiUtil;
+
+/***/ },
+/* 315 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var AppDispatcher = __webpack_require__(232);
+	var BookmarkConstants = __webpack_require__(313);
+	var BookmarkApiUtil = __webpack_require__(314);
+	var ErrorActions = __webpack_require__(257);
+	var hashHistory = __webpack_require__(168).hashHistory;
+
+	var BookmarkActions = {
+	  // Client-side
+
+	  fetchBookmarks: function fetchBookmarks() {
+	    BookmarkApiUtil.fetchBookmarks(BookmarkActions.receiveAll, ErrorActions.setErrors);
+	  },
+	  getBookmark: function getBookmark(id) {
+	    BookmarkApiUtil.getBookmark(id, BookmarkActions.receiveBookmark, ErrorActions.setErrors);
+	  },
+	  createBookmark: function createBookmark(bookmark) {
+	    BookmarkApiUtil.createBookmark(bookmark, BookmarkActions.receiveBookmark, ErrorActions.setErrors);
+	  },
+	  editBookmark: function editBookmark(bookmark) {
+	    BookmarkApiUtil.updateBookmark(bookmark, BookmarkActions.receiveBookmark, ErrorActions.setErrors);
+	  },
+	  deleteBookmark: function deleteBookmark(id) {
+	    BookmarkApiUtil.deleteBookmark(id, BookmarkActions.removeBookmark, ErrorActions.setErrors);
+	  },
+
+
+	  // Server-side
+	  receiveAll: function receiveAll(bookmarks) {
+	    AppDispatcher.dispatch({
+	      actionType: BookmarkConstants.BOOKMARKS_RECEIVED,
+	      bookmarks: bookmarks
+	    });
+	  },
+	  receiveBookmark: function receiveBookmark(bookmark) {
+	    AppDispatcher.dispatch({
+	      actionType: BookmarkConstants.BOOKMARK_RECEIVED,
+	      bookmark: bookmark
+	    });
+	  },
+	  removeBookmark: function removeBookmark(bookmark) {
+	    AppDispatcher.dispatch({
+	      actionType: BookmarkConstants.BOOKMARK_REMOVED,
+	      bookmark: bookmark
+	    });
+	  }
+	};
+
+	module.exports = BookmarkActions;
+
+/***/ },
+/* 316 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var ReactRouter = __webpack_require__(168);
+
+	var BookmarkIndexItem = React.createClass({
+	  displayName: 'BookmarkIndexItem',
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'bookmarks-index-item' },
+	      React.createElement(
+	        'p',
+	        null,
+	        this.props.bookmark.user_id
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        this.props.bookmark.gathering_id
+	      )
+	    );
+	  }
+	});
+
+	module.exports = BookmarkIndexItem;
+
+/***/ },
+/* 317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var TicketStore = __webpack_require__(318);
+	var TicketActions = __webpack_require__(319);
+	var TicketIndexItem = __webpack_require__(322);
+
+	var TicketsIndex = React.createClass({
+	  displayName: 'TicketsIndex',
+	  getInitialState: function getInitialState() {
+	    return { tickets: [] };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.ticketListener = TicketStore.addListener(this._onChange);
+	    TicketActions.fetchTickets();
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.ticketListener.remove();
+	  },
+	  _onChange: function _onChange() {
+	    this.setState({ tickets: TicketStore.all() });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'tickets-index' },
+	      'TICKETS',
+	      console.log(this.state.tickets),
+	      React.createElement(
+	        'ul',
+	        null,
+	        this.state.tickets.map(function (ticket) {
+	          return React.createElement(
+	            'li',
+	            { key: ticket.id },
+	            React.createElement(TicketIndexItem, {
+	              ticket: ticket })
+	          );
+	        }),
+	        'END OF TICKETS'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = TicketsIndex;
+
+/***/ },
+/* 318 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var AppDispatcher = __webpack_require__(232);
+	var Store = __webpack_require__(236).Store;
+	var TicketConstants = __webpack_require__(320);
+
+	var TicketStore = new Store(AppDispatcher);
+
+	var _tickets = {};
+
+	TicketStore.all = function () {
+	  return Object.keys(_tickets).map(function (ticketId) {
+	    return _tickets[ticketId];
+	  });
+	};
+
+	TicketStore.find = function (ticketId) {
+	  return _tickets[ticketId];
+	};
+
+	var resetTickets = function resetTickets(tickets) {
+	  _tickets = {};
+	  tickets.forEach(function (ticket) {
+	    _tickets[ticket.id] = ticket;
+	  });
+	};
+
+	var setTicket = function setTicket(ticket) {
+	  _tickets[ticket.id] = ticket;
+	};
+
+	var deleteTicket = function deleteTicket(ticket) {
+	  delete _tickets[ticket.id];
+	};
+
+	TicketStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case TicketConstants.TICKETS_RECEIVED:
+	      resetTickets(payload.tickets);
+	      TicketStore.__emitChange();
+	      break;
+	    case TicketConstants.TICKET_RECEIVED:
+	      setTicket(payload.ticket);
+	      TicketStore.__emitChange();
+	      break;
+	    case TicketConstants.TICKET_REMOVED:
+	      deleteTicket(payload.ticket);
+	      TicketStore.__emitChange();
+	      break;
+	  }
+	};
+
+	module.exports = TicketStore;
+
+/***/ },
+/* 319 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var AppDispatcher = __webpack_require__(232);
+	var TicketConstants = __webpack_require__(320);
+	var TicketApiUtil = __webpack_require__(321);
+	var ErrorActions = __webpack_require__(257);
+	var hashHistory = __webpack_require__(168).hashHistory;
+
+	var TicketActions = {
+	  // Client-side
+
+	  fetchTickets: function fetchTickets() {
+	    TicketApiUtil.fetchTickets(TicketActions.receiveAll, ErrorActions.setErrors);
+	  },
+	  getTicket: function getTicket(id) {
+	    TicketApiUtil.getTicket(id, TicketActions.receiveTicket, ErrorActions.setErrors);
+	  },
+	  createTicket: function createTicket(ticket) {
+	    TicketApiUtil.createTicket(ticket, TicketActions.receiveTicket, ErrorActions.setErrors);
+	  },
+	  editTicket: function editTicket(ticket) {
+	    TicketApiUtil.updateTicket(ticket, TicketActions.receiveTicket, ErrorActions.setErrors);
+	  },
+	  deleteTicket: function deleteTicket(id) {
+	    TicketApiUtil.deleteTicket(id, TicketActions.removeTicket, ErrorActions.setErrors);
+	  },
+
+
+	  // Server-side
+	  receiveAll: function receiveAll(tickets) {
+	    AppDispatcher.dispatch({
+	      actionType: TicketConstants.TICKETS_RECEIVED,
+	      tickets: tickets
+	    });
+	  },
+	  receiveTicket: function receiveTicket(ticket) {
+	    AppDispatcher.dispatch({
+	      actionType: TicketConstants.TICKET_RECEIVED,
+	      ticket: ticket
+	    });
+	  },
+	  removeTicket: function removeTicket(ticket) {
+	    AppDispatcher.dispatch({
+	      actionType: TicketConstants.TICKET_REMOVED,
+	      ticket: ticket
+	    });
+	  }
+	};
+
+	module.exports = TicketActions;
+
+/***/ },
+/* 320 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var BookmarkConstants = {
+	  TICKETS_RECEIVED: "TICKETS_RECEIVED",
+	  TICKET_RECEIVED: "TICKET_RECEIVED",
+	  TICKET_REMOVED: "TICKET_REMOVED"
+	};
+
+	module.exports = BookmarkConstants;
+
+/***/ },
+/* 321 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var TicketApiUtil = {
+	  fetchTickets: function fetchTickets(success, _error) {
+	    $.ajax({
+	      url: "api/tickets",
+	      method: 'GET',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error("tickets", errors);
+	      }
+	    });
+	  },
+	  getTicket: function getTicket(id, success, _error2) {
+	    $.ajax({
+	      url: "api/tickets/" + id,
+	      method: 'GET',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error2("tickets", errors);
+	      }
+	    });
+	  },
+	  createTicket: function createTicket(ticket, success, _error3) {
+	    $.ajax({
+	      url: "api/tickets",
+	      method: 'POST',
+	      data: { ticket: ticket },
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error3("tickets", errors);
+	      }
+	    });
+	  },
+	  updateTicket: function updateTicket(ticket, success, _error4) {
+	    $.ajax({
+	      url: "api/tickets/" + ticket.id,
+	      method: 'PATCH',
+	      data: { ticket: ticket },
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error4("tickets", errors);
+	      }
+	    });
+	  },
+	  destroyTicket: function destroyTicket(id, success, _error5) {
+	    $.ajax({
+	      url: "api/tickets/" + id,
+	      method: 'DELETE',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error5("tickets", errors);
+	      }
+	    });
+	  }
+	};
+
+	module.exports = TicketApiUtil;
+
+/***/ },
+/* 322 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var ReactRouter = __webpack_require__(168);
+
+	var TicketsIndexItem = React.createClass({
+	  displayName: 'TicketsIndexItem',
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'tickets-index-item' },
+	      React.createElement(
+	        'p',
+	        null,
+	        this.props.ticket.attendee_id
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        this.props.ticket.gathering_id
+	      )
+	    );
+	  }
+	});
+
+	module.exports = TicketsIndexItem;
 
 /***/ }
 /******/ ]);
