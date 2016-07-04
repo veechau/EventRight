@@ -87,7 +87,7 @@ user interface.
   **Objective:** Tickets can be created and destroyed through
   the API.
 
-  - [ ] create `Ticket` model
+  - [x] create `Ticket` model
   - [ ] CRUD API for events (`TicketsController`)
   - [ ] jBuilder views for tickets
   - [ ] test out API interaction in the console.
@@ -125,7 +125,7 @@ which has its own `Index` view.
 
 **Objective:** Events can be bookmarked, and can be removed from bookmarked list.
 
-- [ ] create `Bookmark` model and join table
+- [x] create `Bookmark` model and join table
 - build out API, Flux loop, and components for:
   - [ ] fetching bookmarks for current user
   - [ ] adding bookmarks to events

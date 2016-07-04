@@ -67,6 +67,10 @@
 	var CategoriesIndex = __webpack_require__(300);
 	var CategoryIndexItem = __webpack_require__(305);
 	var CategoryIndexShow = __webpack_require__(308);
+	var BookmarksIndex = __webpack_require__(309);
+	var BookmarkIndexItem = __webpack_require__(316);
+	var TicketsIndex = __webpack_require__(317);
+	var TicketIndexItem = __webpack_require__(322);
 
 	var SessionStore = __webpack_require__(231);
 	var SessionActions = __webpack_require__(255);
@@ -84,7 +88,11 @@
 	    React.createElement(Route, { path: '/events/:eventId', component: GatheringIndexShow }),
 	    React.createElement(Route, { path: '/events/new', component: GatheringForm }),
 	    React.createElement(Route, { path: '/categories', component: CategoriesIndex }),
-	    React.createElement(Route, { path: '/categories/:catId', component: CategoryIndexShow })
+	    React.createElement(Route, { path: '/categories/:catId', component: CategoryIndexShow }),
+	    React.createElement(Route, { path: '/bookmarks/', component: BookmarksIndex }),
+	    React.createElement(Route, { path: '/bookmarks/:bookmarkId', component: BookmarkIndexItem }),
+	    React.createElement(Route, { path: '/tickets/', component: TicketsIndex }),
+	    React.createElement(Route, { path: '/ticket/:ticketId', component: TicketIndexItem })
 	  )
 	);
 
@@ -36448,6 +36456,7 @@
 	var AppSlider = __webpack_require__(272);
 	var GatheringsIndex = __webpack_require__(293);
 	var CategoriesIndex = __webpack_require__(300);
+	var TicketsIndex = __webpack_require__(317);
 
 	var GatheringForm = __webpack_require__(306);
 
@@ -36460,7 +36469,8 @@
 	      React.createElement(AppSlider, null),
 	      React.createElement(CategoriesIndex, null),
 	      React.createElement(GatheringsIndex, null),
-	      React.createElement(GatheringForm, null)
+	      React.createElement(GatheringForm, null),
+	      React.createElement(TicketsIndex, null)
 	    );
 	  }
 	});
@@ -36497,8 +36507,6 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'categories-index' },
-	      'CATEGORIES',
-	      console.log(this.state.categories),
 	      React.createElement(
 	        'ul',
 	        null,
@@ -36509,8 +36517,7 @@
 	            React.createElement(CategoryIndexItem, {
 	              category: category })
 	          );
-	        }),
-	        'END OF CATEGORIES'
+	        })
 	      )
 	    );
 	  }
@@ -37134,6 +37141,571 @@
 	});
 
 	module.exports = CategoryIndexShow;
+
+/***/ },
+/* 309 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var BookmarkStore = __webpack_require__(311);
+	var BookmarkActions = __webpack_require__(315);
+	var BookmarkIndexItem = __webpack_require__(316);
+
+	var BookmarksIndex = React.createClass({
+	  displayName: 'BookmarksIndex',
+	  getInitialState: function getInitialState() {
+	    return { bookmarks: [] };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.bookmarkListener = BookmarkStore.addListener(this._onChange);
+	    BookmarkActions.fetchBookmarks();
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.bookmarkListener.remove();
+	  },
+	  _onChange: function _onChange() {
+	    this.setState({ bookmarks: BookmarkStore.all() });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'bookmarks-index' },
+	      'BOOKMARKS',
+	      React.createElement(
+	        'ul',
+	        null,
+	        this.state.bookmarks.map(function (bookmark) {
+	          return React.createElement(
+	            'li',
+	            { key: bookmark.id },
+	            React.createElement(BookmarkIndexItem, {
+	              bookmark: bookmark })
+	          );
+	        }),
+	        'END OF BOOKMARKS'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = BookmarksIndex;
+
+/***/ },
+/* 310 */,
+/* 311 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var AppDispatcher = __webpack_require__(232);
+	var Store = __webpack_require__(236).Store;
+	var BookmarkConstants = __webpack_require__(313);
+
+	var BookmarkStore = new Store(AppDispatcher);
+
+	var _bookmarks = {};
+
+	BookmarkStore.all = function () {
+	  return Object.keys(_bookmarks).map(function (bookmarkId) {
+	    return _bookmarks[bookmarkId];
+	  });
+	};
+
+	BookmarkStore.find = function (bookmarkId) {
+	  return _bookmarks[bookmarkId];
+	};
+
+	var resetBookmarks = function resetBookmarks(bookmarks) {
+	  _bookmarks = {};
+	  bookmarks.forEach(function (bookmark) {
+	    _bookmarks[bookmark.id] = bookmark;
+	  });
+	};
+
+	var setBookmark = function setBookmark(bookmark) {
+	  _bookmarks[bookmark.id] = bookmark;
+	};
+
+	var deleteBookmark = function deleteBookmark(bookmark) {
+	  delete _bookmarks[bookmark.id];
+	};
+
+	BookmarkStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case BookmarkConstants.BOOKMARKS_RECEIVED:
+	      resetBookmarks(payload.bookmarks);
+	      BookmarkStore.__emitChange();
+	      break;
+	    case BookmarkConstants.BOOKMARK_RECEIVED:
+	      setBookmark(payload.bookmark);
+	      BookmarkStore.__emitChange();
+	      break;
+	    case BookmarkConstants.BOOKMARK_REMOVED:
+	      deleteBookmark(payload.bookmark);
+	      BookmarkStore.__emitChange();
+	      break;
+	  }
+	};
+
+	module.exports = BookmarkStore;
+
+/***/ },
+/* 312 */,
+/* 313 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var BookmarkConstants = {
+	  BOOKMARKS_RECEIVED: "BOOKMARKS_RECEIVED",
+	  BOOKMARK_RECEIVED: "BOOKMARK_RECEIVED",
+	  BOOKMARK_REMOVED: "BOOKMARK_REMOVED"
+	};
+
+	module.exports = BookmarkConstants;
+
+/***/ },
+/* 314 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var BookmarkApiUtil = {
+	  fetchBookmarks: function fetchBookmarks(success, _error) {
+	    $.ajax({
+	      url: "api/bookmarks",
+	      method: 'GET',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error("bookmarks", errors);
+	      }
+	    });
+	  },
+	  getBookmark: function getBookmark(id, success, _error2) {
+	    $.ajax({
+	      url: "api/bookmarks/" + id,
+	      method: 'GET',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error2("bookmarks", errors);
+	      }
+	    });
+	  },
+	  createBookmark: function createBookmark(bookmark, success, _error3) {
+	    $.ajax({
+	      url: "api/bookmarks",
+	      method: 'POST',
+	      data: { bookmark: bookmark },
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error3("bookmarks", errors);
+	      }
+	    });
+	  },
+	  updateBookmark: function updateBookmark(bookmark, success, _error4) {
+	    $.ajax({
+	      url: "api/bookmarks/" + bookmark.id,
+	      method: 'PATCH',
+	      data: { bookmark: bookmark },
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error4("bookmarks", errors);
+	      }
+	    });
+	  },
+	  deleteBookmark: function deleteBookmark(id, success, _error5) {
+	    $.ajax({
+	      url: "api/bookmarks/" + id,
+	      method: 'DELETE',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error5("bookmarks", errors);
+	      }
+	    });
+	  }
+	};
+
+	module.exports = BookmarkApiUtil;
+
+/***/ },
+/* 315 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var AppDispatcher = __webpack_require__(232);
+	var BookmarkConstants = __webpack_require__(313);
+	var BookmarkApiUtil = __webpack_require__(314);
+	var ErrorActions = __webpack_require__(257);
+	var hashHistory = __webpack_require__(168).hashHistory;
+
+	var BookmarkActions = {
+	  // Client-side
+
+	  fetchBookmarks: function fetchBookmarks() {
+	    BookmarkApiUtil.fetchBookmarks(BookmarkActions.receiveAll, ErrorActions.setErrors);
+	  },
+	  getBookmark: function getBookmark(id) {
+	    BookmarkApiUtil.getBookmark(id, BookmarkActions.receiveBookmark, ErrorActions.setErrors);
+	  },
+	  createBookmark: function createBookmark(bookmark) {
+	    BookmarkApiUtil.createBookmark(bookmark, BookmarkActions.receiveBookmark, ErrorActions.setErrors);
+	  },
+	  editBookmark: function editBookmark(bookmark) {
+	    BookmarkApiUtil.updateBookmark(bookmark, BookmarkActions.receiveBookmark, ErrorActions.setErrors);
+	  },
+	  deleteBookmark: function deleteBookmark(id) {
+	    BookmarkApiUtil.deleteBookmark(id, BookmarkActions.removeBookmark, ErrorActions.setErrors);
+	  },
+
+
+	  // Server-side
+	  receiveAll: function receiveAll(bookmarks) {
+	    AppDispatcher.dispatch({
+	      actionType: BookmarkConstants.BOOKMARKS_RECEIVED,
+	      bookmarks: bookmarks
+	    });
+	  },
+	  receiveBookmark: function receiveBookmark(bookmark) {
+	    AppDispatcher.dispatch({
+	      actionType: BookmarkConstants.BOOKMARK_RECEIVED,
+	      bookmark: bookmark
+	    });
+	  },
+	  removeBookmark: function removeBookmark(bookmark) {
+	    AppDispatcher.dispatch({
+	      actionType: BookmarkConstants.BOOKMARK_REMOVED,
+	      bookmark: bookmark
+	    });
+	  }
+	};
+
+	module.exports = BookmarkActions;
+
+/***/ },
+/* 316 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var ReactRouter = __webpack_require__(168);
+
+	var BookmarkIndexItem = React.createClass({
+	  displayName: 'BookmarkIndexItem',
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'bookmarks-index-item' },
+	      React.createElement(
+	        'p',
+	        null,
+	        'this.props.bookmarks.user_id'
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        'this.props.bookmarks.gathering_id'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = BookmarkIndexItem;
+
+/***/ },
+/* 317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var TicketStore = __webpack_require__(318);
+	var TicketActions = __webpack_require__(319);
+	var TicketIndexItem = __webpack_require__(322);
+
+	var TicketsIndex = React.createClass({
+	  displayName: 'TicketsIndex',
+	  getInitialState: function getInitialState() {
+	    return { tickets: [] };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.ticketListener = TicketStore.addListener(this._onChange);
+	    TicketActions.fetchTickets();
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.ticketListener.remove();
+	  },
+	  _onChange: function _onChange() {
+	    this.setState({ tickets: TicketStore.all() });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'tickets-index' },
+	      'TICKETS',
+	      console.log(this.state.tickets),
+	      React.createElement(
+	        'ul',
+	        null,
+	        this.state.tickets.map(function (ticket) {
+	          return React.createElement(
+	            'li',
+	            { key: ticket.id },
+	            React.createElement(TicketIndexItem, {
+	              ticket: ticket })
+	          );
+	        }),
+	        'END OF TICKETS'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = TicketsIndex;
+
+/***/ },
+/* 318 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var AppDispatcher = __webpack_require__(232);
+	var Store = __webpack_require__(236).Store;
+	var TicketConstants = __webpack_require__(320);
+
+	var TicketStore = new Store(AppDispatcher);
+
+	var _tickets = {};
+
+	TicketStore.all = function () {
+	  return Object.keys(_tickets).map(function (ticketId) {
+	    return _tickets[ticketId];
+	  });
+	};
+
+	TicketStore.find = function (ticketId) {
+	  return _tickets[ticketId];
+	};
+
+	var resetTickets = function resetTickets(tickets) {
+	  _tickets = {};
+	  tickets.forEach(function (ticket) {
+	    _tickets[ticket.id] = ticket;
+	  });
+	};
+
+	var setTicket = function setTicket(ticket) {
+	  _tickets[ticket.id] = ticket;
+	};
+
+	var deleteTicket = function deleteTicket(ticket) {
+	  delete _tickets[ticket.id];
+	};
+
+	TicketStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case TicketConstants.TICKETS_RECEIVED:
+	      resetTickets(payload.tickets);
+	      TicketStore.__emitChange();
+	      break;
+	    case TicketConstants.TICKET_RECEIVED:
+	      setTicket(payload.ticket);
+	      TicketStore.__emitChange();
+	      break;
+	    case TicketConstants.TICKET_REMOVED:
+	      deleteTicket(payload.ticket);
+	      TicketStore.__emitChange();
+	      break;
+	  }
+	};
+
+	module.exports = TicketStore;
+
+/***/ },
+/* 319 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var AppDispatcher = __webpack_require__(232);
+	var TicketConstants = __webpack_require__(320);
+	var TicketApiUtil = __webpack_require__(321);
+	var ErrorActions = __webpack_require__(257);
+	var hashHistory = __webpack_require__(168).hashHistory;
+
+	var TicketActions = {
+	  // Client-side
+
+	  fetchTickets: function fetchTickets() {
+	    TicketApiUtil.fetchTickets(TicketActions.receiveAll, ErrorActions.setErrors);
+	  },
+	  getTicket: function getTicket(id) {
+	    TicketApiUtil.getTicket(id, TicketActions.receiveTicket, ErrorActions.setErrors);
+	  },
+	  createTicket: function createTicket(ticket) {
+	    TicketApiUtil.createTicket(ticket, TicketActions.receiveTicket, ErrorActions.setErrors);
+	  },
+	  editTicket: function editTicket(ticket) {
+	    TicketApiUtil.updateTicket(ticket, TicketActions.receiveTicket, ErrorActions.setErrors);
+	  },
+	  deleteTicket: function deleteTicket(id) {
+	    TicketApiUtil.deleteTicket(id, TicketActions.removeTicket, ErrorActions.setErrors);
+	  },
+
+
+	  // Server-side
+	  receiveAll: function receiveAll(tickets) {
+	    AppDispatcher.dispatch({
+	      actionType: TicketConstants.TICKETS_RECEIVED,
+	      tickets: tickets
+	    });
+	  },
+	  receiveTicket: function receiveTicket(ticket) {
+	    AppDispatcher.dispatch({
+	      actionType: TicketConstants.TICKET_RECEIVED,
+	      ticket: ticket
+	    });
+	  },
+	  removeTicket: function removeTicket(ticket) {
+	    AppDispatcher.dispatch({
+	      actionType: TicketConstants.TICKET_REMOVED,
+	      ticket: ticket
+	    });
+	  }
+	};
+
+	module.exports = TicketActions;
+
+/***/ },
+/* 320 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var BookmarkConstants = {
+	  TICKETS_RECEIVED: "TICKETS_RECEIVED",
+	  TICKET_RECEIVED: "TICKET_RECEIVED",
+	  TICKET_REMOVED: "TICKET_REMOVED"
+	};
+
+	module.exports = BookmarkConstants;
+
+/***/ },
+/* 321 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var TicketApiUtil = {
+	  fetchTickets: function fetchTickets(success, _error) {
+	    $.ajax({
+	      url: "api/tickets",
+	      method: 'GET',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error("tickets", errors);
+	      }
+	    });
+	  },
+	  getTicket: function getTicket(id, success, _error2) {
+	    $.ajax({
+	      url: "api/tickets/" + id,
+	      method: 'GET',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error2("tickets", errors);
+	      }
+	    });
+	  },
+	  createTicket: function createTicket(ticket, success, _error3) {
+	    $.ajax({
+	      url: "api/tickets",
+	      method: 'POST',
+	      data: { ticket: ticket },
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error3("tickets", errors);
+	      }
+	    });
+	  },
+	  updateTicket: function updateTicket(ticket, success, _error4) {
+	    $.ajax({
+	      url: "api/tickets/" + ticket.id,
+	      method: 'PATCH',
+	      data: { ticket: ticket },
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error4("tickets", errors);
+	      }
+	    });
+	  },
+	  destroyTicket: function destroyTicket(id, success, _error5) {
+	    $.ajax({
+	      url: "api/tickets/" + id,
+	      method: 'DELETE',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+
+	        _error5("tickets", errors);
+	      }
+	    });
+	  }
+	};
+
+	module.exports = TicketApiUtil;
+
+/***/ },
+/* 322 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var ReactRouter = __webpack_require__(168);
+
+	var TicketsIndexItem = React.createClass({
+	  displayName: 'TicketsIndexItem',
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'tickets-index-item' },
+	      React.createElement(
+	        'p',
+	        null,
+	        this.props.ticket.attendee_id
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        this.props.ticket.gathering_id
+	      )
+	    );
+	  }
+	});
+
+	module.exports = TicketsIndexItem;
 
 /***/ }
 /******/ ]);

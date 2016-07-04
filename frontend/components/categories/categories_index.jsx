@@ -24,8 +24,6 @@ const CategoriesIndex = React.createClass({
   render(){
     return (
       <div className="categories-index">
-      CATEGORIES
-      {console.log(this.state.categories)}
         <ul>
           {this.state.categories.map( (category) => {
             return (
@@ -35,7 +33,6 @@ const CategoriesIndex = React.createClass({
               </li>
             );
           })}
-          END OF CATEGORIES
         </ul>
       </div>
     );

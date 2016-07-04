@@ -19,6 +19,11 @@ const GatheringForm = require('./components/gatherings/gathering_form');
 const CategoriesIndex = require('./components/categories/categories_index');
 const CategoryIndexItem = require('./components/categories/category_index_item');
 const CategoryIndexShow = require('./components/categories/category_index_show');
+const BookmarksIndex = require('./components/bookmarks/bookmarks_index');
+const BookmarkIndexItem = require('./components/bookmarks/bookmark_index_item');
+const TicketsIndex = require('./components/tickets/tickets_index');
+const TicketIndexItem = require('./components/tickets/ticket_index_item');
+
 
 
 const SessionStore = require('./stores/session_store');
@@ -36,6 +41,10 @@ const routes = (
         <Route path="/events/new" component={ GatheringForm} />
         <Route path="/categories" component={ CategoriesIndex} />
         <Route path="/categories/:catId" component={ CategoryIndexShow } />
+        <Route path="/bookmarks/" component={ BookmarksIndex } />
+        <Route path="/bookmarks/:bookmarkId" component={ BookmarkIndexItem } />
+        <Route path="/tickets/" component={ TicketsIndex } />
+        <Route path="/ticket/:ticketId" component={ TicketIndexItem } />
     </Route>
   </Router>
 );

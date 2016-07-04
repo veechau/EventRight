@@ -3,6 +3,7 @@ const SessionStore = require('../stores/session_store');
 const AppSlider = require('./app_slider');
 const GatheringsIndex = require('./gatherings/gatherings_index');
 const CategoriesIndex = require('./categories/categories_index');
+const TicketsIndex = require('./tickets/tickets_index');
 
 const GatheringForm = require('./gatherings/gathering_form');
 
@@ -14,6 +15,7 @@ const Landing = React.createClass({
         <CategoriesIndex />
         <GatheringsIndex />
         <GatheringForm />
+        <TicketsIndex />
       </div>
     );
   }

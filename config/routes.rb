@@ -4,8 +4,8 @@ Rails.application.routes.draw do
     resource :session, only: [:index, :create, :destroy, :show]
     resources :gatherings, except: [:new, :edit]
     resources :categories, except: [:new, :edit]
-    resources :tickets, only: [:create, :destroy]
-    resources :bookmarks, only: [:create, :destroy]
+    resources :tickets, except: [:new, :edit]
+    resources :bookmarks, except: [:new, :edit]
   end
 
   root "static_pages#root"
