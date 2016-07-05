@@ -4,7 +4,6 @@ const AppDispatcher = require('../dispatcher/dispatcher');
 const TicketConstants = require('../constants/ticket_constants');
 const TicketApiUtil = require('../util/ticket_api_util');
 const ErrorActions = require('./error_actions');
-const hashHistory = require('react-router').hashHistory;
 
 const TicketActions = {
   // Client-side

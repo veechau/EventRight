@@ -1,8 +1,7 @@
 const React = require('react');
 const Modal = require('boron/DropModal');
 
-const LoginForm = require('./login_form');
-const SignupForm = require('./signup_form');
+const GatheringForm = require('./gathering_form');
 
 const modalStyle = {
   width: '100%',
@@ -23,7 +22,7 @@ const contentStyle = {
   borderRadius: '8px'
 };
 
-const SessionModal = React.createClass({
+const GatheringModal = React.createClass({
     showModal(){
         this.refs.modal.show();
     },
@@ -31,26 +30,17 @@ const SessionModal = React.createClass({
         this.refs.modal.hide();
     },
     render: function() {
-      let formContent = "";
-      let buttontext = "";
-      if (this.props.content === "login"){
-        formContent = < LoginForm />;
-        buttontext = "Login";
-      } else {
-        formContent = < SignupForm />;
-        buttontext = "Signup";
-      }
         return (
             <div className="nav-links-item">
-              <div onClick={this.showModal}>{buttontext}</div>
+              <div onClick={this.showModal}>Create Event</div>
               <Modal  ref="modal"
-                      className="session-modal"
+                      className="gathering-modal"
                       modalStyle={modalStyle}
                       backdropStyle={backdropStyle}
                       contentStyle={contentStyle}>
-                <div className="session-modal-content">
+                <div className="gathering-modal-content">
                   <div onClick={this.hideModal}>X</div>
-                  {formContent}
+                  <GatheringForm />
                 </div>
               </Modal>
             </div>
@@ -58,4 +48,4 @@ const SessionModal = React.createClass({
     }
 });
 
-module.exports = SessionModal;
+module.exports = GatheringModal;

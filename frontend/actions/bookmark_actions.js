@@ -4,7 +4,6 @@ const AppDispatcher = require('../dispatcher/dispatcher');
 const BookmarkConstants = require('../constants/bookmark_constants');
 const BookmarkApiUtil = require('../util/bookmark_api_util');
 const ErrorActions = require('./error_actions');
-const hashHistory = require('react-router').hashHistory;
 
 const BookmarkActions = {
   // Client-side

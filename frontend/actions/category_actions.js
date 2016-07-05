@@ -4,7 +4,6 @@ const AppDispatcher = require('../dispatcher/dispatcher');
 const CategoryConstants = require('../constants/category_constants');
 const CategoryApiUtil = require('../util/categories_api_util');
 const ErrorActions = require('./error_actions');
-const hashHistory = require('react-router').hashHistory;
 
 const CategoryActions = {
 

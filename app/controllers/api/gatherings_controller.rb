@@ -7,6 +7,7 @@ class Api::GatheringsController < ApplicationController
 
   def create
     @gathering = Gathering.new(gathering_params)
+    @gathering.organizer_id = current_user.id
     if @gathering.save
       render :show
     else
@@ -44,7 +45,7 @@ class Api::GatheringsController < ApplicationController
   private
 
   def gathering_params
-    params.fetch(:gathering, {}).permit(
+    params.require(:gathering).permit(
       :artist,
       :location,
       :start_date,
@@ -52,9 +53,9 @@ class Api::GatheringsController < ApplicationController
       :description,
       :image,
       :tix_price,
+      :funds,
       :goal,
       :status, #should be automatically set based on tix_price compared to goal
-      :organizer_id, #get from current user
       :category_id #from check boxes
       )
   end

@@ -1,12 +1,17 @@
 "use strict";
 
 const React = require('react');
-const GatheringActions = require('../../actions/gathering_actions');
-const GatheringStore = require('../../stores/gathering_store');
-const ErrorActions = require('../../actions/error_actions');
-const ErrorStore = require('../../stores/error_store');
-const SessionStore = require('../../stores/session_store');
-const EndDatePicker = require('./date_picker');
+const GatheringActions = require('../../../actions/gathering_actions');
+const GatheringStore = require('../../../stores/gathering_store');
+const ErrorActions = require('../../../actions/error_actions');
+const ErrorStore = require('../../../stores/error_store');
+const SessionStore = require('../../../stores/session_store');
+
+const ReactRouter = require('react-router');
+const hashHistory = ReactRouter.hashHistory;
+
+const GatheringModal = require('./gathering_modal');
+
 
 const GatheringForm = React.createClass({
 
@@ -26,7 +31,6 @@ const GatheringForm = React.createClass({
       funds: 0,
       goal: 0,
       status: "ongoing",
-      organizer_id: SessionStore.currentUser.id,
       category_id: ""
     };
   },
@@ -41,8 +45,7 @@ const GatheringForm = React.createClass({
 
   componentWillUnmount(){
     this.errorListener.remove();
-    this.sessionListener.remove();
-  },
+	  },
 
   _handleSubmit(e){
     e.preventDefault();
@@ -54,16 +57,14 @@ const GatheringForm = React.createClass({
       end_date: this.state.end_date,
       description: this.state.description,
       image: this.state.image,
-      tix_price: parseInt(this.state.tix_price),
-      funds: parseInt(this.state.funds),
-      goal: parseInt(this.state.goal),
+      tix_price: this.state.tix_price,
+      funds: this.state.funds,
+      goal: this.state.goal,
       status: this.state.status,
-      organizer_id: this.state.organizer_id,
       category_id: this.state.category_id
     };
-
     GatheringActions.createGathering(formData);
-
+		GatheringModal.hideModal();
   },
 
   fieldErrors(field) {
@@ -112,18 +113,15 @@ const GatheringForm = React.createClass({
             </label>
             <br />
 
-              { this.fieldErrors("start_date") }
-              <input type="hidden"
-                value={this.state.start_date}
-                onChange={this.update("start_date")}
-                className="gathering-input" />
-
 
             <label> End Date:
               { this.fieldErrors("end_date") }
-							<EndDatePicker />
+							<input type="date"
+								onChange={this.update("end_date")}
+								className="gathering-input" />
             </label>
             <br />
+
             <label> Description:
               { this.fieldErrors("description") }
               <input type="text"
@@ -157,17 +155,6 @@ const GatheringForm = React.createClass({
             </label>
             <br />
 
-              { this.fieldErrors("status") }
-              <input type="hidden"
-                value={this.state.status}
-                onChange={this.update("status")}
-                className="gathering-input" />
-
-							{ this.fieldErrors("organizer_id") }
-              <input type="hidden"
-                value={this.state.organizer_id}
-                onChange={this.update("organizer_id")}
-                className="gathering-input" />
 
             <label> Category:
               { this.fieldErrors("category_id") }

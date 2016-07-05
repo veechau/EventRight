@@ -7,6 +7,8 @@ const SessionModal = require('./auth/session_modal');
 const LoginForm = require('./auth/login_form');
 const SignupForm = require('./auth/signup_form');
 
+const GatheringModal = require('./gatherings/form/gathering_modal.jsx');
+
 
 const Nav = React.createClass({
   componentDidMount() {
@@ -42,6 +44,7 @@ const Nav = React.createClass({
           <div
                 className="nav-links-item"
                 onClick={this._handleLogOut}>Logout</div>
+          <GatheringModal />
           <div
                 className="nav-links-item"
                 onClick={this._accountInfo}>Account Information</div>

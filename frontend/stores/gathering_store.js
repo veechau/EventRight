@@ -3,6 +3,9 @@
 const AppDispatcher = require('../dispatcher/dispatcher');
 const Store = require('flux/utils').Store;
 const GatheringConstants = require('../constants/gathering_constants');
+const ReactRouter = require('react-router');
+const hashHistory = ReactRouter.hashHistory;
+
 
 const GatheringStore = new Store(AppDispatcher);
 
@@ -27,6 +30,8 @@ const resetGatherings = function(gatherings) {
 
 const setGathering = function(gathering) {
   _gatherings[gathering.id] = gathering;
+  debugger
+  hashHistory.push(`/events/${gathering.id}`);
 };
 
 const deleteGathering = function(gathering) {

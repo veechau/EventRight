@@ -28,11 +28,11 @@ const GatheringApiUtil = {
     });
   },
 
-  createGathering(gathering, success, error){
+  createGathering(gatheringInfo, success, error){
     $.ajax({
       url: '/api/gatherings',
       type: 'POST',
-      data: gathering,
+      data: {gathering: gatheringInfo},
       success,
       error(xhr) {
         const errors = xhr.responseJSON;
@@ -42,11 +42,11 @@ const GatheringApiUtil = {
     });
   },
 
-  updateGathering(gathering, success, error){
+  updateGathering(gatheringInfo, success, error){
     $.ajax({
-      url: `/api/gatherings/${gathering.id}`,
+      url: `/api/gatherings/${gatheringInfo.id}`,
       type: 'PATCH',
-      data: gathering,
+      data: {gathering: gatheringInfo},
       success,
       error(xhr) {
         const errors = xhr.responseJSON;
