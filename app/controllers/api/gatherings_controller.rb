@@ -44,7 +44,7 @@ class Api::GatheringsController < ApplicationController
   private
 
   def gathering_params
-    params.require(:gathering).permit(
+    params.fetch(:gathering, {}).permit(
       :artist,
       :location,
       :start_date,

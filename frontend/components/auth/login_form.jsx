@@ -1,9 +1,9 @@
 "use strict";
 
 const React = require('react');
-const Link = require('react-router').Link;
 const SessionActions = require('../../actions/session_actions');
 const SessionStore = require('../../stores/session_store');
+const ErrorActions = require('../../actions/error_actions');
 const ErrorStore = require('../../stores/error_store');
 
 const LoginForm = React.createClass({
@@ -20,6 +20,7 @@ const LoginForm = React.createClass({
   },
 
 	componentWillMount() {
+		ErrorActions.clearErrors();
 		this.redirectIfLoggedIn();
 	},
 

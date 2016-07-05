@@ -18,7 +18,7 @@ const backdropStyle = {
 const contentStyle = {
   width: '40%',
   margin: 'auto',
-  marginTop: 'calc(100vh/5)',
+  marginTop: '55px',
   border: '1px solid #D2D6DF',
   borderRadius: '8px'
 };

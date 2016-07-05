@@ -6,7 +6,6 @@ const GatheringStore = require('../../stores/gathering_store');
 const ErrorActions = require('../../actions/error_actions');
 const ErrorStore = require('../../stores/error_store');
 const SessionStore = require('../../stores/session_store');
-
 const EndDatePicker = require('./date_picker');
 
 const GatheringForm = React.createClass({
@@ -15,7 +14,7 @@ const GatheringForm = React.createClass({
 		router: React.PropTypes.object.isRequired
 	},
 
-  getInitialState(){
+  getInitialState() {
     return {
       artist: "",
       location: "",
@@ -34,23 +33,15 @@ const GatheringForm = React.createClass({
 
   componentWillMount(){
     ErrorActions.clearErrors();
-    this.redirectIfNotLoggedIn();
   },
 
   componentDidMount(){
     this.errorListener = ErrorStore.addListener(this.forceUpdate.bind(this));
-    this.sessionListener = SessionStore.addListener(this.redirectIfLoggedIn);
   },
 
   componentWillUnmount(){
     this.errorListener.remove();
     this.sessionListener.remove();
-  },
-
-  redirectIfNotLoggedIn() {
-    if (!SessionStore.isUserLoggedIn()) {
-      this.context.router.push("/");
-    }
   },
 
   _handleSubmit(e){
@@ -120,14 +111,14 @@ const GatheringForm = React.createClass({
                 className="gathering-input" />
             </label>
             <br />
-            <label> Start Date:
+
               { this.fieldErrors("start_date") }
               <input type="hidden"
                 value={this.state.start_date}
                 onChange={this.update("start_date")}
                 className="gathering-input" />
-            </label>
-            <br />
+
+
             <label> End Date:
               { this.fieldErrors("end_date") }
 							<EndDatePicker />
@@ -165,14 +156,19 @@ const GatheringForm = React.createClass({
                 className="gathering-input" />
             </label>
             <br />
-            <label> Status:
+
               { this.fieldErrors("status") }
               <input type="hidden"
                 value={this.state.status}
                 onChange={this.update("status")}
                 className="gathering-input" />
-            </label>
-            <br />
+
+							{ this.fieldErrors("organizer_id") }
+              <input type="hidden"
+                value={this.state.organizer_id}
+                onChange={this.update("organizer_id")}
+                className="gathering-input" />
+
             <label> Category:
               { this.fieldErrors("category_id") }
               <input type="number"

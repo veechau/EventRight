@@ -7,26 +7,20 @@ const TicketsIndex = require('./tickets/tickets_index');
 const BookmarksIndex = require('./bookmarks/bookmarks_index');
 
 const GatheringForm = require('./gatherings/gathering_form');
+const GatheringFormReact = require('./gatherings/gathering_form_react');
 
 const Landing = React.createClass({
   render(){
-    let userDash = "";
-    if (SessionStore.isUserLoggedIn){
-      userDash = (
-        <div className="user-dash">
-        <TicketsIndex />
-        <BookmarksIndex />
-        <GatheringForm />
-        </div>
-      );
-    }
 
     return(
       <div className="landing-page">
         <AppSlider />
         <CategoriesIndex />
         <GatheringsIndex />
-        {userDash}
+        <TicketsIndex />
+        <BookmarksIndex />
+        <GatheringForm />
+        <GatheringFormReact />
       </div>
     );
   }
