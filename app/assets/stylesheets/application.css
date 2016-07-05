@@ -271,3 +271,353 @@ div.category-index-item-image {
   height: 300px;
   margin: 10px;
 }
+
+
+/*React-Date-Picker*/
+
+.react-datepicker {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #aeaeae;
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+}
+
+.react-datepicker__triangle {
+  position: absolute;
+  left: 50px;
+}
+
+.react-datepicker__tether-element-attached-top .react-datepicker__triangle {
+  @extend %triangle-arrow-up;
+}
+
+.react-datepicker__tether-element-attached-bottom .react-datepicker__triangle {
+  @extend %triangle-arrow-down;
+}
+
+.react-datepicker__tether-element-attached-bottom.react-datepicker__tether-element {
+  margin-top: -20px;
+}
+
+.react-datepicker__header {
+  text-align: center;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #aeaeae;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding-top: 8px;
+  position: relative;
+}
+
+.react-datepicker__current-month {
+  margin-top: 0;
+  color: #000;
+  font-weight: bold;
+  font-size: 13px;
+
+  &--hasYearDropdown {
+    margin-bottom: 16px;
+  }
+}
+
+.react-datepicker__navigation {
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  width: 0;
+  border: 6px solid transparent;
+
+  &--previous {
+    left: 10px;
+    border-right-color: #000;
+
+    &:hover {
+      border-right-color: darken(#000, 10%);
+    }
+  }
+
+  &--next {
+    right: 10px;
+    border-left-color: #000;
+
+    &:hover {
+      border-left-color: darken(#000, 10%);
+    }
+  }
+
+  &--years {
+    position: relative;
+    top: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    &-previous {
+      top: 4px;
+      border-top-color: #000;
+
+      &:hover {
+        border-top-color: darken(#000, 10%);
+      }
+    }
+
+    &-upcoming {
+      top: -4px;
+      border-bottom-color: #000;
+
+      &:hover {
+        border-bottom-color: darken(#000, 10%);
+      }
+    }
+  }
+}
+
+.react-datepicker__month {
+  margin: 5px;
+  text-align: center;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day {
+  color: #000;
+  display: inline-block;
+  width: 24px;
+  line-height: 24px;
+  text-align: center;
+  margin: 2px;
+}
+
+.react-datepicker__day {
+  cursor: pointer;
+
+  &:hover {
+    border-radius: 4px;
+    background-color: #f0f0f0;
+  }
+
+  &--today {
+    font-weight: bold;
+  }
+
+  &--selected,
+  &--in-range {
+    border-radius: 4px;
+    background-color: #216ba5;
+    color: #fff;
+
+    &:hover {
+      background-color: darken(#216ba5, 5%);
+    }
+  }
+
+  &--disabled {
+    cursor: default;
+    color: #000;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.react-datepicker__input-container {
+  position: relative;
+  display: inline-block;
+}
+
+.react-datepicker__year-read-view {
+  width: 50%;
+  left: 25%;
+  position: absolute;
+  bottom: 25px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  &:hover {
+    cursor: pointer;
+
+    .react-datepicker__year-read-view--down-arrow {
+      border-top-color: darken(#000, 10%);
+    }
+  }
+
+  &--down-arrow {
+    @extend %triangle-arrow-down;
+    border-top-color: #000;
+    margin-bottom: 3px;
+    left: 5px;
+    top: 9px;
+    position: relative;
+    border-width: 6px;
+  }
+
+  &--selected-year {
+    right: 6px;
+    position: relative;
+  }
+}
+
+.react-datepicker__year-dropdown {
+  background-color: #f0f0f0;
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  top: 30px;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid #aeaeae;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.react-datepicker__year-option {
+  line-height: 20px;
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  &:first-of-type {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+
+  &:last-of-type {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  &:hover {
+    background-color: #000;
+
+    .react-datepicker__navigation--years-upcoming {
+      border-bottom-color: darken(#000, 10%);
+    }
+
+    .react-datepicker__navigation--years-previous {
+      border-top-color: darken($muted-color, 10%);
+    }
+  }
+
+  &--selected {
+    position: absolute;
+    left: 30px;
+  }
+}
+
+.react-datepicker__close-icon {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  height: 0;
+  outline: 0;
+  padding: 0;
+  vertical-align: middle;
+
+  &::after {
+    background-color: #216ba5;
+    border-radius: 50%;
+    bottom: 0;
+    box-sizing: border-box;
+    color: #fff;
+    content: "\00d7";
+    cursor: pointer;
+    font-size: 12px;
+    height: 16px;
+    width: 16px;
+    line-height: 1;
+    margin: -8px auto 0;
+    padding: 2px;
+    position: absolute;
+    right: 7px;
+    text-align: center;
+    top: 50%;
+  }
+}
+
+.react-datepicker__today-button {
+  background: #f0f0f0;
+  border-top: 1px solid #aeaeae;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 0;
+}
+
+.react-datepicker__tether-element {
+  z-index: 2147483647;
+}
+
+
+%triangle-arrow {
+  margin-left: -8px;
+  position: absolute;
+
+  &,
+  &::before {
+    box-sizing: content-box;
+    position: absolute;
+    border: 8px solid transparent;
+
+    height: 0;
+    width: 1px;
+  }
+
+  &::before {
+    content: "";
+    z-index: -1;
+    border-width: 8px;
+
+    left: -8px;
+    border-bottom-color: #aeaeae;
+  }
+}
+
+%triangle-arrow-up {
+  @extend %triangle-arrow;
+
+  top: 0;
+  margin-top: -8px;
+
+  &,
+  &::before {
+    border-top: none;
+    border-bottom-color: #f0f0f0;
+  }
+
+  &::before {
+    top: -1px;
+    border-bottom-color: #aeaeae;
+  }
+}
+
+%triangle-arrow-down {
+  @extend %triangle-arrow;
+
+  bottom: 0;
+  margin-bottom: -8px;
+
+  &,
+  &::before {
+    border-bottom: none;
+    border-top-color: #fff;
+  }
+
+  &::before {
+    bottom: -1px;
+    border-top-color: #aeaeae;
+  }
+}

@@ -25,7 +25,6 @@ const TicketsIndex = React.createClass({
     return (
       <div className="tickets-index">
       TICKETS
-      {console.log(this.state.tickets)}
         <ul>
           {this.state.tickets.map( (ticket) => {
             return (

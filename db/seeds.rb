@@ -52,3 +52,17 @@ end
     category_id: rand(Category.all.count)
   })
 end
+
+20.times do
+  Ticket.create({
+    attendee_id: rand(User.all.count),
+    gathering_id: rand(Gathering.all.count)
+    })
+end
+
+20.times do
+  Bookmark.create({
+    user_id: rand(User.all.count),
+    gathering_id: rand(Gathering.all.count)
+    })
+end

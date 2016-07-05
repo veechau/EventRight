@@ -88,12 +88,12 @@ user interface.
   the API.
 
   - [x] create `Ticket` model
-  - [ ] CRUD API for events (`TicketsController`)
-  - [ ] jBuilder views for tickets
+  - [x] CRUD API for events (`TicketsController`)
+  - [x] jBuilder views for tickets
   - [ ] test out API interaction in the console.
   - [ ] basic styling for existing components
   - [ ] setup the flux loop with skeleton files
-  - [ ] setup React Router
+  - [x] setup React Router
   - implement each note component, building out the flux loop as needed.
     - [ ] `TicketsIndex`
     - [ ] `TicketIndexItem`
@@ -104,7 +104,7 @@ user interface.
 
   - [ ] Add BookmarkIndex to landing page
   - [ ] Add TicketsIndex to landing page
-  - [ ] CRUD API for events (`TicketsController`)
+  - [x] CRUD API for events (`TicketsController`)
 
 ### Phase 6: Categories (1 day, W2 M 6pm)
 

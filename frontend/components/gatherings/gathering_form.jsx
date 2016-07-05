@@ -7,6 +7,8 @@ const ErrorActions = require('../../actions/error_actions');
 const ErrorStore = require('../../stores/error_store');
 const SessionStore = require('../../stores/session_store');
 
+const EndDatePicker = require('./date_picker');
+
 const GatheringForm = React.createClass({
 
 	contextTypes: {
@@ -128,10 +130,7 @@ const GatheringForm = React.createClass({
             <br />
             <label> End Date:
               { this.fieldErrors("end_date") }
-              <input type="datetime"
-                value={this.state.end_date}
-                onChange={this.update("end_date")}
-                className="gathering-input" />
+							<EndDatePicker />
             </label>
             <br />
             <label> Description:
