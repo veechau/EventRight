@@ -149,7 +149,6 @@ const SignupForm = React.createClass({
 
 		        <br />
 						<input type="submit" value="Submit" />
-						<button onClick={this._handleLogIn}>Demo User</button>
 					</div>
 				</form>
 			</div>

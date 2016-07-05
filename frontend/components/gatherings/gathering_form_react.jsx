@@ -5,19 +5,32 @@ const FormControl = require('react-bootstrap').FormControl;
 const ControlLabel = require('react-bootstrap').ControlLabel;
 const HelpBlock = require('react-bootstrap').HelpBlock;
 
+const SessionStore = require('../../stores/session_store');
+
 const MagicForm = React.createClass({
 
   getInitialState() {
     return {
-      value: ''
+      artist: "",
+      location: "",
+      start_date: new Date(),
+      end_date: "",
+      description: "",
+      image: "",
+      tix_price: 0,
+      funds: 0,
+      goal: 0,
+      status: "ongoing",
+      organizer_id: SessionStore.currentUser.id,
+      category_id: ""
     };
   },
 
   getValidationState() {
-    const length = this.state.value.length;
-    if (length > 10) return 'success';
-    else if (length > 5) return 'warning';
-    else if (length > 0) return 'error';
+    // const length = this.state.value.length;
+    // if (length > 10) return 'success';
+    // else if (length > 5) return 'warning';
+    // else if (length > 0) return 'error';
   },
 
   handleChange(e) {
@@ -45,6 +58,10 @@ const MagicForm = React.createClass({
         this.setState({ data: state });
     },
 
+    update(property) {
+      return (e) => this.setState({[property]: e.target.value});
+    },
+
   render(){
     return (
       <div>
@@ -60,7 +77,7 @@ const MagicForm = React.createClass({
               type="text"
               value={this.state.artist}
               placeholder="Enter text"
-              onChange={this.handleChange}
+              onChange={this.update("artist")}
               />
 
               <br />
@@ -71,7 +88,7 @@ const MagicForm = React.createClass({
               value={this.state.location}
               placeholder="123 Fake Street, San Francisco, CA 94107"
               rows="2"
-              onChange={this.handleChange}
+              onChange={this.update("location")}
               />
 
               <br />
@@ -81,43 +98,43 @@ const MagicForm = React.createClass({
               type="datetime"
               value={this.state.end_date}
               placeholder="Enter crowdfunding end date"
-              onChange={this.handleChange}
+              onChange={this.update("end_date")}
               />
 
               <br />
             <ControlLabel>Description</ControlLabel>
             <FormControl
               type="text"
-              value={this.state.value}
+              value={this.state.description}
               placeholder="Event Description"
-              onChange={this.handleChange}
+              onChange={this.update("description")}
               />
 
               <br />
             <ControlLabel>Image</ControlLabel>
             <FormControl
               type="text"
-              value={this.state.value}
+              value={this.state.image}
               placeholder="Image URL"
-              onChange={this.handleChange}
+              onChange={this.update("image")}
               />
 
               <br />
             <ControlLabel>Ticket Price</ControlLabel>
             <FormControl
               type="number"
-              value={this.state.value}
+              value={this.state.tix_price}
               placeholder="Enter price"
-              onChange={this.handleChange}
+              onChange={this.update("tix_price")}
               />
 
               <br />
             <ControlLabel>Goal</ControlLabel>
             <FormControl
               type="number"
-              value={this.state.value}
+              value={this.state.goal}
               placeholder="Enter crowdfunding goal"
-              onChange={this.handleChange}
+              onChange={this.update("goal")}
               />
 
               <br />
@@ -126,7 +143,7 @@ const MagicForm = React.createClass({
               type="number"
               value={this.state.category_id}
               placeholder="Enter crowdfunding goal"
-              onChange={this.handleChange}>
+              onChange={this.update("category_id")}>
               <option value="1">Category 1</option>
               <option value="2">Category 2</option>
               <option value="3">Category 3</option>
