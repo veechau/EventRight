@@ -45389,7 +45389,8 @@ return jQuery;
 				this.context.router.push("/");
 			}
 		},
-		_handleLogIn: function _handleLogIn() {
+		_handleLogIn: function _handleLogIn(e) {
+			e.preventDefault();
 			SessionActions.logIn({ username: "Demo_User", password: "Password" });
 		},
 		_handleSubmit: function _handleSubmit(e) {
@@ -45588,7 +45589,8 @@ return jQuery;
 	      this.context.router.push("/");
 	    }
 	  },
-	  _handleLogIn: function _handleLogIn() {
+	  _handleLogIn: function _handleLogIn(e) {
+	    e.preventDefault();
 	    SessionActions.logIn({ username: "Demo_User", password: "Password" });
 	  },
 	  _handleSubmit: function _handleSubmit(e) {
@@ -63395,6 +63397,8 @@ return jQuery;
 
 	'use strict';
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	var React = __webpack_require__(1);
 	var DateTimeField = __webpack_require__(427);
 	var FormGroup = __webpack_require__(476).FormGroup;
@@ -63402,16 +63406,31 @@ return jQuery;
 	var ControlLabel = __webpack_require__(476).ControlLabel;
 	var HelpBlock = __webpack_require__(476).HelpBlock;
 
+	var SessionStore = __webpack_require__(231);
+
 	var MagicForm = React.createClass({
 	  displayName: 'MagicForm',
 	  getInitialState: function getInitialState() {
 	    return {
-	      value: ''
+	      artist: "",
+	      location: "",
+	      start_date: new Date(),
+	      end_date: "",
+	      description: "",
+	      image: "",
+	      tix_price: 0,
+	      funds: 0,
+	      goal: 0,
+	      status: "ongoing",
+	      organizer_id: SessionStore.currentUser.id,
+	      category_id: ""
 	    };
 	  },
 	  getValidationState: function getValidationState() {
-	    var length = this.state.value.length;
-	    if (length > 10) return 'success';else if (length > 5) return 'warning';else if (length > 0) return 'error';
+	    // const length = this.state.value.length;
+	    // if (length > 10) return 'success';
+	    // else if (length > 5) return 'warning';
+	    // else if (length > 0) return 'error';
 	  },
 	  handleChange: function handleChange(e) {
 	    this.setState({ value: e.target.value });
@@ -63438,6 +63457,13 @@ return jQuery;
 	    this.setState({ data: state });
 	  },
 
+	  update: function update(property) {
+	    var _this = this;
+
+	    return function (e) {
+	      return _this.setState(_defineProperty({}, property, e.target.value));
+	    };
+	  },
 	  render: function render() {
 	    return React.createElement(
 	      'div',
@@ -63466,7 +63492,7 @@ return jQuery;
 	            type: 'text',
 	            value: this.state.artist,
 	            placeholder: 'Enter text',
-	            onChange: this.handleChange
+	            onChange: this.update("artist")
 	          }),
 	          React.createElement('br', null),
 	          React.createElement(
@@ -63480,7 +63506,7 @@ return jQuery;
 	            value: this.state.location,
 	            placeholder: '123 Fake Street, San Francisco, CA 94107',
 	            rows: '2',
-	            onChange: this.handleChange
+	            onChange: this.update("location")
 	          }),
 	          React.createElement('br', null),
 	          React.createElement(
@@ -63493,7 +63519,7 @@ return jQuery;
 	            type: 'datetime',
 	            value: this.state.end_date,
 	            placeholder: 'Enter crowdfunding end date',
-	            onChange: this.handleChange
+	            onChange: this.update("end_date")
 	          }),
 	          React.createElement('br', null),
 	          React.createElement(
@@ -63503,9 +63529,9 @@ return jQuery;
 	          ),
 	          React.createElement(FormControl, {
 	            type: 'text',
-	            value: this.state.value,
+	            value: this.state.description,
 	            placeholder: 'Event Description',
-	            onChange: this.handleChange
+	            onChange: this.update("description")
 	          }),
 	          React.createElement('br', null),
 	          React.createElement(
@@ -63515,9 +63541,9 @@ return jQuery;
 	          ),
 	          React.createElement(FormControl, {
 	            type: 'text',
-	            value: this.state.value,
+	            value: this.state.image,
 	            placeholder: 'Image URL',
-	            onChange: this.handleChange
+	            onChange: this.update("image")
 	          }),
 	          React.createElement('br', null),
 	          React.createElement(
@@ -63527,9 +63553,9 @@ return jQuery;
 	          ),
 	          React.createElement(FormControl, {
 	            type: 'number',
-	            value: this.state.value,
+	            value: this.state.tix_price,
 	            placeholder: 'Enter price',
-	            onChange: this.handleChange
+	            onChange: this.update("tix_price")
 	          }),
 	          React.createElement('br', null),
 	          React.createElement(
@@ -63539,9 +63565,9 @@ return jQuery;
 	          ),
 	          React.createElement(FormControl, {
 	            type: 'number',
-	            value: this.state.value,
+	            value: this.state.goal,
 	            placeholder: 'Enter crowdfunding goal',
-	            onChange: this.handleChange
+	            onChange: this.update("goal")
 	          }),
 	          React.createElement('br', null),
 	          React.createElement(
@@ -63555,7 +63581,7 @@ return jQuery;
 	              type: 'number',
 	              value: this.state.category_id,
 	              placeholder: 'Enter crowdfunding goal',
-	              onChange: this.handleChange },
+	              onChange: this.update("category_id") },
 	            React.createElement(
 	              'option',
 	              { value: '1' },

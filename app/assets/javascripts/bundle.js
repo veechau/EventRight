@@ -33782,7 +33782,8 @@
 				this.context.router.push("/");
 			}
 		},
-		_handleLogIn: function _handleLogIn() {
+		_handleLogIn: function _handleLogIn(e) {
+			e.preventDefault();
 			SessionActions.logIn({ username: "Demo_User", password: "Password" });
 		},
 		_handleSubmit: function _handleSubmit(e) {
@@ -33860,7 +33861,12 @@
 								className: 'login-input' })
 						),
 						React.createElement('br', null),
-						React.createElement('input', { type: 'submit', value: 'Submit' })
+						React.createElement('input', { type: 'submit', value: 'Submit' }),
+						React.createElement(
+							'button',
+							{ onClick: this._handleLogIn },
+							'Demo User'
+						)
 					)
 				)
 			);
@@ -33976,7 +33982,8 @@
 	      this.context.router.push("/");
 	    }
 	  },
-	  _handleLogIn: function _handleLogIn() {
+	  _handleLogIn: function _handleLogIn(e) {
+	    e.preventDefault();
 	    SessionActions.logIn({ username: "Demo_User", password: "Password" });
 	  },
 	  _handleSubmit: function _handleSubmit(e) {
@@ -34106,7 +34113,12 @@
 	              className: 'login-input' })
 	          ),
 	          React.createElement('br', null),
-	          React.createElement('input', { type: 'submit', value: 'Submit' })
+	          React.createElement('input', { type: 'submit', value: 'Submit' }),
+	          React.createElement(
+	            'button',
+	            { onClick: this._handleLogIn },
+	            'Demo User'
+	          )
 	        )
 	      )
 	    );

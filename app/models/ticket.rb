@@ -3,4 +3,5 @@ class Ticket < ActiveRecord::Base
 
   belongs_to :attendee, class_name: 'User'
   belongs_to :gathering, class_name: 'Gathering'
+
 end
