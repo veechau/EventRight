@@ -22,7 +22,20 @@ const contentStyle = {
   borderRadius: '8px'
 };
 
+const GatheringStore = require('../../../stores/gathering_store');
+
 const GatheringModal = React.createClass({
+    componentDidMount() {
+      this.gatheringListener = GatheringStore.addListener(this._onChange);
+    },
+
+    componentWillUnmount() {
+      this.gatheringListener.remove();
+    },
+    _onChange() {
+      this.refs.modal.hide();
+    },
+
     showModal(){
         this.refs.modal.show();
     },

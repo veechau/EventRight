@@ -37,6 +37,7 @@ const SessionActions = {
       actionType: SessionConstants.LOGIN,
       currentUser: currentUser
     });
+    hashHistory.push("/home");
   },
 
   removeCurrentUser() {

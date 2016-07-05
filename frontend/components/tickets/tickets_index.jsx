@@ -24,7 +24,6 @@ const TicketsIndex = React.createClass({
   render(){
     return (
       <div className="tickets-index">
-      TICKETS
         <ul>
           {this.state.tickets.map( (ticket) => {
             return (
@@ -34,7 +33,6 @@ const TicketsIndex = React.createClass({
               </li>
             );
           })}
-          END OF TICKETS
         </ul>
       </div>
     );

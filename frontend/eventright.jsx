@@ -10,6 +10,7 @@ const hashHistory = ReactRouter.hashHistory;
 
 const App = require('./components/app');
 const Landing = require('./components/landing');
+const UserLanding = require('./components/user_landing');
 const LoginForm = require('./components/auth/login_form');
 const SignupForm = require('./components/auth/signup_form');
 const GatheringsIndex = require('./components/gatherings/gatherings_index');
@@ -34,6 +35,7 @@ const routes = (
     <Router history={ hashHistory }>
       <Route path="/" component={ App }>
         <IndexRoute component={ Landing } />
+        <Route path="/home" component={ UserLanding } />
         <Route path="/login" component={ LoginForm} />
         <Route path="/signup" component={ SignupForm } />
         <Route path="/events" component={ GatheringsIndex } />

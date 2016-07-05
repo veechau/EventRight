@@ -7,6 +7,7 @@ const SessionModal = require('./auth/session_modal');
 const LoginForm = require('./auth/login_form');
 const SignupForm = require('./auth/signup_form');
 
+const GatheringStore = require('../stores/gathering_store');
 const GatheringModal = require('./gatherings/form/gathering_modal.jsx');
 
 

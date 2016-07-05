@@ -8,11 +8,11 @@ class Api::CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
 
+
     if @category.save
       render :show
     else
-      @errors = @category.errors.full_messages
-      render 'api/shared/error', status: 422
+      render json: @category.errors, status: 422
     end
   end
 

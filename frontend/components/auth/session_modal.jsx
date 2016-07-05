@@ -8,6 +8,7 @@ const modalStyle = {
   width: '100%',
   height: '100%',
   backgroundColor: 'fade(#4B4E4F, 80%)',
+  borderRadius: '8px',
   opacity: '0.3',
 };
 

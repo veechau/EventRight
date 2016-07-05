@@ -11,8 +11,7 @@ class Api::GatheringsController < ApplicationController
     if @gathering.save
       render :show
     else
-      @errors = @gathering.errors.full_messages
-      render 'api/shared/error', status: 422
+      render json: @gathering.errors, status: 422
     end
   end
 
@@ -38,7 +37,8 @@ class Api::GatheringsController < ApplicationController
     if @gathering.destroy
       render :index
     else
-      render json: @gathering.errors
+      @errors = @gathering.errors.full_messages
+			render "api/shared/error", status: 422
     end
   end
 

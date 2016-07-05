@@ -28,7 +28,7 @@ const GatheringApiUtil = {
     });
   },
 
-  createGathering(gatheringInfo, success, error){
+  createGathering(gatheringInfo, success, errorCB){
     $.ajax({
       url: '/api/gatherings',
       type: 'POST',
@@ -36,8 +36,7 @@ const GatheringApiUtil = {
       success,
       error(xhr) {
         const errors = xhr.responseJSON;
-
-        error("creating event", errors);
+        errorCB("creating event", errors);
       }
     });
   },

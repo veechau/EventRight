@@ -30,7 +30,6 @@ const resetGatherings = function(gatherings) {
 
 const setGathering = function(gathering) {
   _gatherings[gathering.id] = gathering;
-  debugger
   hashHistory.push(`/events/${gathering.id}`);
 };
 
@@ -41,17 +40,21 @@ const deleteGathering = function(gathering) {
 GatheringStore.__onDispatch = payload => {
   switch (payload.actionType) {
     case GatheringConstants.GATHERINGS_RECEIVED:
-    resetGatherings(payload.gatherings);
-    GatheringStore.__emitChange();
-      break;
+      resetGatherings(payload.gatherings);
+      GatheringStore.__emitChange();
+    break;
     case GatheringConstants.GATHERING_RECEIVED:
-    setGathering(payload.gathering);
-    GatheringStore.__emitChange();
-      break;
+      setGathering(payload.gathering);
+      GatheringStore.__emitChange();
+    break;
     case GatheringConstants.GATHERING_REMOVED:
-    deleteGathering(payload.gathering);
-    GatheringStore.__emitChange();
-      break;
+      deleteGathering(payload.gathering);
+      GatheringStore.__emitChange();
+    break;
+    case GatheringConstants.ERROR:
+      console.log(payload.errors);
+      GatheringStore.__emitChange();
+    break;
   }
 };
 

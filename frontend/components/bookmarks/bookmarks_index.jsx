@@ -24,7 +24,6 @@ const BookmarksIndex = React.createClass({
   render(){
     return (
       <div className="bookmarks-index">
-      BOOKMARKS
         <ul>
           {this.state.bookmarks.map( (bookmark) => {
             return (
@@ -34,7 +33,6 @@ const BookmarksIndex = React.createClass({
               </li>
             );
           })}
-          END OF BOOKMARKS
         </ul>
       </div>
     );

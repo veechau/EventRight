@@ -10,9 +10,6 @@ const SessionStore = require('../../../stores/session_store');
 const ReactRouter = require('react-router');
 const hashHistory = ReactRouter.hashHistory;
 
-const GatheringModal = require('./gathering_modal');
-
-
 const GatheringForm = React.createClass({
 
 	contextTypes: {
@@ -64,18 +61,15 @@ const GatheringForm = React.createClass({
       category_id: this.state.category_id
     };
     GatheringActions.createGathering(formData);
-		GatheringModal.hideModal();
+
   },
 
   fieldErrors(field) {
-    const errors = ErrorStore.formErrors("create_event");
-
+    const errors = ErrorStore.formErrors("creating event");
     if (!errors[field]) { return; }
-
     const messages = errors[field].map( (errorMsg, i) => {
       return <li key={ i }>{ errorMsg }</li>;
     });
-
     return <ul>{ messages }</ul>;
   },
 

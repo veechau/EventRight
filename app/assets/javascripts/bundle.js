@@ -58,6 +58,7 @@
 	
 	var App = __webpack_require__(230);
 	var Landing = __webpack_require__(299);
+	var UserLanding = __webpack_require__(742);
 	var LoginForm = __webpack_require__(269);
 	var SignupForm = __webpack_require__(271);
 	var GatheringsIndex = __webpack_require__(293);
@@ -82,6 +83,7 @@
 	    Route,
 	    { path: '/', component: App },
 	    React.createElement(IndexRoute, { component: Landing }),
+	    React.createElement(Route, { path: '/home', component: UserLanding }),
 	    React.createElement(Route, { path: '/login', component: LoginForm }),
 	    React.createElement(Route, { path: '/signup', component: SignupForm }),
 	    React.createElement(Route, { path: '/events', component: GatheringsIndex }),
@@ -32869,6 +32871,7 @@
 	var LoginForm = __webpack_require__(269);
 	var SignupForm = __webpack_require__(271);
 	
+	var GatheringStore = __webpack_require__(294);
 	var GatheringModal = __webpack_require__(741);
 	
 	var Nav = React.createClass({
@@ -32959,6 +32962,7 @@
 	      actionType: SessionConstants.LOGIN,
 	      currentUser: currentUser
 	    });
+	    hashHistory.push("/home");
 	  },
 	  removeCurrentUser: function removeCurrentUser() {
 	    AppDispatcher.dispatch({
@@ -33085,6 +33089,7 @@
 	  width: '100%',
 	  height: '100%',
 	  backgroundColor: 'fade(#4B4E4F, 80%)',
+	  borderRadius: '8px',
 	  opacity: '0.3'
 	};
 	
@@ -33785,7 +33790,7 @@
 		},
 		redirectIfLoggedIn: function redirectIfLoggedIn() {
 			if (SessionStore.isUserLoggedIn()) {
-				this.context.router.push("/");
+				this.context.router.push("/home");
 			}
 		},
 		_handleLogIn: function _handleLogIn(e) {
@@ -33923,13 +33928,11 @@
 	  if (form !== _form) {
 	    return {};
 	  }
-	
 	  // copies the _errors object into a new object
 	  var result = {};
 	  for (var field in _errors) {
 	    result[field] = Array.from(_errors[field]);
 	  }
-	
 	  return result;
 	};
 	
@@ -33985,7 +33988,7 @@
 	  },
 	  redirectIfLoggedIn: function redirectIfLoggedIn() {
 	    if (SessionStore.isUserLoggedIn()) {
-	      this.context.router.push("/");
+	      this.context.router.push("/home");
 	    }
 	  },
 	  _handleLogIn: function _handleLogIn(e) {
@@ -36259,7 +36262,6 @@
 	
 	var setGathering = function setGathering(gathering) {
 	  _gatherings[gathering.id] = gathering;
-	  debugger;
 	  hashHistory.push('/events/' + gathering.id);
 	};
 	
@@ -36279,6 +36281,10 @@
 	      break;
 	    case GatheringConstants.GATHERING_REMOVED:
 	      deleteGathering(payload.gathering);
+	      GatheringStore.__emitChange();
+	      break;
+	    case GatheringConstants.ERROR:
+	      console.log(payload.errors);
 	      GatheringStore.__emitChange();
 	      break;
 	  }
@@ -36386,7 +36392,7 @@
 	      }
 	    });
 	  },
-	  createGathering: function createGathering(gatheringInfo, success, _error3) {
+	  createGathering: function createGathering(gatheringInfo, success, errorCB) {
 	    $.ajax({
 	      url: '/api/gatherings',
 	      type: 'POST',
@@ -36394,12 +36400,11 @@
 	      success: success,
 	      error: function error(xhr) {
 	        var errors = xhr.responseJSON;
-	
-	        _error3("creating event", errors);
+	        errorCB("creating event", errors);
 	      }
 	    });
 	  },
-	  updateGathering: function updateGathering(gatheringInfo, success, _error4) {
+	  updateGathering: function updateGathering(gatheringInfo, success, _error3) {
 	    $.ajax({
 	      url: '/api/gatherings/' + gatheringInfo.id,
 	      type: 'PATCH',
@@ -36408,11 +36413,11 @@
 	      error: function error(xhr) {
 	        var errors = xhr.responseJSON;
 	
-	        _error4("editing event", errors);
+	        _error3("editing event", errors);
 	      }
 	    });
 	  },
-	  deleteGathering: function deleteGathering(id, success, _error5) {
+	  deleteGathering: function deleteGathering(id, success, _error4) {
 	    $.ajax({
 	      url: '/api/gatherings/' + id,
 	      type: 'DELETE',
@@ -36420,7 +36425,7 @@
 	      error: function error(xhr) {
 	        var errors = xhr.responseJSON;
 	
-	        _error5("deleting event", errors);
+	        _error4("deleting event", errors);
 	      }
 	    });
 	  }
@@ -36468,8 +36473,6 @@
 	var AppSlider = __webpack_require__(272);
 	var GatheringsIndex = __webpack_require__(293);
 	var CategoriesIndex = __webpack_require__(300);
-	var TicketsIndex = __webpack_require__(306);
-	var BookmarksIndex = __webpack_require__(312);
 	
 	var Landing = React.createClass({
 	  displayName: 'Landing',
@@ -36792,7 +36795,6 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'tickets-index' },
-	      'TICKETS',
 	      React.createElement(
 	        'ul',
 	        null,
@@ -36803,8 +36805,7 @@
 	            React.createElement(TicketIndexItem, {
 	              ticket: ticket })
 	          );
-	        }),
-	        'END OF TICKETS'
+	        })
 	      )
 	    );
 	  }
@@ -37019,23 +37020,18 @@
 	
 	var React = __webpack_require__(1);
 	var ReactRouter = __webpack_require__(168);
+	var GatheringStore = __webpack_require__(294);
 	
 	var TicketsIndexItem = React.createClass({
 	  displayName: 'TicketsIndexItem',
 	  render: function render() {
+	    var currentTicket = this.props.ticket;
+	    var ticketedEvent = GatheringStore.find(currentTicket.gathering_id);
 	    return React.createElement(
 	      'div',
-	      { className: 'tickets-index-item' },
-	      React.createElement(
-	        'p',
-	        null,
-	        this.props.ticket.attendee_id
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        this.props.ticket.gathering_id
-	      )
+	      { className: 'tickets-index-item',
+	        onClick: this._handleImgClick },
+	      React.createElement('img', { src: ticketedEvent.image })
 	    );
 	  }
 	});
@@ -37072,7 +37068,6 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'bookmarks-index' },
-	      'BOOKMARKS',
 	      React.createElement(
 	        'ul',
 	        null,
@@ -37083,8 +37078,7 @@
 	            React.createElement(BookmarkIndexItem, {
 	              bookmark: bookmark })
 	          );
-	        }),
-	        'END OF BOOKMARKS'
+	        })
 	      )
 	    );
 	  }
@@ -37299,23 +37293,18 @@
 	
 	var React = __webpack_require__(1);
 	var ReactRouter = __webpack_require__(168);
+	var GatheringStore = __webpack_require__(294);
 	
 	var BookmarkIndexItem = React.createClass({
 	  displayName: 'BookmarkIndexItem',
 	  render: function render() {
+	    var currentBookmark = this.props.bookmark;
+	    var ticketedEvent = GatheringStore.find(currentBookmark.gathering_id);
 	    return React.createElement(
 	      'div',
-	      { className: 'bookmarks-index-item' },
-	      React.createElement(
-	        'p',
-	        null,
-	        this.props.bookmark.user_id
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        this.props.bookmark.gathering_id
-	      )
+	      { className: 'bookmark-index-item',
+	        onClick: this._handleImgClick },
+	      React.createElement('img', { src: ticketedEvent.image })
 	    );
 	  }
 	});
@@ -37908,8 +37897,6 @@
 	var ReactRouter = __webpack_require__(168);
 	var hashHistory = ReactRouter.hashHistory;
 	
-	var GatheringModal = __webpack_require__(741);
-	
 	var GatheringForm = React.createClass({
 	  displayName: 'GatheringForm',
 	
@@ -37959,15 +37946,12 @@
 	      category_id: this.state.category_id
 	    };
 	    GatheringActions.createGathering(formData);
-	    GatheringModal.hideModal();
 	  },
 	  fieldErrors: function fieldErrors(field) {
-	    var errors = ErrorStore.formErrors("create_event");
-	
+	    var errors = ErrorStore.formErrors("creating event");
 	    if (!errors[field]) {
 	      return;
 	    }
-	
 	    var messages = errors[field].map(function (errorMsg, i) {
 	      return React.createElement(
 	        'li',
@@ -37975,7 +37959,6 @@
 	        errorMsg
 	      );
 	    });
-	
 	    return React.createElement(
 	      'ul',
 	      null,
@@ -38133,8 +38116,19 @@
 	  borderRadius: '8px'
 	};
 	
+	var GatheringStore = __webpack_require__(294);
+	
 	var GatheringModal = React.createClass({
 	  displayName: 'GatheringModal',
+	  componentDidMount: function componentDidMount() {
+	    this.gatheringListener = GatheringStore.addListener(this._onChange);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.gatheringListener.remove();
+	  },
+	  _onChange: function _onChange() {
+	    this.refs.modal.hide();
+	  },
 	  showModal: function showModal() {
 	    this.refs.modal.show();
 	  },
@@ -38174,6 +38168,37 @@
 	});
 	
 	module.exports = GatheringModal;
+
+/***/ },
+/* 742 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var SessionStore = __webpack_require__(231);
+	var AppSlider = __webpack_require__(272);
+	var GatheringsIndex = __webpack_require__(293);
+	var CategoriesIndex = __webpack_require__(300);
+	var TicketsIndex = __webpack_require__(306);
+	var BookmarksIndex = __webpack_require__(312);
+	
+	var Landing = React.createClass({
+	  displayName: 'Landing',
+	  render: function render() {
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'landing-page' },
+	      React.createElement(CategoriesIndex, null),
+	      React.createElement(GatheringsIndex, null),
+	      React.createElement(TicketsIndex, null),
+	      React.createElement(BookmarksIndex, null)
+	    );
+	  }
+	});
+	
+	module.exports = Landing;
 
 /***/ }
 /******/ ]);

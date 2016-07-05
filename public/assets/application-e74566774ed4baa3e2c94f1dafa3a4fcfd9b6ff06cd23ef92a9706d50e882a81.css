@@ -157,13 +157,9 @@ div.nav-links-item:hover {
 
 /*Login Form*/
 
-.session-modal-content{
+.session-modal-content {
   background-color: #FFFFFF;
   color: #666A73;
-}
-
-.session-modal-link{
-  color: #00a8f2;
 }
 
 .login-form-container {
@@ -175,6 +171,27 @@ div.nav-links-item:hover {
 }
 
 .login-form {
+  display: flex;
+  position: block;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+}
+
+.gathering-modal-content {
+  background-color: #FFFFFF;
+  color: #666A73;
+}
+
+.gathering-form-container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  margin: auto;
+  padding: 40px;
+}
+
+.gathering-form {
   display: flex;
   position: block;
   flex-direction: column;
@@ -201,7 +218,7 @@ div.gatherings-index ul{
 }
 
 div.gatherings-index {
-
+height: 40vh;
 }
 
 div.gathering-index-item-image {

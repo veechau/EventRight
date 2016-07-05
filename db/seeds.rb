@@ -28,7 +28,7 @@ require 'faker'
     })
 end
 
-10.times do
+8.times do
   Category.create({
     title: Faker::Commerce.department(2, true),
     description: Faker::Hipster.paragraphs,
@@ -36,7 +36,7 @@ end
     })
 end
 
-15.times do
+16.times do
   Gathering.create({
     artist: Faker::Hipster.word,
     location: Faker::Address.street_address + ", " + Faker::Address.city + ", " + Faker::Address.state_abbr + ", " + Faker::Address.country,
