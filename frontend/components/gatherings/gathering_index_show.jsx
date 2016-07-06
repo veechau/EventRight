@@ -24,20 +24,22 @@ const GatheringIndexShow = React.createClass({
     return (
       <div className="gathering-index-show">
         <div className="gathering-index-show-left">
-            {this.state.gathering.title}
-            {this.state.gathering.artist}
-            {this.state.gathering.location}
-            {this.state.gathering.start_date}
-            {this.state.gathering.end_date}
-            {this.state.gathering.description}
-            {this.state.gathering.tix_price}
-            {this.state.gathering.goal}
-            {this.state.gathering.status}
-            {this.state.gathering.category_id}
+
+            <h1>{this.state.gathering.artist}</h1>
+            <p>{this.state.gathering.location}</p>
+            <p>{Date.parse(this.state.gathering.start_date)} to {Date.parse(this.state.gathering.end_date)}</p>
+            <p>{this.state.gathering.description}</p>
+
           </div>
           <div className="gathering-index-show-right">
-            <img src={this.state.gathering.image}/>
-          </div>
+          <img className="gathering-index-item-image" src={this.state.gathering.image}/>
+          <p>{this.state.gathering.tix_price}</p>
+          <p>{this.state.gathering.goal}</p>
+          <p>{this.state.gathering.status}</p>
+          <button>Buy Ticket</button>
+          <button>Bookmark Event</button>
+          <div>{this.state.gathering.category_id}</div>
+        </div>
       </div>
     );
   }

@@ -58,6 +58,10 @@
    cursor: pointer;
  }
 
+ h1 {
+   font-size: 32px;
+ }
+
  /* Clearfix */
 
  .group:after {
@@ -135,7 +139,8 @@ div.nav-links-item:hover {
 /*Banner / Slider*/
 
 .app-slider-div {
-  height: 70vh
+  height: 70vh;
+  /*max-height: 600px;*/
 }
 
 .app-slider-div div{
@@ -223,35 +228,54 @@ div.nav-links-item:hover {
 /*User Landing Page*/
 .user-landing-page {
   width: 90%;
-  height: 500px;
-  margin: auto;
+  height: 80vh;
+  margin: 20px auto 0 auto;
+  overflow: scroll;
 }
 
 .user-dash {
   display: flex;
-  justify-content: center;
-}
-
-div.user-dash-bookmark {
-    flex: 0 0 25%;
-}
-div.user-dash-tickets {
-    flex: 0 0 40%;
-}
-
-.ticket-index-item {
-  display: flex;
   justify-content: space-around;
 }
 
-
-.tickets-index ul {
+.user-dash-bookmark, .user-dash-tickets {
   display: flex;
-  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.user-dash-bookmark ul {
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
+.user-dash-tickets ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.tickets-index-item {
+  display: flex;
+  align-items: flex-start;
+  margin: 10px 0;
+}
+
+.tickets-index-item > img {
+  margin-right: 10px
+}
+
+.tickets-index-item > img, .tickets-index-item > div {
+  width: 50%;
+}
+
+.bookmark-index-item {
+  width: 150px;
+  margin: 10px 0;
+}
+
+/*
 .tickets-index li{
   display: flex;
   justify-content: center;
@@ -278,25 +302,26 @@ div.user-dash-tickets {
   width: 150px;
   height: auto;
   margin: 10px;
-}
-
+}*/
 
 
 /*Events Index*/
 
-div.gatherings-index ul{
+.gatherings-index {
+  display: flex;
+  justify-content: center;
+  height: 40vh;
+  width: 100%
+}
+
+.gatherings-index ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
 }
 
-div.gatherings-index {
-height: 40vh;
-width: 100%
-}
-
-div.gathering-index-item-image {
+.gathering-index-item-image {
   display: flex;
   width: 300px;
   height: auto;
@@ -304,65 +329,39 @@ div.gathering-index-item-image {
 }
 
 .gathering-index-show {
-
+  display: flex;
+  justify-content: space-around;
 }
 
-.gathering-index-show-title {
-
+.gathering-index-show-left {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
-.gathering-index-show-artist {
-
+.gathering-index-show-right {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
-.gathering-index-show-location {
 
-}
+/*Category Index*/
 
-.gathering-index-show-start-date {
-
-}
-
-.gathering-index-show-end-date {
-
-}
-
-.gathering-index-show-description {
-
-}
-
-.gathering-index-show-image {
-
-}
-
-.gathering-index-show-ticket-price {
-
-}
-
-.gathering-index-show-goal {
-
-}
-
-.gathering-index-show-status {
-
-}
-
-.gathering-index-show-category {
-
-}
-
-div.categories-index ul{
+.categories-index ul{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
 }
 
-div.categories-index {
+.categories-index {
 
 }
 
-div.category-index-item-image {
+.category-index-item-image {
   display: flex;
   float: left;
   width: 300px;

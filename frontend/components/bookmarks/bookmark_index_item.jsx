@@ -10,10 +10,10 @@ const BookmarkIndexItem = React.createClass({
   render(){
     let ticketedEvent = GatheringStore.find(this.props.bookmark.gathering_id);
     return (
-          <div  className="bookmark-index-item"
+          <li  className="bookmark-index-item"
                 onClick={this._handleImgClick}>
               <img src={ticketedEvent.image}/>
-          </div>
+          </li>
       );
   }
 });

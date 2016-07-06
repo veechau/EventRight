@@ -34334,9 +34334,9 @@
 	      end_date: "",
 	      description: "",
 	      image: "",
-	      tix_price: 0,
+	      tix_price: "",
 	      funds: 0,
-	      goal: 0,
+	      goal: "",
 	      status: "ongoing",
 	      category_id: ""
 	    };
@@ -34650,7 +34650,7 @@
 	  render: function render() {
 	    var settings = {
 	      className: "app-slider-div",
-	      adaptiveHeight: true,
+	      adaptiveHeight: false,
 	      arrows: true,
 	      dots: true,
 	      autoplaySpeed: 4000,
@@ -34661,7 +34661,7 @@
 	      speed: 500,
 	      slidesToShow: 1,
 	      slidesToScroll: 1,
-	      variableWidth: true
+	      variableWidth: false
 	    };
 	    return React.createElement(
 	      Slider,
@@ -37142,20 +37142,13 @@
 	  },
 	  render: function render() {
 	    return React.createElement(
-	      'div',
-	      { className: 'tickets-index' },
-	      React.createElement(
-	        'ul',
-	        null,
-	        this.state.tickets.map(function (ticket) {
-	          return React.createElement(
-	            'li',
-	            { key: ticket.id },
-	            React.createElement(TicketIndexItem, {
-	              ticket: ticket })
-	          );
-	        })
-	      )
+	      'ul',
+	      null,
+	      this.state.tickets.map(function (ticket) {
+	        return React.createElement(TicketIndexItem, {
+	          key: ticket.id,
+	          ticket: ticket });
+	      })
 	    );
 	  }
 	});
@@ -37380,7 +37373,7 @@
 	  render: function render() {
 	    var ticketedEvent = GatheringStore.find(this.props.ticket.gathering_id);
 	    return React.createElement(
-	      'div',
+	      'li',
 	      { className: 'tickets-index-item',
 	        onClick: this._handleImgClick },
 	      React.createElement('img', { src: ticketedEvent.image }),
@@ -37447,20 +37440,13 @@
 	  },
 	  render: function render() {
 	    return React.createElement(
-	      'div',
-	      { className: 'bookmarks-index' },
-	      React.createElement(
-	        'ul',
-	        null,
-	        this.state.bookmarks.map(function (bookmark) {
-	          return React.createElement(
-	            'li',
-	            { key: bookmark.id },
-	            React.createElement(BookmarkIndexItem, {
-	              bookmark: bookmark })
-	          );
-	        })
-	      )
+	      'ul',
+	      null,
+	      this.state.bookmarks.map(function (bookmark) {
+	        return React.createElement(BookmarkIndexItem, {
+	          key: bookmark.id,
+	          bookmark: bookmark });
+	      })
 	    );
 	  }
 	});
@@ -37685,7 +37671,7 @@
 	  render: function render() {
 	    var ticketedEvent = GatheringStore.find(this.props.bookmark.gathering_id);
 	    return React.createElement(
-	      'div',
+	      'li',
 	      { className: 'bookmark-index-item',
 	        onClick: this._handleImgClick },
 	      React.createElement('img', { src: ticketedEvent.image })
@@ -37731,21 +37717,63 @@
 	      React.createElement(
 	        'div',
 	        { className: 'gathering-index-show-left' },
-	        this.state.gathering.title,
-	        this.state.gathering.artist,
-	        this.state.gathering.location,
-	        this.state.gathering.start_date,
-	        this.state.gathering.end_date,
-	        this.state.gathering.description,
-	        this.state.gathering.tix_price,
-	        this.state.gathering.goal,
-	        this.state.gathering.status,
-	        this.state.gathering.category_id
+	        React.createElement(
+	          'h1',
+	          null,
+	          this.state.gathering.artist
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          this.state.gathering.location
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          Date.parse(this.state.gathering.start_date),
+	          ' to ',
+	          Date.parse(this.state.gathering.end_date)
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          this.state.gathering.description
+	        )
 	      ),
 	      React.createElement(
 	        'div',
 	        { className: 'gathering-index-show-right' },
-	        React.createElement('img', { src: this.state.gathering.image })
+	        React.createElement('img', { className: 'gathering-index-item-image', src: this.state.gathering.image }),
+	        React.createElement(
+	          'p',
+	          null,
+	          this.state.gathering.tix_price
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          this.state.gathering.goal
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          this.state.gathering.status
+	        ),
+	        React.createElement(
+	          'button',
+	          null,
+	          'Buy Ticket'
+	        ),
+	        React.createElement(
+	          'button',
+	          null,
+	          'Bookmark Event'
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          this.state.gathering.category_id
+	        )
 	      )
 	    );
 	  }

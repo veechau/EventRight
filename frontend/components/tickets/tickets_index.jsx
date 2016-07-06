@@ -23,18 +23,15 @@ const TicketsIndex = React.createClass({
 
   render(){
     return (
-      <div className="tickets-index">
-        <ul>
-          {this.state.tickets.map( (ticket) => {
-            return (
-              <li key={ticket.id}>
-                <TicketIndexItem
-                  ticket={ticket} />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <ul>
+        {this.state.tickets.map( (ticket) => {
+          return (
+              <TicketIndexItem
+                key={ticket.id}
+                ticket={ticket} />
+          );
+        })}
+      </ul>
     );
   }
 });

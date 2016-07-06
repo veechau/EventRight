@@ -24,9 +24,9 @@ const GatheringForm = React.createClass({
       end_date: "",
       description: "",
       image: "",
-      tix_price: 0,
+      tix_price: "",
       funds: 0,
-      goal: 0,
+      goal: "",
       status: "ongoing",
       category_id: ""
     };

@@ -23,18 +23,15 @@ const BookmarksIndex = React.createClass({
 
   render(){
     return (
-      <div className="bookmarks-index">
-        <ul>
-          {this.state.bookmarks.map( (bookmark) => {
-            return (
-              <li key={bookmark.id}>
-                <BookmarkIndexItem
-                  bookmark={bookmark} />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <ul>
+        {this.state.bookmarks.map( (bookmark) => {
+          return (
+              <BookmarkIndexItem
+                key={bookmark.id}
+                bookmark={bookmark} />
+          );
+        })}
+      </ul>
     );
   }
 });
