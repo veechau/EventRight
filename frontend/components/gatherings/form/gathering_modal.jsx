@@ -32,6 +32,7 @@ const GatheringModal = React.createClass({
     componentWillUnmount() {
       this.gatheringListener.remove();
     },
+
     _onChange() {
       this.refs.modal.hide();
     },

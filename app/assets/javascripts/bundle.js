@@ -34650,7 +34650,7 @@
 	  render: function render() {
 	    var settings = {
 	      className: "app-slider-div",
-	      adaptiveHeight: false,
+	      adaptiveHeight: true,
 	      arrows: true,
 	      dots: true,
 	      autoplaySpeed: 4000,
@@ -34661,7 +34661,7 @@
 	      speed: 500,
 	      slidesToShow: 1,
 	      slidesToScroll: 1,
-	      variableWidth: false
+	      variableWidth: true
 	    };
 	    return React.createElement(
 	      Slider,
@@ -37141,15 +37141,23 @@
 	    this.setState({ tickets: TicketStore.all() });
 	  },
 	  render: function render() {
-	    return React.createElement(
-	      'ul',
-	      null,
-	      this.state.tickets.map(function (ticket) {
-	        return React.createElement(TicketIndexItem, {
-	          key: ticket.id,
-	          ticket: ticket });
-	      })
-	    );
+	    if (this.state.tickets.length === 0) {
+	      return React.createElement(
+	        'div',
+	        null,
+	        'You have not funded any events :('
+	      );
+	    } else {
+	      return React.createElement(
+	        'ul',
+	        null,
+	        this.state.tickets.map(function (ticket) {
+	          return React.createElement(TicketIndexItem, {
+	            key: ticket.id,
+	            ticket: ticket });
+	        })
+	      );
+	    }
 	  }
 	});
 	
@@ -37439,15 +37447,23 @@
 	    this.setState({ bookmarks: BookmarkStore.all() });
 	  },
 	  render: function render() {
-	    return React.createElement(
-	      'ul',
-	      null,
-	      this.state.bookmarks.map(function (bookmark) {
-	        return React.createElement(BookmarkIndexItem, {
-	          key: bookmark.id,
-	          bookmark: bookmark });
-	      })
-	    );
+	    if (this.state.bookmarks.length === 0) {
+	      return React.createElement(
+	        'div',
+	        null,
+	        'You do not have any bookmarked events!'
+	      );
+	    } else {
+	      return React.createElement(
+	        'ul',
+	        null,
+	        this.state.bookmarks.map(function (bookmark) {
+	          return React.createElement(BookmarkIndexItem, {
+	            key: bookmark.id,
+	            bookmark: bookmark });
+	        })
+	      );
+	    }
 	  }
 	});
 	
@@ -37669,12 +37685,12 @@
 	    hashHistory.push('events/' + this.props.bookmark.gathering_id);
 	  },
 	  render: function render() {
-	    var ticketedEvent = GatheringStore.find(this.props.bookmark.gathering_id);
+	    var bookmarkedEvent = GatheringStore.find(this.props.bookmark.gathering_id);
 	    return React.createElement(
 	      'li',
 	      { className: 'bookmark-index-item',
 	        onClick: this._handleImgClick },
-	      React.createElement('img', { src: ticketedEvent.image })
+	      React.createElement('img', { src: bookmarkedEvent.image })
 	    );
 	  }
 	});
@@ -37692,6 +37708,9 @@
 	var React = __webpack_require__(1);
 	var GatheringStore = __webpack_require__(272);
 	var GatheringActions = __webpack_require__(276);
+	var TicketStore = __webpack_require__(310);
+	var TicketActions = __webpack_require__(312);
+	var SessionStore = __webpack_require__(231);
 	
 	var GatheringIndexShow = React.createClass({
 	  displayName: 'GatheringIndexShow',
@@ -37703,12 +37722,17 @@
 	  },
 	  componentDidMount: function componentDidMount() {
 	    this.gatheringIndexShowListener = GatheringStore.addListener(this._onChange);
+	    this.ticketListener = TicketStore.addListener(this._addTicket);
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    this.gatheringIndexShowListener.remove();
 	  },
 	  _onChange: function _onChange() {
 	    this.setState({ gathering: GatheringStore.find(this.props.params.eventId) });
+	  },
+	  _addTicket: function _addTicket() {
+	    var currentUser = SessionStore.currentUser();
+	    TicketActions.createTicket({ ticket: { attendee_id: currentUser.id, gathering_id: this.props.params.eventId } });
 	  },
 	  render: function render() {
 	    return React.createElement(
@@ -37730,20 +37754,15 @@
 	        React.createElement(
 	          'p',
 	          null,
-	          Date.parse(this.state.gathering.start_date),
+	          this.state.gathering.start_date,
 	          ' to ',
-	          Date.parse(this.state.gathering.end_date)
+	          this.state.gathering.end_date
 	        ),
 	        React.createElement(
 	          'p',
 	          null,
 	          this.state.gathering.description
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-right' },
-	        React.createElement('img', { className: 'gathering-index-item-image', src: this.state.gathering.image }),
+	        ),
 	        React.createElement(
 	          'p',
 	          null,
@@ -37758,7 +37777,12 @@
 	          'p',
 	          null,
 	          this.state.gathering.status
-	        ),
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-right' },
+	        React.createElement('img', { className: 'gathering-index-item-image', src: this.state.gathering.image }),
 	        React.createElement(
 	          'button',
 	          null,
@@ -37816,18 +37840,22 @@
 	      { className: 'category-index-show' },
 	      React.createElement(
 	        'div',
-	        { className: 'category-index-show-title' },
-	        this.state.category.title
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'category-index-show-description' },
-	        this.state.category.description
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'category-index-show-image' },
+	        { className: 'category-index-show-left' },
 	        React.createElement('img', { src: this.state.category.image })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'category-index-show-right' },
+	        React.createElement(
+	          'h1',
+	          null,
+	          this.state.category.title
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          this.state.category.description
+	        )
 	      )
 	    );
 	  }

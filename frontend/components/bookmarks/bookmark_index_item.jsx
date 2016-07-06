@@ -8,11 +8,11 @@ const BookmarkIndexItem = React.createClass({
     hashHistory.push(`events/${this.props.bookmark.gathering_id}`);
   },
   render(){
-    let ticketedEvent = GatheringStore.find(this.props.bookmark.gathering_id);
+    let bookmarkedEvent = GatheringStore.find(this.props.bookmark.gathering_id);
     return (
           <li  className="bookmark-index-item"
                 onClick={this._handleImgClick}>
-              <img src={ticketedEvent.image}/>
+              <img src={bookmarkedEvent.image}/>
           </li>
       );
   }

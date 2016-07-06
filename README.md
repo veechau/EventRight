@@ -18,13 +18,13 @@ EventRight is a web application inspired by Eventbrite with a crowdfunding flair
 - [ ] Registration/Tickets
   - [x] Only registered/signed-in users are able to create new events
   - [ ] Registered/signed-in users may add tickets to their cart
-  - [ ] User Dashboard shows current user's purchased events
+  - [x] User Dashboard shows current user's purchased events
 - [ ] Categories
   - [ ] Events and Categories have a many-to-many relationship
   - [ ] Categories will be used to sort, filter and search events
 - [ ] Bookmark events
   - [ ] Registered/signed-in users can bookmark events
-  - [ ] User Dashboard shows current user's bookmarked events
+  - [x] User Dashboard shows current user's bookmarked events
   - [ ] Adequate CSS styling
 
 ## Design Docs
@@ -67,19 +67,19 @@ the API.
 - [x] CRUD API for events (`EventsController`)
 - [x] jBuilder views for events
 - [x] test out API interaction in the console.
-- [ ] basic styling for existing components
+- [x] basic styling for existing components
 
 ### Phase 3: Flux Architecture and Router (1.5 days, W1 Th 10pm)
 
 **Objective:** Events can be created, read, edited and destroyed with the
 user interface.
 
-- [ ] setup the flux loop with skeleton files
+- [x] setup the flux loop with skeleton files
 - [x] setup React Router
 - implement each note component, building out the flux loop as needed.
   - [x] `EventsIndex`
   - [x] `EventIndexItem`
-  - [ ] `EventForm`
+  - [x] `EventForm`
 
 ### Phase 4: Tickets Model, API, and basic APIUtil (1.5 day, W1 F 10pm)
 
@@ -90,7 +90,7 @@ user interface.
   - [x] CRUD API for events (`TicketsController`)
   - [x] jBuilder views for tickets
   - [ ] test out API interaction in the console.
-  - [ ] basic styling for existing components
+  - [x] basic styling for existing components
   - [ ] setup the flux loop with skeleton files
   - [x] setup React Router
   - implement each note component, building out the flux loop as needed.
@@ -101,8 +101,8 @@ user interface.
 
   **Objective:** User Landing show current user's bookmarked events and purchased events
 
-  - [ ] Add BookmarkIndex to user landing page
-  - [ ] Add TicketsIndex to user landing page
+  - [x] Add BookmarkIndex to user landing page
+  - [x] Add TicketsIndex to user landing page
   - [x] CRUD API for events (`TicketsController`)
 
 ### Phase 6: Categories (1 day, W2 M 6pm)

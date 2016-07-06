@@ -22,17 +22,23 @@ const TicketsIndex = React.createClass({
   },
 
   render(){
-    return (
-      <ul>
-        {this.state.tickets.map( (ticket) => {
-          return (
-              <TicketIndexItem
-                key={ticket.id}
-                ticket={ticket} />
-          );
-        })}
-      </ul>
-    );
+    if (this.state.tickets.length === 0){
+      return (
+        <div>You have not funded any events :(</div>
+      );
+    } else {
+      return (
+        <ul>
+          {this.state.tickets.map( (ticket) => {
+            return (
+                <TicketIndexItem
+                  key={ticket.id}
+                  ticket={ticket} />
+            );
+          })}
+        </ul>
+      );
+    }
   }
 });
 

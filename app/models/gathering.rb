@@ -8,9 +8,10 @@ class Gathering < ActiveRecord::Base
   after_initialize :set_defaults
 
   private
-
-  def find_events_by_category(category_name)
-  end
+  # 
+  # def find_events_by_category(category_id)
+  #   Category.find(id: self.category_id)
+  # end
 
   def set_defaults
     self.start_date = Time.now

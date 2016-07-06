@@ -22,17 +22,23 @@ const BookmarksIndex = React.createClass({
   },
 
   render(){
-    return (
-      <ul>
+    if (this.state.bookmarks.length === 0){
+      return (
+        <div>You do not have any bookmarked events!</div>
+      );
+    } else {
+      return (
+        <ul>
         {this.state.bookmarks.map( (bookmark) => {
           return (
-              <BookmarkIndexItem
-                key={bookmark.id}
-                bookmark={bookmark} />
+            <BookmarkIndexItem
+            key={bookmark.id}
+            bookmark={bookmark} />
           );
         })}
-      </ul>
-    );
+        </ul>
+      );
+    }
   }
 });
 
