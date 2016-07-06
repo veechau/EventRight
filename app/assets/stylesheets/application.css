@@ -229,27 +229,39 @@ div.nav-links-item:hover {
 
 .user-dash {
   display: flex;
+  justify-content: center;
 }
 
 div.user-dash-bookmark {
     flex: 0 0 25%;
 }
 div.user-dash-tickets {
-    flex: 0 0 75%;
+    flex: 0 0 40%;
 }
+
+.ticket-index-item {
+  display: flex;
+  justify-content: space-around;
+}
+
 
 .tickets-index ul {
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-around;
 }
 
 .tickets-index li{
   display: flex;
+  justify-content: center;
+  margin: auto;;
+}
+
+.tickets-index li img {
   width: 300px;
   height: auto;
-  margin: 10px;
+  margin: auto;
 }
 
 
@@ -258,6 +270,7 @@ div.user-dash-tickets {
   flex-grow: 1;
   flex-wrap: wrap;
   justify-content: space-around;
+  margin: auto;
 }
 
 .bookmarks-index li {
@@ -280,6 +293,7 @@ div.gatherings-index ul{
 
 div.gatherings-index {
 height: 40vh;
+width: 100%
 }
 
 div.gathering-index-item-image {

@@ -49337,58 +49337,22 @@ return jQuery;
 	      { className: 'gathering-index-show' },
 	      React.createElement(
 	        'div',
-	        { className: 'gathering-index-show-title' },
-	        this.state.gathering.title
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-artist' },
-	        this.state.gathering.artist
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-location' },
-	        this.state.gathering.location
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-start-date' },
-	        this.state.gathering.start_date
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-end-date' },
-	        this.state.gathering.end_date
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-description' },
-	        this.state.gathering.description
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-image' },
-	        React.createElement('img', { src: this.state.gathering.image })
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-ticket-price' },
-	        this.state.gathering.tix_price
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-goal' },
-	        this.state.gathering.goal
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-status' },
-	        this.state.gathering.status
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-category' },
+	        { className: 'gathering-index-show-left' },
+	        this.state.gathering.title,
+	        this.state.gathering.artist,
+	        this.state.gathering.location,
+	        this.state.gathering.start_date,
+	        this.state.gathering.end_date,
+	        this.state.gathering.description,
+	        this.state.gathering.tix_price,
+	        this.state.gathering.goal,
+	        this.state.gathering.status,
 	        this.state.gathering.category_id
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'gathering-index-show-right' },
+	        React.createElement('img', { src: this.state.gathering.image })
 	      )
 	    );
 	  }

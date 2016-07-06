@@ -10,8 +10,8 @@ const TicketsIndexItem = React.createClass({
   render(){
     let ticketedEvent = GatheringStore.find(this.props.ticket.gathering_id);
     return (
-        <div  className="tickets-index-item"
-              onClick={this._handleImgClick}>
+        <div className="tickets-index-item"
+             onClick={this._handleImgClick}>
             <img src={ticketedEvent.image}/>
             <div className="ticket-index-item-info">
             <p>{ticketedEvent.artist}</p>
