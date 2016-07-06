@@ -7,6 +7,10 @@ const SessionModal = require('./auth/session_modal');
 const LoginForm = require('./auth/login_form');
 const SignupForm = require('./auth/signup_form');
 
+const ReactRouter = require('react-router');
+const hashHistory = ReactRouter.hashHistory;
+
+
 const GatheringStore = require('../stores/gathering_store');
 const GatheringModal = require('./gatherings/form/gathering_modal.jsx');
 
@@ -25,7 +29,7 @@ const Nav = React.createClass({
   },
 
   _accountInfo(){
-    // implement later
+    hashHistory.push('/home');
   },
 
 
@@ -48,7 +52,9 @@ const Nav = React.createClass({
           <GatheringModal />
           <div
                 className="nav-links-item"
-                onClick={this._accountInfo}>Account Information</div>
+                onClick={this._accountInfo}>
+                <img src="https://res.cloudinary.com/vechau/image/upload/v1467766265/user_grioed.png"/>
+                </div>
         </nav>
       );
     }

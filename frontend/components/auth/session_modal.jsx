@@ -8,7 +8,6 @@ const modalStyle = {
   width: '100%',
   height: '100%',
   backgroundColor: 'fade(#4B4E4F, 80%)',
-  borderRadius: '8px',
   opacity: '0.3',
 };
 
@@ -50,7 +49,7 @@ const SessionModal = React.createClass({
                       backdropStyle={backdropStyle}
                       contentStyle={contentStyle}>
                 <div className="session-modal-content">
-                  <div onClick={this.hideModal}>X</div>
+                  <div onClick={this.hideModal}> X </div>
                   {formContent}
                 </div>
               </Modal>

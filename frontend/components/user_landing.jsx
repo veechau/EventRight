@@ -11,11 +11,19 @@ const Landing = React.createClass({
   render(){
 
     return(
-      <div className="landing-page">
-        <CategoriesIndex />
+      <div className="user-landing-page">
+        <div className="user-dash">
+          <div className="user-dash-bookmark">
+            <header className="user-landing-header">Bookmarked Events</header>
+            <BookmarksIndex />
+          </div>
+          <div className="user-dash-tickets">
+            <header className="user-landing-header">Events Funded By You!</header>
+            <TicketsIndex />
+          </div>
+        </div>
+          <header className="user-landing-header">Explore Events</header>
         <GatheringsIndex />
-        <TicketsIndex />
-        <BookmarksIndex />
       </div>
     );
   }

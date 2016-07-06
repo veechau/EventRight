@@ -1,3 +1,9 @@
+/* line 6, /Users/veronicachau/Documents/EventRight/app/assets/stylesheets/static_pages.scss */
+#content {
+  font-family: 'Roboto', sans-serif;
+  font-size: inherit;
+  vertical-align: baseline;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -10,9 +16,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
+
+
  */
+
 
  html, body, header, nav, h1, a,
  ul, li, strong, main, i,

@@ -16,10 +16,9 @@ EventRight is a web application inspired by Eventbrite with a crowdfunding flair
   - [ ] Only the events that are within current user's city are included
   - [ ] Bonus: Events displayed are based off of user's subscribed categories/bookmarks
 - [ ] Registration/Tickets
-  - [ ] Only registered/signed-in users are able to create new events
+  - [x] Only registered/signed-in users are able to create new events
   - [ ] Registered/signed-in users may add tickets to their cart
   - [ ] User Dashboard shows current user's purchased events
-  - [ ] Bonus: Warn user of conflicting times/events
 - [ ] Categories
   - [ ] Events and Categories have a many-to-many relationship
   - [ ] Categories will be used to sort, filter and search events
@@ -95,15 +94,15 @@ user interface.
   - [ ] setup the flux loop with skeleton files
   - [x] setup React Router
   - implement each note component, building out the flux loop as needed.
-    - [ ] `TicketsIndex`
-    - [ ] `TicketIndexItem`
+    - [x] `TicketsIndex`
+    - [x] `TicketIndexItem`
 
 ### Phase 5: User Landing Page (1.5 day, W1 F 10pm)
 
   **Objective:** User Landing show current user's bookmarked events and purchased events
 
-  - [ ] Add BookmarkIndex to landing page
-  - [ ] Add TicketsIndex to landing page
+  - [ ] Add BookmarkIndex to user landing page
+  - [ ] Add TicketsIndex to user landing page
   - [x] CRUD API for events (`TicketsController`)
 
 ### Phase 6: Categories (1 day, W2 M 6pm)
@@ -114,7 +113,7 @@ user interface.
 - build out API, Flux loop, and components for:
   - [x] Category CRUD
   - [ ] adding events requires a category
-  - [ ] moving events to a different category
+  - [ ] updating events to a different category
   - [ ] viewing events by category
 - Use CSS to style new views
 
@@ -127,7 +126,7 @@ which has its own `Index` view.
 
 - [x] create `Bookmark` model and join table
 - build out API, Flux loop, and components for:
-  - [ ] fetching bookmarks for current user
+  - [x] fetching bookmarks for current user
   - [ ] adding bookmarks to events
   - [ ] removing bookmarks to events
 - [ ] Style new elements

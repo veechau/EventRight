@@ -11664,20 +11664,21 @@ return jQuery;
 	var hashHistory = ReactRouter.hashHistory;
 	
 	var App = __webpack_require__(230);
-	var Landing = __webpack_require__(299);
+	var Landing = __webpack_require__(301);
+	var UserLanding = __webpack_require__(308);
 	var LoginForm = __webpack_require__(269);
 	var SignupForm = __webpack_require__(271);
-	var GatheringsIndex = __webpack_require__(293);
-	var GatheringIndexItem = __webpack_require__(298);
-	var GatheringIndexShow = __webpack_require__(738);
-	var GatheringForm = __webpack_require__(740);
-	var CategoriesIndex = __webpack_require__(300);
-	var CategoryIndexItem = __webpack_require__(305);
-	var CategoryIndexShow = __webpack_require__(739);
-	var BookmarksIndex = __webpack_require__(312);
-	var BookmarkIndexItem = __webpack_require__(317);
-	var TicketsIndex = __webpack_require__(306);
-	var TicketIndexItem = __webpack_require__(311);
+	var GatheringsIndex = __webpack_require__(299);
+	var GatheringIndexItem = __webpack_require__(300);
+	var GatheringIndexShow = __webpack_require__(321);
+	var GatheringForm = __webpack_require__(275);
+	var CategoriesIndex = __webpack_require__(302);
+	var CategoryIndexItem = __webpack_require__(307);
+	var CategoryIndexShow = __webpack_require__(322);
+	var BookmarksIndex = __webpack_require__(315);
+	var BookmarkIndexItem = __webpack_require__(320);
+	var TicketsIndex = __webpack_require__(309);
+	var TicketIndexItem = __webpack_require__(314);
 	
 	var SessionStore = __webpack_require__(231);
 	var SessionActions = __webpack_require__(255);
@@ -11689,6 +11690,7 @@ return jQuery;
 	    Route,
 	    { path: '/', component: App },
 	    React.createElement(IndexRoute, { component: Landing }),
+	    React.createElement(Route, { path: '/home', component: UserLanding }),
 	    React.createElement(Route, { path: '/login', component: LoginForm }),
 	    React.createElement(Route, { path: '/signup', component: SignupForm }),
 	    React.createElement(Route, { path: '/events', component: GatheringsIndex }),
@@ -37593,9 +37595,9 @@ return jQuery;
 	var SessionStore = __webpack_require__(231);
 	
 	var Nav = __webpack_require__(254);
-	var AppSlider = __webpack_require__(272);
+	var AppSlider = __webpack_require__(278);
 	
-	var GatheringsIndex = __webpack_require__(293);
+	var GatheringsIndex = __webpack_require__(299);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -44476,7 +44478,11 @@ return jQuery;
 	var LoginForm = __webpack_require__(269);
 	var SignupForm = __webpack_require__(271);
 	
-	var GatheringModal = __webpack_require__(741);
+	var ReactRouter = __webpack_require__(168);
+	var hashHistory = ReactRouter.hashHistory;
+	
+	var GatheringStore = __webpack_require__(272);
+	var GatheringModal = __webpack_require__(274);
 	
 	var Nav = React.createClass({
 	  displayName: 'Nav',
@@ -44490,7 +44496,7 @@ return jQuery;
 	    SessionActions.logIn({ username: "Demo_User", password: "Password" });
 	  },
 	  _accountInfo: function _accountInfo() {
-	    // implement later
+	    hashHistory.push('/home');
 	  },
 	  greeting: function greeting() {
 	    var nav = React.createElement(
@@ -44522,7 +44528,7 @@ return jQuery;
 	          {
 	            className: 'nav-links-item',
 	            onClick: this._accountInfo },
-	          'Account Information'
+	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/v1467766265/user_grioed.png' })
 	        )
 	      );
 	    }
@@ -44566,6 +44572,7 @@ return jQuery;
 	      actionType: SessionConstants.LOGIN,
 	      currentUser: currentUser
 	    });
+	    hashHistory.push("/home");
 	  },
 	  removeCurrentUser: function removeCurrentUser() {
 	    AppDispatcher.dispatch({
@@ -44747,7 +44754,7 @@ return jQuery;
 	          React.createElement(
 	            'div',
 	            { onClick: this.hideModal },
-	            'X'
+	            ' X '
 	          ),
 	          formContent
 	        )
@@ -45392,7 +45399,7 @@ return jQuery;
 		},
 		redirectIfLoggedIn: function redirectIfLoggedIn() {
 			if (SessionStore.isUserLoggedIn()) {
-				this.context.router.push("/");
+				this.context.router.push("/home");
 			}
 		},
 		_handleLogIn: function _handleLogIn(e) {
@@ -45530,13 +45537,11 @@ return jQuery;
 	  if (form !== _form) {
 	    return {};
 	  }
-	
 	  // copies the _errors object into a new object
 	  var result = {};
 	  for (var field in _errors) {
 	    result[field] = Array.from(_errors[field]);
 	  }
-	
 	  return result;
 	};
 	
@@ -45592,7 +45597,7 @@ return jQuery;
 	  },
 	  redirectIfLoggedIn: function redirectIfLoggedIn() {
 	    if (SessionStore.isUserLoggedIn()) {
-	      this.context.router.push("/");
+	      this.context.router.push("/home");
 	    }
 	  },
 	  _handleLogIn: function _handleLogIn(e) {
@@ -45744,12 +45749,508 @@ return jQuery;
 /* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
+	var AppDispatcher = __webpack_require__(232);
+	var Store = __webpack_require__(236).Store;
+	var GatheringConstants = __webpack_require__(273);
+	var ReactRouter = __webpack_require__(168);
+	var hashHistory = ReactRouter.hashHistory;
+	
+	var GatheringStore = new Store(AppDispatcher);
+	
+	var _gatherings = {};
+	
+	GatheringStore.all = function () {
+	  return Object.keys(_gatherings).map(function (gatheringId) {
+	    return _gatherings[gatheringId];
+	  });
+	};
+	
+	GatheringStore.find = function (gatheringId) {
+	  return _gatherings[gatheringId];
+	};
+	
+	var resetGatherings = function resetGatherings(gatherings) {
+	  _gatherings = {};
+	  gatherings.forEach(function (gathering) {
+	    _gatherings[gathering.id] = gathering;
+	  });
+	};
+	
+	var setGathering = function setGathering(gathering) {
+	  _gatherings[gathering.id] = gathering;
+	  hashHistory.push('/events/' + gathering.id);
+	};
+	
+	var deleteGathering = function deleteGathering(gathering) {
+	  delete _gatherings[gathering.id];
+	};
+	
+	GatheringStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case GatheringConstants.GATHERINGS_RECEIVED:
+	      resetGatherings(payload.gatherings);
+	      GatheringStore.__emitChange();
+	      break;
+	    case GatheringConstants.GATHERING_RECEIVED:
+	      setGathering(payload.gathering);
+	      GatheringStore.__emitChange();
+	      break;
+	    case GatheringConstants.GATHERING_REMOVED:
+	      deleteGathering(payload.gathering);
+	      GatheringStore.__emitChange();
+	      break;
+	    case GatheringConstants.ERROR:
+	      console.log(payload.errors);
+	      GatheringStore.__emitChange();
+	      break;
+	  }
+	};
+	
+	module.exports = GatheringStore;
+
+/***/ },
+/* 273 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	var GatheringConstants = {
+			GATHERINGS_RECEIVED: "GATHERINGS_RECEIVED",
+			GATHERING_RECEIVED: "GATHERING_RECEIVED",
+			GATHERING_REMOVED: "GATHERING_REMOVED"
+	};
+	
+	module.exports = GatheringConstants;
+
+/***/ },
+/* 274 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var Modal = __webpack_require__(260);
+	
+	var GatheringForm = __webpack_require__(275);
+	
+	var modalStyle = {
+	  width: '100%',
+	  height: '100%',
+	  backgroundColor: 'fade(#4B4E4F, 80%)',
+	  opacity: '0.3'
+	};
+	
+	var backdropStyle = {
+	  border: '0px solid transparent'
+	};
+	
+	var contentStyle = {
+	  width: '40%',
+	  margin: 'auto',
+	  marginTop: '55px',
+	  border: '1px solid #D2D6DF',
+	  borderRadius: '8px'
+	};
+	
+	var GatheringStore = __webpack_require__(272);
+	
+	var GatheringModal = React.createClass({
+	  displayName: 'GatheringModal',
+	  componentDidMount: function componentDidMount() {
+	    this.gatheringListener = GatheringStore.addListener(this._onChange);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.gatheringListener.remove();
+	  },
+	  _onChange: function _onChange() {
+	    this.refs.modal.hide();
+	  },
+	  showModal: function showModal() {
+	    this.refs.modal.show();
+	  },
+	  hideModal: function hideModal() {
+	    this.refs.modal.hide();
+	  },
+	
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'nav-links-item' },
+	      React.createElement(
+	        'div',
+	        { onClick: this.showModal },
+	        'Create Event'
+	      ),
+	      React.createElement(
+	        Modal,
+	        { ref: 'modal',
+	          className: 'gathering-modal',
+	          modalStyle: modalStyle,
+	          backdropStyle: backdropStyle,
+	          contentStyle: contentStyle },
+	        React.createElement(
+	          'div',
+	          { className: 'gathering-modal-content' },
+	          React.createElement(
+	            'div',
+	            { onClick: this.hideModal },
+	            ' X '
+	          ),
+	          React.createElement(GatheringForm, null)
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = GatheringModal;
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	var React = __webpack_require__(1);
+	var GatheringActions = __webpack_require__(276);
+	var GatheringStore = __webpack_require__(272);
+	var ErrorActions = __webpack_require__(257);
+	var ErrorStore = __webpack_require__(270);
+	var SessionStore = __webpack_require__(231);
+	
+	var ReactRouter = __webpack_require__(168);
+	var hashHistory = ReactRouter.hashHistory;
+	
+	var GatheringForm = React.createClass({
+	  displayName: 'GatheringForm',
+	
+	
+	  contextTypes: {
+	    router: React.PropTypes.object.isRequired
+	  },
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      artist: "",
+	      location: "",
+	      start_date: new Date(),
+	      end_date: "",
+	      description: "",
+	      image: "",
+	      tix_price: 0,
+	      funds: 0,
+	      goal: 0,
+	      status: "ongoing",
+	      category_id: ""
+	    };
+	  },
+	  componentWillMount: function componentWillMount() {
+	    ErrorActions.clearErrors();
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.errorListener = ErrorStore.addListener(this.forceUpdate.bind(this));
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.errorListener.remove();
+	  },
+	  _handleSubmit: function _handleSubmit(e) {
+	    e.preventDefault();
+	
+	    var formData = {
+	      artist: this.state.artist,
+	      location: this.state.location,
+	      start_date: this.state.start_date,
+	      end_date: this.state.end_date,
+	      description: this.state.description,
+	      image: this.state.image,
+	      tix_price: this.state.tix_price,
+	      funds: this.state.funds,
+	      goal: this.state.goal,
+	      status: this.state.status,
+	      category_id: this.state.category_id
+	    };
+	    GatheringActions.createGathering(formData);
+	  },
+	  fieldErrors: function fieldErrors(field) {
+	    var errors = ErrorStore.formErrors("creating event");
+	    if (!errors[field]) {
+	      return;
+	    }
+	    var messages = errors[field].map(function (errorMsg, i) {
+	      return React.createElement(
+	        'li',
+	        { key: i },
+	        errorMsg
+	      );
+	    });
+	    return React.createElement(
+	      'ul',
+	      null,
+	      messages
+	    );
+	  },
+	  update: function update(property) {
+	    var _this = this;
+	
+	    return function (e) {
+	      return _this.setState(_defineProperty({}, property, e.target.value));
+	    };
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'gathering-form-container' },
+	      React.createElement(
+	        'form',
+	        { onSubmit: this._handleSubmit, className: 'gathering-form-box' },
+	        React.createElement(
+	          'div',
+	          { className: 'gathering-form-header' },
+	          'Create an Event'
+	        ),
+	        React.createElement('br', null),
+	        this.fieldErrors("base"),
+	        React.createElement(
+	          'div',
+	          { className: 'gathering-form' },
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Artist:',
+	            this.fieldErrors("artist"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.artist,
+	              onChange: this.update("artist"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Location:',
+	            this.fieldErrors("location"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.location,
+	              onChange: this.update("location"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' End Date:',
+	            this.fieldErrors("end_date"),
+	            React.createElement('input', { type: 'date',
+	              onChange: this.update("end_date"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Description:',
+	            this.fieldErrors("description"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.description,
+	              onChange: this.update("description"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Image:',
+	            this.fieldErrors("image"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.image,
+	              onChange: this.update("image"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Ticket Price:',
+	            this.fieldErrors("tix_price"),
+	            React.createElement('input', { type: 'number',
+	              value: this.state.tix_price,
+	              onChange: this.update("tix_price"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Goal:',
+	            this.fieldErrors("goal"),
+	            React.createElement('input', { type: 'number',
+	              value: this.state.goal,
+	              onChange: this.update("goal"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Category:',
+	            this.fieldErrors("category_id"),
+	            React.createElement('input', { type: 'number',
+	              value: this.state.category_id,
+	              onChange: this.update("category_id"),
+	              className: 'gathering-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement('input', { type: 'submit', value: 'Submit' })
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = GatheringForm;
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var AppDispatcher = __webpack_require__(232);
+	var GatheringConstants = __webpack_require__(273);
+	var GatheringApiUtil = __webpack_require__(277);
+	var ErrorActions = __webpack_require__(257);
+	
+	var GatheringActions = {
+	
+	  // Client-side
+	
+	  fetchGatherings: function fetchGatherings() {
+	    GatheringApiUtil.fetchGatherings(GatheringActions.receiveAll, ErrorActions.setErrors);
+	  },
+	  getGathering: function getGathering(id) {
+	    GatheringApiUtil.getGathering(id, GatheringActions.receiveGathering, ErrorActions.setErrors);
+	  },
+	  createGathering: function createGathering(gathering) {
+	    GatheringApiUtil.createGathering(gathering, GatheringActions.receiveGathering, ErrorActions.setErrors);
+	  },
+	  editGathering: function editGathering(gathering) {
+	    GatheringApiUtil.updateGathering(gathering, GatheringActions.receiveGathering, ErrorActions.setErrors);
+	  },
+	  deleteGathering: function deleteGathering(id) {
+	    GatheringApiUtil.deleteGathering(id, GatheringActions.removeGathering, ErrorActions.setErrors);
+	  },
+	
+	
+	  // Server-side
+	  receiveAll: function receiveAll(gatherings) {
+	    AppDispatcher.dispatch({
+	      actionType: GatheringConstants.GATHERINGS_RECEIVED,
+	      gatherings: gatherings
+	    });
+	  },
+	  receiveGathering: function receiveGathering(gathering) {
+	    AppDispatcher.dispatch({
+	      actionType: GatheringConstants.GATHERING_RECEIVED,
+	      gathering: gathering
+	    });
+	  },
+	  removeGathering: function removeGathering(gathering) {
+	    AppDispatcher.dispatch({
+	      actionType: GatheringConstants.GATHERING_REMOVED,
+	      gathering: gathering
+	    });
+	  }
+	};
+	
+	module.exports = GatheringActions;
+
+/***/ },
+/* 277 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	var GatheringApiUtil = {
+	  fetchGatherings: function fetchGatherings(success, _error) {
+	    $.ajax({
+	      url: '/api/gatherings',
+	      type: 'GET',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+	
+	        _error("events", errors);
+	      }
+	    });
+	  },
+	  getGathering: function getGathering(id, success, _error2) {
+	    $.ajax({
+	      url: '/api/gatherings/' + id,
+	      type: 'GET',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+	
+	        _error2("event", errors);
+	      }
+	    });
+	  },
+	  createGathering: function createGathering(gatheringInfo, success, errorCB) {
+	    $.ajax({
+	      url: '/api/gatherings',
+	      type: 'POST',
+	      data: { gathering: gatheringInfo },
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+	        errorCB("creating event", errors);
+	      }
+	    });
+	  },
+	  updateGathering: function updateGathering(gatheringInfo, success, _error3) {
+	    $.ajax({
+	      url: '/api/gatherings/' + gatheringInfo.id,
+	      type: 'PATCH',
+	      data: { gathering: gatheringInfo },
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+	
+	        _error3("editing event", errors);
+	      }
+	    });
+	  },
+	  deleteGathering: function deleteGathering(id, success, _error4) {
+	    $.ajax({
+	      url: '/api/gatherings/' + id,
+	      type: 'DELETE',
+	      success: success,
+	      error: function error(xhr) {
+	        var errors = xhr.responseJSON;
+	
+	        _error4("deleting event", errors);
+	      }
+	    });
+	  }
+	};
+	
+	module.exports = GatheringApiUtil;
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	/* eslint max-len: "off" */
 	
 	var React = __webpack_require__(1);
-	var Slider = __webpack_require__(273);
+	var Slider = __webpack_require__(279);
 	
 	var AppSlider = React.createClass({
 	  displayName: 'AppSlider',
@@ -45810,15 +46311,15 @@ return jQuery;
 	module.exports = AppSlider;
 
 /***/ },
-/* 273 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(274);
+	module.exports = __webpack_require__(280);
 
 /***/ },
-/* 274 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45829,21 +46330,21 @@ return jQuery;
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _innerSlider = __webpack_require__(275);
+	var _innerSlider = __webpack_require__(281);
 	
-	var _objectAssign = __webpack_require__(281);
+	var _objectAssign = __webpack_require__(287);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _json2mq = __webpack_require__(288);
+	var _json2mq = __webpack_require__(294);
 	
 	var _json2mq2 = _interopRequireDefault(_json2mq);
 	
-	var _reactResponsiveMixin = __webpack_require__(290);
+	var _reactResponsiveMixin = __webpack_require__(296);
 	
 	var _reactResponsiveMixin2 = _interopRequireDefault(_reactResponsiveMixin);
 	
-	var _defaultProps = __webpack_require__(283);
+	var _defaultProps = __webpack_require__(289);
 	
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 	
@@ -45920,7 +46421,7 @@ return jQuery;
 	module.exports = Slider;
 
 /***/ },
-/* 275 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45937,31 +46438,31 @@ return jQuery;
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _mixinsEventHandlers = __webpack_require__(276);
+	var _mixinsEventHandlers = __webpack_require__(282);
 	
 	var _mixinsEventHandlers2 = _interopRequireDefault(_mixinsEventHandlers);
 	
-	var _mixinsHelpers = __webpack_require__(279);
+	var _mixinsHelpers = __webpack_require__(285);
 	
 	var _mixinsHelpers2 = _interopRequireDefault(_mixinsHelpers);
 	
-	var _initialState = __webpack_require__(282);
+	var _initialState = __webpack_require__(288);
 	
 	var _initialState2 = _interopRequireDefault(_initialState);
 	
-	var _defaultProps = __webpack_require__(283);
+	var _defaultProps = __webpack_require__(289);
 	
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 	
-	var _classnames = __webpack_require__(284);
+	var _classnames = __webpack_require__(290);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _track = __webpack_require__(285);
+	var _track = __webpack_require__(291);
 	
-	var _dots = __webpack_require__(286);
+	var _dots = __webpack_require__(292);
 	
-	var _arrows = __webpack_require__(287);
+	var _arrows = __webpack_require__(293);
 	
 	var InnerSlider = _react2['default'].createClass({
 	  displayName: 'InnerSlider',
@@ -46114,7 +46615,7 @@ return jQuery;
 	exports.InnerSlider = InnerSlider;
 
 /***/ },
-/* 276 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46124,13 +46625,13 @@ return jQuery;
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _trackHelper = __webpack_require__(277);
+	var _trackHelper = __webpack_require__(283);
 	
-	var _helpers = __webpack_require__(279);
+	var _helpers = __webpack_require__(285);
 	
 	var _helpers2 = _interopRequireDefault(_helpers);
 	
-	var _objectAssign = __webpack_require__(281);
+	var _objectAssign = __webpack_require__(287);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
@@ -46303,7 +46804,7 @@ return jQuery;
 	module.exports = exports['default'];
 
 /***/ },
-/* 277 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46313,7 +46814,7 @@ return jQuery;
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _ReactDOM = __webpack_require__(278);
+	var _ReactDOM = __webpack_require__(284);
 	
 	var _ReactDOM2 = _interopRequireDefault(_ReactDOM);
 	
@@ -46429,7 +46930,7 @@ return jQuery;
 	exports.getTrackLeft = getTrackLeft;
 
 /***/ },
-/* 278 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46454,7 +46955,7 @@ return jQuery;
 	module.exports = exports['default'];
 
 /***/ },
-/* 279 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46469,17 +46970,17 @@ return jQuery;
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ReactDOM = __webpack_require__(278);
+	var _ReactDOM = __webpack_require__(284);
 	
 	var _ReactDOM2 = _interopRequireDefault(_ReactDOM);
 	
-	var _reactLibReactTransitionEvents = __webpack_require__(280);
+	var _reactLibReactTransitionEvents = __webpack_require__(286);
 	
 	var _reactLibReactTransitionEvents2 = _interopRequireDefault(_reactLibReactTransitionEvents);
 	
-	var _trackHelper = __webpack_require__(277);
+	var _trackHelper = __webpack_require__(283);
 	
-	var _objectAssign = __webpack_require__(281);
+	var _objectAssign = __webpack_require__(287);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
@@ -46755,7 +47256,7 @@ return jQuery;
 	module.exports = exports['default'];
 
 /***/ },
-/* 280 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -46833,7 +47334,7 @@ return jQuery;
 	module.exports = ReactTransitionEvents;
 
 /***/ },
-/* 281 */
+/* 287 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -46865,7 +47366,7 @@ return jQuery;
 
 
 /***/ },
-/* 282 */
+/* 288 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -46915,7 +47416,7 @@ return jQuery;
 	module.exports = initialState;
 
 /***/ },
-/* 283 */
+/* 289 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -46968,7 +47469,7 @@ return jQuery;
 	module.exports = defaultProps;
 
 /***/ },
-/* 284 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -47022,7 +47523,7 @@ return jQuery;
 
 
 /***/ },
-/* 285 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47037,11 +47538,11 @@ return jQuery;
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _objectAssign = __webpack_require__(281);
+	var _objectAssign = __webpack_require__(287);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _classnames = __webpack_require__(284);
+	var _classnames = __webpack_require__(290);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -47175,7 +47676,7 @@ return jQuery;
 	exports.Track = Track;
 
 /***/ },
-/* 286 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47190,7 +47691,7 @@ return jQuery;
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(284);
+	var _classnames = __webpack_require__(290);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -47254,7 +47755,7 @@ return jQuery;
 	exports.Dots = Dots;
 
 /***/ },
-/* 287 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47271,7 +47772,7 @@ return jQuery;
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(284);
+	var _classnames = __webpack_require__(290);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -47369,10 +47870,10 @@ return jQuery;
 	exports.NextArrow = NextArrow;
 
 /***/ },
-/* 288 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var camel2hyphen = __webpack_require__(289);
+	var camel2hyphen = __webpack_require__(295);
 	
 	var isDimension = function (feature) {
 	  var re = /[height|width]$/;
@@ -47425,7 +47926,7 @@ return jQuery;
 	module.exports = json2mq;
 
 /***/ },
-/* 289 */
+/* 295 */
 /***/ function(module, exports) {
 
 	var camel2hyphen = function (str) {
@@ -47439,12 +47940,12 @@ return jQuery;
 	module.exports = camel2hyphen;
 
 /***/ },
-/* 290 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var canUseDOM = __webpack_require__(291);
-	var enquire = canUseDOM && __webpack_require__(292);
-	var json2mq = __webpack_require__(288);
+	var canUseDOM = __webpack_require__(297);
+	var enquire = canUseDOM && __webpack_require__(298);
+	var json2mq = __webpack_require__(294);
 	
 	var ResponsiveMixin = {
 	  media: function (query, handler) {
@@ -47474,7 +47975,7 @@ return jQuery;
 	module.exports = ResponsiveMixin;
 
 /***/ },
-/* 291 */
+/* 297 */
 /***/ function(module, exports) {
 
 	var canUseDOM = !!(
@@ -47486,7 +47987,7 @@ return jQuery;
 	module.exports = canUseDOM;
 
 /***/ },
-/* 292 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -47784,15 +48285,15 @@ return jQuery;
 	}));
 
 /***/ },
-/* 293 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var GatheringStore = __webpack_require__(294);
-	var GatheringActions = __webpack_require__(296);
-	var GatheringIndexItem = __webpack_require__(298);
+	var GatheringStore = __webpack_require__(272);
+	var GatheringActions = __webpack_require__(276);
+	var GatheringIndexItem = __webpack_require__(300);
 	
 	var GatheringsIndex = React.createClass({
 	  displayName: 'GatheringsIndex',
@@ -47832,211 +48333,7 @@ return jQuery;
 	module.exports = GatheringsIndex;
 
 /***/ },
-/* 294 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var AppDispatcher = __webpack_require__(232);
-	var Store = __webpack_require__(236).Store;
-	var GatheringConstants = __webpack_require__(295);
-	var ReactRouter = __webpack_require__(168);
-	var hashHistory = ReactRouter.hashHistory;
-	
-	var GatheringStore = new Store(AppDispatcher);
-	
-	var _gatherings = {};
-	
-	GatheringStore.all = function () {
-	  return Object.keys(_gatherings).map(function (gatheringId) {
-	    return _gatherings[gatheringId];
-	  });
-	};
-	
-	GatheringStore.find = function (gatheringId) {
-	  return _gatherings[gatheringId];
-	};
-	
-	var resetGatherings = function resetGatherings(gatherings) {
-	  _gatherings = {};
-	  gatherings.forEach(function (gathering) {
-	    _gatherings[gathering.id] = gathering;
-	  });
-	};
-	
-	var setGathering = function setGathering(gathering) {
-	  _gatherings[gathering.id] = gathering;
-	  debugger;
-	  hashHistory.push('/events/' + gathering.id);
-	};
-	
-	var deleteGathering = function deleteGathering(gathering) {
-	  delete _gatherings[gathering.id];
-	};
-	
-	GatheringStore.__onDispatch = function (payload) {
-	  switch (payload.actionType) {
-	    case GatheringConstants.GATHERINGS_RECEIVED:
-	      resetGatherings(payload.gatherings);
-	      GatheringStore.__emitChange();
-	      break;
-	    case GatheringConstants.GATHERING_RECEIVED:
-	      setGathering(payload.gathering);
-	      GatheringStore.__emitChange();
-	      break;
-	    case GatheringConstants.GATHERING_REMOVED:
-	      deleteGathering(payload.gathering);
-	      GatheringStore.__emitChange();
-	      break;
-	  }
-	};
-	
-	module.exports = GatheringStore;
-
-/***/ },
-/* 295 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	var GatheringConstants = {
-			GATHERINGS_RECEIVED: "GATHERINGS_RECEIVED",
-			GATHERING_RECEIVED: "GATHERING_RECEIVED",
-			GATHERING_REMOVED: "GATHERING_REMOVED"
-	};
-	
-	module.exports = GatheringConstants;
-
-/***/ },
-/* 296 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var AppDispatcher = __webpack_require__(232);
-	var GatheringConstants = __webpack_require__(295);
-	var GatheringApiUtil = __webpack_require__(297);
-	var ErrorActions = __webpack_require__(257);
-	
-	var GatheringActions = {
-	
-	  // Client-side
-	
-	  fetchGatherings: function fetchGatherings() {
-	    GatheringApiUtil.fetchGatherings(GatheringActions.receiveAll, ErrorActions.setErrors);
-	  },
-	  getGathering: function getGathering(id) {
-	    GatheringApiUtil.getGathering(id, GatheringActions.receiveGathering, ErrorActions.setErrors);
-	  },
-	  createGathering: function createGathering(gathering) {
-	    GatheringApiUtil.createGathering(gathering, GatheringActions.receiveGathering, ErrorActions.setErrors);
-	  },
-	  editGathering: function editGathering(gathering) {
-	    GatheringApiUtil.updateGathering(gathering, GatheringActions.receiveGathering, ErrorActions.setErrors);
-	  },
-	  deleteGathering: function deleteGathering(id) {
-	    GatheringApiUtil.deleteGathering(id, GatheringActions.removeGathering, ErrorActions.setErrors);
-	  },
-	
-	
-	  // Server-side
-	  receiveAll: function receiveAll(gatherings) {
-	    AppDispatcher.dispatch({
-	      actionType: GatheringConstants.GATHERINGS_RECEIVED,
-	      gatherings: gatherings
-	    });
-	  },
-	  receiveGathering: function receiveGathering(gathering) {
-	    AppDispatcher.dispatch({
-	      actionType: GatheringConstants.GATHERING_RECEIVED,
-	      gathering: gathering
-	    });
-	  },
-	  removeGathering: function removeGathering(gathering) {
-	    AppDispatcher.dispatch({
-	      actionType: GatheringConstants.GATHERING_REMOVED,
-	      gathering: gathering
-	    });
-	  }
-	};
-	
-	module.exports = GatheringActions;
-
-/***/ },
-/* 297 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	var GatheringApiUtil = {
-	  fetchGatherings: function fetchGatherings(success, _error) {
-	    $.ajax({
-	      url: '/api/gatherings',
-	      type: 'GET',
-	      success: success,
-	      error: function error(xhr) {
-	        var errors = xhr.responseJSON;
-	
-	        _error("events", errors);
-	      }
-	    });
-	  },
-	  getGathering: function getGathering(id, success, _error2) {
-	    $.ajax({
-	      url: '/api/gatherings/' + id,
-	      type: 'GET',
-	      success: success,
-	      error: function error(xhr) {
-	        var errors = xhr.responseJSON;
-	
-	        _error2("event", errors);
-	      }
-	    });
-	  },
-	  createGathering: function createGathering(gatheringInfo, success, _error3) {
-	    $.ajax({
-	      url: '/api/gatherings',
-	      type: 'POST',
-	      data: { gathering: gatheringInfo },
-	      success: success,
-	      error: function error(xhr) {
-	        var errors = xhr.responseJSON;
-	
-	        _error3("creating event", errors);
-	      }
-	    });
-	  },
-	  updateGathering: function updateGathering(gatheringInfo, success, _error4) {
-	    $.ajax({
-	      url: '/api/gatherings/' + gatheringInfo.id,
-	      type: 'PATCH',
-	      data: { gathering: gatheringInfo },
-	      success: success,
-	      error: function error(xhr) {
-	        var errors = xhr.responseJSON;
-	
-	        _error4("editing event", errors);
-	      }
-	    });
-	  },
-	  deleteGathering: function deleteGathering(id, success, _error5) {
-	    $.ajax({
-	      url: '/api/gatherings/' + id,
-	      type: 'DELETE',
-	      success: success,
-	      error: function error(xhr) {
-	        var errors = xhr.responseJSON;
-	
-	        _error5("deleting event", errors);
-	      }
-	    });
-	  }
-	};
-	
-	module.exports = GatheringApiUtil;
-
-/***/ },
-/* 298 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48065,18 +48362,16 @@ return jQuery;
 	module.exports = GatheringIndexItem;
 
 /***/ },
-/* 299 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
 	var SessionStore = __webpack_require__(231);
-	var AppSlider = __webpack_require__(272);
-	var GatheringsIndex = __webpack_require__(293);
-	var CategoriesIndex = __webpack_require__(300);
-	var TicketsIndex = __webpack_require__(306);
-	var BookmarksIndex = __webpack_require__(312);
+	var AppSlider = __webpack_require__(278);
+	var GatheringsIndex = __webpack_require__(299);
+	var CategoriesIndex = __webpack_require__(302);
 	
 	var Landing = React.createClass({
 	  displayName: 'Landing',
@@ -48095,15 +48390,15 @@ return jQuery;
 	module.exports = Landing;
 
 /***/ },
-/* 300 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var CategoryStore = __webpack_require__(301);
-	var CategoryActions = __webpack_require__(303);
-	var CategoryIndexItem = __webpack_require__(305);
+	var CategoryStore = __webpack_require__(303);
+	var CategoryActions = __webpack_require__(305);
+	var CategoryIndexItem = __webpack_require__(307);
 	
 	var CategoriesIndex = React.createClass({
 	  displayName: 'CategoriesIndex',
@@ -48143,14 +48438,14 @@ return jQuery;
 	module.exports = CategoriesIndex;
 
 /***/ },
-/* 301 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var AppDispatcher = __webpack_require__(232);
 	var Store = __webpack_require__(236).Store;
-	var CategoryConstants = __webpack_require__(302);
+	var CategoryConstants = __webpack_require__(304);
 	
 	var CategoryStore = new Store(AppDispatcher);
 	
@@ -48201,7 +48496,7 @@ return jQuery;
 	module.exports = CategoryStore;
 
 /***/ },
-/* 302 */
+/* 304 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -48215,14 +48510,14 @@ return jQuery;
 	module.exports = CategoryConstants;
 
 /***/ },
-/* 303 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var AppDispatcher = __webpack_require__(232);
-	var CategoryConstants = __webpack_require__(302);
-	var CategoryApiUtil = __webpack_require__(304);
+	var CategoryConstants = __webpack_require__(304);
+	var CategoryApiUtil = __webpack_require__(306);
 	var ErrorActions = __webpack_require__(257);
 	
 	var CategoryActions = {
@@ -48270,7 +48565,7 @@ return jQuery;
 	module.exports = CategoryActions;
 
 /***/ },
-/* 304 */
+/* 306 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -48343,7 +48638,7 @@ return jQuery;
 	module.exports = CategoryApiUtil;
 
 /***/ },
-/* 305 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48370,15 +48665,72 @@ return jQuery;
 	module.exports = CategoriesIndexItem;
 
 /***/ },
-/* 306 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var TicketStore = __webpack_require__(307);
-	var TicketActions = __webpack_require__(309);
-	var TicketIndexItem = __webpack_require__(311);
+	var SessionStore = __webpack_require__(231);
+	var AppSlider = __webpack_require__(278);
+	var GatheringsIndex = __webpack_require__(299);
+	var CategoriesIndex = __webpack_require__(302);
+	var TicketsIndex = __webpack_require__(309);
+	var BookmarksIndex = __webpack_require__(315);
+	
+	var Landing = React.createClass({
+	  displayName: 'Landing',
+	  render: function render() {
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'user-landing-page' },
+	      React.createElement(
+	        'div',
+	        { className: 'user-dash' },
+	        React.createElement(
+	          'div',
+	          { className: 'user-dash-bookmark' },
+	          React.createElement(
+	            'header',
+	            { className: 'user-landing-header' },
+	            'Bookmarked Events'
+	          ),
+	          React.createElement(BookmarksIndex, null)
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'user-dash-tickets' },
+	          React.createElement(
+	            'header',
+	            { className: 'user-landing-header' },
+	            'Events Funded By You!'
+	          ),
+	          React.createElement(TicketsIndex, null)
+	        )
+	      ),
+	      React.createElement(
+	        'header',
+	        { className: 'user-landing-header' },
+	        'Explore Events'
+	      ),
+	      React.createElement(GatheringsIndex, null)
+	    );
+	  }
+	});
+	
+	module.exports = Landing;
+
+/***/ },
+/* 309 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var TicketStore = __webpack_require__(310);
+	var TicketActions = __webpack_require__(312);
+	var TicketIndexItem = __webpack_require__(314);
 	
 	var TicketsIndex = React.createClass({
 	  displayName: 'TicketsIndex',
@@ -48399,7 +48751,6 @@ return jQuery;
 	    return React.createElement(
 	      'div',
 	      { className: 'tickets-index' },
-	      'TICKETS',
 	      React.createElement(
 	        'ul',
 	        null,
@@ -48410,8 +48761,7 @@ return jQuery;
 	            React.createElement(TicketIndexItem, {
 	              ticket: ticket })
 	          );
-	        }),
-	        'END OF TICKETS'
+	        })
 	      )
 	    );
 	  }
@@ -48420,14 +48770,14 @@ return jQuery;
 	module.exports = TicketsIndex;
 
 /***/ },
-/* 307 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var AppDispatcher = __webpack_require__(232);
 	var Store = __webpack_require__(236).Store;
-	var TicketConstants = __webpack_require__(308);
+	var TicketConstants = __webpack_require__(311);
 	
 	var TicketStore = new Store(AppDispatcher);
 	
@@ -48478,7 +48828,7 @@ return jQuery;
 	module.exports = TicketStore;
 
 /***/ },
-/* 308 */
+/* 311 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -48492,14 +48842,14 @@ return jQuery;
 	module.exports = BookmarkConstants;
 
 /***/ },
-/* 309 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var AppDispatcher = __webpack_require__(232);
-	var TicketConstants = __webpack_require__(308);
-	var TicketApiUtil = __webpack_require__(310);
+	var TicketConstants = __webpack_require__(311);
+	var TicketApiUtil = __webpack_require__(313);
 	var ErrorActions = __webpack_require__(257);
 	
 	var TicketActions = {
@@ -48546,7 +48896,7 @@ return jQuery;
 	module.exports = TicketActions;
 
 /***/ },
-/* 310 */
+/* 313 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -48619,29 +48969,56 @@ return jQuery;
 	module.exports = TicketApiUtil;
 
 /***/ },
-/* 311 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
 	var ReactRouter = __webpack_require__(168);
+	var hashHistory = ReactRouter.hashHistory;
+	var GatheringStore = __webpack_require__(272);
 	
 	var TicketsIndexItem = React.createClass({
 	  displayName: 'TicketsIndexItem',
+	  _handleImgClick: function _handleImgClick() {
+	    hashHistory.push('events/' + this.props.ticket.gathering_id);
+	  },
 	  render: function render() {
+	    var ticketedEvent = GatheringStore.find(this.props.ticket.gathering_id);
 	    return React.createElement(
 	      'div',
-	      { className: 'tickets-index-item' },
+	      { className: 'tickets-index-item',
+	        onClick: this._handleImgClick },
+	      React.createElement('img', { src: ticketedEvent.image }),
 	      React.createElement(
-	        'p',
-	        null,
-	        this.props.ticket.attendee_id
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        this.props.ticket.gathering_id
+	        'div',
+	        { className: 'ticket-index-item-info' },
+	        React.createElement(
+	          'p',
+	          null,
+	          ticketedEvent.artist
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          ticketedEvent.location
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          ticketedEvent.funds
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          ticketedEvent.goal
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          ticketedEvent.status
+	        )
 	      )
 	    );
 	  }
@@ -48650,15 +49027,15 @@ return jQuery;
 	module.exports = TicketsIndexItem;
 
 /***/ },
-/* 312 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var BookmarkStore = __webpack_require__(313);
-	var BookmarkActions = __webpack_require__(315);
-	var BookmarkIndexItem = __webpack_require__(317);
+	var BookmarkStore = __webpack_require__(316);
+	var BookmarkActions = __webpack_require__(318);
+	var BookmarkIndexItem = __webpack_require__(320);
 	
 	var BookmarksIndex = React.createClass({
 	  displayName: 'BookmarksIndex',
@@ -48679,7 +49056,6 @@ return jQuery;
 	    return React.createElement(
 	      'div',
 	      { className: 'bookmarks-index' },
-	      'BOOKMARKS',
 	      React.createElement(
 	        'ul',
 	        null,
@@ -48690,8 +49066,7 @@ return jQuery;
 	            React.createElement(BookmarkIndexItem, {
 	              bookmark: bookmark })
 	          );
-	        }),
-	        'END OF BOOKMARKS'
+	        })
 	      )
 	    );
 	  }
@@ -48700,14 +49075,14 @@ return jQuery;
 	module.exports = BookmarksIndex;
 
 /***/ },
-/* 313 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var AppDispatcher = __webpack_require__(232);
 	var Store = __webpack_require__(236).Store;
-	var BookmarkConstants = __webpack_require__(314);
+	var BookmarkConstants = __webpack_require__(317);
 	
 	var BookmarkStore = new Store(AppDispatcher);
 	
@@ -48758,7 +49133,7 @@ return jQuery;
 	module.exports = BookmarkStore;
 
 /***/ },
-/* 314 */
+/* 317 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -48772,14 +49147,14 @@ return jQuery;
 	module.exports = BookmarkConstants;
 
 /***/ },
-/* 315 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var AppDispatcher = __webpack_require__(232);
-	var BookmarkConstants = __webpack_require__(314);
-	var BookmarkApiUtil = __webpack_require__(316);
+	var BookmarkConstants = __webpack_require__(317);
+	var BookmarkApiUtil = __webpack_require__(319);
 	var ErrorActions = __webpack_require__(257);
 	
 	var BookmarkActions = {
@@ -48826,7 +49201,7 @@ return jQuery;
 	module.exports = BookmarkActions;
 
 /***/ },
-/* 316 */
+/* 319 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -48899,30 +49274,28 @@ return jQuery;
 	module.exports = BookmarkApiUtil;
 
 /***/ },
-/* 317 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(1);
 	var ReactRouter = __webpack_require__(168);
+	var hashHistory = ReactRouter.hashHistory;
+	var GatheringStore = __webpack_require__(272);
 	
 	var BookmarkIndexItem = React.createClass({
 	  displayName: 'BookmarkIndexItem',
+	  _handleImgClick: function _handleImgClick() {
+	    hashHistory.push('events/' + this.props.bookmark.gathering_id);
+	  },
 	  render: function render() {
+	    var ticketedEvent = GatheringStore.find(this.props.bookmark.gathering_id);
 	    return React.createElement(
 	      'div',
-	      { className: 'bookmarks-index-item' },
-	      React.createElement(
-	        'p',
-	        null,
-	        this.props.bookmark.user_id
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        this.props.bookmark.gathering_id
-	      )
+	      { className: 'bookmark-index-item',
+	        onClick: this._handleImgClick },
+	      React.createElement('img', { src: ticketedEvent.image })
 	    );
 	  }
 	});
@@ -48930,427 +49303,7 @@ return jQuery;
 	module.exports = BookmarkIndexItem;
 
 /***/ },
-/* 318 */,
-/* 319 */,
-/* 320 */,
-/* 321 */,
-/* 322 */,
-/* 323 */,
-/* 324 */,
-/* 325 */,
-/* 326 */,
-/* 327 */,
-/* 328 */,
-/* 329 */,
-/* 330 */,
-/* 331 */,
-/* 332 */,
-/* 333 */,
-/* 334 */,
-/* 335 */,
-/* 336 */,
-/* 337 */,
-/* 338 */,
-/* 339 */,
-/* 340 */,
-/* 341 */,
-/* 342 */,
-/* 343 */,
-/* 344 */,
-/* 345 */,
-/* 346 */,
-/* 347 */,
-/* 348 */,
-/* 349 */,
-/* 350 */,
-/* 351 */,
-/* 352 */,
-/* 353 */,
-/* 354 */,
-/* 355 */,
-/* 356 */,
-/* 357 */,
-/* 358 */,
-/* 359 */,
-/* 360 */,
-/* 361 */,
-/* 362 */,
-/* 363 */,
-/* 364 */,
-/* 365 */,
-/* 366 */,
-/* 367 */,
-/* 368 */,
-/* 369 */,
-/* 370 */,
-/* 371 */,
-/* 372 */,
-/* 373 */,
-/* 374 */,
-/* 375 */,
-/* 376 */,
-/* 377 */,
-/* 378 */,
-/* 379 */,
-/* 380 */,
-/* 381 */,
-/* 382 */,
-/* 383 */,
-/* 384 */,
-/* 385 */,
-/* 386 */,
-/* 387 */,
-/* 388 */,
-/* 389 */,
-/* 390 */,
-/* 391 */,
-/* 392 */,
-/* 393 */,
-/* 394 */,
-/* 395 */,
-/* 396 */,
-/* 397 */,
-/* 398 */,
-/* 399 */,
-/* 400 */,
-/* 401 */,
-/* 402 */,
-/* 403 */,
-/* 404 */,
-/* 405 */,
-/* 406 */,
-/* 407 */,
-/* 408 */,
-/* 409 */,
-/* 410 */,
-/* 411 */,
-/* 412 */,
-/* 413 */,
-/* 414 */,
-/* 415 */,
-/* 416 */,
-/* 417 */,
-/* 418 */,
-/* 419 */,
-/* 420 */,
-/* 421 */,
-/* 422 */,
-/* 423 */,
-/* 424 */,
-/* 425 */,
-/* 426 */,
-/* 427 */,
-/* 428 */,
-/* 429 */,
-/* 430 */,
-/* 431 */,
-/* 432 */,
-/* 433 */,
-/* 434 */,
-/* 435 */,
-/* 436 */,
-/* 437 */,
-/* 438 */,
-/* 439 */,
-/* 440 */,
-/* 441 */,
-/* 442 */,
-/* 443 */,
-/* 444 */,
-/* 445 */,
-/* 446 */,
-/* 447 */,
-/* 448 */,
-/* 449 */,
-/* 450 */,
-/* 451 */,
-/* 452 */,
-/* 453 */,
-/* 454 */,
-/* 455 */,
-/* 456 */,
-/* 457 */,
-/* 458 */,
-/* 459 */,
-/* 460 */,
-/* 461 */,
-/* 462 */,
-/* 463 */,
-/* 464 */,
-/* 465 */,
-/* 466 */,
-/* 467 */,
-/* 468 */,
-/* 469 */,
-/* 470 */,
-/* 471 */,
-/* 472 */,
-/* 473 */,
-/* 474 */,
-/* 475 */,
-/* 476 */,
-/* 477 */,
-/* 478 */,
-/* 479 */,
-/* 480 */,
-/* 481 */,
-/* 482 */,
-/* 483 */,
-/* 484 */,
-/* 485 */,
-/* 486 */,
-/* 487 */,
-/* 488 */,
-/* 489 */,
-/* 490 */,
-/* 491 */,
-/* 492 */,
-/* 493 */,
-/* 494 */,
-/* 495 */,
-/* 496 */,
-/* 497 */,
-/* 498 */,
-/* 499 */,
-/* 500 */,
-/* 501 */,
-/* 502 */,
-/* 503 */,
-/* 504 */,
-/* 505 */,
-/* 506 */,
-/* 507 */,
-/* 508 */,
-/* 509 */,
-/* 510 */,
-/* 511 */,
-/* 512 */,
-/* 513 */,
-/* 514 */,
-/* 515 */,
-/* 516 */,
-/* 517 */,
-/* 518 */,
-/* 519 */,
-/* 520 */,
-/* 521 */,
-/* 522 */,
-/* 523 */,
-/* 524 */,
-/* 525 */,
-/* 526 */,
-/* 527 */,
-/* 528 */,
-/* 529 */,
-/* 530 */,
-/* 531 */,
-/* 532 */,
-/* 533 */,
-/* 534 */,
-/* 535 */,
-/* 536 */,
-/* 537 */,
-/* 538 */,
-/* 539 */,
-/* 540 */,
-/* 541 */,
-/* 542 */,
-/* 543 */,
-/* 544 */,
-/* 545 */,
-/* 546 */,
-/* 547 */,
-/* 548 */,
-/* 549 */,
-/* 550 */,
-/* 551 */,
-/* 552 */,
-/* 553 */,
-/* 554 */,
-/* 555 */,
-/* 556 */,
-/* 557 */,
-/* 558 */,
-/* 559 */,
-/* 560 */,
-/* 561 */,
-/* 562 */,
-/* 563 */,
-/* 564 */,
-/* 565 */,
-/* 566 */,
-/* 567 */,
-/* 568 */,
-/* 569 */,
-/* 570 */,
-/* 571 */,
-/* 572 */,
-/* 573 */,
-/* 574 */,
-/* 575 */,
-/* 576 */,
-/* 577 */,
-/* 578 */,
-/* 579 */,
-/* 580 */,
-/* 581 */,
-/* 582 */,
-/* 583 */,
-/* 584 */,
-/* 585 */,
-/* 586 */,
-/* 587 */,
-/* 588 */,
-/* 589 */,
-/* 590 */,
-/* 591 */,
-/* 592 */,
-/* 593 */,
-/* 594 */,
-/* 595 */,
-/* 596 */,
-/* 597 */,
-/* 598 */,
-/* 599 */,
-/* 600 */,
-/* 601 */,
-/* 602 */,
-/* 603 */,
-/* 604 */,
-/* 605 */,
-/* 606 */,
-/* 607 */,
-/* 608 */,
-/* 609 */,
-/* 610 */,
-/* 611 */,
-/* 612 */,
-/* 613 */,
-/* 614 */,
-/* 615 */,
-/* 616 */,
-/* 617 */,
-/* 618 */,
-/* 619 */,
-/* 620 */,
-/* 621 */,
-/* 622 */,
-/* 623 */,
-/* 624 */,
-/* 625 */,
-/* 626 */,
-/* 627 */,
-/* 628 */,
-/* 629 */,
-/* 630 */,
-/* 631 */,
-/* 632 */,
-/* 633 */,
-/* 634 */,
-/* 635 */,
-/* 636 */,
-/* 637 */,
-/* 638 */,
-/* 639 */,
-/* 640 */,
-/* 641 */,
-/* 642 */,
-/* 643 */,
-/* 644 */,
-/* 645 */,
-/* 646 */,
-/* 647 */,
-/* 648 */,
-/* 649 */,
-/* 650 */,
-/* 651 */,
-/* 652 */,
-/* 653 */,
-/* 654 */,
-/* 655 */,
-/* 656 */,
-/* 657 */,
-/* 658 */,
-/* 659 */,
-/* 660 */,
-/* 661 */,
-/* 662 */,
-/* 663 */,
-/* 664 */,
-/* 665 */,
-/* 666 */,
-/* 667 */,
-/* 668 */,
-/* 669 */,
-/* 670 */,
-/* 671 */,
-/* 672 */,
-/* 673 */,
-/* 674 */,
-/* 675 */,
-/* 676 */,
-/* 677 */,
-/* 678 */,
-/* 679 */,
-/* 680 */,
-/* 681 */,
-/* 682 */,
-/* 683 */,
-/* 684 */,
-/* 685 */,
-/* 686 */,
-/* 687 */,
-/* 688 */,
-/* 689 */,
-/* 690 */,
-/* 691 */,
-/* 692 */,
-/* 693 */,
-/* 694 */,
-/* 695 */,
-/* 696 */,
-/* 697 */,
-/* 698 */,
-/* 699 */,
-/* 700 */,
-/* 701 */,
-/* 702 */,
-/* 703 */,
-/* 704 */,
-/* 705 */,
-/* 706 */,
-/* 707 */,
-/* 708 */,
-/* 709 */,
-/* 710 */,
-/* 711 */,
-/* 712 */,
-/* 713 */,
-/* 714 */,
-/* 715 */,
-/* 716 */,
-/* 717 */,
-/* 718 */,
-/* 719 */,
-/* 720 */,
-/* 721 */,
-/* 722 */,
-/* 723 */,
-/* 724 */,
-/* 725 */,
-/* 726 */,
-/* 727 */,
-/* 728 */,
-/* 729 */,
-/* 730 */,
-/* 731 */,
-/* 732 */,
-/* 733 */,
-/* 734 */,
-/* 735 */,
-/* 736 */,
-/* 737 */,
-/* 738 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49358,8 +49311,8 @@ return jQuery;
 	/* eslint max-len: "off" */
 	
 	var React = __webpack_require__(1);
-	var GatheringStore = __webpack_require__(294);
-	var GatheringActions = __webpack_require__(296);
+	var GatheringStore = __webpack_require__(272);
+	var GatheringActions = __webpack_require__(276);
 	
 	var GatheringIndexShow = React.createClass({
 	  displayName: 'GatheringIndexShow',
@@ -49444,7 +49397,7 @@ return jQuery;
 	module.exports = GatheringIndexShow;
 
 /***/ },
-/* 739 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49452,8 +49405,8 @@ return jQuery;
 	/* eslint max-len: "off" */
 	
 	var React = __webpack_require__(1);
-	var CategoryStore = __webpack_require__(301);
-	var CategoryActions = __webpack_require__(303);
+	var CategoryStore = __webpack_require__(303);
+	var CategoryActions = __webpack_require__(305);
 	
 	var CategoryIndexShow = React.createClass({
 	  displayName: 'CategoryIndexShow',
@@ -49496,291 +49449,6 @@ return jQuery;
 	});
 	
 	module.exports = CategoryIndexShow;
-
-/***/ },
-/* 740 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
-	var React = __webpack_require__(1);
-	var GatheringActions = __webpack_require__(296);
-	var GatheringStore = __webpack_require__(294);
-	var ErrorActions = __webpack_require__(257);
-	var ErrorStore = __webpack_require__(270);
-	var SessionStore = __webpack_require__(231);
-	
-	var ReactRouter = __webpack_require__(168);
-	var hashHistory = ReactRouter.hashHistory;
-	
-	var GatheringModal = __webpack_require__(741);
-	
-	var GatheringForm = React.createClass({
-	  displayName: 'GatheringForm',
-	
-	
-	  contextTypes: {
-	    router: React.PropTypes.object.isRequired
-	  },
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      artist: "",
-	      location: "",
-	      start_date: new Date(),
-	      end_date: "",
-	      description: "",
-	      image: "",
-	      tix_price: 0,
-	      funds: 0,
-	      goal: 0,
-	      status: "ongoing",
-	      category_id: ""
-	    };
-	  },
-	  componentWillMount: function componentWillMount() {
-	    ErrorActions.clearErrors();
-	  },
-	  componentDidMount: function componentDidMount() {
-	    this.errorListener = ErrorStore.addListener(this.forceUpdate.bind(this));
-	  },
-	  componentWillUnmount: function componentWillUnmount() {
-	    this.errorListener.remove();
-	  },
-	  _handleSubmit: function _handleSubmit(e) {
-	    e.preventDefault();
-	
-	    var formData = {
-	      artist: this.state.artist,
-	      location: this.state.location,
-	      start_date: this.state.start_date,
-	      end_date: this.state.end_date,
-	      description: this.state.description,
-	      image: this.state.image,
-	      tix_price: this.state.tix_price,
-	      funds: this.state.funds,
-	      goal: this.state.goal,
-	      status: this.state.status,
-	      category_id: this.state.category_id
-	    };
-	    GatheringActions.createGathering(formData);
-	    GatheringModal.hideModal();
-	  },
-	  fieldErrors: function fieldErrors(field) {
-	    var errors = ErrorStore.formErrors("create_event");
-	
-	    if (!errors[field]) {
-	      return;
-	    }
-	
-	    var messages = errors[field].map(function (errorMsg, i) {
-	      return React.createElement(
-	        'li',
-	        { key: i },
-	        errorMsg
-	      );
-	    });
-	
-	    return React.createElement(
-	      'ul',
-	      null,
-	      messages
-	    );
-	  },
-	  update: function update(property) {
-	    var _this = this;
-	
-	    return function (e) {
-	      return _this.setState(_defineProperty({}, property, e.target.value));
-	    };
-	  },
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'gathering-form-container' },
-	      React.createElement(
-	        'form',
-	        { onSubmit: this._handleSubmit, className: 'gathering-form-box' },
-	        React.createElement(
-	          'div',
-	          { className: 'gathering-form-header' },
-	          'Create an Event'
-	        ),
-	        React.createElement('br', null),
-	        this.fieldErrors("base"),
-	        React.createElement(
-	          'div',
-	          { className: 'gathering-form' },
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Artist:',
-	            this.fieldErrors("artist"),
-	            React.createElement('input', { type: 'text',
-	              value: this.state.artist,
-	              onChange: this.update("artist"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Location:',
-	            this.fieldErrors("location"),
-	            React.createElement('input', { type: 'text',
-	              value: this.state.location,
-	              onChange: this.update("location"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' End Date:',
-	            this.fieldErrors("end_date"),
-	            React.createElement('input', { type: 'date',
-	              onChange: this.update("end_date"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Description:',
-	            this.fieldErrors("description"),
-	            React.createElement('input', { type: 'text',
-	              value: this.state.description,
-	              onChange: this.update("description"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Image:',
-	            this.fieldErrors("image"),
-	            React.createElement('input', { type: 'text',
-	              value: this.state.image,
-	              onChange: this.update("image"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Ticket Price:',
-	            this.fieldErrors("tix_price"),
-	            React.createElement('input', { type: 'number',
-	              value: this.state.tix_price,
-	              onChange: this.update("tix_price"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Goal:',
-	            this.fieldErrors("goal"),
-	            React.createElement('input', { type: 'number',
-	              value: this.state.goal,
-	              onChange: this.update("goal"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'label',
-	            null,
-	            ' Category:',
-	            this.fieldErrors("category_id"),
-	            React.createElement('input', { type: 'number',
-	              value: this.state.category_id,
-	              onChange: this.update("category_id"),
-	              className: 'gathering-input' })
-	          ),
-	          React.createElement('br', null),
-	          React.createElement('input', { type: 'submit', value: 'Submit' })
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = GatheringForm;
-
-/***/ },
-/* 741 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	var Modal = __webpack_require__(260);
-	
-	var GatheringForm = __webpack_require__(740);
-	
-	var modalStyle = {
-	  width: '100%',
-	  height: '100%',
-	  backgroundColor: 'fade(#4B4E4F, 80%)',
-	  opacity: '0.3'
-	};
-	
-	var backdropStyle = {
-	  border: '0px solid transparent'
-	};
-	
-	var contentStyle = {
-	  width: '40%',
-	  margin: 'auto',
-	  marginTop: '55px',
-	  border: '1px solid #D2D6DF',
-	  borderRadius: '8px'
-	};
-	
-	var GatheringModal = React.createClass({
-	  displayName: 'GatheringModal',
-	  showModal: function showModal() {
-	    this.refs.modal.show();
-	  },
-	  hideModal: function hideModal() {
-	    this.refs.modal.hide();
-	  },
-	
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'nav-links-item' },
-	      React.createElement(
-	        'div',
-	        { onClick: this.showModal },
-	        'Create Event'
-	      ),
-	      React.createElement(
-	        Modal,
-	        { ref: 'modal',
-	          className: 'gathering-modal',
-	          modalStyle: modalStyle,
-	          backdropStyle: backdropStyle,
-	          contentStyle: contentStyle },
-	        React.createElement(
-	          'div',
-	          { className: 'gathering-modal-content' },
-	          React.createElement(
-	            'div',
-	            { onClick: this.hideModal },
-	            'X'
-	          ),
-	          React.createElement(GatheringForm, null)
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = GatheringModal;
 
 /***/ }
 /******/ ]);
