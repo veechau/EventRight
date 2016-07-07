@@ -17,6 +17,16 @@ GatheringStore.all = function(){
   });
 };
 
+GatheringStore.findByCategoryId = function(catId){
+  let _selectedGatherings = [];
+  Object.keys(_gatherings).forEach( (gatheringId) => {
+    if (_gatherings[gatheringId].category_id == catId) {
+      _selectedGatherings.push(_gatherings[gatheringId]);
+    }
+  });
+  return _selectedGatherings;
+},
+
 GatheringStore.find = function(gatheringId){
   return _gatherings[gatheringId];
 };

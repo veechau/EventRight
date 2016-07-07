@@ -6,28 +6,35 @@ const GatheringActions = require('../../actions/gathering_actions');
 const TicketStore = require('../../stores/ticket_store');
 const TicketActions = require('../../actions/ticket_actions');
 const SessionStore = require('../../stores/session_store');
-
+const CategoryStore = require('../../stores/category_store');
+const CategoryActions = require('../../actions/category_actions');
 
 const GatheringIndexShow = React.createClass({
   getInitialState(){
-    return { gathering: {} };
+    let eventId;
+    if (this.props.params) {
+      eventId = this.props.params.eventId;
+    } else {
+      eventId = this.props.gathering.id;
+    }
+    return { gathering_id: eventId, category: "", gathering: GatheringStore.find(eventId) };
   },
   componentWillMount(){
-    GatheringActions.getGathering(this.props.params.eventId);
+    CategoryActions.fetchCategories();
   },
   componentDidMount(){
-    this.gatheringIndexShowListener = GatheringStore.addListener(this._onChange);
+    this.categoryIndexShowListener = CategoryStore.addListener(this._categoryChange);
     this.ticketListener = TicketStore.addListener(this._addTicket);
   },
   componentWillUnmount(){
-    this.gatheringIndexShowListener.remove();
+    this.categoryIndexShowListener.remove();
   },
-  _onChange(){
-    this.setState({ gathering: GatheringStore.find(this.props.params.eventId) });
+  _categoryChange(){
+    this.setState({category: CategoryStore.find(this.state.gathering.category_id).title});
   },
   _addTicket(){
     let currentUser = SessionStore.currentUser();
-    TicketActions.createTicket({ticket: {attendee_id: currentUser.id, gathering_id: this.props.params.eventId}});
+    TicketActions.createTicket({ticket: {attendee_id: currentUser.id, gathering_id: this.props.params.gathering.id}});
   },
   render(){
     return (
@@ -47,7 +54,7 @@ const GatheringIndexShow = React.createClass({
           <img className="gathering-index-item-image" src={this.state.gathering.image}/>
           <button>Buy Ticket</button>
           <button>Bookmark Event</button>
-          <div>{this.state.gathering.category_id}</div>
+          <div>{this.state.category}</div>
         </div>
       </div>
     );

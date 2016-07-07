@@ -2,6 +2,8 @@ const React = require('react');
 const BookmarkStore = require('../../stores/bookmark_store');
 const BookmarkActions = require('../../actions/bookmark_actions');
 const BookmarkIndexItem = require('./bookmark_index_item');
+const GatheringActions = require('../../actions/gathering_actions');
+const GatheringStore = require('../../stores/gathering_store');
 
 const BookmarksIndex = React.createClass({
   getInitialState(){
@@ -10,11 +12,14 @@ const BookmarksIndex = React.createClass({
 
   componentDidMount(){
     this.bookmarkListener = BookmarkStore.addListener(this._onChange);
+    this.gatheringListener = GatheringStore.addListener(this.forceUpdate.bind(this));
     BookmarkActions.fetchBookmarks();
+    GatheringActions.fetchGatherings();
   },
 
   componentWillUnmount(){
     this.bookmarkListener.remove();
+    this.gatheringListener.remove();
   },
 
   _onChange(){

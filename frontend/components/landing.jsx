@@ -12,7 +12,6 @@ const Landing = React.createClass({
       <div className="landing-page">
         <AppSlider />
         <CategoriesIndex />
-        <GatheringsIndex />
       </div>
     );
   }

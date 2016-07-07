@@ -22,8 +22,11 @@ const Landing = React.createClass({
             <TicketsIndex />
           </div>
         </div>
-          <header className="user-landing-header">Explore Events</header>
-        <GatheringsIndex />
+
+        <header className="user-landing-header">Explore Events</header>
+        <div className="user-dash-explore">
+          <GatheringsIndex />
+        </div>
       </div>
     );
   }

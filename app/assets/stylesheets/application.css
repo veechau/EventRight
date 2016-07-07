@@ -99,7 +99,8 @@ button:hover {
   justify-content: space-between;
   margin: 0;
   width: 100%;
-  border: 1px solid #D2D6DF;
+  border-top: 1px solid #D2D6DF;
+  border-bottom: 1px solid #D2D6DF;
   align-items: center;
 }
 
@@ -108,6 +109,7 @@ button:hover {
   padding-left: 10px;
   padding-top: 2px;
   padding-bottom: 2px;
+  border-left: 1px solid #D2D6DF;
   font-family: 'Pacifico', sans-serif;
   color: #F6682F;
   font-size: 28px;
@@ -122,6 +124,8 @@ button:hover {
 .nav-links {
   display: flex;
   justify-content: space-around;
+  height: 73px;
+  border-right: 1px solid #D2D6DF;
 }
 
 div.nav-links-item{
@@ -140,8 +144,8 @@ div.nav-links-item:hover {
 /*Banner / Slider*/
 
 .app-slider-div {
-  height: 85vh;
-  /*max-height: 600px;*/
+  height: 100vh;
+  min-height: 300px;
 }
 
 .app-slider-div div{
@@ -150,11 +154,11 @@ div.nav-links-item:hover {
   align-items: center;
 }
 
-.app-slider-div div img {
+.app-slider-div img {
   height: auto;
   width: 100vw;
   top: calc(-80vh/3);
-  position: relative;
+  position: absolute;
 }
 
 /*Login/Signup Form*/
@@ -231,9 +235,7 @@ div.nav-links-item:hover {
 /*User Landing Page*/
 .user-landing-page {
   width: 90%;
-  height: 80vh;
   margin: 20px auto 0 auto;
-  overflow: scroll;
 }
 
 .user-landing-header {
@@ -245,12 +247,24 @@ div.nav-links-item:hover {
   justify-content: space-around;
 }
 
+.user-dash-explore {
+  display: flex;
+  justify-content: center;
+  height: 50%;
+  overflow: scroll;
+  border: 1px solid #D2D6DF;
+}
+
+
 .user-dash-bookmark, .user-dash-tickets {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 50%;
-  margin-bottom: 30px;
+  height: 55vh;
+  overflow: scroll;
+  border: 1px solid #D2D6DF;
+  margin-bottom: 10px;
 }
 
 .user-dash-bookmark ul {
@@ -267,11 +281,16 @@ div.nav-links-item:hover {
 .tickets-index-item {
   display: flex;
   align-items: flex-start;
-  margin: 10px 0;
+  padding: 5px;
+  margin: 25px 0;
 }
 
 .tickets-index-item > img {
   margin-right: 10px
+}
+
+.tickets-index-item > img:hover {
+  cursor: pointer;
 }
 
 .tickets-index-item > img, .tickets-index-item > div {
@@ -280,7 +299,12 @@ div.nav-links-item:hover {
 
 .bookmark-index-item {
   width: 150px;
-  margin: 10px 0;
+  margin: 5px 0;
+  padding: 5px;
+}
+
+.bookmark-index-item:hover {
+  cursor: pointer;
 }
 
 /*Events Index*/
@@ -295,16 +319,17 @@ div.nav-links-item:hover {
 .gatherings-index ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
 .gathering-index-item-image {
   display: flex;
-  width: 300px;
-  height: auto;
+  width: 200px;
+  height: 200px;
   margin: 10px;
 }
+
 
 /*Event Show*/
 .gathering-index-show {
@@ -347,8 +372,12 @@ div.nav-links-item:hover {
   display: flex;
   float: left;
   width: 300px;
-  height: 300px;
+  height: auto;
   margin: 10px;
+}
+
+.category-index-item-image:hover {
+  cursor: pointer;
 }
 
 /*Category Show*/
@@ -370,4 +399,11 @@ div.nav-links-item:hover {
   width: 40%;
   justify-content: flex-start;
   flex-direction: column;
+}
+
+.category-index-show-events {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
 }
