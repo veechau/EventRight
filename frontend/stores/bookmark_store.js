@@ -27,6 +27,7 @@ const resetBookmarks = function(bookmarks) {
 
 const setBookmark = function(bookmark) {
   _bookmarks[bookmark.id] = bookmark;
+  alert("Bookmark Added!");
 };
 
 const deleteBookmark = function(bookmark) {

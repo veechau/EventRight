@@ -26,8 +26,14 @@ const resetTickets = function(tickets) {
 };
 
 const setTicket = function(ticket) {
-  _tickets[ticket.id] = ticket;
-};
+  const response = confirm("Please confirm your purchase");
+    if (response == true) {
+      _tickets[ticket.id] = ticket;
+      alert("You funded this event!");
+    } else {
+      alert("You pressed Cancel!");
+    }
+  };
 
 const deleteTicket = function(ticket) {
   delete _tickets[ticket.id];

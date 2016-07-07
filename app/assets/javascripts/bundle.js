@@ -37212,7 +37212,13 @@
 	};
 	
 	var setTicket = function setTicket(ticket) {
-	  _tickets[ticket.id] = ticket;
+	  var response = confirm("Please confirm your purchase");
+	  if (response == true) {
+	    _tickets[ticket.id] = ticket;
+	    alert("You funded this event!");
+	  } else {
+	    alert("You pressed Cancel!");
+	  }
 	};
 	
 	var deleteTicket = function deleteTicket(ticket) {
@@ -37534,6 +37540,7 @@
 	
 	var setBookmark = function setBookmark(bookmark) {
 	  _bookmarks[bookmark.id] = bookmark;
+	  alert("Bookmark Added!");
 	};
 	
 	var deleteBookmark = function deleteBookmark(bookmark) {
@@ -37750,7 +37757,10 @@
 	var GatheringActions = __webpack_require__(276);
 	var TicketStore = __webpack_require__(310);
 	var TicketActions = __webpack_require__(312);
+	var BookmarkStore = __webpack_require__(316);
+	var BookmarkActions = __webpack_require__(318);
 	var SessionStore = __webpack_require__(231);
+	var SessionActions = __webpack_require__(255);
 	var CategoryStore = __webpack_require__(303);
 	var CategoryActions = __webpack_require__(305);
 	
@@ -37769,18 +37779,43 @@
 	    CategoryActions.fetchCategories();
 	  },
 	  componentDidMount: function componentDidMount() {
-	    this.categoryIndexShowListener = CategoryStore.addListener(this._categoryChange);
-	    this.ticketListener = TicketStore.addListener(this._addTicket);
+	    this.categoryStoreListener = CategoryStore.addListener(this._categoryChange);
+	    this.gatheringStoreListener = GatheringStore.addListener(this._gatheringChange);
+	    this.ticketStoreListener = TicketStore.addListener(this._ticketChange);
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
-	    this.categoryIndexShowListener.remove();
+	    this.categoryStoreListener.remove();
+	    this.gatheringStoreListener.remove();
+	    this.ticketStoreListener.remove();
 	  },
 	  _categoryChange: function _categoryChange() {
 	    this.setState({ category: CategoryStore.find(this.state.gathering.category_id).title });
 	  },
-	  _addTicket: function _addTicket() {
+	  _gatheringChange: function _gatheringChange() {
+	    this.setState({ gathering: { fund: this.state.gathering.funds + this.state.gathering.tix_price } });
+	  },
+	  _ticketChange: function _ticketChange() {},
+	  _addTicket: function _addTicket(e) {
+	    e.preventDefault();
+	    // console.log(this.state.gathering.funds);
 	    var currentUser = SessionStore.currentUser();
-	    TicketActions.createTicket({ ticket: { attendee_id: currentUser.id, gathering_id: this.props.params.gathering.id } });
+	    // console.log(currentUser);
+	    TicketActions.createTicket({ attendee_id: currentUser.id, gathering_id: this.state.gathering_id });
+	    // console.log(currentUser);
+	    // console.log(this.state.gathering.tix_price);
+	    // console.log(this.state.gathering.funds);
+	  },
+	  _addBookmark: function _addBookmark(e) {
+	
+	    e.preventDefault();
+	    var currentUser = SessionStore.currentUser();
+	    BookmarkActions.createBookmark({ user_id: currentUser.id, gathering_id: this.state.gathering_id });
+	    //   $('#add-bookmark').text("Remove Bookmark");
+	    //   $('#add-bookmark').change(this._removeBookmark);
+	    // },
+	    // _removeBookmark(e) {
+	    //   $('#add-bookmark').text("Add Bookmark");
+	    //   $('#add-bookmark').change(this._addBookmark);
 	  },
 	  render: function render() {
 	    return React.createElement(
@@ -37833,12 +37868,16 @@
 	        React.createElement('img', { className: 'gathering-index-item-image', src: this.state.gathering.image }),
 	        React.createElement(
 	          'button',
-	          null,
+	          { id: 'buy-ticket',
+	            onClick: this._addTicket,
+	            disabled: !SessionStore.isUserLoggedIn() },
 	          'Buy Ticket'
 	        ),
 	        React.createElement(
 	          'button',
-	          null,
+	          { id: 'add-bookmark',
+	            onClick: this._addBookmark,
+	            disabled: !SessionStore.isUserLoggedIn() },
 	          'Bookmark Event'
 	        ),
 	        React.createElement(
