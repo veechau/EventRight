@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160704005944) do
+ActiveRecord::Schema.define(version: 20160707231332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20160704005944) do
   end
 
   add_index "bookmarks", ["gathering_id"], name: "index_bookmarks_on_gathering_id", using: :btree
+  add_index "bookmarks", ["user_id", "gathering_id"], name: "index_bookmarks_on_user_id_and_gathering_id", unique: true, using: :btree
   add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 20160704005944) do
     t.datetime "updated_at",   null: false
   end
 
+  add_index "tickets", ["attendee_id", "gathering_id"], name: "index_tickets_on_attendee_id_and_gathering_id", unique: true, using: :btree
   add_index "tickets", ["attendee_id"], name: "index_tickets_on_attendee_id", using: :btree
   add_index "tickets", ["gathering_id"], name: "index_tickets_on_gathering_id", using: :btree
 

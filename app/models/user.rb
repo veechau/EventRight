@@ -6,9 +6,20 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
   before_validation :ensure_session_token_uniqueness
 
-  has_many :gatherings
-  # has_many :tickets
-  # has_many :bookmarks
+  has_many :gatherings, dependent: :destroy,
+  primary_key: :id,
+  foreign_key: :organizer_id,
+  class_name: 'Gathering'
+
+  has_many :tickets, dependent: :destroy,
+  primary_key: :id,
+  foreign_key: :attendee_id,
+  class_name: 'Ticket'
+
+  has_many :bookmarks, dependent: :destroy,
+  primary_key: :id,
+  foreign_key: :user_id,
+  class_name: 'Bookmark'
 
   attr_reader :password
 

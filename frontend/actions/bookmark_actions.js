@@ -38,7 +38,7 @@ const BookmarkActions = {
   deleteBookmark(id){
     BookmarkApiUtil.deleteBookmark(
       id,
-      BookmarkActions.removeBookmark,
+      BookmarkActions.receiveAll,
       ErrorActions.setErrors);
   },
 
@@ -55,13 +55,6 @@ const BookmarkActions = {
       bookmark: bookmark
     });
   },
-  removeBookmark(bookmark){
-    AppDispatcher.dispatch({
-      actionType: BookmarkConstants.BOOKMARK_REMOVED,
-      bookmark: bookmark
-    });
-  }
-
 };
 
 module.exports = BookmarkActions;

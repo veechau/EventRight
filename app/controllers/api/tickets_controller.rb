@@ -1,6 +1,6 @@
 class Api::TicketsController < ApplicationController
   def index
-    @tickets = Ticket.where(attendee_id: current_user)
+    @tickets = Ticket.all
     render :index
   end
 

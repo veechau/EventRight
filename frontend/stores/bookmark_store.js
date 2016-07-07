@@ -18,6 +18,24 @@ BookmarkStore.find = function(bookmarkId){
   return _bookmarks[bookmarkId];
 };
 
+BookmarkStore.findByUserId = function(userId) {
+  let _selectedBookmarks = [];
+  Object.keys(_bookmarks).forEach( (bookmarkId) => {
+    if (_bookmarks[bookmarkId].user_id === userId) {
+      _selectedBookmarks.push(_bookmarks[bookmarkId]);
+    }
+  });
+  return _selectedBookmarks;
+};
+
+BookmarkStore.findBookmark = function(gatheringId, userId){
+  Object.keys(_bookmarks).forEach ( (bookmarkId) => {
+    if (_bookmarks[bookmarkId].gathering_id === gatheringId && _bookmarks[bookmarkId].user_id === userId) {
+      return _bookmarks[bookmarkId];
+    }
+  });
+};
+
 const resetBookmarks = function(bookmarks) {
   _bookmarks = {};
   bookmarks.forEach( (bookmark) => {
@@ -27,7 +45,6 @@ const resetBookmarks = function(bookmarks) {
 
 const setBookmark = function(bookmark) {
   _bookmarks[bookmark.id] = bookmark;
-  alert("Bookmark Added!");
 };
 
 const deleteBookmark = function(bookmark) {

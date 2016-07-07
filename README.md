@@ -19,11 +19,11 @@ EventRight is a web application inspired by Eventbrite with a crowdfunding flair
   - [x] Only registered/signed-in users are able to create new events
   - [ ] Registered/signed-in users may add tickets to their cart
   - [x] User Dashboard shows current user's purchased events
-- [ ] Categories
-  - [ ] Events and Categories have a many-to-many relationship
-  - [ ] Categories will be used to sort, filter and search events
+- [x] Categories
+  - [x] Events and Categories have a many-to-many relationship
+  - [x] Categories will be used to sort, filter and search events
 - [ ] Bookmark events
-  - [ ] Registered/signed-in users can bookmark events
+  - [x] Registered/signed-in users can bookmark events
   - [x] User Dashboard shows current user's bookmarked events
   - [ ] Adequate CSS styling
 
@@ -89,9 +89,9 @@ user interface.
   - [x] create `Ticket` model
   - [x] CRUD API for events (`TicketsController`)
   - [x] jBuilder views for tickets
-  - [ ] test out API interaction in the console.
+  - [x] test out API interaction in the console.
   - [x] basic styling for existing components
-  - [ ] setup the flux loop with skeleton files
+  - [x] setup the flux loop with skeleton files
   - [x] setup React Router
   - implement each note component, building out the flux loop as needed.
     - [x] `TicketsIndex`
@@ -112,9 +112,9 @@ user interface.
 - [x] create `Category` model
 - build out API, Flux loop, and components for:
   - [x] Category CRUD
-  - [ ] adding events requires a category
+  - [x] adding events requires a category
   - [ ] updating events to a different category
-  - [ ] viewing events by category
+  - [x] viewing events by category
 - Use CSS to style new views
 
 Phase 5 adds organization to the Events. Events belong to a Category,
@@ -127,7 +127,7 @@ which has its own `Index` view.
 - [x] create `Bookmark` model and join table
 - build out API, Flux loop, and components for:
   - [x] fetching bookmarks for current user
-  - [ ] adding bookmarks to events
+  - [x] adding bookmarks to events
   - [ ] removing bookmarks to events
 - [ ] Style new elements
 

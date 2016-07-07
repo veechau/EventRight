@@ -4,11 +4,13 @@ class Gathering < ActiveRecord::Base
 
   belongs_to :category
   belongs_to :organizer, class_name: 'User'
+  has_many :tickets, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   after_initialize :set_defaults
 
   private
-  # 
+  #
   # def find_events_by_category(category_id)
   #   Category.find(id: self.category_id)
   # end

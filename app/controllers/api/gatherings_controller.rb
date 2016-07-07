@@ -1,7 +1,7 @@
 class Api::GatheringsController < ApplicationController
 
   def index
-    @gatherings = Gathering.all
+    @gatherings = Gathering.all.includes(:tickets, :bookmarks)
     render :index
   end
 
@@ -16,12 +16,12 @@ class Api::GatheringsController < ApplicationController
   end
 
   def show
-    @gathering = Gathering.find(params[:id])
+    @gathering = Gathering.find(params[:id]).includes(:tickets, :bookmarks)
     render :show
   end
 
   def update
-    @gathering = Gathering.find(params[:id])
+    @gathering = Gathering.find(params[:id]).includes(:tickets, :bookmarks)
     if @gathering.update(gathering_params)
       render :show
     else

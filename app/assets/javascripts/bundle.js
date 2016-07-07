@@ -37138,6 +37138,7 @@
 	var TicketIndexItem = __webpack_require__(314);
 	var GatheringActions = __webpack_require__(276);
 	var GatheringStore = __webpack_require__(272);
+	var SessionStore = __webpack_require__(231);
 	
 	var TicketsIndex = React.createClass({
 	  displayName: 'TicketsIndex',
@@ -37155,7 +37156,8 @@
 	    this.gatheringListener.remove();
 	  },
 	  _onChange: function _onChange() {
-	    this.setState({ tickets: TicketStore.all() });
+	    this.setState({
+	      tickets: TicketStore.findByUserId(SessionStore.currentUser().id) });
 	  },
 	  render: function render() {
 	    if (this.state.tickets.length === 0) {
@@ -37204,6 +37206,16 @@
 	  return _tickets[ticketId];
 	};
 	
+	TicketStore.findByUserId = function (userId) {
+	  var _selectedTickets = [];
+	  Object.keys(_tickets).forEach(function (ticketId) {
+	    if (_tickets[ticketId].attendee_id === userId) {
+	      _selectedTickets.push(_tickets[ticketId]);
+	    }
+	  });
+	  return _selectedTickets;
+	};
+	
 	var resetTickets = function resetTickets(tickets) {
 	  _tickets = {};
 	  tickets.forEach(function (ticket) {
@@ -37212,13 +37224,7 @@
 	};
 	
 	var setTicket = function setTicket(ticket) {
-	  var response = confirm("Please confirm your purchase");
-	  if (response == true) {
-	    _tickets[ticket.id] = ticket;
-	    alert("You funded this event!");
-	  } else {
-	    alert("You pressed Cancel!");
-	  }
+	  _tickets[ticket.id] = ticket;
 	};
 	
 	var deleteTicket = function deleteTicket(ticket) {
@@ -37465,6 +37471,7 @@
 	var BookmarkIndexItem = __webpack_require__(320);
 	var GatheringActions = __webpack_require__(276);
 	var GatheringStore = __webpack_require__(272);
+	var SessionStore = __webpack_require__(231);
 	
 	var BookmarksIndex = React.createClass({
 	  displayName: 'BookmarksIndex',
@@ -37482,7 +37489,7 @@
 	    this.gatheringListener.remove();
 	  },
 	  _onChange: function _onChange() {
-	    this.setState({ bookmarks: BookmarkStore.all() });
+	    this.setState({ bookmarks: BookmarkStore.findByUserId(SessionStore.currentUser().id) });
 	  },
 	  render: function render() {
 	    if (this.state.bookmarks.length === 0) {
@@ -37531,6 +37538,24 @@
 	  return _bookmarks[bookmarkId];
 	};
 	
+	BookmarkStore.findByUserId = function (userId) {
+	  var _selectedBookmarks = [];
+	  Object.keys(_bookmarks).forEach(function (bookmarkId) {
+	    if (_bookmarks[bookmarkId].user_id === userId) {
+	      _selectedBookmarks.push(_bookmarks[bookmarkId]);
+	    }
+	  });
+	  return _selectedBookmarks;
+	};
+	
+	BookmarkStore.findBookmark = function (gatheringId, userId) {
+	  Object.keys(_bookmarks).forEach(function (bookmarkId) {
+	    if (_bookmarks[bookmarkId].gathering_id === gatheringId && _bookmarks[bookmarkId].user_id === userId) {
+	      return _bookmarks[bookmarkId];
+	    }
+	  });
+	};
+	
 	var resetBookmarks = function resetBookmarks(bookmarks) {
 	  _bookmarks = {};
 	  bookmarks.forEach(function (bookmark) {
@@ -37540,7 +37565,6 @@
 	
 	var setBookmark = function setBookmark(bookmark) {
 	  _bookmarks[bookmark.id] = bookmark;
-	  alert("Bookmark Added!");
 	};
 	
 	var deleteBookmark = function deleteBookmark(bookmark) {
@@ -37607,7 +37631,7 @@
 	    BookmarkApiUtil.updateBookmark(bookmark, BookmarkActions.receiveBookmark, ErrorActions.setErrors);
 	  },
 	  deleteBookmark: function deleteBookmark(id) {
-	    BookmarkApiUtil.deleteBookmark(id, BookmarkActions.removeBookmark, ErrorActions.setErrors);
+	    BookmarkApiUtil.deleteBookmark(id, BookmarkActions.receiveAll, ErrorActions.setErrors);
 	  },
 	
 	
@@ -37621,12 +37645,6 @@
 	  receiveBookmark: function receiveBookmark(bookmark) {
 	    AppDispatcher.dispatch({
 	      actionType: BookmarkConstants.BOOKMARK_RECEIVED,
-	      bookmark: bookmark
-	    });
-	  },
-	  removeBookmark: function removeBookmark(bookmark) {
-	    AppDispatcher.dispatch({
-	      actionType: BookmarkConstants.BOOKMARK_REMOVED,
 	      bookmark: bookmark
 	    });
 	  }
@@ -37773,51 +37791,109 @@
 	    } else {
 	      eventId = this.props.gathering.id;
 	    }
-	    return { gathering_id: eventId, category: "", gathering: GatheringStore.find(eventId) };
+	    return { gathering_id: eventId,
+	      category: "",
+	      gathering: GatheringStore.find(eventId),
+	      ticketText: "Buy Ticket",
+	      bookmarkText: "Add Bookmark",
+	      purchased: false
+	    };
 	  },
 	  componentWillMount: function componentWillMount() {
 	    CategoryActions.fetchCategories();
 	  },
 	  componentDidMount: function componentDidMount() {
+	    this._bookmarkChange();
+	    this._ticketChange();
 	    this.categoryStoreListener = CategoryStore.addListener(this._categoryChange);
-	    this.gatheringStoreListener = GatheringStore.addListener(this._gatheringChange);
+	    this.bookmarkStoreListener = BookmarkStore.addListener(this._bookmarkChange);
 	    this.ticketStoreListener = TicketStore.addListener(this._ticketChange);
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    this.categoryStoreListener.remove();
-	    this.gatheringStoreListener.remove();
+	    this.bookmarkStoreListener.remove();
 	    this.ticketStoreListener.remove();
 	  },
 	  _categoryChange: function _categoryChange() {
 	    this.setState({ category: CategoryStore.find(this.state.gathering.category_id).title });
 	  },
-	  _gatheringChange: function _gatheringChange() {
-	    this.setState({ gathering: { fund: this.state.gathering.funds + this.state.gathering.tix_price } });
+	  _bookmarkChange: function _bookmarkChange() {
+	    var _this = this;
+	
+	    var buttonText = "Add Bookmark";
+	    var currentUser = SessionStore.currentUser();
+	    if (currentUser && this.state.gathering) {
+	      var bookmarks = BookmarkStore.findByUserId(currentUser.id);
+	      bookmarks.forEach(function (bookmark) {
+	        if (bookmark.gathering_id === _this.state.gathering.id) {
+	          buttonText = "Remove Bookmark";
+	        }
+	      });
+	    }
+	    this.setState({ bookmarkText: buttonText });
 	  },
-	  _ticketChange: function _ticketChange() {},
+	  _ticketChange: function _ticketChange() {
+	    var _this2 = this;
+	
+	    var buttonText = "Buy Ticket";
+	    var currentUser = SessionStore.currentUser();
+	    if (currentUser && this.state.gathering) {
+	      var tickets = TicketStore.findByUserId(currentUser.id);
+	      tickets.forEach(function (ticket) {
+	        if (ticket.gathering_id === _this2.state.gathering.id) {
+	          buttonText = "Purchased!";
+	          _this2.setState({ purchased: true });
+	        }
+	      });
+	    }
+	    this.setState({ ticketText: buttonText });
+	  },
 	  _addTicket: function _addTicket(e) {
 	    e.preventDefault();
-	    // console.log(this.state.gathering.funds);
 	    var currentUser = SessionStore.currentUser();
-	    // console.log(currentUser);
 	    TicketActions.createTicket({ attendee_id: currentUser.id, gathering_id: this.state.gathering_id });
-	    // console.log(currentUser);
-	    // console.log(this.state.gathering.tix_price);
-	    // console.log(this.state.gathering.funds);
 	  },
-	  _addBookmark: function _addBookmark(e) {
-	
+	  _toggleBookmark: function _toggleBookmark(e) {
 	    e.preventDefault();
 	    var currentUser = SessionStore.currentUser();
-	    BookmarkActions.createBookmark({ user_id: currentUser.id, gathering_id: this.state.gathering_id });
-	    //   $('#add-bookmark').text("Remove Bookmark");
-	    //   $('#add-bookmark').change(this._removeBookmark);
-	    // },
-	    // _removeBookmark(e) {
-	    //   $('#add-bookmark').text("Add Bookmark");
-	    //   $('#add-bookmark').change(this._addBookmark);
+	    if (this.state.bookmarkText === "Add Bookmark") {
+	      BookmarkActions.createBookmark({ user_id: currentUser.id, gathering_id: this.state.gathering_id });
+	    } else {
+	      BookmarkActions.deleteBookmark(this.state.gathering_id, currentUser.id);
+	    }
+	  },
+	  _parseDate: function _parseDate(date) {
+	    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	
+	    var parseDate = new Date(date);
+	    var day = parseDate.getDate();
+	    var monthIndex = parseDate.getMonth();
+	    var year = parseDate.getFullYear();
+	
+	    return day + ' ' + monthNames[monthIndex] + ' ' + year + ')';
 	  },
 	  render: function render() {
+	    var buttons = "";
+	
+	    if (SessionStore.isUserLoggedIn()) {
+	      buttons = React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'button',
+	          { id: 'buy-ticket',
+	            onClick: this._addTicket,
+	            disabled: this.state.purchased },
+	          this.state.ticketText
+	        ),
+	        React.createElement(
+	          'button',
+	          { id: 'add-bookmark',
+	            onClick: this._toggleBookmark },
+	          this.state.bookmarkText
+	        )
+	      );
+	    }
 	    return React.createElement(
 	      'div',
 	      { className: 'gathering-index-show' },
@@ -37866,20 +37942,7 @@
 	        'div',
 	        { className: 'gathering-index-show-right' },
 	        React.createElement('img', { className: 'gathering-index-item-image', src: this.state.gathering.image }),
-	        React.createElement(
-	          'button',
-	          { id: 'buy-ticket',
-	            onClick: this._addTicket,
-	            disabled: !SessionStore.isUserLoggedIn() },
-	          'Buy Ticket'
-	        ),
-	        React.createElement(
-	          'button',
-	          { id: 'add-bookmark',
-	            onClick: this._addBookmark,
-	            disabled: !SessionStore.isUserLoggedIn() },
-	          'Bookmark Event'
-	        ),
+	        buttons,
 	        React.createElement(
 	          'div',
 	          null,

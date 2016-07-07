@@ -14,8 +14,18 @@ TicketStore.all = function(){
   });
 };
 
-TicketStore.find = function(ticketId){
+TicketStore.find = function(ticketId) {
   return _tickets[ticketId];
+};
+
+TicketStore.findByUserId = function(userId) {
+  let _selectedTickets = [];
+  Object.keys(_tickets).forEach( (ticketId) => {
+    if (_tickets[ticketId].attendee_id === userId) {
+      _selectedTickets.push(_tickets[ticketId]);
+    }
+  });
+  return _selectedTickets;
 };
 
 const resetTickets = function(tickets) {
@@ -26,14 +36,8 @@ const resetTickets = function(tickets) {
 };
 
 const setTicket = function(ticket) {
-  const response = confirm("Please confirm your purchase");
-    if (response == true) {
-      _tickets[ticket.id] = ticket;
-      alert("You funded this event!");
-    } else {
-      alert("You pressed Cancel!");
-    }
-  };
+  _tickets[ticket.id] = ticket;
+};
 
 const deleteTicket = function(ticket) {
   delete _tickets[ticket.id];

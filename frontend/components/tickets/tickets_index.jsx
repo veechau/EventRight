@@ -4,6 +4,7 @@ const TicketActions = require('../../actions/ticket_actions');
 const TicketIndexItem = require('./ticket_index_item');
 const GatheringActions = require('../../actions/gathering_actions');
 const GatheringStore = require('../../stores/gathering_store');
+const SessionStore = require('../../stores/session_store');
 
 const TicketsIndex = React.createClass({
   getInitialState(){
@@ -23,7 +24,9 @@ const TicketsIndex = React.createClass({
   },
 
   _onChange(){
-    this.setState({ tickets: TicketStore.all() });
+    this.setState({
+      tickets: TicketStore.findByUserId(SessionStore.currentUser().id
+    )});
   },
 
   render(){

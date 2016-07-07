@@ -4,6 +4,8 @@ const BookmarkActions = require('../../actions/bookmark_actions');
 const BookmarkIndexItem = require('./bookmark_index_item');
 const GatheringActions = require('../../actions/gathering_actions');
 const GatheringStore = require('../../stores/gathering_store');
+const SessionStore = require('../../stores/session_store');
+
 
 const BookmarksIndex = React.createClass({
   getInitialState(){
@@ -23,7 +25,7 @@ const BookmarksIndex = React.createClass({
   },
 
   _onChange(){
-    this.setState({ bookmarks: BookmarkStore.all() });
+    this.setState({ bookmarks: BookmarkStore.findByUserId(SessionStore.currentUser().id) });
   },
 
   render(){

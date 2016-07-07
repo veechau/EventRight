@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
 
   def create
-		@user = User.new(user_params)
+		@user = User.new(user_params).includes(:tickets, :bookmarks, :gatherings)
 
 		if @user.save
 			login(@user)

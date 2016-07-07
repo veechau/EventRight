@@ -1,6 +1,6 @@
 class Api::BookmarksController < ApplicationController
   def index
-    @bookmarks = Bookmark.where(user_id: current_user.id)
+    @bookmarks = Bookmark.all
     render :index
   end
 
@@ -20,9 +20,10 @@ class Api::BookmarksController < ApplicationController
   end
 
   def destroy
-    @bookmark = Bookmark.find(params[:id])
+    @bookmark = Bookmark.find_by(gathering_id: params[:id], user_id: current_user.id)
 
     if @bookmark.destroy
+      @bookmarks = Bookmark.all
       render :index
     else
       render json: @bookmark.errors

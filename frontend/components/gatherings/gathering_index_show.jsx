@@ -20,55 +20,103 @@ const GatheringIndexShow = React.createClass({
     } else {
       eventId = this.props.gathering.id;
     }
-    return { gathering_id: eventId, category: "", gathering: GatheringStore.find(eventId) };
+    return {  gathering_id: eventId,
+              category: "",
+              gathering: GatheringStore.find(eventId),
+              ticketText: "Buy Ticket",
+              bookmarkText: "Add Bookmark",
+              purchased: false
+            };
   },
   componentWillMount(){
     CategoryActions.fetchCategories();
   },
   componentDidMount(){
+    this._bookmarkChange();
+    this._ticketChange();
     this.categoryStoreListener = CategoryStore.addListener(this._categoryChange);
-    this.gatheringStoreListener = GatheringStore.addListener(this._gatheringChange);
+    this.bookmarkStoreListener = BookmarkStore.addListener(this._bookmarkChange);
     this.ticketStoreListener = TicketStore.addListener(this._ticketChange);
   },
   componentWillUnmount(){
     this.categoryStoreListener.remove();
-    this.gatheringStoreListener.remove();
+    this.bookmarkStoreListener.remove();
     this.ticketStoreListener.remove();
   },
   _categoryChange(){
     this.setState({category: CategoryStore.find(this.state.gathering.category_id).title});
   },
-  _gatheringChange(){
-    this.setState({gathering: {fund: (this.state.gathering.funds + this.state.gathering.tix_price)}});
+  _bookmarkChange(){
+    let buttonText = "Add Bookmark";
+    let currentUser = SessionStore.currentUser();
+    if (currentUser && this.state.gathering) {
+      let bookmarks = BookmarkStore.findByUserId(currentUser.id);
+      bookmarks.forEach( (bookmark) => {
+        if (bookmark.gathering_id === this.state.gathering.id) {
+          buttonText = "Remove Bookmark";
+        }
+      });
+    }
+    this.setState({ bookmarkText: buttonText });
   },
   _ticketChange(){
-
+    let buttonText = "Buy Ticket";
+    let currentUser = SessionStore.currentUser();
+    if (currentUser && this.state.gathering) {
+      let tickets = TicketStore.findByUserId(currentUser.id);
+      tickets.forEach( (ticket) => {
+        if (ticket.gathering_id === this.state.gathering.id) {
+          buttonText = "Purchased!";
+          this.setState({ purchased: true});
+        }
+      });
+    }
+    this.setState({ ticketText: buttonText });
   },
   _addTicket(e){
     e.preventDefault();
-    // console.log(this.state.gathering.funds);
     let currentUser = SessionStore.currentUser();
-    // console.log(currentUser);
     TicketActions.createTicket({attendee_id: currentUser.id, gathering_id: this.state.gathering_id});
-    // console.log(currentUser);
-    // console.log(this.state.gathering.tix_price);
-    // console.log(this.state.gathering.funds);
   },
-  _addBookmark(e){
-
+  _toggleBookmark(e){
     e.preventDefault();
     let currentUser = SessionStore.currentUser();
-    BookmarkActions.createBookmark({user_id: currentUser.id, gathering_id: this.state.gathering_id});
-  //   $('#add-bookmark').text("Remove Bookmark");
-  //   $('#add-bookmark').change(this._removeBookmark);
-  // },
-  // _removeBookmark(e) {
-  //   $('#add-bookmark').text("Add Bookmark");
-  //   $('#add-bookmark').change(this._addBookmark);
+    if (this.state.bookmarkText === "Add Bookmark") {
+      BookmarkActions.createBookmark({user_id: currentUser.id, gathering_id: this.state.gathering_id});
+    } else {
+      BookmarkActions.deleteBookmark(this.state.gathering_id, currentUser.id);
+    }
+  },
+  _parseDate(date){
+    const monthNames = [
+      "January", "February", "March",
+      "April", "May", "June", "July",
+      "August", "September", "October",
+      "November", "December"
+    ];
+
+    const parseDate = new Date(date);
+    const day = parseDate.getDate();
+    const monthIndex = parseDate.getMonth();
+    const year = parseDate.getFullYear();
+
+    return `${day} ${monthNames[monthIndex]} ${year})`;
   },
   render(){
-    return (
+    let buttons = "";
 
+    if (SessionStore.isUserLoggedIn()) {
+      buttons = (
+        <div>
+          <button id="buy-ticket"
+          onClick={this._addTicket}
+          disabled={this.state.purchased}>{this.state.ticketText}</button>
+          <button id="add-bookmark"
+          onClick={this._toggleBookmark}>{this.state.bookmarkText}</button>
+        </div>
+      );
+    }
+    return (
 
       <div className="gathering-index-show">
         <div className="gathering-index-show-left">
@@ -84,12 +132,9 @@ const GatheringIndexShow = React.createClass({
           </div>
           <div className="gathering-index-show-right">
           <img className="gathering-index-item-image" src={this.state.gathering.image}/>
-          <button id="buy-ticket"
-                  onClick={this._addTicket}
-                  disabled={!SessionStore.isUserLoggedIn()}>Buy Ticket</button>
-          <button id="add-bookmark"
-                  onClick={this._addBookmark}
-                  disabled={!SessionStore.isUserLoggedIn()}>Bookmark Event</button>
+
+          {buttons}
+
           <div>{this.state.category}</div>
         </div>
       </div>
