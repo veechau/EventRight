@@ -31,6 +31,11 @@ GatheringStore.find = function(gatheringId){
   return _gatherings[gatheringId];
 };
 
+GatheringStore.updateFund = function(gathering){
+  _gatherings[gathering.id].funds += _gatherings[gathering.id].tix_price;
+};
+
+
 const resetGatherings = function(gatherings) {
   _gatherings = {};
   gatherings.forEach( (gathering) => {

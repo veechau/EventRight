@@ -34775,6 +34775,10 @@
 	  return _gatherings[gatheringId];
 	};
 	
+	GatheringStore.updateFund = function (gathering) {
+	  _gatherings[gathering.id].funds += _gatherings[gathering.id].tix_price;
+	};
+	
 	var resetGatherings = function resetGatherings(gatherings) {
 	  _gatherings = {};
 	  gatherings.forEach(function (gathering) {
@@ -38465,6 +38469,7 @@
 	      tickets.forEach(function (ticket) {
 	        if (ticket.gathering_id === _this2.state.gathering.id) {
 	          buttonText = "Purchased!";
+	          GatheringStore.updateFund(_this2.state.gathering);
 	          _this2.setState({ purchased: true });
 	        }
 	      });
@@ -38499,7 +38504,7 @@
 	    return day + ' ' + monthNames[monthIndex] + ' ' + year;
 	  },
 	  render: function render() {
-	    var percentage = (parseInt(this.state.gathering.funds) / parseInt(this.state.gathering.goal)).toString();
+	    var percentage = (parseInt(100 * this.state.gathering.funds) / this.state.gathering.goal).toString();
 	
 	    var containerStyle = {
 	      "width": "100%"

@@ -69,9 +69,11 @@ const GatheringIndexShow = React.createClass({
       tickets.forEach( (ticket) => {
         if (ticket.gathering_id === this.state.gathering.id) {
           buttonText = "Purchased!";
+          GatheringStore.updateFund(this.state.gathering);
           this.setState({ purchased: true});
         }
       });
+
     }
     this.setState({ ticketText: buttonText });
   },
@@ -108,7 +110,7 @@ const GatheringIndexShow = React.createClass({
     return `${day} ${monthNames[monthIndex]} ${year}`;
   },
   render(){
-    let percentage = (parseInt(this.state.gathering.funds) / parseInt(this.state.gathering.goal)).toString();
+    let percentage = (parseInt(100 * this.state.gathering.funds) / (this.state.gathering.goal)).toString();
 
     let containerStyle = {
       "width": "100%"
