@@ -181,7 +181,12 @@ div.nav-links-item:hover {
 
 #welcome-arrow-img {
   width: 30%;
-  margin-left: calc(100vh/6);
+  margin-left: calc(100vh/5);
+}
+
+#welcome-arrow-img:hover {
+  width: 32%;
+  margin-left: calc(100vh/5);
 }
 
 /*Login/Signup Form*/
@@ -361,19 +366,30 @@ div.nav-links-item:hover {
 .gathering-index-show {
   display: flex;
   justify-content: space-around;
+  padding: 10px;
+  border-top: 1px solid #D2D6DF;
+  border-left: 1px solid #D2D6DF;
+  border-right: 1px solid #D2D6DF;
+}
+
+.gathering-index-show:last-child{
+  border-bottom: 1px solid #D2D6DF;
 }
 
 .gathering-index-show-left {
   display: flex;
-  width: 50%;
+  width: 500px;
+  padding-left: 10px;
   justify-content: space-around;
+  align-items: flex-start;
   flex-direction: column;
 }
 
 .gathering-index-show-right {
   display: flex;
-  width: 30%;
+  padding-right: 10px;
   justify-content: space-between;
+  align-items: center;
   flex-direction: column;
 }
 

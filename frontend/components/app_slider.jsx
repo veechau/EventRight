@@ -1,9 +1,59 @@
 /* eslint max-len: "off" */
 'use strict';
 
-var React = require('react');
+const React = require('react');
+const Carousel = require('nuka-carousel');
 
-var Carousel = require('nuka-carousel');
+
+const Decorators = [
+  {
+    component: React.createClass({
+      render() {
+        return (
+          <button
+            style={this.getButtonStyles(this.props.currentSlide === 0)}
+            onClick={this.props.previousSlide}></button>
+        );
+      },
+      getButtonStyles(disabled) {
+        return {
+          border: 0,
+          background: 'rgba(0,0,0,0.4)',
+          color: 'white',
+          padding: 0,
+          outline: 0,
+          opacity: disabled ? 0.3 : 1,
+          cursor: 'pointer'
+        };
+      }
+    }),
+    position: 'BottomLeft'
+  },
+  {
+    component: React.createClass({
+      render() {
+        return (
+          <button
+            style={this.getButtonStyles(this.props.currentSlide + this.props.slidesToScroll >= this.props.slideCount)}
+            onClick={this.props.nextSlide}></button>
+        );
+      },
+      getButtonStyles(disabled) {
+        return {
+          border: 0,
+          background: 'rgba(0,0,0,0.4)',
+          color: 'white',
+          padding: 0,
+          outline: 0,
+          opacity: disabled ? 0.3 : 1,
+          cursor: 'pointer'
+        };
+      }
+    }),
+    position: 'BottomRight'
+  }
+];
+
 
 const AppSlider = React.createClass({
   mixins: [Carousel.ControllerMixin],
@@ -18,15 +68,15 @@ const AppSlider = React.createClass({
   },
   render() {
     return (
-
         <Carousel
           className="app-slider-div"
+          decorators={Decorators}
           dragging={true}
           slidesToShow={1}
           speed={200}
           autoplay={true}
           frameOverflow={'hidden'}
-          initialSlideHeight={0.7}
+          wrapAround={true}
           >
           <div><img src="https://res.cloudinary.com/vechau/image/upload/c_scale,h_1600/v1467271000/AppSlider/photo-1453090927415-5f45085b65c0_o2iojc.jpg"
           onLoad={this.handleImageLoaded}
@@ -51,5 +101,6 @@ const AppSlider = React.createClass({
     );
   }
 });
+
 
 module.exports = AppSlider;

@@ -100,7 +100,7 @@ const GatheringIndexShow = React.createClass({
     const monthIndex = parseDate.getMonth();
     const year = parseDate.getFullYear();
 
-    return `${day} ${monthNames[monthIndex]} ${year})`;
+    return `${day} ${monthNames[monthIndex]} ${year}`;
   },
   render(){
     let buttons = "";
@@ -123,7 +123,7 @@ const GatheringIndexShow = React.createClass({
 
             <h1>{this.state.gathering.artist}</h1>
             <p>{this.state.gathering.location}</p>
-            <p>{(this.state.gathering.start_date)} to {(this.state.gathering.end_date)}</p>
+            <p>{this._parseDate(this.state.gathering.start_date)} TO {this._parseDate(this.state.gathering.end_date)}</p>
             <p>{this.state.gathering.description}</p>
             <p>{this.state.gathering.tix_price}</p>
             <p>{this.state.gathering.goal}</p>

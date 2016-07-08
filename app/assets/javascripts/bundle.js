@@ -35473,8 +35473,51 @@
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	
 	var Carousel = __webpack_require__(285);
+	
+	var Decorators = [{
+	  component: React.createClass({
+	    displayName: 'component',
+	    render: function render() {
+	      return React.createElement('button', {
+	        style: this.getButtonStyles(this.props.currentSlide === 0),
+	        onClick: this.props.previousSlide });
+	    },
+	    getButtonStyles: function getButtonStyles(disabled) {
+	      return {
+	        border: 0,
+	        background: 'rgba(0,0,0,0.4)',
+	        color: 'white',
+	        padding: 0,
+	        outline: 0,
+	        opacity: disabled ? 0.3 : 1,
+	        cursor: 'pointer'
+	      };
+	    }
+	  }),
+	  position: 'BottomLeft'
+	}, {
+	  component: React.createClass({
+	    displayName: 'component',
+	    render: function render() {
+	      return React.createElement('button', {
+	        style: this.getButtonStyles(this.props.currentSlide + this.props.slidesToScroll >= this.props.slideCount),
+	        onClick: this.props.nextSlide });
+	    },
+	    getButtonStyles: function getButtonStyles(disabled) {
+	      return {
+	        border: 0,
+	        background: 'rgba(0,0,0,0.4)',
+	        color: 'white',
+	        padding: 0,
+	        outline: 0,
+	        opacity: disabled ? 0.3 : 1,
+	        cursor: 'pointer'
+	      };
+	    }
+	  }),
+	  position: 'BottomRight'
+	}];
 	
 	var AppSlider = React.createClass({
 	  displayName: 'AppSlider',
@@ -35494,12 +35537,13 @@
 	      Carousel,
 	      {
 	        className: 'app-slider-div',
+	        decorators: Decorators,
 	        dragging: true,
 	        slidesToShow: 1,
 	        speed: 200,
 	        autoplay: true,
 	        frameOverflow: 'hidden',
-	        initialSlideHeight: 0.7
+	        wrapAround: true
 	      },
 	      React.createElement(
 	        'div',
@@ -37526,6 +37570,8 @@
 
 	'use strict';
 	
+	/* eslint max-len: "off" */
+	
 	var React = __webpack_require__(1);
 	var SessionStore = __webpack_require__(233);
 	var AppSlider = __webpack_require__(284);
@@ -37547,7 +37593,9 @@
 	          { id: 'welcome-text' },
 	          'Welcome to EventRight!'
 	        ),
-	        React.createElement('img', { id: 'welcome-arrow-img', src: 'https://res.cloudinary.com/vechau/image/upload/v1467938248/AppSlider/down-arrow-icon.png' })
+	        React.createElement('img', { onClick: this._scroll,
+	          id: 'welcome-arrow-img', src: 'https://res.cloudinary.com/vechau/image/upload/v1467938248/AppSlider/down-arrow-icon.png'
+	        })
 	      ),
 	      React.createElement(AppSlider, { id: 'app-slider-div' }),
 	      React.createElement(CategoriesIndex, null)
@@ -38437,7 +38485,7 @@
 	    var monthIndex = parseDate.getMonth();
 	    var year = parseDate.getFullYear();
 	
-	    return day + ' ' + monthNames[monthIndex] + ' ' + year + ')';
+	    return day + ' ' + monthNames[monthIndex] + ' ' + year;
 	  },
 	  render: function render() {
 	    var buttons = "";
@@ -38480,9 +38528,9 @@
 	        React.createElement(
 	          'p',
 	          null,
-	          this.state.gathering.start_date,
-	          ' to ',
-	          this.state.gathering.end_date
+	          this._parseDate(this.state.gathering.start_date),
+	          ' TO ',
+	          this._parseDate(this.state.gathering.end_date)
 	        ),
 	        React.createElement(
 	          'p',
