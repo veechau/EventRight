@@ -143,18 +143,18 @@ div.nav-links-item:hover {
 
 /*Banner / Slider*/
 
-#app-slider-div {
+.app-slider-div {
   height: 100vh;
   min-height: 300px;
 }
 
-#app-slider-div div{
+.app-slider-div div{
   overflow: hidden;
   height: 85vh;
   align-items: center;
 }
 
-#app-slider-div img {
+.app-slider-div img {
   height: auto;
   width: 100vw;
   top: calc(-80vh/3);
@@ -168,15 +168,15 @@ div.nav-links-item:hover {
   align-content: space-around;
   position: absolute;
   top: 20%;
-  left: calc(50% - 100vh/3);
+  left: calc(55% - 100vh/2);
   z-index: 2;
 }
 
 #welcome-text {
   margin-bottom: 30%;
-  font-family: 'Pacifico', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 3em;
-  color: F6682F;
+  color: #FFFFFF;
 }
 
 #welcome-arrow-img {
