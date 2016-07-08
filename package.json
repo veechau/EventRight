@@ -34,12 +34,11 @@
     "flux": "^2.1.1",
     "jquery": "^3.0.0",
     "moment": "^2.14.1",
+    "nuka-carousel": "^2.0.2",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-infinite": "^0.9.2",
     "react-router": "^2.5.1",
-    "react-slick": "^0.12.2",
-    "slick-carousel": "^1.6.0",
     "webpack": "^1.13.1"
   }
 }

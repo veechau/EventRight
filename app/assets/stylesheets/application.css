@@ -143,22 +143,45 @@ div.nav-links-item:hover {
 
 /*Banner / Slider*/
 
-.app-slider-div {
+#app-slider-div {
   height: 100vh;
   min-height: 300px;
 }
 
-.app-slider-div div{
+#app-slider-div div{
   overflow: hidden;
   height: 85vh;
   align-items: center;
 }
 
-.app-slider-div img {
+#app-slider-div img {
   height: auto;
   width: 100vw;
   top: calc(-80vh/3);
   position: absolute;
+}
+
+#welcome-arrow {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: space-around;
+  position: absolute;
+  top: 20%;
+  left: calc(50% - 100vh/3);
+  z-index: 2;
+}
+
+#welcome-text {
+  margin-bottom: 30%;
+  font-family: 'Pacifico', sans-serif;
+  font-size: 3em;
+  color: F6682F;
+}
+
+#welcome-arrow-img {
+  width: 30%;
+  margin-left: calc(100vh/6);
 }
 
 /*Login/Signup Form*/

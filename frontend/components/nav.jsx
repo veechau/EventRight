@@ -22,6 +22,7 @@ const Nav = React.createClass({
 
   _handleLogOut(){
     SessionActions.logOut();
+    hashHistory.push('/');
   },
 
   _handleLogIn(){
