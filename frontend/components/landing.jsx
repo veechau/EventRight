@@ -9,10 +9,10 @@ const CategoriesIndex = require('./categories/categories_index');
 
 const Landing = React.createClass({
   _scrollDown(){
-    window.scrollTo(0, 600)
+    $('html,body').animate({scrollTop: $(".categories-index").offset().top},'slow');
   },
-  render(){
 
+  render(){
     return(
       <div className="landing-page">
 

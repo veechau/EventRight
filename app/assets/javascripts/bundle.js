@@ -67,7 +67,7 @@
 	var GatheringForm = __webpack_require__(277);
 	var CategoriesIndex = __webpack_require__(293);
 	var CategoryIndexItem = __webpack_require__(294);
-	var CategoryIndexShow = __webpack_require__(309);
+	var CategoryIndexShow = __webpack_require__(311);
 	var BookmarksIndex = __webpack_require__(302);
 	var BookmarkIndexItem = __webpack_require__(307);
 	var TicketsIndex = __webpack_require__(296);
@@ -37580,10 +37580,9 @@
 	var Landing = React.createClass({
 	  displayName: 'Landing',
 	  _scrollDown: function _scrollDown() {
-	    window.scrollTo(0, 600);
+	    $('html,body').animate({ scrollTop: $(".categories-index").offset().top }, 'slow');
 	  },
 	  render: function render() {
-	
 	    return React.createElement(
 	      'div',
 	      { className: 'landing-page' },
@@ -38393,6 +38392,7 @@
 	/* eslint max-len: "off" */
 	
 	var React = __webpack_require__(1);
+	var Line = __webpack_require__(309).Line;
 	var GatheringStore = __webpack_require__(274);
 	var GatheringActions = __webpack_require__(278);
 	var TicketStore = __webpack_require__(297);
@@ -38499,6 +38499,13 @@
 	    return day + ' ' + monthNames[monthIndex] + ' ' + year;
 	  },
 	  render: function render() {
+	    var percentage = (parseInt(this.state.gathering.funds) / parseInt(this.state.gathering.goal)).toString();
+	
+	    var containerStyle = {
+	      "padding": "5px",
+	      "width": "100%"
+	    };
+	
 	    var buttons = "";
 	
 	    if (SessionStore.isUserLoggedIn()) {
@@ -38537,9 +38544,22 @@
 	          this.state.gathering.location
 	        ),
 	        React.createElement(
-	          'p',
+	          'div',
 	          { id: 'event-description' },
-	          this.state.gathering.description
+	          React.createElement(
+	            'p',
+	            null,
+	            this.state.gathering.description
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { id: 'event-progress', style: containerStyle },
+	          React.createElement(Line, { percent: percentage,
+	            strokeWidth: '4',
+	            trailWidth: '4',
+	            strokeColor: '#F6682F'
+	          })
 	        ),
 	        React.createElement(
 	          'p',
@@ -38595,6 +38615,111 @@
 
 /***/ },
 /* 309 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = __webpack_require__(310);
+
+/***/ },
+/* 310 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var assign = __webpack_require__(4);
+	var React = __webpack_require__(1);
+	var defaultProps = {
+	  strokeWidth: 1,
+	  strokeColor: '#3FC7FA',
+	  trailWidth: 1,
+	  trailColor: '#D9D9D9'
+	};
+	
+	var Line = React.createClass({
+	  displayName: 'Line',
+	
+	  render: function render() {
+	    var props = assign({}, this.props);
+	    var pathStyle = {
+	      'strokeDasharray': '100px, 100px',
+	      'strokeDashoffset': 100 - props.percent + 'px',
+	      'transition': 'stroke-dashoffset 0.6s ease 0s, stroke 0.6s linear'
+	    };
+	
+	    ['strokeWidth', 'strokeColor', 'trailWidth', 'trailColor'].forEach(function (item) {
+	      if (item === 'trailWidth' && !props.trailWidth && props.strokeWidth) {
+	        props.trailWidth = props.strokeWidth;
+	        return;
+	      }
+	      if (item === 'strokeWidth' && props.strokeWidth && (!parseFloat(props.strokeWidth) || parseFloat(props.strokeWidth) > 100 || parseFloat(props.strokeWidth) < 0)) {
+	        props[item] = defaultProps[item];
+	        return;
+	      }
+	      if (!props[item]) {
+	        props[item] = defaultProps[item];
+	      }
+	    });
+	
+	    var strokeWidth = props.strokeWidth;
+	    var center = strokeWidth / 2;
+	    var right = 100 - strokeWidth / 2;
+	    var pathString = 'M ' + center + ',' + center + ' L ' + right + ',' + center;
+	    var viewBoxString = '0 0 100 ' + strokeWidth;
+	
+	    return React.createElement(
+	      'svg',
+	      { className: "rc-progress-line", viewBox: viewBoxString, preserveAspectRatio: "none" },
+	      React.createElement('path', { className: "rc-progress-line-trail", d: pathString, strokeLinecap: "round",
+	        stroke: props.trailColor, strokeWidth: props.trailWidth, fillOpacity: "0" }),
+	      React.createElement('path', { className: "rc-progress-line-path", d: pathString, strokeLinecap: "round",
+	        stroke: props.strokeColor, strokeWidth: props.strokeWidth, fillOpacity: "0", style: pathStyle })
+	    );
+	  }
+	});
+	
+	var Circle = React.createClass({
+	  displayName: 'Circle',
+	
+	  render: function render() {
+	    var props = assign({}, this.props);
+	    var strokeWidth = props.strokeWidth;
+	    var radius = 50 - strokeWidth / 2;
+	    var pathString = 'M 50,50 m 0,-' + radius + '\n     a ' + radius + ',' + radius + ' 0 1 1 0,' + 2 * radius + '\n     a ' + radius + ',' + radius + ' 0 1 1 0,-' + 2 * radius;
+	    var len = Math.PI * 2 * radius;
+	    var pathStyle = {
+	      'strokeDasharray': len + 'px ' + len + 'px',
+	      'strokeDashoffset': (100 - props.percent) / 100 * len + 'px',
+	      'transition': 'stroke-dashoffset 0.6s ease 0s, stroke 0.6s ease'
+	    };
+	    ['strokeWidth', 'strokeColor', 'trailWidth', 'trailColor'].forEach(function (item) {
+	      if (item === 'trailWidth' && !props.trailWidth && props.strokeWidth) {
+	        props.trailWidth = props.strokeWidth;
+	        return;
+	      }
+	      if (!props[item]) {
+	        props[item] = defaultProps[item];
+	      }
+	    });
+	
+	    return React.createElement(
+	      'svg',
+	      { className: 'rc-progress-circle', viewBox: '0 0 100 100' },
+	      React.createElement('path', { className: 'rc-progress-circle-trail', d: pathString, stroke: props.trailColor,
+	        strokeWidth: props.trailWidth, fillOpacity: '0' }),
+	      React.createElement('path', { className: 'rc-progress-circle-path', d: pathString, strokeLinecap: 'round',
+	        stroke: props.strokeColor, strokeWidth: props.strokeWidth, fillOpacity: '0', style: pathStyle })
+	    );
+	  }
+	});
+	
+	module.exports = {
+	  Line: Line,
+	  Circle: Circle
+	};
+
+/***/ },
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

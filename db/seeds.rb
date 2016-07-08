@@ -166,7 +166,7 @@ Gathering.create({
   goal: 40000,
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 4
+  category_id: 6
 })
 
 Gathering.create({
@@ -189,14 +189,14 @@ Gathering.create({
   location: "1 Amphitheatre Pkwy, Mountain View, CA 94043",
   start_date: Faker::Date.between(2.days.ago, Date.today),
   end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
-  description: "",
+  description: "Brothers Malcolm, Angus, and George Young were born in Glasgow, Scotland, and moved to Sydney with most of their family in 1963. George was the first to learn to play the guitar. He became a member of the Easybeats, one of Australia's most successful bands of the 1960s.",
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987036/Artists/ACDC.jpg",
   tix_price: 150,
   funds: (150 * 140),
   goal: (150 * 400),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 3
+  category_id: 1
 })
 
 Gathering.create({

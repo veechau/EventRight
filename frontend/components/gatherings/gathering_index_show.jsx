@@ -1,6 +1,7 @@
 /* eslint max-len: "off" */
 
 const React = require('react');
+const Line = require('rc-progress').Line;
 const GatheringStore = require('../../stores/gathering_store');
 const GatheringActions = require('../../actions/gathering_actions');
 const TicketStore = require('../../stores/ticket_store');
@@ -26,7 +27,7 @@ const GatheringIndexShow = React.createClass({
               gathering: GatheringStore.find(eventId),
               ticketText: "Buy Ticket",
               bookmarkText: "Add Bookmark",
-              purchased: false
+              purchased: false,
             };
   },
   componentWillMount(){
@@ -107,6 +108,13 @@ const GatheringIndexShow = React.createClass({
     return `${day} ${monthNames[monthIndex]} ${year}`;
   },
   render(){
+    let percentage = (parseInt(this.state.gathering.funds) / parseInt(this.state.gathering.goal)).toString();
+
+    let containerStyle = {
+      "padding": "5px",
+      "width": "100%"
+    };
+
     let buttons = "";
 
     if (SessionStore.isUserLoggedIn()) {
@@ -127,7 +135,17 @@ const GatheringIndexShow = React.createClass({
 
             <h1 id="event-header">{this.state.gathering.artist}</h1>
             <p id="event-location">{this.state.gathering.location}</p>
-            <p id="event-description">{this.state.gathering.description}</p>
+            <div id="event-description">
+            <p>{this.state.gathering.description}</p>
+            </div>
+
+            <div id="event-progress" style={containerStyle}>
+                <Line percent={percentage}
+                      strokeWidth="4"
+                      trailWidth="4"
+                      strokeColor="#F6682F"
+                     />
+            </div>
             <p className="event-fund">GA TICKET: ${this.state.gathering.tix_price}</p>
             <p className="event-fund">FUNDS TO DATE: ${this.state.gathering.funds}</p>
             <p className="event-fund">GOAL: ${this.state.gathering.goal}</p>

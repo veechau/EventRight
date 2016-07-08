@@ -421,6 +421,10 @@ div.nav-links-item:hover {
   flex-direction: column;
 }
 
+#event-progress {
+  height: 30px;
+}
+
 #event-header {
 
   font-weight: bold;
@@ -442,11 +446,10 @@ div.nav-links-item:hover {
 #event-description {
   font-size: 0.8em;
   height: 55px;
-  overflow: scroll;
+  overflow-y: scroll;
   padding: 2px;
   border: 1px solid #D2D6DF;
 }
-
 
 ::-webkit-scrollbar {
     -webkit-appearance: none;
