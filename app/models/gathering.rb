@@ -17,7 +17,6 @@ class Gathering < ActiveRecord::Base
 
   def set_defaults
     self.start_date = Time.now
-    self.funds = 0
     self.status = "ongoing"
   end
 

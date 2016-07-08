@@ -13,7 +13,7 @@ require 'faker'
   first_name: "Jane",
   last_name: "Doe",
   password: "Password",
-  avatar: "http://holder.ninja/150x150,,8bd,fff.svg",
+  avatar: "https://holder.ninja/150x150,,8bd,fff.svg",
   balance: 500
 });
 
@@ -23,7 +23,7 @@ require 'faker'
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     password: "Password",
-    avatar: "http://holder.ninja/150x150,,8bd,fff.svg",
+    avatar: "https://holder.ninja/150x150,,8bd,fff.svg",
     balance: rand(1000)
     })
 end
@@ -37,7 +37,7 @@ Category.create({
 Category.create({
   title: "Alternative",
   description: "Latin music encompasses hundreds of styles and rhythms including mainstream genres such as Salsa, Tango, Merengue and Brazilian music, as well as traditional rhythms like Andean music, Puerto Rican Bomba, Cuban Son and Musica Llanera.",
-  image: "http://res.cloudinary.com/vechau/image/upload/v1467840235/Genres/Category-Alternative_kradzo.bmp"
+  image: "https://res.cloudinary.com/vechau/image/upload/v1467840235/Genres/Category-Alternative_kradzo.bmp"
   })
 
 Category.create({
@@ -196,7 +196,7 @@ Gathering.create({
   goal: (150 * 400),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 1
+  category_id: 3
 })
 
 Gathering.create({
@@ -204,7 +204,8 @@ Gathering.create({
   location: "1111 California St, San Francisco, CA 94108",
   start_date: Faker::Date.between(2.days.ago, Date.today),
   end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
-  description: "",
+  description: "Born on July 20, 1947, in Autlán de Navarro, Mexico, Carlos Santana moved to San Francisco in the early 1960s, where he formed the Santana Blues Band in 1966. The band, later simply known as Santana, signed a contract with Columbia Records, with Carlos becoming the consistent front man.
+",
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987039/Artists/carlossantana.jpg",
   tix_price: 50,
   funds: (50 * 190),
@@ -280,7 +281,7 @@ Gathering.create({
   start_date: Faker::Date.between(2.days.ago, Date.today),
   end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
   description: "Haim is an American pop rock band from Los Angeles. The band consists of sisters Este, Danielle and Alana Haim, and drummer Dash Hutton. The group's pop sound on their studio work stands in contrast to the more rock-based music of their live shows.",
-  image: "http://res.cloudinary.com/vechau/image/upload/c_scale,e_grayscale,h_300/v1467987036/Artists/haim.jpg",
+  image: "https://res.cloudinary.com/vechau/image/upload/c_scale,e_grayscale,h_300/v1467987036/Artists/haim.jpg",
   tix_price: 50,
   funds: (50 * 190),
   goal: (50 * 400),
