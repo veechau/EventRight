@@ -76,23 +76,6 @@ Category.create({
   image: "https://res.cloudinary.com/vechau/image/upload/v1467840726/Genres/Category-Latin_wpldsf.bmp"
   })
 
-10.times do
-  Gathering.create({
-    artist: Faker::Hipster.word,
-    location: Faker::Address.street_address + ", " + Faker::Address.city + ", " + Faker::Address.state_abbr + ", " + Faker::Address.country,
-    start_date: Faker::Date.between(2.days.ago, Date.today),
-    end_date: Faker::Date.between(2.days.from_now, 1.year.from_now),
-    description: Faker::Hacker.say_something_smart,
-    image: "http://holder.ninja/300x300,,8bd,fff.svg",
-    tix_price: rand(100),
-    funds: rand(500...100000),
-    goal: rand(500...100000),
-    status: ["ongoing", "completed", "incomplete"].sample,
-    organizer_id: rand(User.all.count) + 1,
-    category_id: rand(Category.all.count) + 1
-  })
-end
-
 
 Gathering.create({
   artist: "Luke Bryan",
