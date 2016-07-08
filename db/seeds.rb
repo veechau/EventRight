@@ -235,7 +235,7 @@ Gathering.create({
   start_date: Faker::Date.between(2.days.ago, Date.today),
   end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
   description: "Enrique Miguel Iglesias Preysler, known professionally as Enrique Iglesias, is a Spanish singer, songwriter, record producer and actor. He is widely regarded as the King of Latin Pop.",
-  image: "https://res.cloudinary.com/vechau/image/upload/v1467987044/Artists/EnriqueIglesias.psd",
+  image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467998550/Artists/EnriqueIglesias.jpg",
   tix_price: 50,
   funds: (50 * 190),
   goal: (50 * 400),
@@ -280,7 +280,7 @@ Gathering.create({
   start_date: Faker::Date.between(2.days.ago, Date.today),
   end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
   description: "Haim is an American pop rock band from Los Angeles. The band consists of sisters Este, Danielle and Alana Haim, and drummer Dash Hutton. The group's pop sound on their studio work stands in contrast to the more rock-based music of their live shows.",
-  image: "http://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987036/Artists/haim.jpg",
+  image: "http://res.cloudinary.com/vechau/image/upload/c_scale,e_grayscale,h_300/v1467987036/Artists/haim.jpg",
   tix_price: 50,
   funds: (50 * 190),
   goal: (50 * 400),
@@ -295,13 +295,13 @@ Gathering.create({
   start_date: Faker::Date.between(2.days.ago, Date.today),
   end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
   description: "Foo Fighters is an American rock band, formed in Seattle in 1994. It was founded by Nirvana drummer Dave Grohl as a one-man project following the death of Kurt Cobain and the resulting dissolution of his previous band.",
-  image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467995464/Artists/foofighters.jpg",
+  image: "https://res.cloudinary.com/vechau/image/upload/e_grayscale/v1467995464/Artists/foofighters.jpg",
   tix_price: 50,
   funds: (50 * 190),
   goal: (50 * 400),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 5
+  category_id: 2
 })
 
 Gathering.create({
@@ -316,22 +316,22 @@ Gathering.create({
   goal: (50 * 400),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 5
+  category_id: 2
 })
 
-5.times do
-  Ticket.create({
-    attendee_id: rand(User.all.count) + 1,
-    gathering_id: rand(Gathering.all.count) + 1
-    })
-end
-
-5.times do
-  Bookmark.create({
-    user_id: rand(User.all.count) + 1,
-    gathering_id: rand(Gathering.all.count) + 1
-    })
-end
+# 5.times do
+#   Ticket.create({
+#     attendee_id: rand(User.all.count) + 1,
+#     gathering_id: rand(Gathering.all.count) + 1
+#     })
+# end
+#
+# 5.times do
+#   Bookmark.create({
+#     user_id: rand(User.all.count) + 1,
+#     gathering_id: rand(Gathering.all.count) + 1
+#     })
+# end
 
 6.times do
   Ticket.create({

@@ -37579,7 +37579,9 @@
 	
 	var Landing = React.createClass({
 	  displayName: 'Landing',
-	  _scrollDown: function _scrollDown() {},
+	  _scrollDown: function _scrollDown() {
+	    window.scrollTo(0, 600);
+	  },
 	  render: function render() {
 	
 	    return React.createElement(
@@ -37595,10 +37597,13 @@
 	        { id: 'welcome-p' },
 	        'Scroll down to explore more!'
 	      ),
-	      React.createElement('img', {
-	        id: 'welcome-arrow',
-	        onClick: this._scrollDown,
-	        src: 'https://res.cloudinary.com/vechau/image/upload/v1467965179/down-arrow-white_ozozli.png' }),
+	      React.createElement(
+	        'div',
+	        { onClick: this._scrollDown },
+	        React.createElement('img', {
+	          id: 'welcome-arrow',
+	          src: 'https://res.cloudinary.com/vechau/image/upload/v1467965179/down-arrow-white_ozozli.png' })
+	      ),
 	      React.createElement(AppSlider, { id: 'app-slider-div' }),
 	      React.createElement(CategoriesIndex, null)
 	    );
@@ -38038,7 +38043,7 @@
 	          'div',
 	          { className: 'ticket-index-item-info' },
 	          React.createElement(
-	            'p',
+	            'h1',
 	            null,
 	            ticketedEvent.artist
 	          ),
@@ -38523,39 +38528,49 @@
 	        { className: 'gathering-index-show-left' },
 	        React.createElement(
 	          'h1',
-	          null,
+	          { id: 'event-header' },
 	          this.state.gathering.artist
 	        ),
 	        React.createElement(
 	          'p',
-	          null,
+	          { id: 'event-location' },
 	          this.state.gathering.location
 	        ),
 	        React.createElement(
 	          'p',
-	          null,
-	          this._parseDate(this.state.gathering.start_date),
-	          ' TO ',
-	          this._parseDate(this.state.gathering.end_date)
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
+	          { id: 'event-description' },
 	          this.state.gathering.description
 	        ),
 	        React.createElement(
 	          'p',
-	          null,
+	          { className: 'event-fund' },
+	          'GA TICKET: $',
 	          this.state.gathering.tix_price
 	        ),
 	        React.createElement(
 	          'p',
-	          null,
+	          { className: 'event-fund' },
+	          'FUNDS TO DATE: $',
+	          this.state.gathering.funds
+	        ),
+	        React.createElement(
+	          'p',
+	          { className: 'event-fund' },
+	          'GOAL: $',
 	          this.state.gathering.goal
 	        ),
 	        React.createElement(
 	          'p',
-	          null,
+	          { className: 'event-fund' },
+	          'CAMPAIGN DATE: ',
+	          this._parseDate(this.state.gathering.start_date),
+	          ' until ',
+	          this._parseDate(this.state.gathering.end_date)
+	        ),
+	        React.createElement(
+	          'p',
+	          { className: 'event-fund' },
+	          'FUNDING STATUS: ',
 	          this.state.gathering.status
 	        )
 	      ),
@@ -38649,7 +38664,7 @@
 	          null,
 	          '↓ Explore ',
 	          this.state.category.title,
-	          ' Music ↓'
+	          ' ↓'
 	        ),
 	        this.state.gatherings.map(function (gathering) {
 	          return React.createElement(GatheringIndexShow, { key: gathering.id, gathering: gathering });

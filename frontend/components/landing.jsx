@@ -9,7 +9,7 @@ const CategoriesIndex = require('./categories/categories_index');
 
 const Landing = React.createClass({
   _scrollDown(){
-
+    window.scrollTo(0, 600)
   },
   render(){
 
@@ -18,10 +18,11 @@ const Landing = React.createClass({
 
         <div id="welcome-text">Welcome to EventRight</div>
         <p id="welcome-p">Scroll down to explore more!</p>
-        <img
+
+        <div onClick={this._scrollDown}><img
           id="welcome-arrow"
-          onClick={this._scrollDown}
           src="https://res.cloudinary.com/vechau/image/upload/v1467965179/down-arrow-white_ozozli.png"/>
+        </div>
         <AppSlider id="app-slider-div"/>
         <CategoriesIndex />
       </div>

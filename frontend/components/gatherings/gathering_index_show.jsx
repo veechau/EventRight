@@ -125,13 +125,14 @@ const GatheringIndexShow = React.createClass({
       <div className="gathering-index-show">
         <div className="gathering-index-show-left">
 
-            <h1>{this.state.gathering.artist}</h1>
-            <p>{this.state.gathering.location}</p>
-            <p>{this._parseDate(this.state.gathering.start_date)} TO {this._parseDate(this.state.gathering.end_date)}</p>
-            <p>{this.state.gathering.description}</p>
-            <p>{this.state.gathering.tix_price}</p>
-            <p>{this.state.gathering.goal}</p>
-            <p>{this.state.gathering.status}</p>
+            <h1 id="event-header">{this.state.gathering.artist}</h1>
+            <p id="event-location">{this.state.gathering.location}</p>
+            <p id="event-description">{this.state.gathering.description}</p>
+            <p className="event-fund">GA TICKET: ${this.state.gathering.tix_price}</p>
+            <p className="event-fund">FUNDS TO DATE: ${this.state.gathering.funds}</p>
+            <p className="event-fund">GOAL: ${this.state.gathering.goal}</p>
+            <p className="event-fund">CAMPAIGN DATE: {this._parseDate(this.state.gathering.start_date)} until {this._parseDate(this.state.gathering.end_date)}</p>
+            <p className="event-fund">FUNDING STATUS: {this.state.gathering.status}</p>
 
           </div>
           <div className="gathering-index-show-right">

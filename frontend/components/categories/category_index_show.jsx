@@ -44,7 +44,7 @@ const CategoryIndexShow = React.createClass({
         </div>
 
         <div className="category-index-show-events">
-          <h3>&darr; Explore {this.state.category.title} Music &darr;</h3>
+          <h3>&darr; Explore {this.state.category.title} &darr;</h3>
           {this.state.gatherings.map( (gathering) => {
             return <GatheringIndexShow key={gathering.id} gathering={gathering} />;
           })}

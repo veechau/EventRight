@@ -210,6 +210,7 @@ div.nav-links-item:hover {
   top: 82%;
   left: 46%;
   z-index: 2;
+  cursor: pointer;
 }
 
 /*Login/Signup Form*/
@@ -326,7 +327,7 @@ div.nav-links-item:hover {
 .user-dash-bookmark ul {
   display: flex;
   flex-wrap: wrap;
-  /*justify-content: space-around;*/
+  justify-content: space-around;
 }
 
 .user-dash-tickets ul {
@@ -409,6 +410,7 @@ div.nav-links-item:hover {
   justify-content: space-around;
   align-items: flex-start;
   flex-direction: column;
+  font-family: 'Roboto', sans-serif;
 }
 
 .gathering-index-show-right {
@@ -417,6 +419,49 @@ div.nav-links-item:hover {
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
+}
+
+#event-header {
+
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+#event-location {
+  font-size: 0.8em;
+  color: #666A73;
+  margin-bottom: 15px;
+}
+
+#event-dates {
+  font-size: 1em;
+  margin-bottom: 15px;
+}
+
+#event-description {
+  font-size: 0.8em;
+  height: 55px;
+  overflow: scroll;
+  padding: 2px;
+  border: 1px solid #D2D6DF;
+}
+
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+.event-fund {
+  color: #666A73;
+  font-size: 0.8em;
+  text-transform: uppercase;
 }
 
 
@@ -474,4 +519,9 @@ div.nav-links-item:hover {
   align-items: center;
   flex-direction: column;
   margin-top: 20px;
+}
+
+.category-index-show-events h3 {
+  font-size: 2em;
+  font-weight: bold;
 }

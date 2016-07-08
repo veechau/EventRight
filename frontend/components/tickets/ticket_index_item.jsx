@@ -19,7 +19,7 @@ const TicketsIndexItem = React.createClass({
           onClick={this._handleImgClick}>
           <img src={ticketedEvent.image}/>
           <div className="ticket-index-item-info">
-          <p>{ticketedEvent.artist}</p>
+          <h1>{ticketedEvent.artist}</h1>
           <p>{ticketedEvent.location}</p>
           <p>{ticketedEvent.funds}</p>
           <p>{ticketedEvent.goal}</p>
@@ -28,7 +28,7 @@ const TicketsIndexItem = React.createClass({
           </li>
         );
       }
-      
+
     return (
       <div>
         {ticketedEventShow}
