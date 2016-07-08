@@ -33,6 +33,14 @@ const Nav = React.createClass({
     hashHistory.push('/home');
   },
 
+  _fillIcon(){
+   $('#nav-icon').attr('src', 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_48/v1468016827/user-icon-big_-hover_sdiiuf.png');
+  },
+
+  _unfillIcon(){
+   $('#nav-icon').attr('src', 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_48/v1468016827/user-icon-big_f66luo.png');
+  },
+
 
   greeting() {
     let nav = (
@@ -53,8 +61,10 @@ const Nav = React.createClass({
           <GatheringModal />
           <div
                 className="nav-links-item"
+                onMouseOver={this._fillIcon}
+                onMouseOut={this._unfillIcon}
                 onClick={this._accountInfo}>
-                <img src="https://res.cloudinary.com/vechau/image/upload/v1467766265/user_grioed.png"/>
+                <img id="nav-icon" src="https://res.cloudinary.com/vechau/image/upload/c_scale,h_48/v1468016827/user-icon-big_f66luo.png"/>
                 </div>
         </nav>
       );

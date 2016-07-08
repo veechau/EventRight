@@ -1,5 +1,5 @@
 {
-  "name": "EventBrite",
+  "name": "EventRight",
   "version": "1.0.0",
   "description": "[Heroku link][heroku] **Note:** This should be a link to your production site",
   "main": "index.js",
@@ -7,9 +7,7 @@
     "doc": "docs",
     "test": "test"
   },
-   "scripts": {
-     "heroku-postbuild": "webpack --config webpack.config.prod.js"
-   },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/veechau/EventRight.git"

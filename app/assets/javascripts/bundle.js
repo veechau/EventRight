@@ -33494,6 +33494,12 @@
 	  _accountInfo: function _accountInfo() {
 	    hashHistory.push('/home');
 	  },
+	  _fillIcon: function _fillIcon() {
+	    $('#nav-icon').attr('src', 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_48/v1468016827/user-icon-big_-hover_sdiiuf.png');
+	  },
+	  _unfillIcon: function _unfillIcon() {
+	    $('#nav-icon').attr('src', 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_48/v1468016827/user-icon-big_f66luo.png');
+	  },
 	  greeting: function greeting() {
 	    var nav = React.createElement(
 	      'nav',
@@ -33523,8 +33529,10 @@
 	          'div',
 	          {
 	            className: 'nav-links-item',
+	            onMouseOver: this._fillIcon,
+	            onMouseOut: this._unfillIcon,
 	            onClick: this._accountInfo },
-	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/v1467766265/user_grioed.png' })
+	          React.createElement('img', { id: 'nav-icon', src: 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_48/v1468016827/user-icon-big_f66luo.png' })
 	        )
 	      );
 	    }
@@ -34955,7 +34963,7 @@
 	      funds: 0,
 	      goal: "",
 	      status: "ongoing",
-	      category_id: "",
+	      category_id: 1,
 	      categories: []
 	    };
 	  },

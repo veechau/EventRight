@@ -30,7 +30,7 @@ const GatheringForm = React.createClass({
       funds: 0,
       goal: "",
       status: "ongoing",
-      category_id: "",
+      category_id: 1,
 			categories: []
     };
   },
