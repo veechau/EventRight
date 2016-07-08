@@ -415,7 +415,7 @@ div.nav-links-item:hover {
 
 .gathering-index-show-right {
   display: flex;
-  padding-right: 10px;
+  padding-right: 5px;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
@@ -449,6 +449,7 @@ div.nav-links-item:hover {
   overflow-y: scroll;
   padding: 2px;
   border: 1px solid #D2D6DF;
+  margin-bottom: 15px;
 }
 
 ::-webkit-scrollbar {

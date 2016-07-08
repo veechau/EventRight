@@ -38502,7 +38502,6 @@
 	    var percentage = (parseInt(this.state.gathering.funds) / parseInt(this.state.gathering.goal)).toString();
 	
 	    var containerStyle = {
-	      "padding": "5px",
 	      "width": "100%"
 	    };
 	

@@ -111,7 +111,6 @@ const GatheringIndexShow = React.createClass({
     let percentage = (parseInt(this.state.gathering.funds) / parseInt(this.state.gathering.goal)).toString();
 
     let containerStyle = {
-      "padding": "5px",
       "width": "100%"
     };
 
