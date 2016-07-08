@@ -8,18 +8,20 @@ const CategoriesIndex = require('./categories/categories_index');
 
 
 const Landing = React.createClass({
+  _scrollDown(){
+
+  },
   render(){
 
     return(
       <div className="landing-page">
 
-        <div id="welcome-arrow">
-          <div id="welcome-text">Welcome to EventRight!</div>
-          <img  onClick={this._scroll}
-                id="welcome-arrow-img" src="https://res.cloudinary.com/vechau/image/upload/v1467938248/AppSlider/down-arrow-icon.png"
-                />
-        </div>
-
+        <div id="welcome-text">Welcome to EventRight</div>
+        <p id="welcome-p">Scroll down to explore more!</p>
+        <img
+          id="welcome-arrow"
+          onClick={this._scrollDown}
+          src="https://res.cloudinary.com/vechau/image/upload/v1467965179/down-arrow-white_ozozli.png"/>
         <AppSlider id="app-slider-div"/>
         <CategoriesIndex />
       </div>

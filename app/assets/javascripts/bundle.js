@@ -37544,8 +37544,7 @@
 	/* eslint max-len: "off" */
 	
 	var React = __webpack_require__(1);
-	var ReactRouter = __webpack_require__(170);
-	var hashHistory = ReactRouter.hashHistory;
+	var hashHistory = __webpack_require__(170).hashHistory;
 	
 	var GatheringIndexItem = React.createClass({
 	  displayName: 'GatheringIndexItem',
@@ -37580,6 +37579,7 @@
 	
 	var Landing = React.createClass({
 	  displayName: 'Landing',
+	  _scrollDown: function _scrollDown() {},
 	  render: function render() {
 	
 	    return React.createElement(
@@ -37587,16 +37587,18 @@
 	      { className: 'landing-page' },
 	      React.createElement(
 	        'div',
-	        { id: 'welcome-arrow' },
-	        React.createElement(
-	          'div',
-	          { id: 'welcome-text' },
-	          'Welcome to EventRight!'
-	        ),
-	        React.createElement('img', { onClick: this._scroll,
-	          id: 'welcome-arrow-img', src: 'https://res.cloudinary.com/vechau/image/upload/v1467938248/AppSlider/down-arrow-icon.png'
-	        })
+	        { id: 'welcome-text' },
+	        'Welcome to EventRight'
 	      ),
+	      React.createElement(
+	        'p',
+	        { id: 'welcome-p' },
+	        'Scroll down to explore more!'
+	      ),
+	      React.createElement('img', {
+	        id: 'welcome-arrow',
+	        onClick: this._scrollDown,
+	        src: 'https://res.cloudinary.com/vechau/image/upload/v1467965179/down-arrow-white_ozozli.png' }),
 	      React.createElement(AppSlider, { id: 'app-slider-div' }),
 	      React.createElement(CategoriesIndex, null)
 	    );
@@ -38396,6 +38398,7 @@
 	var SessionActions = __webpack_require__(257);
 	var CategoryStore = __webpack_require__(283);
 	var CategoryActions = __webpack_require__(280);
+	var hashHistory = __webpack_require__(170).hashHistory;
 	
 	var GatheringIndexShow = React.createClass({
 	  displayName: 'GatheringIndexShow',
@@ -38477,6 +38480,9 @@
 	      BookmarkActions.deleteBookmark(this.state.gathering_id, currentUser.id);
 	    }
 	  },
+	  _handleImgClick: function _handleImgClick() {
+	    hashHistory.push('events/' + this.state.gathering.id);
+	  },
 	  _parseDate: function _parseDate(date) {
 	    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 	
@@ -38556,7 +38562,9 @@
 	      React.createElement(
 	        'div',
 	        { className: 'gathering-index-show-right' },
-	        React.createElement('img', { className: 'gathering-index-item-image', src: this.state.gathering.image }),
+	        React.createElement('img', { className: 'gathering-index-item-image',
+	          onClick: this._handleImageClick,
+	          src: this.state.gathering.image }),
 	        buttons,
 	        React.createElement(
 	          'div',
@@ -38639,9 +38647,9 @@
 	        React.createElement(
 	          'h3',
 	          null,
-	          'Explore ',
+	          '↓ Explore ',
 	          this.state.category.title,
-	          ' Events'
+	          ' Music ↓'
 	        ),
 	        this.state.gatherings.map(function (gathering) {
 	          return React.createElement(GatheringIndexShow, { key: gathering.id, gathering: gathering });

@@ -1,8 +1,7 @@
 /* eslint max-len: "off" */
 
 const React = require('react');
-const ReactRouter = require('react-router');
-const hashHistory = ReactRouter.hashHistory;
+const hashHistory = require('react-router').hashHistory;
 
 const GatheringIndexItem = React.createClass({
   _handleImgClick(){

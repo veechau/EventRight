@@ -78,7 +78,8 @@ const AppSlider = React.createClass({
           frameOverflow={'hidden'}
           wrapAround={true}
           >
-          <div><img src="https://res.cloudinary.com/vechau/image/upload/c_scale,h_1600/v1467271000/AppSlider/photo-1453090927415-5f45085b65c0_o2iojc.jpg"
+          <div>
+          <img src="https://res.cloudinary.com/vechau/image/upload/c_scale,h_1600/v1467271000/AppSlider/photo-1453090927415-5f45085b65c0_o2iojc.jpg"
           onLoad={this.handleImageLoaded}
           onError={this.handleImageErrored}/></div>
           <div><img src="https://res.cloudinary.com/vechau/image/upload/c_scale,h_1600/v1467272765/AppSlider/photo-1445965752525-ac2d3c195ffe_qdcaum.jpg"

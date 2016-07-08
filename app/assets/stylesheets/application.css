@@ -161,32 +161,55 @@ div.nav-links-item:hover {
   position: absolute;
 }
 
-#welcome-arrow {
+
+/*#welcome-arrow {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-content: space-around;
   position: absolute;
   top: 20%;
-  left: calc(55% - 100vh/2);
+  left: calc(60% - 100vh/2);
+  z-index: 2;
+}*/
+
+#welcome-text {
+  position: absolute;
+  top: 20%;
+  left: calc(56% - 100vh/2);
+  margin-bottom: 30%;
+  font-family: 'Pacifico', sans-serif;
+  font-size: 3em;
+  color: #FFFFFF;
   z-index: 2;
 }
 
-#welcome-text {
-  margin-bottom: 30%;
+#welcome-p {
+  position: absolute;
+  top: 75%;
+  left: calc(52% - 100vh/5);
   font-family: 'Roboto', sans-serif;
-  font-size: 3em;
+  font-size: 1em;
   color: #FFFFFF;
+  z-index: 2;
 }
 
-#welcome-arrow-img {
-  width: 30%;
-  margin-left: calc(100vh/5);
+#welcome-arrow {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 80%;
+  left: 46%;
+  z-index: 2;
 }
 
-#welcome-arrow-img:hover {
-  width: 32%;
-  margin-left: calc(100vh/5);
+#welcome-arrow:hover {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 82%;
+  left: 46%;
+  z-index: 2;
 }
 
 /*Login/Signup Form*/
@@ -270,12 +293,15 @@ div.nav-links-item:hover {
 }
 
 .user-landing-header {
+  display: flex;
   margin: 10px 0px;
+  justify-content: center;
 }
 
 .user-dash {
   display: flex;
   justify-content: space-around;
+
 }
 
 .user-dash-explore {
@@ -292,20 +318,20 @@ div.nav-links-item:hover {
   flex-direction: column;
   align-items: center;
   width: 50%;
-  height: 55vh;
+  height: 50vh;
   overflow: scroll;
   border: 1px solid #D2D6DF;
-  margin-bottom: 10px;
 }
 
 .user-dash-bookmark ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  /*justify-content: space-around;*/
 }
 
 .user-dash-tickets ul {
   display: flex;
+  width: 80%;
   flex-direction: column;
 }
 
@@ -313,7 +339,7 @@ div.nav-links-item:hover {
   display: flex;
   align-items: flex-start;
   padding: 5px;
-  margin: 25px 0;
+  margin: 10px 0;
 }
 
 .tickets-index-item > img {

@@ -11,6 +11,7 @@ const SessionStore = require('../../stores/session_store');
 const SessionActions = require('../../actions/session_actions');
 const CategoryStore = require('../../stores/category_store');
 const CategoryActions = require('../../actions/category_actions');
+const hashHistory = require('react-router').hashHistory;
 
 const GatheringIndexShow = React.createClass({
   getInitialState(){
@@ -87,6 +88,9 @@ const GatheringIndexShow = React.createClass({
       BookmarkActions.deleteBookmark(this.state.gathering_id, currentUser.id);
     }
   },
+  _handleImgClick(){
+    hashHistory.push(`events/${this.state.gathering.id}`);
+  },
   _parseDate(date){
     const monthNames = [
       "January", "February", "March",
@@ -131,7 +135,9 @@ const GatheringIndexShow = React.createClass({
 
           </div>
           <div className="gathering-index-show-right">
-          <img className="gathering-index-item-image" src={this.state.gathering.image}/>
+          <img  className="gathering-index-item-image"
+                onClick={this._handleImageClick}
+                src={this.state.gathering.image}/>
 
           {buttons}
 
