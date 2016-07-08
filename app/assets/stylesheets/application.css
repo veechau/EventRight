@@ -231,6 +231,9 @@ div.nav-links-item:hover {
   justify-content: space-between;
 }
 
+#category-dropdown {
+  display: flex;
+}
 
 /*User Landing Page*/
 .user-landing-page {

@@ -3,6 +3,8 @@
 const React = require('react');
 const GatheringActions = require('../../../actions/gathering_actions');
 const GatheringStore = require('../../../stores/gathering_store');
+const CategoryActions = require('../../../actions/category_actions');
+const CategoryStore = require('../../../stores/category_store');
 const ErrorActions = require('../../../actions/error_actions');
 const ErrorStore = require('../../../stores/error_store');
 const SessionStore = require('../../../stores/session_store');
@@ -28,7 +30,8 @@ const GatheringForm = React.createClass({
       funds: 0,
       goal: "",
       status: "ongoing",
-      category_id: ""
+      category_id: "",
+			categories: []
     };
   },
 
@@ -38,11 +41,18 @@ const GatheringForm = React.createClass({
 
   componentDidMount(){
     this.errorListener = ErrorStore.addListener(this.forceUpdate.bind(this));
+		this.categoryListener = CategoryStore.addListener(this._categories);
+		CategoryActions.fetchCategories();
   },
 
   componentWillUnmount(){
     this.errorListener.remove();
-	  },
+		this.categoryListener.remove();
+	},
+
+	_categories(){
+		this.setState({categories: CategoryStore.all() });
+	},
 
   _handleSubmit(e){
     e.preventDefault();
@@ -90,6 +100,7 @@ const GatheringForm = React.createClass({
           { this.fieldErrors("base") }
           <div className="gathering-form">
             <br />
+
             <label> Artist:
               { this.fieldErrors("artist") }
               <input type="text"
@@ -97,7 +108,9 @@ const GatheringForm = React.createClass({
                 onChange={this.update("artist")}
                 className="gathering-input" />
             </label>
+
             <br />
+
             <label> Location:
               { this.fieldErrors("location") }
               <input type="text"
@@ -105,6 +118,7 @@ const GatheringForm = React.createClass({
                 onChange={this.update("location")}
                 className="gathering-input" />
             </label>
+
             <br />
 
 
@@ -114,6 +128,7 @@ const GatheringForm = React.createClass({
 								onChange={this.update("end_date")}
 								className="gathering-input" />
             </label>
+
             <br />
 
             <label> Description:
@@ -123,7 +138,9 @@ const GatheringForm = React.createClass({
                 onChange={this.update("description")}
                 className="gathering-input" />
             </label>
+
             <br />
+
             <label> Image:
               { this.fieldErrors("image") }
               <input type="text"
@@ -131,7 +148,9 @@ const GatheringForm = React.createClass({
                 onChange={this.update("image")}
                 className="gathering-input" />
             </label>
+
             <br />
+
             <label> Ticket Price:
               { this.fieldErrors("tix_price") }
               <input type="number"
@@ -139,7 +158,9 @@ const GatheringForm = React.createClass({
                 onChange={this.update("tix_price")}
                 className="gathering-input" />
             </label>
+
             <br />
+
             <label> Goal:
               { this.fieldErrors("goal") }
               <input type="number"
@@ -147,18 +168,28 @@ const GatheringForm = React.createClass({
                 onChange={this.update("goal")}
                 className="gathering-input" />
             </label>
-            <br />
 
+            <br />
 
             <label> Category:
               { this.fieldErrors("category_id") }
-              <input type="number"
-                value={this.state.category_id}
-                onChange={this.update("category_id")}
-                className="gathering-input" />
+							<select id="category-dropdown"
+											className="gathering-input"
+											onChange={this.update("category_id")}
+											value ={this.state.category_id}>
+							{this.state.categories.map ( (category) => {
+								return (
+									<option value={category.id}
+													key={category.id}>{category.title}</option>
+								);
+							})}
+
+							</select>
+
             </label>
 
 		        <br />
+
 						<input type="submit" value="Submit" />
 					</div>
 				</form>

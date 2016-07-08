@@ -83,6 +83,7 @@
 	    Route,
 	    { path: '/', component: App },
 	    React.createElement(IndexRoute, { component: Landing }),
+	    React.createElement(Route, { path: '/', component: Landing }),
 	    React.createElement(Route, { path: '/home', component: UserLanding }),
 	    React.createElement(Route, { path: '/login', component: LoginForm }),
 	    React.createElement(Route, { path: '/signup', component: SignupForm }),
@@ -34319,6 +34320,8 @@
 	var React = __webpack_require__(1);
 	var GatheringActions = __webpack_require__(276);
 	var GatheringStore = __webpack_require__(272);
+	var CategoryActions = __webpack_require__(305);
+	var CategoryStore = __webpack_require__(303);
 	var ErrorActions = __webpack_require__(257);
 	var ErrorStore = __webpack_require__(270);
 	var SessionStore = __webpack_require__(231);
@@ -34346,7 +34349,8 @@
 	      funds: 0,
 	      goal: "",
 	      status: "ongoing",
-	      category_id: ""
+	      category_id: "",
+	      categories: []
 	    };
 	  },
 	  componentWillMount: function componentWillMount() {
@@ -34354,9 +34358,15 @@
 	  },
 	  componentDidMount: function componentDidMount() {
 	    this.errorListener = ErrorStore.addListener(this.forceUpdate.bind(this));
+	    this.categoryListener = CategoryStore.addListener(this._categories);
+	    CategoryActions.fetchCategories();
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    this.errorListener.remove();
+	    this.categoryListener.remove();
+	  },
+	  _categories: function _categories() {
+	    this.setState({ categories: CategoryStore.all() });
 	  },
 	  _handleSubmit: function _handleSubmit(e) {
 	    e.preventDefault();
@@ -34500,10 +34510,21 @@
 	            null,
 	            ' Category:',
 	            this.fieldErrors("category_id"),
-	            React.createElement('input', { type: 'number',
-	              value: this.state.category_id,
-	              onChange: this.update("category_id"),
-	              className: 'gathering-input' })
+	            React.createElement(
+	              'select',
+	              { id: 'category-dropdown',
+	                className: 'gathering-input',
+	                onChange: this.update("category_id"),
+	                value: this.state.category_id },
+	              this.state.categories.map(function (category) {
+	                return React.createElement(
+	                  'option',
+	                  { value: category.id,
+	                    key: category.id },
+	                  category.title
+	                );
+	              })
+	            )
 	          ),
 	          React.createElement('br', null),
 	          React.createElement('input', { type: 'submit', value: 'Submit' })
