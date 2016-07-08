@@ -7,9 +7,9 @@
     "doc": "docs",
     "test": "test"
   },
-  "scripts": {
-    "heroku-postbuild": "webpack --config webpack.config.prod.js",
-  },
+   "scripts": {
+     "heroku-postbuild": "webpack --config webpack.config.prod.js"
+   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/veechau/EventRight.git"
