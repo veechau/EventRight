@@ -140,6 +140,10 @@ div.nav-links-item:hover {
   color: #00a8f2;
 }
 
+div.nav-links-item img:hover {
+
+}
+
 
 /*Banner / Slider*/
 
@@ -176,7 +180,7 @@ div.nav-links-item:hover {
 #welcome-text {
   position: absolute;
   top: 20%;
-  left: calc(56% - 100vh/2);
+  left: calc(100%/2 - 233.135px);
   margin-bottom: 30%;
   font-family: 'Pacifico', sans-serif;
   font-size: 3em;
@@ -186,8 +190,8 @@ div.nav-links-item:hover {
 
 #welcome-p {
   position: absolute;
-  top: 75%;
-  left: calc(52% - 100vh/5);
+  top: calc(100% - 150px);
+  left: calc(100%/2 - 101.1px);
   font-family: 'Roboto', sans-serif;
   font-size: 1em;
   color: #FFFFFF;
@@ -198,8 +202,8 @@ div.nav-links-item:hover {
   width: 100px;
   height: 100px;
   position: absolute;
-  top: 78%;
-  left: 46%;
+  top: calc(100% - 130px);
+  left: calc(100%/2 - 50px);
   z-index: 2;
 }
 
@@ -207,8 +211,8 @@ div.nav-links-item:hover {
   width: 100px;
   height: 100px;
   position: absolute;
-  top: 80%;
-  left: 46%;
+  top: calc(100% - 120px);
+  left: calc(100%/2 - 50px);
   z-index: 2;
   cursor: pointer;
 }
@@ -501,6 +505,7 @@ div.nav-links-item:hover {
 .category-index-show {
   display: flex;
   justify-content: space-around;
+  margin-top: 15px;
 }
 
 .category-index-show-left {
@@ -522,7 +527,7 @@ div.nav-links-item:hover {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 20px;
+  margin: 15px 0;
 }
 
 .category-index-show-events h3 {

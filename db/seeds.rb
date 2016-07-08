@@ -265,7 +265,7 @@ Gathering.create({
   location: "1 Amphitheatre Pkwy, Mountain View, CA 94043",
   start_date: Faker::Date.between(2.days.ago, Date.today),
   end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
-  description: "",
+  description: "Justin Randall Timberlake (born January 31, 1981) is an American singer, songwriter, actor and record producer. Born and raised in Memphis, Tennessee, he appeared on the television shows Star Search and The All-New Mickey Mouse Club as a child. In the late 1990s, Timberlake rose to prominence as one of the two lead vocalists and youngest member of NSYNC, which eventually became one of the best-selling boy bands of all time. During the group's hiatus, Timberlake released his debut solo album, the R&B-focused Justified (2002), which included the successful singles \Cry Me a River\ and \Rock Your Body\, and earned his first two Grammy Awards.",
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987036/Artists/JT.jpg",
   tix_price: 60,
   funds: (60 * 190),

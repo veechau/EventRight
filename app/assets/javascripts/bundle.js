@@ -38030,9 +38030,11 @@
 
 	'use strict';
 	
+	/* eslint max-len: "off" */
+	
 	var React = __webpack_require__(1);
-	var ReactRouter = __webpack_require__(170);
-	var hashHistory = ReactRouter.hashHistory;
+	var Line = __webpack_require__(309).Line;
+	var hashHistory = __webpack_require__(170).hashHistory;
 	var GatheringStore = __webpack_require__(274);
 	var GatheringActions = __webpack_require__(278);
 	
@@ -38043,8 +38045,18 @@
 	  },
 	  render: function render() {
 	    var ticketedEvent = GatheringStore.find(this.props.ticket.gathering_id);
+	
 	    var ticketedEventShow = "";
 	    if (ticketedEvent) {
+	
+	      var percentage = (parseInt(100 * ticketedEvent.funds) / ticketedEvent.goal).toString();
+	
+	      var containerStyle = {
+	        "width": "100%",
+	        "paddingTop": "15px",
+	        "paddingBottom": "10px"
+	      };
+	
 	      ticketedEventShow = React.createElement(
 	        'li',
 	        { className: 'tickets-index-item',
@@ -38064,18 +38076,30 @@
 	            ticketedEvent.location
 	          ),
 	          React.createElement(
+	            'div',
+	            { id: 'event-progress', style: containerStyle },
+	            React.createElement(Line, { percent: percentage,
+	              strokeWidth: '4',
+	              trailWidth: '4',
+	              strokeColor: '#F6682F'
+	            })
+	          ),
+	          React.createElement(
 	            'p',
-	            null,
+	            { className: 'event-fund' },
+	            'FUNDS TO DATE: $',
 	            ticketedEvent.funds
 	          ),
 	          React.createElement(
 	            'p',
-	            null,
+	            { className: 'event-fund' },
+	            'GOAL: $',
 	            ticketedEvent.goal
 	          ),
 	          React.createElement(
 	            'p',
-	            null,
+	            { className: 'event-fund' },
+	            'FUNDING STATUS: ',
 	            ticketedEvent.status
 	          )
 	        )
