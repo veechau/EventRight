@@ -15,17 +15,17 @@ EventRight is a web application inspired by Eventbrite with a crowdfunding flair
   - [ ] Events index page sorted by crowdfunding status (in_progress, incomplete and completed)
   - [ ] Only the events that are within current user's city are included
   - [ ] Bonus: Events displayed are based off of user's subscribed categories/bookmarks
-- [ ] Registration/Tickets
+- x] Registration/Tickets
   - [x] Only registered/signed-in users are able to create new events
-  - [ ] Registered/signed-in users may add tickets to their cart
+  - [x] Registered/signed-in users may add tickets to their cart
   - [x] User Dashboard shows current user's purchased events
 - [x] Categories
   - [x] Events and Categories have a many-to-many relationship
   - [x] Categories will be used to sort, filter and search events
-- [ ] Bookmark events
+- [x] Bookmark events
   - [x] Registered/signed-in users can bookmark events
   - [x] User Dashboard shows current user's bookmarked events
-  - [ ] Adequate CSS styling
+  - [x] Adequate CSS styling
 
 ## Design Docs
 * [View Wireframes][views]
@@ -129,7 +129,7 @@ which has its own `Index` view.
   - [x] fetching bookmarks for current user
   - [x] adding bookmarks to events
   - [ ] removing bookmarks to events
-- [ ] Style new elements
+- [x] Style new elements
 
 ### Phase 8: Styling Cleanup and Seeding (1 day, W2 F 6pm)
 
@@ -137,7 +137,7 @@ which has its own `Index` view.
 
 - [ ] Get feedback on my UI from others
 - [ ] Refactor HTML classes & CSS rules
-- [ ] Add modals, transitions, and other styling flourishes.
+- [x] Add modals, transitions, and other styling flourishes.
 
 ### Bonus Features (TBD)
 - [ ] Display events from search results as markers on a map
