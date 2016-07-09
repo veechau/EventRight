@@ -140,16 +140,10 @@ div.nav-links-item:hover {
   color: #00a8f2;
 }
 
-div.nav-links-item img:hover {
-
-}
-
-
 /*Banner / Slider*/
 
 .app-slider-div {
   height: 100vh;
-  min-height: 300px;
 }
 
 .app-slider-div div{
@@ -160,22 +154,12 @@ div.nav-links-item img:hover {
 
 .app-slider-div img {
   height: auto;
+  min-height: 600px;
   width: 100vw;
   top: calc(-80vh/3);
   position: absolute;
 }
 
-
-/*#welcome-arrow {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-content: space-around;
-  position: absolute;
-  top: 20%;
-  left: calc(60% - 100vh/2);
-  z-index: 2;
-}*/
 
 #welcome-text {
   position: absolute;
@@ -289,6 +273,11 @@ div.nav-links-item img:hover {
 
 #category-dropdown {
   display: flex;
+}
+
+/*Landing Page*/
+.landing-page {
+  height: 100%;
 }
 
 /*User Landing Page*/

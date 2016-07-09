@@ -265,7 +265,7 @@ Gathering.create({
   location: "1 Amphitheatre Pkwy, Mountain View, CA 94043",
   start_date: Faker::Date.between(2.days.ago, Date.today),
   end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
-  description: "Justin Randall Timberlake (born January 31, 1981) is an American singer, songwriter, actor and record producer. Born and raised in Memphis, Tennessee, he appeared on the television shows Star Search and The All-New Mickey Mouse Club as a child. In the late 1990s, Timberlake rose to prominence as one of the two lead vocalists and youngest member of NSYNC, which eventually became one of the best-selling boy bands of all time. During the group's hiatus, Timberlake released his debut solo album, the R&B-focused Justified (2002), which included the successful singles \Cry Me a River\ and \Rock Your Body\, and earned his first two Grammy Awards.",
+  description: "Justin Randall Timberlake (born January 31, 1981) is an American singer, songwriter, actor and record producer. Born and raised in Memphis, Tennessee, he appeared on the television shows Star Search and The All-New Mickey Mouse Club as a child. In the late 1990s, Timberlake rose to prominence as one of the two lead vocalists and youngest member of NSYNC, which eventually became one of the best-selling boy bands of all time. During the group's hiatus, Timberlake released his debut solo album, the R&B-focused Justified (2002), which included the successful singles 'Cry Me a River' and 'Rock Your Body', and earned his first two Grammy Awards.",
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987036/Artists/JT.jpg",
   tix_price: 60,
   funds: (60 * 190),
@@ -319,6 +319,81 @@ Gathering.create({
   organizer_id: rand(User.all.count) + 1,
   category_id: 2
 })
+
+Gathering.create({
+  artist: "Tove Lo",
+  location: "444 Jessie St, San Francisco, CA 94103",
+  start_date: Faker::Date.between(2.days.ago, Date.today),
+  end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
+  description: "Swedish singer/songwriter Tove Lo was born Ebba Tove Elsa Nilsson on October 29, 1987 in a suburb of Stockholm. Beginning to write poetry and short stories at a young age, she went on to study at the famous Rytmus Musikergymnasiet -- a music-oriented high school comparable to the U.K.'s BRIT School -- where she met and befriended the future members of Icona Pop. After singing in the band Tremblebee, made up of students from the school, and a spell playing one-man-and-his-dog nightclub gigs as frontwoman of a math rock band, she decided to focus on her own songs, spending six months in her shed studio working on a demo. At a party celebrating Icona Pop's first record deal, she used the opportunity to foist her demo on a staff member at their label, leading to a publishing deal with Warner Chappell and a trip to L.A. to work with fellow Swede and pop songwriting/production supremo Max Martin.",
+  image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987039/Artists/tovelo.jpg",
+  tix_price: 30,
+  funds: (30 * 13),
+  goal: (30 * 20),
+  status: "ongoing",
+  organizer_id: rand(User.all.count) + 1,
+  category_id: 1
+})
+
+Gathering.create({
+  artist: "Shakira",
+  location: "1111 California St, San Francisco, CA 94108",
+  start_date: Faker::Date.between(2.days.ago, Date.today),
+  end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
+  description: "After achieving superstardom throughout Latin America, Colombian-born Shakira became Latin pop's biggest female crossover artist since Jennifer Lopez. Noted for her aggressive, rock-influenced approach, Shakira maintained an extraordinary degree of creative control over her music, especially for a female artist; she wrote or co-wrote nearly all of her own material, and in the process gained a reputation as one of Latin music's most ambitiously poetic lyricists. When she released her first English material in late 2001, she became an instant pop sensation, thanks to her quirky poetic sense and a sexy video image built on her hip-shaking belly dance moves.",
+  image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1468021199/shakira_mnvkwd.jpg",
+  tix_price: 50,
+  funds: (50 * 190),
+  goal: (50 * 300),
+  status: "ongoing",
+  organizer_id: rand(User.all.count) + 1,
+  category_id: 8
+})
+
+Gathering.create({
+  artist: "Foster the People",
+  location: "119 Utah St, San Francisco, CA 94103",
+  start_date: Faker::Date.between(2.days.ago, Date.today),
+  end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
+  description: "Formed in Los Angeles in 2009 by multi-instrumentalist singer/songwriter Mark Foster, indie rock trio Foster the People make melodic and atmospheric, dance-oriented pop. Foster initially began the project alone, but before long he added long-term friend Cubbie Fink on bass and drummer Mark Pontius to complete the lineup. The following year, their single \"Pumped Up Kicks\" was posted on their website, picking up considerable buzz online and significant airplay on KROQ, alongside packed performances at the Texas musical festival SXSW. This inevitably attracted the attention of major labels, and eventually the band signed to Columbia imprint Startime International. Early in 2011 they released a self-titled EP that featured \"Pumped Up Kicks,\" and with the major-label support, the song became a worldwide hit. ",
+  image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987040/Artists/fosterthepeople.jpg",
+  tix_price: 50,
+  funds: (50 * 190),
+  goal: (50 * 400),
+  status: "ongoing",
+  organizer_id: rand(User.all.count) + 1,
+  category_id: 7
+})
+
+Gathering.create({
+  artist: "Zedd",
+  location: "1414 Harbour Way S, Richmond, CA 94804",
+  start_date: Faker::Date.between(2.days.ago, Date.today),
+  end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
+  description: "Born Anton Zaslavski, German producer Zedd broke onto the European electronic scene in 2010 with a remix of Skrillex's \"Scary Monsters and Nice Sprites.\" Though known for his glitch, pulsing production, Zedd's musical journey began in the acoustic realm. Born into a musical family, the future producer cut his teeth on the piano at four years old and eventually moved on to drums and played in a rock band before being drawn into the digital world in 2009. Zedd built a name for himself with his remixes of artists like Lady Gaga, B.o.B, and Armand Van Helden while also releasing his own singles and EPs. In 2012, the young producer delivered his first full-length, the club-worthy Clarity, whose lead single, \"Spectrum,\" shot to the top of the U.S. dance chart. One of the follow-ups, \"Stay the Night,\" featuring Hayley Williams, reached number two on the British pop charts.",
+  image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1468021984/zedd_xusn0s.jpg",
+  tix_price: 70,
+  funds: (70 * 190),
+  goal: (70 * 300),
+  status: "ongoing",
+  organizer_id: rand(User.all.count) + 1,
+  category_id: 5
+})
+
+# Gathering.create({
+#   artist: "",
+#   location: "---",
+#   start_date: Faker::Date.between(2.days.ago, Date.today),
+#   end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
+#   description: "---",
+#   image: "---",
+#   tix_price: 50,
+#   funds: (50 * 190),
+#   goal: (50 * 400),
+#   status: "ongoing",
+#   organizer_id: rand(User.all.count) + 1,
+#   category_id: 2
+# })
 
 # 5.times do
 #   Ticket.create({
