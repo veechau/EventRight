@@ -13,8 +13,8 @@ const BookmarkIndexItem = React.createClass({
     let bookmarkedEventShow = "";
     if (bookmarkedEvent) {
       bookmarkedEventShow = (
-        <li  className="bookmark-index-item"
-        onClick={this._handleImgClick}>
+        <li   className="bookmark-index-item"
+              onClick={this._handleImgClick}>
         <img src={bookmarkedEvent.image}/>
         </li>
       );

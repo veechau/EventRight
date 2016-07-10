@@ -147,7 +147,7 @@ div.nav-links-item:hover {
 }
 
 .app-slider-div div{
-  overflow: hidden;
+  overflow-y: hidden;
   height: 85vh;
   align-items: center;
 }
@@ -281,6 +281,10 @@ div.nav-links-item:hover {
 }
 
 /*User Landing Page*/
+.user-landing-page-container {
+
+}
+
 .user-landing-page {
   width: 90%;
   margin: 20px auto 0 auto;
@@ -290,6 +294,11 @@ div.nav-links-item:hover {
   display: flex;
   margin: 10px 0px;
   justify-content: center;
+}
+
+.user-info {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .user-dash {
@@ -302,7 +311,7 @@ div.nav-links-item:hover {
   display: flex;
   justify-content: center;
   height: 50%;
-  overflow: scroll;
+  overflow-y: scroll;
   border: 1px solid #D2D6DF;
 }
 
@@ -313,7 +322,7 @@ div.nav-links-item:hover {
   align-items: center;
   width: 50%;
   height: 50vh;
-  overflow: scroll;
+  overflow-y: scroll;
   border: 1px solid #D2D6DF;
 }
 

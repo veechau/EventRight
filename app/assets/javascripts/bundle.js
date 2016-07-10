@@ -37707,6 +37707,7 @@
 	
 	var React = __webpack_require__(1);
 	var SessionStore = __webpack_require__(233);
+	var SessionActions = __webpack_require__(257);
 	var AppSlider = __webpack_require__(284);
 	var GatheringsIndex = __webpack_require__(290);
 	var CategoriesIndex = __webpack_require__(293);
@@ -37715,11 +37716,33 @@
 	
 	var Landing = React.createClass({
 	  displayName: 'Landing',
+	  getInitialState: function getInitialState() {
+	    return { currentUser: "" };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.SessionStoreListener = SessionStore.addListener(this._onChange());
+	    SessionActions.fetchCurrentUser();
+	  },
+	  _onChange: function _onChange() {
+	    this.setState({ currentUser: SessionStore.currentUser() });
+	  },
 	  render: function render() {
 	
 	    return React.createElement(
 	      'div',
 	      { className: 'user-landing-page' },
+	      React.createElement(
+	        'div',
+	        { className: 'user-info' },
+	        React.createElement(
+	          'h1',
+	          null,
+	          'Welcome back, ',
+	          this.state.currentUser.first_name,
+	          ' ',
+	          this.state.currentUser.last_name
+	        )
+	      ),
 	      React.createElement(
 	        'div',
 	        { className: 'user-dash' },

@@ -209,7 +209,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987039/Artists/carlossantana.jpg",
   tix_price: 50,
   funds: (50 * 190),
-  goal: (50 * 400),
+  goal: (50 * 300),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 8
@@ -224,7 +224,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987042/Artists/beyonce.jpg",
   tix_price: 100,
   funds: (100 * 190),
-  goal: (100 * 450),
+  goal: (100 * 300),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 6
@@ -239,7 +239,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467998550/Artists/EnriqueIglesias.jpg",
   tix_price: 50,
   funds: (50 * 190),
-  goal: (50 * 400),
+  goal: (50 * 350),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 8
@@ -254,7 +254,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/v1467987157/Artists/deadmau5.jpg",
   tix_price: 60,
   funds: (60 * 190),
-  goal: (60 * 400),
+  goal: (60 * 300),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 5
@@ -269,7 +269,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987036/Artists/JT.jpg",
   tix_price: 60,
   funds: (60 * 190),
-  goal: (60 * 400),
+  goal: (60 * 300),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 1
@@ -284,7 +284,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,e_grayscale,h_300/v1467987036/Artists/haim.jpg",
   tix_price: 50,
   funds: (50 * 190),
-  goal: (50 * 400),
+  goal: (50 * 200),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 7
@@ -299,7 +299,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/e_grayscale/v1467995464/Artists/foofighters.jpg",
   tix_price: 50,
   funds: (50 * 190),
-  goal: (50 * 400),
+  goal: (50 * 300),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 2
@@ -314,7 +314,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467995465/Artists/radiohead.jpg",
   tix_price: 50,
   funds: (50 * 190),
-  goal: (50 * 400),
+  goal: (50 * 250),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 2
