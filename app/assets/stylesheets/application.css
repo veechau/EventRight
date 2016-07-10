@@ -163,7 +163,7 @@ div.nav-links-item:hover {
 
 #welcome-text {
   position: absolute;
-  top: 20%;
+  top: calc(20%);
   left: calc(100%/2 - 233.135px);
   margin-bottom: 30%;
   font-family: 'Pacifico', sans-serif;
@@ -494,7 +494,9 @@ div.nav-links-item:hover {
 .category-index-show {
   display: flex;
   justify-content: space-around;
+  margin: auto;
   margin-top: 15px;
+  width: 70%
 }
 
 .category-index-show-left {
@@ -516,10 +518,14 @@ div.nav-links-item:hover {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 15px 0;
+  margin: 30px 0;
 }
 
 .category-index-show-events h3 {
   font-size: 2em;
   font-weight: bold;
+}
+
+.category-index-show img {
+  width: 300px;
 }

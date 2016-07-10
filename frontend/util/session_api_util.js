@@ -31,7 +31,7 @@ const SessionApiUtil = {
 			url: '/api/user',
 			type: 'POST',
 			dataType: 'json',
-			data: { user },
+			data: {user},
 			success,
 			error(xhr) {
 				const errors = xhr.responseJSON;

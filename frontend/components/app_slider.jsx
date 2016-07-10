@@ -77,6 +77,7 @@ const AppSlider = React.createClass({
           autoplay={true}
           frameOverflow={'hidden'}
           wrapAround={true}
+          height={"100%"}
           >
           <div>
           <img src="https://res.cloudinary.com/vechau/image/upload/c_scale,h_1600/v1467271000/AppSlider/photo-1453090927415-5f45085b65c0_o2iojc.jpg"

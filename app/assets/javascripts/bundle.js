@@ -63,13 +63,13 @@
 	var SignupForm = __webpack_require__(273);
 	var GatheringsIndex = __webpack_require__(290);
 	var GatheringIndexItem = __webpack_require__(291);
-	var GatheringIndexShow = __webpack_require__(308);
+	var GatheringIndexShow = __webpack_require__(310);
 	var GatheringForm = __webpack_require__(277);
 	var CategoriesIndex = __webpack_require__(293);
 	var CategoryIndexItem = __webpack_require__(294);
 	var CategoryIndexShow = __webpack_require__(311);
-	var BookmarksIndex = __webpack_require__(302);
-	var BookmarkIndexItem = __webpack_require__(307);
+	var BookmarksIndex = __webpack_require__(304);
+	var BookmarkIndexItem = __webpack_require__(309);
 	var TicketsIndex = __webpack_require__(296);
 	var TicketIndexItem = __webpack_require__(301);
 	
@@ -35039,91 +35039,90 @@
 	        ),
 	        React.createElement('br', null),
 	        this.fieldErrors("base"),
+	        React.createElement('br', null),
 	        React.createElement(
 	          'div',
 	          { className: 'gathering-form' },
-	          React.createElement('br', null),
 	          React.createElement(
 	            'label',
 	            null,
 	            ' Artist:',
-	            this.fieldErrors("artist"),
 	            React.createElement('input', { type: 'text',
 	              value: this.state.artist,
 	              onChange: this.update("artist"),
 	              className: 'gathering-input' })
 	          ),
+	          this.fieldErrors("artist"),
 	          React.createElement('br', null),
 	          React.createElement(
 	            'label',
 	            null,
 	            ' Location:',
-	            this.fieldErrors("location"),
 	            React.createElement('input', { type: 'text',
 	              value: this.state.location,
 	              onChange: this.update("location"),
 	              className: 'gathering-input' })
 	          ),
+	          this.fieldErrors("location"),
 	          React.createElement('br', null),
 	          React.createElement(
 	            'label',
 	            null,
 	            ' End Date:',
-	            this.fieldErrors("end_date"),
 	            React.createElement('input', { type: 'date',
 	              onChange: this.update("end_date"),
 	              className: 'gathering-input' })
 	          ),
+	          this.fieldErrors("end_date"),
 	          React.createElement('br', null),
 	          React.createElement(
 	            'label',
 	            null,
 	            ' Description:',
-	            this.fieldErrors("description"),
 	            React.createElement('input', { type: 'text',
 	              value: this.state.description,
 	              onChange: this.update("description"),
 	              className: 'gathering-input' })
 	          ),
+	          this.fieldErrors("description"),
 	          React.createElement('br', null),
 	          React.createElement(
 	            'label',
 	            null,
 	            ' Image:',
-	            this.fieldErrors("image"),
 	            React.createElement('input', { type: 'text',
 	              value: this.state.image,
 	              onChange: this.update("image"),
 	              className: 'gathering-input' })
 	          ),
+	          this.fieldErrors("image"),
 	          React.createElement('br', null),
 	          React.createElement(
 	            'label',
 	            null,
 	            ' Ticket Price:',
-	            this.fieldErrors("tix_price"),
 	            React.createElement('input', { type: 'number',
 	              value: this.state.tix_price,
 	              onChange: this.update("tix_price"),
 	              className: 'gathering-input' })
 	          ),
+	          this.fieldErrors("tix_price"),
 	          React.createElement('br', null),
 	          React.createElement(
 	            'label',
 	            null,
 	            ' Goal:',
-	            this.fieldErrors("goal"),
 	            React.createElement('input', { type: 'number',
 	              value: this.state.goal,
 	              onChange: this.update("goal"),
 	              className: 'gathering-input' })
 	          ),
+	          this.fieldErrors("goal"),
 	          React.createElement('br', null),
 	          React.createElement(
 	            'label',
 	            null,
 	            ' Category:',
-	            this.fieldErrors("category_id"),
 	            React.createElement(
 	              'select',
 	              { id: 'category-dropdown',
@@ -35140,6 +35139,7 @@
 	              })
 	            )
 	          ),
+	          this.fieldErrors("category_id"),
 	          React.createElement('br', null),
 	          React.createElement('input', { type: 'submit', value: 'Submit' })
 	        )
@@ -35555,7 +35555,8 @@
 	        speed: 200,
 	        autoplay: true,
 	        frameOverflow: 'hidden',
-	        wrapAround: true
+	        wrapAround: true,
+	        height: "100%"
 	      },
 	      React.createElement(
 	        'div',
@@ -37610,7 +37611,7 @@
 	      ),
 	      React.createElement(
 	        'div',
-	        { onClick: this._scrollDown },
+	        { onMouseOver: this._scrollDown },
 	        React.createElement('img', {
 	          id: 'welcome-arrow',
 	          src: 'https://res.cloudinary.com/vechau/image/upload/v1467965179/down-arrow-white_ozozli.png' })
@@ -37710,7 +37711,7 @@
 	var GatheringsIndex = __webpack_require__(290);
 	var CategoriesIndex = __webpack_require__(293);
 	var TicketsIndex = __webpack_require__(296);
-	var BookmarksIndex = __webpack_require__(302);
+	var BookmarksIndex = __webpack_require__(304);
 	
 	var Landing = React.createClass({
 	  displayName: 'Landing',
@@ -38033,7 +38034,7 @@
 	/* eslint max-len: "off" */
 	
 	var React = __webpack_require__(1);
-	var Line = __webpack_require__(309).Line;
+	var Line = __webpack_require__(302).Line;
 	var hashHistory = __webpack_require__(170).hashHistory;
 	var GatheringStore = __webpack_require__(274);
 	var GatheringActions = __webpack_require__(278);
@@ -38122,10 +38123,115 @@
 
 	'use strict';
 	
+	module.exports = __webpack_require__(303);
+
+/***/ },
+/* 303 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var assign = __webpack_require__(4);
 	var React = __webpack_require__(1);
-	var BookmarkStore = __webpack_require__(303);
-	var BookmarkActions = __webpack_require__(305);
-	var BookmarkIndexItem = __webpack_require__(307);
+	var defaultProps = {
+	  strokeWidth: 1,
+	  strokeColor: '#3FC7FA',
+	  trailWidth: 1,
+	  trailColor: '#D9D9D9'
+	};
+	
+	var Line = React.createClass({
+	  displayName: 'Line',
+	
+	  render: function render() {
+	    var props = assign({}, this.props);
+	    var pathStyle = {
+	      'strokeDasharray': '100px, 100px',
+	      'strokeDashoffset': 100 - props.percent + 'px',
+	      'transition': 'stroke-dashoffset 0.6s ease 0s, stroke 0.6s linear'
+	    };
+	
+	    ['strokeWidth', 'strokeColor', 'trailWidth', 'trailColor'].forEach(function (item) {
+	      if (item === 'trailWidth' && !props.trailWidth && props.strokeWidth) {
+	        props.trailWidth = props.strokeWidth;
+	        return;
+	      }
+	      if (item === 'strokeWidth' && props.strokeWidth && (!parseFloat(props.strokeWidth) || parseFloat(props.strokeWidth) > 100 || parseFloat(props.strokeWidth) < 0)) {
+	        props[item] = defaultProps[item];
+	        return;
+	      }
+	      if (!props[item]) {
+	        props[item] = defaultProps[item];
+	      }
+	    });
+	
+	    var strokeWidth = props.strokeWidth;
+	    var center = strokeWidth / 2;
+	    var right = 100 - strokeWidth / 2;
+	    var pathString = 'M ' + center + ',' + center + ' L ' + right + ',' + center;
+	    var viewBoxString = '0 0 100 ' + strokeWidth;
+	
+	    return React.createElement(
+	      'svg',
+	      { className: "rc-progress-line", viewBox: viewBoxString, preserveAspectRatio: "none" },
+	      React.createElement('path', { className: "rc-progress-line-trail", d: pathString, strokeLinecap: "round",
+	        stroke: props.trailColor, strokeWidth: props.trailWidth, fillOpacity: "0" }),
+	      React.createElement('path', { className: "rc-progress-line-path", d: pathString, strokeLinecap: "round",
+	        stroke: props.strokeColor, strokeWidth: props.strokeWidth, fillOpacity: "0", style: pathStyle })
+	    );
+	  }
+	});
+	
+	var Circle = React.createClass({
+	  displayName: 'Circle',
+	
+	  render: function render() {
+	    var props = assign({}, this.props);
+	    var strokeWidth = props.strokeWidth;
+	    var radius = 50 - strokeWidth / 2;
+	    var pathString = 'M 50,50 m 0,-' + radius + '\n     a ' + radius + ',' + radius + ' 0 1 1 0,' + 2 * radius + '\n     a ' + radius + ',' + radius + ' 0 1 1 0,-' + 2 * radius;
+	    var len = Math.PI * 2 * radius;
+	    var pathStyle = {
+	      'strokeDasharray': len + 'px ' + len + 'px',
+	      'strokeDashoffset': (100 - props.percent) / 100 * len + 'px',
+	      'transition': 'stroke-dashoffset 0.6s ease 0s, stroke 0.6s ease'
+	    };
+	    ['strokeWidth', 'strokeColor', 'trailWidth', 'trailColor'].forEach(function (item) {
+	      if (item === 'trailWidth' && !props.trailWidth && props.strokeWidth) {
+	        props.trailWidth = props.strokeWidth;
+	        return;
+	      }
+	      if (!props[item]) {
+	        props[item] = defaultProps[item];
+	      }
+	    });
+	
+	    return React.createElement(
+	      'svg',
+	      { className: 'rc-progress-circle', viewBox: '0 0 100 100' },
+	      React.createElement('path', { className: 'rc-progress-circle-trail', d: pathString, stroke: props.trailColor,
+	        strokeWidth: props.trailWidth, fillOpacity: '0' }),
+	      React.createElement('path', { className: 'rc-progress-circle-path', d: pathString, strokeLinecap: 'round',
+	        stroke: props.strokeColor, strokeWidth: props.strokeWidth, fillOpacity: '0', style: pathStyle })
+	    );
+	  }
+	});
+	
+	module.exports = {
+	  Line: Line,
+	  Circle: Circle
+	};
+
+/***/ },
+/* 304 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var BookmarkStore = __webpack_require__(305);
+	var BookmarkActions = __webpack_require__(307);
+	var BookmarkIndexItem = __webpack_require__(309);
 	var GatheringActions = __webpack_require__(278);
 	var GatheringStore = __webpack_require__(274);
 	var SessionStore = __webpack_require__(233);
@@ -38172,14 +38278,14 @@
 	module.exports = BookmarksIndex;
 
 /***/ },
-/* 303 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var AppDispatcher = __webpack_require__(234);
 	var Store = __webpack_require__(238).Store;
-	var BookmarkConstants = __webpack_require__(304);
+	var BookmarkConstants = __webpack_require__(306);
 	
 	var BookmarkStore = new Store(AppDispatcher);
 	
@@ -38248,7 +38354,7 @@
 	module.exports = BookmarkStore;
 
 /***/ },
-/* 304 */
+/* 306 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38262,14 +38368,14 @@
 	module.exports = BookmarkConstants;
 
 /***/ },
-/* 305 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var AppDispatcher = __webpack_require__(234);
-	var BookmarkConstants = __webpack_require__(304);
-	var BookmarkApiUtil = __webpack_require__(306);
+	var BookmarkConstants = __webpack_require__(306);
+	var BookmarkApiUtil = __webpack_require__(308);
 	var ErrorActions = __webpack_require__(259);
 	
 	var BookmarkActions = {
@@ -38310,7 +38416,7 @@
 	module.exports = BookmarkActions;
 
 /***/ },
-/* 306 */
+/* 308 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38383,7 +38489,7 @@
 	module.exports = BookmarkApiUtil;
 
 /***/ },
-/* 307 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38420,7 +38526,7 @@
 	module.exports = BookmarkIndexItem;
 
 /***/ },
-/* 308 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38428,13 +38534,13 @@
 	/* eslint max-len: "off" */
 	
 	var React = __webpack_require__(1);
-	var Line = __webpack_require__(309).Line;
+	var Line = __webpack_require__(302).Line;
 	var GatheringStore = __webpack_require__(274);
 	var GatheringActions = __webpack_require__(278);
 	var TicketStore = __webpack_require__(297);
 	var TicketActions = __webpack_require__(299);
-	var BookmarkStore = __webpack_require__(303);
-	var BookmarkActions = __webpack_require__(305);
+	var BookmarkStore = __webpack_require__(305);
+	var BookmarkActions = __webpack_require__(307);
 	var SessionStore = __webpack_require__(233);
 	var SessionActions = __webpack_require__(257);
 	var CategoryStore = __webpack_require__(283);
@@ -38650,111 +38756,6 @@
 	module.exports = GatheringIndexShow;
 
 /***/ },
-/* 309 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = __webpack_require__(310);
-
-/***/ },
-/* 310 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var assign = __webpack_require__(4);
-	var React = __webpack_require__(1);
-	var defaultProps = {
-	  strokeWidth: 1,
-	  strokeColor: '#3FC7FA',
-	  trailWidth: 1,
-	  trailColor: '#D9D9D9'
-	};
-	
-	var Line = React.createClass({
-	  displayName: 'Line',
-	
-	  render: function render() {
-	    var props = assign({}, this.props);
-	    var pathStyle = {
-	      'strokeDasharray': '100px, 100px',
-	      'strokeDashoffset': 100 - props.percent + 'px',
-	      'transition': 'stroke-dashoffset 0.6s ease 0s, stroke 0.6s linear'
-	    };
-	
-	    ['strokeWidth', 'strokeColor', 'trailWidth', 'trailColor'].forEach(function (item) {
-	      if (item === 'trailWidth' && !props.trailWidth && props.strokeWidth) {
-	        props.trailWidth = props.strokeWidth;
-	        return;
-	      }
-	      if (item === 'strokeWidth' && props.strokeWidth && (!parseFloat(props.strokeWidth) || parseFloat(props.strokeWidth) > 100 || parseFloat(props.strokeWidth) < 0)) {
-	        props[item] = defaultProps[item];
-	        return;
-	      }
-	      if (!props[item]) {
-	        props[item] = defaultProps[item];
-	      }
-	    });
-	
-	    var strokeWidth = props.strokeWidth;
-	    var center = strokeWidth / 2;
-	    var right = 100 - strokeWidth / 2;
-	    var pathString = 'M ' + center + ',' + center + ' L ' + right + ',' + center;
-	    var viewBoxString = '0 0 100 ' + strokeWidth;
-	
-	    return React.createElement(
-	      'svg',
-	      { className: "rc-progress-line", viewBox: viewBoxString, preserveAspectRatio: "none" },
-	      React.createElement('path', { className: "rc-progress-line-trail", d: pathString, strokeLinecap: "round",
-	        stroke: props.trailColor, strokeWidth: props.trailWidth, fillOpacity: "0" }),
-	      React.createElement('path', { className: "rc-progress-line-path", d: pathString, strokeLinecap: "round",
-	        stroke: props.strokeColor, strokeWidth: props.strokeWidth, fillOpacity: "0", style: pathStyle })
-	    );
-	  }
-	});
-	
-	var Circle = React.createClass({
-	  displayName: 'Circle',
-	
-	  render: function render() {
-	    var props = assign({}, this.props);
-	    var strokeWidth = props.strokeWidth;
-	    var radius = 50 - strokeWidth / 2;
-	    var pathString = 'M 50,50 m 0,-' + radius + '\n     a ' + radius + ',' + radius + ' 0 1 1 0,' + 2 * radius + '\n     a ' + radius + ',' + radius + ' 0 1 1 0,-' + 2 * radius;
-	    var len = Math.PI * 2 * radius;
-	    var pathStyle = {
-	      'strokeDasharray': len + 'px ' + len + 'px',
-	      'strokeDashoffset': (100 - props.percent) / 100 * len + 'px',
-	      'transition': 'stroke-dashoffset 0.6s ease 0s, stroke 0.6s ease'
-	    };
-	    ['strokeWidth', 'strokeColor', 'trailWidth', 'trailColor'].forEach(function (item) {
-	      if (item === 'trailWidth' && !props.trailWidth && props.strokeWidth) {
-	        props.trailWidth = props.strokeWidth;
-	        return;
-	      }
-	      if (!props[item]) {
-	        props[item] = defaultProps[item];
-	      }
-	    });
-	
-	    return React.createElement(
-	      'svg',
-	      { className: 'rc-progress-circle', viewBox: '0 0 100 100' },
-	      React.createElement('path', { className: 'rc-progress-circle-trail', d: pathString, stroke: props.trailColor,
-	        strokeWidth: props.trailWidth, fillOpacity: '0' }),
-	      React.createElement('path', { className: 'rc-progress-circle-path', d: pathString, strokeLinecap: 'round',
-	        stroke: props.strokeColor, strokeWidth: props.strokeWidth, fillOpacity: '0', style: pathStyle })
-	    );
-	  }
-	});
-	
-	module.exports = {
-	  Line: Line,
-	  Circle: Circle
-	};
-
-/***/ },
 /* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -38767,7 +38768,7 @@
 	var CategoryActions = __webpack_require__(280);
 	var GatheringStore = __webpack_require__(274);
 	var GatheringActions = __webpack_require__(278);
-	var GatheringIndexShow = __webpack_require__(308);
+	var GatheringIndexShow = __webpack_require__(310);
 	
 	var CategoryIndexShow = React.createClass({
 	  displayName: 'CategoryIndexShow',
@@ -38823,9 +38824,9 @@
 	        React.createElement(
 	          'h3',
 	          null,
-	          '↓ Explore ',
+	          '↓ Explore more ',
 	          this.state.category.title,
-	          ' ↓'
+	          ' events ↓'
 	        ),
 	        this.state.gatherings.map(function (gathering) {
 	          return React.createElement(GatheringIndexShow, { key: gathering.id, gathering: gathering });

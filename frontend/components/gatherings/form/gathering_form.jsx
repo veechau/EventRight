@@ -98,81 +98,80 @@ const GatheringForm = React.createClass({
         </div>
           <br/>
           { this.fieldErrors("base") }
+					<br/>
           <div className="gathering-form">
-            <br />
 
             <label> Artist:
-              { this.fieldErrors("artist") }
               <input type="text"
                 value={this.state.artist}
                 onChange={this.update("artist")}
                 className="gathering-input" />
             </label>
+						{ this.fieldErrors("artist") }
 
             <br />
 
             <label> Location:
-              { this.fieldErrors("location") }
               <input type="text"
                 value={this.state.location}
                 onChange={this.update("location")}
                 className="gathering-input" />
             </label>
+						{ this.fieldErrors("location") }
 
             <br />
 
 
             <label> End Date:
-              { this.fieldErrors("end_date") }
 							<input type="date"
 								onChange={this.update("end_date")}
 								className="gathering-input" />
             </label>
+						{ this.fieldErrors("end_date") }
 
             <br />
 
             <label> Description:
-              { this.fieldErrors("description") }
               <input type="text"
                 value={this.state.description}
                 onChange={this.update("description")}
                 className="gathering-input" />
             </label>
+						{ this.fieldErrors("description") }
 
             <br />
 
             <label> Image:
-              { this.fieldErrors("image") }
               <input type="text"
                 value={this.state.image}
                 onChange={this.update("image")}
                 className="gathering-input" />
             </label>
+						{ this.fieldErrors("image") }
 
             <br />
 
             <label> Ticket Price:
-              { this.fieldErrors("tix_price") }
               <input type="number"
                 value={this.state.tix_price}
                 onChange={this.update("tix_price")}
                 className="gathering-input" />
             </label>
+						{ this.fieldErrors("tix_price") }
 
             <br />
 
             <label> Goal:
-              { this.fieldErrors("goal") }
               <input type="number"
                 value={this.state.goal}
                 onChange={this.update("goal")}
                 className="gathering-input" />
             </label>
+						{ this.fieldErrors("goal") }
 
             <br />
 
             <label> Category:
-              { this.fieldErrors("category_id") }
 							<select id="category-dropdown"
 											className="gathering-input"
 											onChange={this.update("category_id")}
@@ -187,6 +186,7 @@ const GatheringForm = React.createClass({
 							</select>
 
             </label>
+						{ this.fieldErrors("category_id") }
 
 		        <br />
 

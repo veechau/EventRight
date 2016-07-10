@@ -19,7 +19,7 @@ const Landing = React.createClass({
         <div id="welcome-text">Welcome to EventRight</div>
         <p id="welcome-p">Scroll down to explore more!</p>
 
-        <div onClick={this._scrollDown}><img
+        <div onMouseOver={this._scrollDown}><img
           id="welcome-arrow"
           src="https://res.cloudinary.com/vechau/image/upload/v1467965179/down-arrow-white_ozozli.png"/>
         </div>

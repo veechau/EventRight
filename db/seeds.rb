@@ -116,7 +116,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467984773/GFL_h8agtj.jpg",
   tix_price: 60,
   funds: (60 * 40),
-  goal: (600),
+  goal: (6000),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 4

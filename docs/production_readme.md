@@ -1,8 +1,8 @@
 # FresherNote
 
-[EventRight live][heroku] **NB:** This should be a link to your production site
+[EventRight live][EventRight] **NB:** This should be a link to your production site
 
-[heroku]: http://www.herokuapp.com
+[heroku]: http://www.eventright.us
 
 EventRight is a full-stack web application inspired by EventBrite  It utilizes Ruby on Rails on the backend, a PostgreSQL database, and React.js with a Flux architectural framework on the frontend.  
 
