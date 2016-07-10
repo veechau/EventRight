@@ -36,7 +36,7 @@ class Gathering < ActiveRecord::Base
   end
 
   def add_default_image_to_events
-    self.image = "https://res.cloudinary.com/vechau/image/upload/c_fill,h_300,w_300/v1468176030/hipsterlogogenerator_1468175650423_dyn2b9.png" unless self.image
+    self.image = "https://res.cloudinary.com/vechau/image/upload/c_fill,h_300,w_300/v1468176030/hipsterlogogenerator_1468175650423_dyn2b9.png" unless self.image.length > 6
   end
 
 end
