@@ -154,7 +154,7 @@ div.nav-links-item:hover {
 
 .app-slider-div img {
   height: auto;
-  min-height: 600px;
+  min-height: 800px;
   width: 100vw;
   top: calc(-80vh/3);
   position: absolute;
@@ -310,8 +310,8 @@ div.nav-links-item:hover {
 .user-dash-explore {
   display: flex;
   justify-content: center;
-  height: 50%;
-  overflow-y: scroll;
+  /*height: 50%;
+  overflow-y: scroll;*/
   border: 1px solid #D2D6DF;
 }
 
@@ -491,9 +491,9 @@ div.nav-links-item:hover {
 .category-index-item-image {
   display: flex;
   float: left;
-  width: 300px;
-  height: auto;
-  margin: 10px;
+  width: 250px;
+  height: 250px;
+  margin: 25px 10px;
 }
 
 .category-index-item-image:hover {

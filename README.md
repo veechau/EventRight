@@ -1,31 +1,33 @@
 # EventRight
 
-[Heroku link][heroku] **Note:** This should be a link to your production site
+[EventRight Live][heroku]
 
-[heroku]: https://eventright.herokuapp.com/
+[heroku]: http://www.eventright.us/#/home?_k=ey1mur
 
 ## Minimum Viable Product
 
 EventRight is a web application inspired by Eventbrite with a crowdfunding flair that will be built using Ruby on Rails and React.js. By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
 
-- [x] Hosting on Heroku
-- [x] New account creation, login, and guest/demo login
+- [ ] Hosting on Heroku
+- [ ] New account creation, login, and guest/demo login
 - [ ] A production README, replacing this README (**NB**: check out the [sample production README](docs/production_readme.md) -- you'll write this later)
+- [ ] Categories
+  - [ ] Categories representing the top 8 music genres
+  - [ ] Categories are used to sort events by the artist's genre
+  - [ ] Bonus: Categories index sorts events by crowdfunding status (ongoing, completed, incomplete)
 - [ ] Events
   - [ ] Events index page sorted by crowdfunding status (in_progress, incomplete and completed)
   - [ ] Only the events that are within current user's city are included
   - [ ] Bonus: Events displayed are based off of user's subscribed categories/bookmarks
-- x] Registration/Tickets
-  - [x] Only registered/signed-in users are able to create new events
-  - [x] Registered/signed-in users may add tickets to their cart
-  - [x] User Dashboard shows current user's purchased events
-- [x] Categories
-  - [x] Events and Categories have a many-to-many relationship
-  - [x] Categories will be used to sort, filter and search events
-- [x] Bookmark events
-  - [x] Registered/signed-in users can bookmark events
-  - [x] User Dashboard shows current user's bookmarked events
-  - [x] Adequate CSS styling
+- [ ] Registration/Tickets
+  - [ ] Only registered/signed-in users are able to create new events
+  - [ ] Registered/signed-in users may add tickets to their cart
+  - [ ] User Dashboard shows current user's purchased events and bookmarked events
+- [ ] Bookmark events
+  - [ ] Registered/signed-in users can bookmark events
+  - [ ] User Dashboard shows current user's bookmarked events
+  - [ ] User can add or remove bookmarks
+  - [ ] Adequate CSS styling
 
 ## Design Docs
 * [View Wireframes][views]
@@ -128,7 +130,7 @@ which has its own `Index` view.
 - build out API, Flux loop, and components for:
   - [x] fetching bookmarks for current user
   - [x] adding bookmarks to events
-  - [ ] removing bookmarks to events
+  - [x] removing bookmarks to events
 - [x] Style new elements
 
 ### Phase 8: Styling Cleanup and Seeding (1 day, W2 F 6pm)

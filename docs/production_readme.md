@@ -1,74 +1,41 @@
-# FresherNote
+# EventRight
 
 [EventRight live][EventRight]
 
 [EventRight]: http://www.eventright.us
 
-EventRight is a full-stack web application inspired by EventBrite  It utilizes Ruby on Rails on the backend, a PostgreSQL database, and React.js with a Flux architectural framework on the frontend.  
+EventRight is a full-stack web application inspired by EventBrite with a Kickstarter flair. This app allow its users to organize and/or contribute to an existing campaign to bring their favorite artists to their city. EventRight utilizes Ruby on Rails on the backend, a PostgreSQL database, and React.js with a Flux architectural framework on the frontend.  
 
 ## Features & Implementation
 
- **NB**: don't copy and paste any of this.  Many folks will implement similar features, and many employers will see the READMEs of a lot of a/A grads.  You must write in a way that distinguishes your README from that of other students', but use this as a guide for what topics to cover.  
-
 ### Single-Page App
 
-FresherNote is truly a single-page; all content is delivered on one static page.  The root page listens to a `SessionStore` and renders content based on a call to `SessionStore.currentUser()`.  Sensitive information is kept out of the frontend of the app by making an API call to `SessionsController#get_user`.
+  EventRight is a single-page web application that delivers all it's content on one static page. All communication to the server is accomplished with API calls.
 
-```ruby
-class Api::SessionsController < ApplicationController
-    def get_user
-      if current_user
-        render :current_user
-      else
-        render json: errors.full_messages
-      end
-    end
- end
-  ```
+### Creating and Rendering Events
 
-### Note Rendering and Editing
+  On the database side, events are called 'gatherings' to avoid conflict with reserved words in Javascript. Gatherings is stored in one table in the database containing a column for `organizer_id`. This column links the user who created the event as the organizer for the event. The gatherings table has an `artist` and `location` column which will reveal the campaign's targeted artist and location. The `start_date` and `end_date` columns in the database are the campaign's start and end fund date, respectively. The `start_date` is set to the date that the event form is submitted to begin the campaign immediately. The `end_date` has custom validations on the model level in the back end to ensure that is is a future date. Each gatherig also has a `description`, `image`, `tix_price`, `fund`, `goal`, and `status` column. The `description` and `image` will inform other users about the campaign. The `tix_price` is the price for one general admission ticket and the `goal` is the amount of `funds` needed to bring the artist to the music venue in the `location` column. In addition, there is a `category_id` column in the gatherings table because every gathering belongs to a category (genre) and will be sorted by the genre corresponding to the event's artist.
 
-  On the database side, the notes are stored in one table in the database, which contains columns for `id`, `user_id`, `content`, and `updated_at`.  Upon login, an API call is made to the database which joins the user table and the note table on `user_id` and filters by the current user's `id`.  These notes are held in the `NoteStore` until the user's session is destroyed.  
+### Categories
 
-  Notes are rendered in two different components: the `CondensedNote` components, which show the title and first few words of the note content, and the `ExpandedNote` components, which are editable and show all note text.  The `NoteIndex` renders all of the `CondensedNote`s as subcomponents, as well as one `ExpandedNote` component, which renders based on `NoteStore.selectedNote()`. The UI of the `NoteIndex` is taken directly from Evernote for a professional, clean look:  
+To represent the top genress, a categories table was implemented in the database with three columns: `title`, `description`, and `image`. These columns serve as descriptors for the categories.
 
-![image of notebook index](https://github.com/appacademy/sample-project-proposal/blob/master/docs/noteIndex.png)
+### Bookmarks
 
-Note editing is implemented using the Quill.js library, allowing for a Word-processor-like user experience.
+Bookmarks are stored in the database through a join table with columns: `user_id` and `gathering_id`. Bookmarks belong to a gathering and a registered user. Bookmarks are maintained on the front end in the `BookmarkStore`. Signed in users may add and delete bookmarks from the front-end.
 
-### Notebooks
+### Tickets
 
-Implementing Notebooks started with a notebook table in the database.  The `Notebook` table contains two columns: `title` and `id`.  Additionally, a `notebook_id` column was added to the `Note` table.  
-
-The React component structure for notebooks mirrored that of notes: the `NotebookIndex` component renders a list of `CondensedNotebook`s as subcomponents, along with one `ExpandedNotebook`, kept track of by `NotebookStore.selectedNotebook()`.  
-
-`NotebookIndex` render method:
-
-```javascript
-render: function () {
-  return ({this.state.notebooks.map(function (notebook) {
-    return <CondensedNotebook notebook={notebook} />
-  }
-  <ExpandedNotebook notebook={this.state.selectedNotebook} />)
-}
-```
-
-### Tags
-
-As with notebooks, tags are stored in the database through a `tag` table and a join table.  The `tag` table contains the columns `id` and `tag_name`.  The `tagged_notes` table is the associated join table, which contains three columns: `id`, `tag_id`, and `note_id`.  
-
-Tags are maintained on the frontend in the `TagStore`.  Because creating, editing, and destroying notes can potentially affect `Tag` objects, the `NoteIndex` and the `NotebookIndex` both listen to the `TagStore`.  It was not necessary to create a `Tag` component, as tags are simply rendered as part of the individual `Note` components.  
-
-![tag screenshot](https://github.com/appacademy/sample-project-proposal/blob/master/docs/tagScreenshot.png)
+Tickets are stored in the database through a join table with columns: `attendee_id` and `gathering_id`. Tickets belong to a gathering and a registered user. Tickets are maintained on the front end in the `TicketStore`. Signed in users may choose to fund an event by purchasing a ticket but they are not allowed to remove funding from an event.  
 
 ## Future Directions for the Project
 
-In addition to the features already implemented, I plan to continue work on this project.  The next steps for FresherNote are outlined below.
+In addition to the features already implemented, I plan to continue work on this project.  The next steps for EventRight are outlined below.
 
 ### Search
 
-Searching notes is a standard feature of Evernote.  I plan to utilize the Fuse.js library to create a fuzzy search of notes and notebooks.  This search will look go through tags, note titles, notebook titles, and note content.  
+Searching notes is a standard feature of EventRight. This search will look go through categories and gathering artist names and by venues.
 
-### Direct Messaging
+### Maps
 
-Although this is less essential functionality, I also plan to implement messaging between FresherNote users.  To do this, I will use WebRTC so that notifications of messages happens seamlessly.  
+I also plan to allow users to search events based on venues via Google Maps Api.

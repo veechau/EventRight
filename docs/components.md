@@ -7,26 +7,21 @@ associated routes, so the nesting of your bolded components must
 _**exactly**_ match the nesting of your routes.)
 
 * **App**
-  * MainPage
-    * EventIndex
-      * EventIndexItem
-    * CategoryIndex
+  * **Landing**
+    * **CategoryIndex**
       * CategoryIndexItem
-  * **EventsIndex**
-    * EventIndexItem
-    * **EventDetail**
-      * EventEditArea
-  * **CategoriesIndex**
-    * CategoriesIndexItem
-      * **CategoryDetail**
-        * EventIndexItem
-  * **UserPage**
-    * EventForm
-    * **UserDetail**
-      * **BookmarksIndex**
-        * BookmarkIndexItem
-      * **TicketsIndex**
-        * EventTicketItem
+        * **GatheringIndex**
+          * GatheringIndexItem
+            * GatheringIndexShow
+  * **User-Landing**
+    * **BookmarksIndex**
+      * BookmarkIndexItem
+    * **TicketsIndex**
+      * GatheringTicketItem
+    * **GatheringForm**
+    * GatheringIndex
+      * GatheringIndexItem
+        * GatheringIndexShow
 
 
 ## Routes
@@ -37,8 +32,8 @@ _**exactly**_ match the nesting of your routes.)
     * **component:** `EventDetail` **path:** `events/:eventId`
   * **component:** `CategoriesIndex` **path:** `categories`
     * **component:** `CategoryDetails` **path:** `categories/:categoryId`
-  * **component:** `UserPage` **path:** `users/:userId`
-    * **component:** `BookmarksIndex` **path:** `users/:userId/bookmarks`
-      * **component:** `BookmarkIndexItem` **path:** `users/:userId/bookmarks/:bookmarkId`
-    * **component:** `TicketsIndex` **path:** `users/:userId/tickets`
-      * **component:** `TicketIndexItem` **path:** `users/:userId/tickets/:ticketId`
+  * **component:** `UserPage` **path:** `home`
+    * **component:** `BookmarksIndex` **path:** `bookmarks`
+      * **component:** `BookmarkIndexItem` **path:** `bookmarks/:bookmarkId`
+    * **component:** `TicketsIndex` **path:** `tickets`
+      * **component:** `TicketIndexItem` **path:** `tickets/:ticketId`
