@@ -7,7 +7,6 @@
     "doc": "docs",
     "test": "test"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/veechau/EventRight.git"
@@ -34,6 +33,7 @@
     "react-dom": "^15.1.0",
     "react-infinite": "^0.9.2",
     "react-router": "^2.5.1",
+    "react-search": "^1.0.10",
     "webpack": "^1.13.1"
   },
   "engines": {

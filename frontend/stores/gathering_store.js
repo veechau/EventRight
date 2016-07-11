@@ -3,8 +3,7 @@
 const AppDispatcher = require('../dispatcher/dispatcher');
 const Store = require('flux/utils').Store;
 const GatheringConstants = require('../constants/gathering_constants');
-const ReactRouter = require('react-router');
-const hashHistory = ReactRouter.hashHistory;
+const hashHistory = require('react-router').hashHistory;
 
 
 const GatheringStore = new Store(AppDispatcher);

@@ -539,3 +539,49 @@ div.nav-links-item:hover {
 .category-index-show img {
   width: 300px;
 }
+
+/*Search Bar*/
+
+.search-bar input[type=text]{
+    text-align: center;
+    font: inherit;
+    border: 6px solid #a3d8d6;
+    padding: 13px 12px;
+    font-size: 15px;
+    box-shadow: 0 1px 1px #DDD;
+    width: 384px;
+    outline: none;
+    display: block;
+    color: #7B8585;
+    margin: 0 auto 20px;
+}
+
+.search-bar ul{
+    list-style: none;
+    display: inline-block;
+    width: 420px;
+    text-align: left;
+}
+
+.search-bar ul li{
+    display: block;
+    padding: 15px 20px;
+    background-color: #F8F8F8;
+    color: #7B8585;
+    margin-bottom: 3px;
+    position: relative;
+
+    transition: 0.3s;
+}
+
+.search-bar ul li a{
+    position: absolute;
+    left: 160px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #969d9d;
+}
+
+.search-bar ul li:hover{
+    background-color:#d8f2f1;
+}

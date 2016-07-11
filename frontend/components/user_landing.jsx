@@ -13,11 +13,14 @@ const Landing = React.createClass({
     return {currentUser: ""};
   },
   componentDidMount(){
-    this.SessionStoreListener = SessionStore.addListener(this._onChange());
+    this.sessionStoreListener = SessionStore.addListener(this._onChange);
     SessionActions.fetchCurrentUser();
   },
   _onChange(){
     this.setState({currentUser: SessionStore.currentUser()});
+  },
+  componentWillUnmount(){
+    this.sessionStoreListener.remove();
   },
   render(){
 
