@@ -34973,6 +34973,7 @@
 	var Modal = __webpack_require__(264);
 	
 	var GatheringForm = __webpack_require__(279);
+	var GatheringStore = __webpack_require__(276);
 	
 	var modalStyle = {
 	  width: '100%',
@@ -34994,8 +34995,6 @@
 	  border: '1px solid #D2D6DF',
 	  borderRadius: '8px'
 	};
-	
-	var GatheringStore = __webpack_require__(276);
 	
 	var GatheringModal = React.createClass({
 	  displayName: 'GatheringModal',
@@ -37886,36 +37885,22 @@
 	      React.createElement(
 	        'div',
 	        { className: 'user-dash' },
-	        React.createElement(
-	          'div',
-	          { className: 'user-dash-bookmark' },
-	          React.createElement(
-	            'header',
-	            { className: 'user-landing-header' },
-	            'Bookmarked Events'
-	          ),
-	          React.createElement(BookmarksIndex, null)
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'user-dash-tickets' },
-	          React.createElement(
-	            'header',
-	            { className: 'user-landing-header' },
-	            'Events Funded By You!'
-	          ),
-	          React.createElement(TicketsIndex, null)
-	        )
-	      ),
-	      React.createElement(
-	        'header',
-	        { className: 'user-landing-header' },
-	        'Explore Events'
+	        React.createElement(BookmarksIndex, null),
+	        React.createElement(TicketsIndex, null)
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'user-dash-explore' },
-	        React.createElement(GatheringsIndex, null)
+	        { id: 'user-dash-explore' },
+	        React.createElement(
+	          'h1',
+	          { className: 'user-landing-header' },
+	          'Explore Events'
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'user-dash-explore-index' },
+	          React.createElement(GatheringsIndex, null)
+	        )
 	      )
 	    );
 	  }
@@ -37930,12 +37915,34 @@
 	'use strict';
 	
 	var React = __webpack_require__(1);
+	var Modal = __webpack_require__(264);
+	
 	var TicketStore = __webpack_require__(299);
 	var TicketActions = __webpack_require__(301);
 	var TicketIndexItem = __webpack_require__(303);
 	var GatheringActions = __webpack_require__(280);
 	var GatheringStore = __webpack_require__(276);
 	var SessionStore = __webpack_require__(235);
+	
+	var modalStyle = {
+	  width: '80%',
+	  height: '80%',
+	  backgroundColor: 'fade(#4B4E4F, 80%)',
+	  opacity: '0.3'
+	};
+	
+	var backdropStyle = {
+	  width: '100%',
+	  border: '0px solid transparent'
+	};
+	
+	var contentStyle = {
+	  width: '100%',
+	  margin: 'auto',
+	  marginTop: '20px',
+	  border: '1px solid #D2D6DF',
+	  borderRadius: '8px'
+	};
 	
 	var TicketsIndex = React.createClass({
 	  displayName: 'TicketsIndex',
@@ -37956,15 +37963,29 @@
 	    this.setState({
 	      tickets: TicketStore.findByUserId(SessionStore.currentUser().id) });
 	  },
+	  showModal: function showModal() {
+	    this.refs.modal.show();
+	  },
+	  hideModal: function hideModal() {
+	    this.refs.modal.hide();
+	  },
 	  render: function render() {
-	    if (this.state.tickets.length === 0) {
-	      return React.createElement(
+	    var content = React.createElement(
+	      'div',
+	      { className: 'user-dash-text' },
+	      React.createElement(
+	        'h1',
+	        null,
+	        'My Tickets'
+	      ),
+	      React.createElement(
 	        'div',
 	        null,
 	        'You didn\'t fund any events! :('
-	      );
-	    } else {
-	      return React.createElement(
+	      )
+	    );
+	    if (this.state.tickets.length > 0) {
+	      content = React.createElement(
 	        'ul',
 	        null,
 	        this.state.tickets.map(function (ticket) {
@@ -37974,6 +37995,39 @@
 	        })
 	      );
 	    }
+	    return React.createElement(
+	      'div',
+	      { className: 'user-dash-link' },
+	      React.createElement(
+	        'div',
+	        { onClick: this.showModal },
+	        'Go To My Tickets'
+	      ),
+	      React.createElement(
+	        Modal,
+	        { ref: 'modal',
+	          className: 'user-dash-modal',
+	          modalStyle: modalStyle,
+	          contentStyle: contentStyle },
+	        React.createElement(
+	          'div',
+	          { className: 'user-dash-modal-content' },
+	          React.createElement(
+	            'div',
+	            {
+	              className: 'user-dash-modal-x',
+	              onClick: this.hideModal },
+	            'X'
+	          ),
+	          React.createElement(
+	            'h1',
+	            { className: 'user-dash-text' },
+	            'My Reserved Tickets'
+	          ),
+	          content
+	        )
+	      )
+	    );
 	  }
 	});
 	
@@ -38392,12 +38446,34 @@
 	'use strict';
 	
 	var React = __webpack_require__(1);
+	var Modal = __webpack_require__(264);
+	
 	var BookmarkStore = __webpack_require__(307);
 	var BookmarkActions = __webpack_require__(309);
 	var BookmarkIndexItem = __webpack_require__(311);
 	var GatheringActions = __webpack_require__(280);
 	var GatheringStore = __webpack_require__(276);
 	var SessionStore = __webpack_require__(235);
+	
+	var modalStyle = {
+	  width: '80%',
+	  height: '80%',
+	  backgroundColor: 'fade(#4B4E4F, 80%)',
+	  opacity: '0.3'
+	};
+	
+	var backdropStyle = {
+	  width: '100%',
+	  border: '0px solid transparent'
+	};
+	
+	var contentStyle = {
+	  width: '100%',
+	  margin: 'auto',
+	  marginTop: '20px',
+	  border: '1px solid #D2D6DF',
+	  borderRadius: '8px'
+	};
 	
 	var BookmarksIndex = React.createClass({
 	  displayName: 'BookmarksIndex',
@@ -38414,20 +38490,27 @@
 	    this.bookmarkListener.remove();
 	    this.gatheringListener.remove();
 	  },
+	  showModal: function showModal() {
+	    this.refs.modal.show();
+	  },
+	  hideModal: function hideModal() {
+	    this.refs.modal.hide();
+	  },
 	  _onChange: function _onChange() {
 	    this.setState({ bookmarks: BookmarkStore.findByUserId(SessionStore.currentUser().id) });
 	  },
 	  render: function render() {
-	    if (this.state.bookmarks.length === 0) {
-	      return React.createElement(
-	        'div',
-	        null,
-	        'You do not have any bookmarked events!'
-	      );
-	    } else {
-	      return React.createElement(
+	
+	    var content = React.createElement(
+	      'div',
+	      null,
+	      'You do not have any bookmarked events!'
+	    );
+	
+	    if (this.state.bookmarks.length > 0) {
+	      content = React.createElement(
 	        'ul',
-	        null,
+	        { className: 'user-dash-bookmark' },
 	        this.state.bookmarks.map(function (bookmark) {
 	          return React.createElement(BookmarkIndexItem, {
 	            key: bookmark.id,
@@ -38435,6 +38518,41 @@
 	        })
 	      );
 	    }
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'div',
+	        {
+	          className: 'user-dash-link',
+	          onClick: this.showModal },
+	        'Go To My Bookmarks'
+	      ),
+	      React.createElement(
+	        Modal,
+	        { ref: 'modal',
+	          className: 'user-dash-modal',
+	          modalStyle: modalStyle,
+	          contentStyle: contentStyle },
+	        React.createElement(
+	          'div',
+	          { className: 'user-dash-modal-content' },
+	          React.createElement(
+	            'div',
+	            {
+	              className: 'user-dash-modal-x',
+	              onClick: this.hideModal },
+	            'X'
+	          ),
+	          React.createElement(
+	            'h1',
+	            { className: 'user-dash-text' },
+	            'My Bookmarks'
+	          ),
+	          content
+	        )
+	      )
+	    );
 	  }
 	});
 	
@@ -38671,11 +38789,33 @@
 	    var bookmarkedEvent = GatheringStore.find(this.props.bookmark.gathering_id);
 	    var bookmarkedEventShow = "";
 	    if (bookmarkedEvent) {
+	      var percentage = (parseInt(100 * bookmarkedEvent.funds) / bookmarkedEvent.goal).toString();
+	
+	      var containerStyle = {
+	        "width": "100%",
+	        "paddingTop": "15px",
+	        "paddingBottom": "10px"
+	      };
+	
 	      bookmarkedEventShow = React.createElement(
 	        'li',
 	        { className: 'bookmark-index-item',
 	          onClick: this._handleImgClick },
-	        React.createElement('img', { src: bookmarkedEvent.image })
+	        React.createElement('img', { src: bookmarkedEvent.image }),
+	        React.createElement(
+	          'div',
+	          { className: 'ticket-index-item-info' },
+	          React.createElement(
+	            'h1',
+	            null,
+	            bookmarkedEvent.artist
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            bookmarkedEvent.location
+	          )
+	        )
 	      );
 	    }
 	    return React.createElement(

@@ -325,14 +325,16 @@ div.nav-links-item:hover {
 }
 
 .user-landing-header {
-  display: flex;
+  display: block;
+  font-family: 'Quicksand', sans-serif;
   margin: 10px 0px;
-  justify-content: center;
+  text-align: center;;
 }
 
 .user-info {
   display: flex;
   justify-content: flex-start;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .user-dash {
@@ -341,40 +343,82 @@ div.nav-links-item:hover {
 
 }
 
-.user-dash-explore {
-  display: flex;
-  justify-content: center;
-  border: 1px solid #D2D6DF;
+.user-dash-modal {
+  position: relative;
+  overflow-y: scroll;
 }
 
+.user-dash-modal-content {
+  background-color: #FFFFFF;
+  border-radius: 7px;
+  padding: 2px;
+  color: #666A73;
+  overflow-y: scroll;
+}
+
+.user-dash-modal-x {
+  text-align: right;
+  padding: 5px;
+}
+
+.user-dash-explore {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.user-dash-explore-index {
+  display: flex;
+  justify-content: center;
+}
 
 .user-dash-bookmark, .user-dash-tickets {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50%;
-  height: 50vh;
+  flex-wrap: wrap;
+  align-items: flex-start;;
+  justify-content: space-around;
   overflow-y: scroll;
-  border: 1px solid #D2D6DF;
 }
-
+/*
 .user-dash-bookmark ul {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: space-around;
-}
+}*/
 
 .user-dash-tickets ul {
   display: flex;
+  flex-wrap: wrap;
   width: 80%;
-  flex-direction: column;
+}
+
+.user-dash-link {
+  font-family: 'Quicksand', sans-serif;
+  border: 1px solid #F6682F;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.user-dash-link:hover {
+  background-color: #F6682F;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.user-dash-text {
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  color: #F6682F;
+  font-size: 2.5em;
 }
 
 .tickets-index-item {
   display: flex;
   align-items: flex-start;
   padding: 5px;
-  margin: 10px 0;
+  margin: 15px 0;
 }
 
 .tickets-index-item > img {
@@ -390,7 +434,7 @@ div.nav-links-item:hover {
 }
 
 .bookmark-index-item {
-  width: 150px;
+  width: 300px;
   margin: 5px 0;
   padding: 5px;
 }
@@ -469,7 +513,9 @@ div.nav-links-item:hover {
 }
 
 .gathering-button:hover {
-  color: #F6682F;
+  background-color: #F6682F;
+  color: #FFFFFF;
+  cursor: pointer;
 }
 
 .gathering-button:disabled {
@@ -593,16 +639,19 @@ div.nav-links-item:hover {
   width: 50%;
 }
 
+.category-index-show-right h1 {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.category-index-show-right p {
+  font-size: 0.8em;
+}
+
 .category-index-show-events {
   display: flex;
   align-items: center;
   flex-direction: column;
   margin: 30px 0;
-}
-
-.category-index-show-events h3 {
-  font-size: 2em;
-  font-weight: bold;
 }
 
 .category-index-show img {
@@ -653,4 +702,5 @@ div.nav-links-item:hover {
 
 .search-bar ul li:hover{
     background-color:#d8f2f1;
+    cursor: pointer;
 }

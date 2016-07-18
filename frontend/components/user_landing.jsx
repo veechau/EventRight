@@ -30,19 +30,14 @@ const Landing = React.createClass({
         <h1>Welcome back, {this.state.currentUser.first_name} {this.state.currentUser.last_name}</h1>
         </div>
         <div className="user-dash">
-          <div className="user-dash-bookmark">
-            <header className="user-landing-header">Bookmarked Events</header>
             <BookmarksIndex />
-          </div>
-          <div className="user-dash-tickets">
-            <header className="user-landing-header">Events Funded By You!</header>
             <TicketsIndex />
-          </div>
         </div>
-
-        <header className="user-landing-header">Explore Events</header>
-        <div className="user-dash-explore">
+        <div id="user-dash-explore">
+        <h1 className="user-landing-header">Explore Events</h1>
+        <div className="user-dash-explore-index">
           <GatheringsIndex />
+        </div>
         </div>
       </div>
     );

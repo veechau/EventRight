@@ -2,6 +2,7 @@ const React = require('react');
 const Modal = require('boron/DropModal');
 
 const GatheringForm = require('./gathering_form');
+const GatheringStore = require('../../../stores/gathering_store');
 
 const modalStyle = {
   width: '100%',
@@ -24,7 +25,6 @@ const contentStyle = {
   borderRadius: '8px'
 };
 
-const GatheringStore = require('../../../stores/gathering_store');
 
 const GatheringModal = React.createClass({
     componentDidMount() {
