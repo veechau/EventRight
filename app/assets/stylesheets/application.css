@@ -344,16 +344,15 @@ div.nav-links-item:hover {
 }
 
 .user-dash-modal {
-  position: relative;
-  overflow-y: scroll;
-}
-
-.user-dash-modal-content {
   background-color: #FFFFFF;
   border-radius: 7px;
   padding: 2px;
   color: #666A73;
   overflow-y: scroll;
+}
+
+.user-dash-modal-content {
+
 }
 
 .user-dash-modal-x {
@@ -417,7 +416,7 @@ div.nav-links-item:hover {
 .tickets-index-item {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content:
   padding: 5px;
 }
 

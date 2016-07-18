@@ -24,7 +24,7 @@ const contentStyle = {
   width: '100%',
   margin: 'auto',
   marginTop: '20px',
-  border: '1px solid #D2D6DF',
+  // border: '1px solid #D2D6DF',
   borderRadius: '8px'
 };
 
