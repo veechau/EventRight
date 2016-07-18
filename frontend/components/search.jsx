@@ -17,7 +17,6 @@ const SearchBar = React.createClass({
   },
   _handleEnter(e){
     if (e.keyCode == 13){
-      console.log("Enter");
     }
   },
   render(){

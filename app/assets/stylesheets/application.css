@@ -310,9 +310,8 @@ div.nav-links-item:hover {
 .user-dash-explore {
   display: flex;
   justify-content: center;
-  /*height: 50%;
-  overflow-y: scroll;*/
   border: 1px solid #D2D6DF;
+  height: 100%;
 }
 
 

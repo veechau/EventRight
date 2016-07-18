@@ -409,14 +409,14 @@ Gathering.create({
 #     })
 # end
 
-6.times do
+3.times do
   Ticket.create({
     attendee_id: 1,
     gathering_id: rand(Gathering.all.count) + 1
     })
 end
 
-6.times do
+3.times do
   Bookmark.create({
     user_id: 1,
     gathering_id: rand(Gathering.all.count) + 1

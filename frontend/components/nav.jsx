@@ -20,6 +20,10 @@ const Nav = React.createClass({
     SessionStore.addListener(this.forceUpdate.bind(this));
   },
 
+  _goToLanding() {
+    hashHistory.push('/');
+  },
+
   _handleLogOut(){
     SessionActions.logOut();
     hashHistory.push('/');
@@ -55,10 +59,13 @@ const Nav = React.createClass({
     if (SessionStore.isUserLoggedIn()) {
       nav = (
         <nav className="nav-links">
+        <div
+            className="nav-links-item"
+            onClick={this._goToLanding}>Home</div>
+        <GatheringModal />
           <div
                 className="nav-links-item"
                 onClick={this._handleLogOut}>Logout</div>
-          <GatheringModal />
           <div
                 className="nav-links-item"
                 onMouseOver={this._fillIcon}

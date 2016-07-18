@@ -25,7 +25,7 @@ const GatheringIndexShow = React.createClass({
     return {  gathering_id: eventId,
               category: "",
               gathering: GatheringStore.find(eventId),
-              ticketText: "Buy Ticket",
+              ticketText: "Reserve Ticket",
               bookmarkText: "Add Bookmark",
               purchased: false,
             };
@@ -62,13 +62,13 @@ const GatheringIndexShow = React.createClass({
     this.setState({ bookmarkText: buttonText });
   },
   _ticketChange(){
-    let buttonText = "Buy Ticket";
+    let buttonText = "Reserve Ticket";
     let currentUser = SessionStore.currentUser();
     if (currentUser && this.state.gathering) {
       let tickets = TicketStore.findByUserId(currentUser.id);
       tickets.forEach( (ticket) => {
         if (ticket.gathering_id === this.state.gathering.id) {
-          buttonText = "Purchased!";
+          buttonText = "Tickets Reserved!";
           GatheringStore.updateFund(this.state.gathering);
           this.setState({ purchased: true});
         }

@@ -33601,6 +33601,9 @@
 	  componentDidMount: function componentDidMount() {
 	    SessionStore.addListener(this.forceUpdate.bind(this));
 	  },
+	  _goToLanding: function _goToLanding() {
+	    hashHistory.push('/');
+	  },
 	  _handleLogOut: function _handleLogOut() {
 	    SessionActions.logOut();
 	    hashHistory.push('/');
@@ -33638,10 +33641,17 @@
 	          'div',
 	          {
 	            className: 'nav-links-item',
+	            onClick: this._goToLanding },
+	          'Home'
+	        ),
+	        React.createElement(GatheringModal, null),
+	        React.createElement(
+	          'div',
+	          {
+	            className: 'nav-links-item',
 	            onClick: this._handleLogOut },
 	          'Logout'
 	        ),
-	        React.createElement(GatheringModal, null),
 	        React.createElement(
 	          'div',
 	          {
@@ -33731,7 +33741,7 @@
 				method: 'DELETE',
 				success: success,
 				error: function error() {
-					console.log("Logout error in SessionApiUtil#logout");
+					// console.log("Logout error in SessionApiUtil#logout");
 				}
 			});
 		},
@@ -33754,7 +33764,7 @@
 				method: 'GET',
 				success: success,
 				error: function error(xhr) {
-					console.log("Error in SessionApiUtil#fetchCurrentUser");
+					// console.log("Error in SessionApiUtil#fetchCurrentUser");
 				}
 			});
 		}
@@ -38704,7 +38714,7 @@
 	    return { gathering_id: eventId,
 	      category: "",
 	      gathering: GatheringStore.find(eventId),
-	      ticketText: "Buy Ticket",
+	      ticketText: "Reserve Ticket",
 	      bookmarkText: "Add Bookmark",
 	      purchased: false
 	    };
@@ -38745,13 +38755,13 @@
 	  _ticketChange: function _ticketChange() {
 	    var _this2 = this;
 	
-	    var buttonText = "Buy Ticket";
+	    var buttonText = "Reserve Ticket";
 	    var currentUser = SessionStore.currentUser();
 	    if (currentUser && this.state.gathering) {
 	      var tickets = TicketStore.findByUserId(currentUser.id);
 	      tickets.forEach(function (ticket) {
 	        if (ticket.gathering_id === _this2.state.gathering.id) {
-	          buttonText = "Purchased!";
+	          buttonText = "Tickets Reserved!";
 	          GatheringStore.updateFund(_this2.state.gathering);
 	          _this2.setState({ purchased: true });
 	        }
