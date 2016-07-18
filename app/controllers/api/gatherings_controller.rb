@@ -2,6 +2,9 @@ class Api::GatheringsController < ApplicationController
 
   def index
     @gatherings = Gathering.all.includes(:tickets, :bookmarks)
+    @gatherings.each do |gathering|
+      gathering.funds = gathering.tickets.count * gathering.tix_price
+    end
     render :index
   end
 
@@ -17,6 +20,7 @@ class Api::GatheringsController < ApplicationController
 
   def show
     @gathering = Gathering.find(params[:id]).includes(:tickets, :bookmarks)
+    @gathering.funds = @gathering.tickets.count * @gathering.tix_price
     render :show
   end
 

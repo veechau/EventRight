@@ -12,6 +12,10 @@ const GatheringIndexItem = React.createClass({
         <div className="gathering-index-item-image"
              onClick={this._handleImgClick}>
           <img src={this.props.gathering.image}/>
+          <p
+            className="gathering-name">
+            {this.props.gathering.artist}
+          </p>
         </div>
     );
   }

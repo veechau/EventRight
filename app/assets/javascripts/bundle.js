@@ -33587,8 +33587,8 @@
 	var SessionActions = __webpack_require__(259);
 	
 	var SessionModal = __webpack_require__(263);
-	var LoginForm = __webpack_require__(273);
-	var SignupForm = __webpack_require__(275);
+	// const LoginForm = require('./auth/login_form');
+	// const SignupForm = require('./auth/signup_form');
 	
 	var ReactRouter = __webpack_require__(172);
 	var hashHistory = ReactRouter.hashHistory;
@@ -33881,8 +33881,10 @@
 	          { className: 'session-modal-content' },
 	          React.createElement(
 	            'div',
-	            { onClick: this.hideModal },
-	            ' X '
+	            {
+	              className: 'session-modal-x',
+	              onClick: this.hideModal },
+	            'X'
 	          ),
 	          formContent
 	        )
@@ -34847,13 +34849,11 @@
 	              onChange: this.update("avatar"),
 	              className: 'login-input' })
 	          ),
-	          React.createElement('br', null),
 	          React.createElement(
 	            'label',
 	            null,
-	            ' Initial Deposit:',
 	            this.fieldErrors("balance"),
-	            React.createElement('input', { type: 'number',
+	            React.createElement('input', { hidden: 'number',
 	              value: this.state.balance,
 	              onChange: this.update("balance"),
 	              className: 'login-input' })
@@ -34982,6 +34982,8 @@
 	};
 	
 	var backdropStyle = {
+	  width: '100%',
+	  height: '100%',
 	  border: '0px solid transparent'
 	};
 	
@@ -35027,15 +35029,16 @@
 	        { ref: 'modal',
 	          className: 'gathering-modal',
 	          modalStyle: modalStyle,
-	          backdropStyle: backdropStyle,
 	          contentStyle: contentStyle },
 	        React.createElement(
 	          'div',
 	          { className: 'gathering-modal-content' },
 	          React.createElement(
 	            'div',
-	            { onClick: this.hideModal },
-	            ' X '
+	            {
+	              className: 'gathering-modal-x',
+	              onClick: this.hideModal },
+	            'X'
 	          ),
 	          React.createElement(GatheringForm, null)
 	        )
@@ -37661,13 +37664,7 @@
 	            'li',
 	            { key: gathering.id },
 	            React.createElement(GatheringIndexItem, {
-	              gathering: gathering }),
-	            React.createElement(
-	              'p',
-	              {
-	                className: 'gathering-name' },
-	              gathering.artist
-	            )
+	              gathering: gathering })
 	          );
 	        })
 	      )
@@ -37698,7 +37695,13 @@
 	      'div',
 	      { className: 'gathering-index-item-image',
 	        onClick: this._handleImgClick },
-	      React.createElement('img', { src: this.props.gathering.image })
+	      React.createElement('img', { src: this.props.gathering.image }),
+	      React.createElement(
+	        'p',
+	        {
+	          className: 'gathering-name' },
+	        this.props.gathering.artist
+	      )
 	    );
 	  }
 	});
@@ -37732,6 +37735,11 @@
 	        'div',
 	        { id: 'welcome-text' },
 	        'Welcome to EventRight'
+	      ),
+	      React.createElement(
+	        'p',
+	        { id: 'welcome-intro' },
+	        'Crowdfund your favorite artist to appear in your city!'
 	      ),
 	      React.createElement(
 	        'p',
@@ -38700,6 +38708,7 @@
 	var SessionActions = __webpack_require__(259);
 	var CategoryStore = __webpack_require__(285);
 	var CategoryActions = __webpack_require__(282);
+	var SessionModal = __webpack_require__(263);
 	var hashHistory = __webpack_require__(172).hashHistory;
 	
 	var GatheringIndexShow = React.createClass({
@@ -38796,6 +38805,9 @@
 	
 	    return day + ' ' + monthNames[monthIndex] + ' ' + year;
 	  },
+	  _directLogIn: function _directLogIn() {
+	    hashHistory.push('/login');
+	  },
 	  render: function render() {
 	    var percentage = (parseInt(100 * this.state.gathering.funds) / this.state.gathering.goal).toString();
 	
@@ -38803,22 +38815,41 @@
 	      "width": "100%"
 	    };
 	
-	    var buttons = "";
+	    var buttons = React.createElement(
+	      'div',
+	      { className: 'gathering-buttons' },
+	      React.createElement(
+	        'button',
+	        {
+	          className: 'gathering-button',
+	          disabled: false,
+	          onClick: this._directLogIn },
+	        'Reserve Ticket'
+	      ),
+	      React.createElement(
+	        'button',
+	        {
+	          className: 'gathering-button',
+	          disabled: false,
+	          onClick: this._directLogIn },
+	        'Add Bookmark'
+	      )
+	    );
 	
 	    if (SessionStore.isUserLoggedIn()) {
 	      buttons = React.createElement(
 	        'div',
-	        null,
+	        { className: 'gathering-buttons' },
 	        React.createElement(
 	          'button',
-	          { id: 'buy-ticket',
+	          { className: 'gathering-button',
 	            onClick: this._addTicket,
 	            disabled: this.state.purchased },
 	          this.state.ticketText
 	        ),
 	        React.createElement(
 	          'button',
-	          { id: 'add-bookmark',
+	          { className: 'gathering-button',
 	            onClick: this._toggleBookmark },
 	          this.state.bookmarkText
 	        )
@@ -38905,7 +38936,8 @@
 	        buttons,
 	        React.createElement(
 	          'div',
-	          null,
+	          { className: 'event-genre' },
+	          'Genre: ',
 	          this.state.category
 	        )
 	      )
@@ -38929,6 +38961,7 @@
 	var GatheringStore = __webpack_require__(276);
 	var GatheringActions = __webpack_require__(280);
 	var GatheringIndexShow = __webpack_require__(312);
+	var hashHistory = __webpack_require__(172).hashHistory;
 	
 	var CategoryIndexShow = React.createClass({
 	  displayName: 'CategoryIndexShow',
@@ -38951,7 +38984,11 @@
 	  _onGatheringChange: function _onGatheringChange() {
 	    this.setState({ gatherings: GatheringStore.findByCategoryId(this.props.params.catId) });
 	  },
+	  _handleImgClick: function _handleImgClick() {
+	    hashHistory.push('events/' + this.state.gathering.id);
+	  },
 	  render: function render() {
+	    $(window).scrollTop();
 	    return React.createElement(
 	      'div',
 	      null,
@@ -38960,7 +38997,9 @@
 	        { className: 'category-index-show' },
 	        React.createElement(
 	          'div',
-	          { className: 'category-index-show-left' },
+	          {
+	            className: 'category-index-show-left',
+	            onClick: this._handleImgClick },
 	          React.createElement('img', { src: this.state.category.image })
 	        ),
 	        React.createElement(
@@ -38981,13 +39020,6 @@
 	      React.createElement(
 	        'div',
 	        { className: 'category-index-show-events' },
-	        React.createElement(
-	          'h3',
-	          null,
-	          '↓ Explore more ',
-	          this.state.category.title,
-	          ' events ↓'
-	        ),
 	        this.state.gatherings.map(function (gathering) {
 	          return React.createElement(GatheringIndexShow, { key: gathering.id, gathering: gathering });
 	        })

@@ -30,10 +30,6 @@ const GatheringsIndex = React.createClass({
               <li key={gathering.id}>
                 <GatheringIndexItem
                   gathering={gathering}/>
-                <p
-                  className="gathering-name">
-                  {gathering.artist}
-                </p>
               </li>
             );
           })}

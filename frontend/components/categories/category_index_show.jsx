@@ -6,6 +6,7 @@ const CategoryActions = require('../../actions/category_actions');
 const GatheringStore = require('../../stores/gathering_store');
 const GatheringActions = require('../../actions/gathering_actions');
 const GatheringIndexShow = require('../gatherings/gathering_index_show');
+const hashHistory = require('react-router').hashHistory;
 
 const CategoryIndexShow = React.createClass({
   getInitialState(){
@@ -27,12 +28,18 @@ const CategoryIndexShow = React.createClass({
   _onGatheringChange(){
     this.setState({ gatherings: GatheringStore.findByCategoryId(this.props.params.catId) });
   },
+  _handleImgClick(){
+    hashHistory.push(`events/${this.state.gathering.id}`);
+  },
   render(){
+    $(window).scrollTop();
     return (
       <div>
         <div className="category-index-show">
 
-          <div className="category-index-show-left">
+          <div
+            className="category-index-show-left"
+            onClick={this._handleImgClick}>
             <img src={this.state.category.image}/>
           </div>
 
@@ -44,7 +51,6 @@ const CategoryIndexShow = React.createClass({
         </div>
 
         <div className="category-index-show-events">
-          <h3>&darr; Explore more {this.state.category.title} events &darr;</h3>
           {this.state.gatherings.map( (gathering) => {
             return <GatheringIndexShow key={gathering.id} gathering={gathering} />;
           })}

@@ -12,6 +12,7 @@ const SessionStore = require('../../stores/session_store');
 const SessionActions = require('../../actions/session_actions');
 const CategoryStore = require('../../stores/category_store');
 const CategoryActions = require('../../actions/category_actions');
+const SessionModal = require('../auth/session_modal');
 const hashHistory = require('react-router').hashHistory;
 
 const GatheringIndexShow = React.createClass({
@@ -109,6 +110,9 @@ const GatheringIndexShow = React.createClass({
 
     return `${day} ${monthNames[monthIndex]} ${year}`;
   },
+  _directLogIn(){
+    hashHistory.push('/login');
+  },
   render(){
     let percentage = (parseInt(100 * this.state.gathering.funds) / (this.state.gathering.goal)).toString();
 
@@ -116,15 +120,30 @@ const GatheringIndexShow = React.createClass({
       "width": "100%"
     };
 
-    let buttons = "";
+    let buttons = (
+      <div className="gathering-buttons">
+        <button
+          className="gathering-button"
+          disabled={false}
+          onClick={this._directLogIn}>
+          Reserve Ticket
+        </button>
+        <button
+          className="gathering-button"
+          disabled={false}
+          onClick={this._directLogIn}>
+          Add Bookmark
+        </button>
+      </div>
+    );
 
     if (SessionStore.isUserLoggedIn()) {
       buttons = (
-        <div>
-          <button id="buy-ticket"
+        <div className="gathering-buttons">
+          <button className="gathering-button"
           onClick={this._addTicket}
           disabled={this.state.purchased}>{this.state.ticketText}</button>
-          <button id="add-bookmark"
+          <button className="gathering-button"
           onClick={this._toggleBookmark}>{this.state.bookmarkText}</button>
         </div>
       );
@@ -161,7 +180,7 @@ const GatheringIndexShow = React.createClass({
 
           {buttons}
 
-          <div>{this.state.category}</div>
+          <div className="event-genre">Genre: {this.state.category}</div>
         </div>
       </div>
     );

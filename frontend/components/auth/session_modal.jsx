@@ -49,7 +49,9 @@ const SessionModal = React.createClass({
                       backdropStyle={backdropStyle}
                       contentStyle={contentStyle}>
                 <div className="session-modal-content">
-                  <div onClick={this.hideModal}> X </div>
+                  <div
+                    className="session-modal-x"
+                    onClick={this.hideModal}>X</div>
                   {formContent}
                 </div>
               </Modal>

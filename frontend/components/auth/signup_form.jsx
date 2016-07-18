@@ -139,10 +139,10 @@ const SignupForm = React.createClass({
                 className="login-input" />
             </label>
 
-            <br />
-            <label> Initial Deposit:
+      
+            <label>
               { this.fieldErrors("balance") }
-              <input type="number"
+              <input hidden="number"
                 value={this.state.balance}
                 onChange={this.update("balance")}
                 className="login-input" />

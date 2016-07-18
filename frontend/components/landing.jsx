@@ -11,12 +11,12 @@ const Landing = React.createClass({
   _scrollDown(){
     $('html,body').animate({scrollTop: $(".categories-index").offset().top},'slow');
   },
-
   render(){
     return(
       <div className="landing-page">
 
         <div id="welcome-text">Welcome to EventRight</div>
+        <p id="welcome-intro">Crowdfund your favorite artist to appear in your city!</p>
         <p id="welcome-p">Scroll down to explore more!</p>
 
         <div onMouseOver={this._scrollDown}><img

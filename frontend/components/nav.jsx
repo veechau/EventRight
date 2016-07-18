@@ -4,8 +4,8 @@ const SessionStore = require('../stores/session_store');
 const SessionActions = require('../actions/session_actions');
 
 const SessionModal = require('./auth/session_modal');
-const LoginForm = require('./auth/login_form');
-const SignupForm = require('./auth/signup_form');
+// const LoginForm = require('./auth/login_form');
+// const SignupForm = require('./auth/signup_form');
 
 const ReactRouter = require('react-router');
 const hashHistory = ReactRouter.hashHistory;

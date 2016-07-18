@@ -11,6 +11,8 @@ const modalStyle = {
 };
 
 const backdropStyle = {
+  width: '100%',
+  height: '100%',
   border: '0px solid transparent',
 };
 
@@ -50,10 +52,13 @@ const GatheringModal = React.createClass({
               <Modal  ref="modal"
                       className="gathering-modal"
                       modalStyle={modalStyle}
-                      backdropStyle={backdropStyle}
                       contentStyle={contentStyle}>
                 <div className="gathering-modal-content">
-                  <div onClick={this.hideModal}> X </div>
+                  <div
+                    className="gathering-modal-x"
+                    onClick={this.hideModal}>
+                    X
+                  </div>
                   <GatheringForm />
                 </div>
               </Modal>
