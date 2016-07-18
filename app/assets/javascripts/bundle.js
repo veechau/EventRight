@@ -37738,7 +37738,7 @@
 	      React.createElement(
 	        'p',
 	        { id: 'welcome-intro' },
-	        'Crowdfund your favorite artist to appear in your city!'
+	        'Crowdfund your favorite artist to perform in your city!'
 	      ),
 	      React.createElement(
 	        'p',

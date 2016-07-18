@@ -16,7 +16,7 @@ const Landing = React.createClass({
       <div className="landing-page">
 
         <div id="welcome-text">Welcome to EventRight</div>
-        <p id="welcome-intro">Crowdfund your favorite artist to appear in your city!</p>
+        <p id="welcome-intro">Crowdfund your favorite artist to perform in your city!</p>
         <p id="welcome-p">Scroll down to explore more!</p>
 
         <div onMouseOver={this._scrollDown}><img
