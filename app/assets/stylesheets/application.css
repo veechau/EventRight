@@ -416,21 +416,23 @@ div.nav-links-item:hover {
 
 .tickets-index-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   padding: 5px;
-  margin: 15px 0;
 }
 
-.tickets-index-item > img {
-  margin-right: 10px
+.tickets-index-item  img {
+  margin-right: 10px;
+  width: 400px;
+  height: auto;
 }
 
-.tickets-index-item > img:hover {
+.tickets-index-item  img:hover {
   cursor: pointer;
 }
 
 .tickets-index-item > img, .tickets-index-item > div {
-  width: 50%;
+  width: 40%;
 }
 
 .bookmark-index-item {
