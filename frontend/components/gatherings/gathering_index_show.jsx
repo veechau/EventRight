@@ -139,7 +139,7 @@ const GatheringIndexShow = React.createClass({
             <div id="event-description">
             <p>{this.state.gathering.description}</p>
             </div>
-
+            <p className="event-fund">Event Progress</p>
             <div id="event-progress" style={containerStyle}>
                 <Line percent={percentage}
                       strokeWidth="4"

@@ -376,6 +376,12 @@ div.nav-links-item:hover {
   width: 100%
 }
 
+.gathering-name {
+  color: #666A73;
+  font-size: 0.8em;
+  align-self: center;
+  text-transform: uppercase;
+}
 .gatherings-index ul {
   display: flex;
   flex-wrap: wrap;
@@ -447,11 +453,11 @@ div.nav-links-item:hover {
 
 #event-description {
   font-size: 0.8em;
-  height: 55px;
+  /*height: 100px;*/
   width: 500px;
   overflow-y: scroll;
   padding: 2px;
-  border: 1px solid #D2D6DF;
+  /*border: 1px solid #D2D6DF;*/
   margin-bottom: 15px;
 }
 

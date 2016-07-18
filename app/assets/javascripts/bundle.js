@@ -37651,7 +37651,13 @@
 	            'li',
 	            { key: gathering.id },
 	            React.createElement(GatheringIndexItem, {
-	              gathering: gathering })
+	              gathering: gathering }),
+	            React.createElement(
+	              'p',
+	              {
+	                className: 'gathering-name' },
+	              gathering.artist
+	            )
 	          );
 	        })
 	      )
@@ -38832,6 +38838,11 @@
 	            null,
 	            this.state.gathering.description
 	          )
+	        ),
+	        React.createElement(
+	          'p',
+	          { className: 'event-fund' },
+	          'Event Progress'
 	        ),
 	        React.createElement(
 	          'div',

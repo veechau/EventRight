@@ -86,7 +86,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467984773/LukeBryan_cv9upb.jpg",
   tix_price: 45,
   funds: (45 * 90),
-  goal: (45 * 300),
+  goal: (45 * 100),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 4
@@ -101,7 +101,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467984773/CarrieUnderwood_viev6m.jpg",
   tix_price: 50,
   funds: 14300,
-  goal: 40000,
+  goal: 20000,
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 4
@@ -115,8 +115,8 @@ Gathering.create({
   description: "Florida Georgia Line is an American country music duo consisting of vocalists Brian Kelley (from Ormond Beach, Florida) and Tyler Hubbard (from Monroe, Georgia). They have achieved major success since their inception and are one of the most successful country music acts of the 2010s.",
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467984773/GFL_h8agtj.jpg",
   tix_price: 60,
-  funds: (60 * 40),
-  goal: (6000),
+  funds: (2400),
+  goal: (3600),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 4
@@ -131,7 +131,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987038/Artists/taylorswift.jpg",
   tix_price: 100,
   funds: 14300,
-  goal: 40000,
+  goal: 20000,
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 1
@@ -148,7 +148,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987039/Artists/Chainsmokers.jpg",
   tix_price: 70,
   funds: (70 * 202),
-  goal: (70 * 350),
+  goal: (70 * 250),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 5
@@ -163,7 +163,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/v1467987036/Artists/kanyewest.jpg",
   tix_price: 50,
   funds: 14300,
-  goal: 40000,
+  goal: 20000,
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 6
@@ -177,8 +177,8 @@ Gathering.create({
   description: "Drake was a cross-platform cultural phenomenon in the 2010s. The songwriter, producer, rapper, and singer sustained a high-level commercial presence shortly after he turned to rapping in 2006, whether on his own chart-topping releases or through a long string of guest appearances on hits by the likes of Lil Wayne, Rihanna, and A$AP Rocky. Each one of the former child actor's first four proper albums, as well as a 2015 mixtape, topped the album charts in his native Canada and in the U.S. Though he caroused with his most hedonistic contemporaries, Drake was frequently praised for his sensitive, introspective approach to rap and R&B.",
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987040/Artists/drake.jpg",
   tix_price: 150,
-  funds: (150 * 190),
-  goal: (150 * 500),
+  funds: (150 * 90),
+  goal: (150 * 100),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 6
@@ -193,7 +193,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987036/Artists/ACDC.jpg",
   tix_price: 150,
   funds: (150 * 140),
-  goal: (150 * 400),
+  goal: (150 * 200),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 3
@@ -209,7 +209,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987039/Artists/carlossantana.jpg",
   tix_price: 50,
   funds: (50 * 190),
-  goal: (50 * 300),
+  goal: (50 * 200),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 8
@@ -224,7 +224,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987042/Artists/beyonce.jpg",
   tix_price: 100,
   funds: (100 * 190),
-  goal: (100 * 300),
+  goal: (100 * 200),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 6
@@ -239,7 +239,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467998550/Artists/EnriqueIglesias.jpg",
   tix_price: 50,
   funds: (50 * 190),
-  goal: (50 * 350),
+  goal: (50 * 250),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 8
@@ -269,7 +269,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987036/Artists/JT.jpg",
   tix_price: 60,
   funds: (60 * 190),
-  goal: (60 * 300),
+  goal: (60 * 240),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 1
@@ -359,7 +359,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1467987040/Artists/fosterthepeople.jpg",
   tix_price: 50,
   funds: (50 * 190),
-  goal: (50 * 400),
+  goal: (50 * 300),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 7
@@ -374,7 +374,7 @@ Gathering.create({
   image: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1468021984/zedd_xusn0s.jpg",
   tix_price: 70,
   funds: (70 * 190),
-  goal: (70 * 300),
+  goal: (70 * 220),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
   category_id: 5

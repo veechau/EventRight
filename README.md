@@ -2,7 +2,7 @@
 
 [EventRight Live][heroku]
 
-[heroku]: http://www.eventright.us/#/home?_k=ey1mur
+[heroku]: http://www.eventright.us/
 
 ## Minimum Viable Product
 
