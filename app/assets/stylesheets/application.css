@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require map.css
  */
 
  html, body, header, nav, h1, a,
@@ -268,6 +269,7 @@ div.nav-links-item:hover {
 
 .gathering-modal {
   position: relative;
+  width: 150% !important;
 }
 
 .gathering-modal-content {
@@ -283,13 +285,19 @@ div.nav-links-item:hover {
 }
 
 /*Gathering Form*/
+.gathering-form-box {
+  flex: 1;
+  width: 60%;
+  align-self: center;
+}
 
 .gathering-form-container {
   display: flex;
+  flex-direction: column;
   position: relative;
   justify-content: center;
   margin: auto;
-  padding: 40px;
+  padding: 0 40px 40px 40px;
 }
 
 .gathering-form {
