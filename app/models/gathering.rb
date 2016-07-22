@@ -1,5 +1,5 @@
 class Gathering < ActiveRecord::Base
-  validates :artist, :location, :start_date, :end_date, :description, :tix_price, :funds, :goal, :category_id, presence: true
+  validates :artist, :place_name, :location, :start_date, :end_date, :description, :tix_price, :funds, :goal, :category_id, presence: true
   validates :status, inclusion: ["ongoing", "completed", "incomplete"]
   validate :validate_end_date_before_start_date
   validate :tix_price_cannot_be_greater_than_goal
