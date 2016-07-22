@@ -14,6 +14,7 @@ const CategoryStore = require('../../stores/category_store');
 const CategoryActions = require('../../actions/category_actions');
 const SessionModal = require('../auth/session_modal');
 const hashHistory = require('react-router').hashHistory;
+const GatheringMap = require('./gathering_map');
 
 const GatheringIndexShow = React.createClass({
   getInitialState(){
@@ -151,37 +152,40 @@ const GatheringIndexShow = React.createClass({
     return (
 
       <div className="gathering-index-show">
-        <div className="gathering-index-show-left">
+        <div className='gathering-index-show-top'>
+          <div className="gathering-index-show-left">
 
-            <h1 id="event-header">{this.state.gathering.artist}</h1>
-            <p id="event-location"><b>{this.state.gathering.place_name}</b><br/>{this.state.gathering.location}</p>
-            <div id="event-description">
-            <p>{this.state.gathering.description}</p>
-            </div>
-            <p className="event-fund">Event Progress</p>
-            <div id="event-progress" style={containerStyle}>
-                <Line percent={percentage}
-                      strokeWidth="4"
-                      trailWidth="4"
-                      strokeColor="#F6682F"
-                     />
-            </div>
-            <p className="event-fund">GA TICKET: ${this.state.gathering.tix_price}</p>
-            <p className="event-fund">FUNDS TO DATE: ${this.state.gathering.funds}</p>
-            <p className="event-fund">GOAL: ${this.state.gathering.goal}</p>
-            <p className="event-fund">CAMPAIGN DATE: {this._parseDate(this.state.gathering.start_date)} until {this._parseDate(this.state.gathering.end_date)}</p>
-            <p className="event-fund">FUNDING STATUS: {this.state.gathering.status}</p>
+              <h1 id="event-header">{this.state.gathering.artist}</h1>
+              <p id="event-location"><b>{this.state.gathering.place_name}</b><br/>{this.state.gathering.location}</p>
+              <div id="event-description">
+                <p>{this.state.gathering.description}</p>
+              </div>
+              <p className="event-fund">Event Progress</p>
+              <div id="event-progress" style={containerStyle}>
+                  <Line percent={percentage}
+                        strokeWidth="4"
+                        trailWidth="4"
+                        strokeColor="#F6682F"
+                       />
+              </div>
+              <p className="event-fund">GA TICKET: ${this.state.gathering.tix_price}</p>
+              <p className="event-fund">FUNDS TO DATE: ${this.state.gathering.funds}</p>
+              <p className="event-fund">GOAL: ${this.state.gathering.goal}</p>
+              <p className="event-fund">CAMPAIGN DATE: {this._parseDate(this.state.gathering.start_date)} until {this._parseDate(this.state.gathering.end_date)}</p>
+              <p className="event-fund">FUNDING STATUS: {this.state.gathering.status}</p>
 
           </div>
           <div className="gathering-index-show-right">
-          <img  className="gathering-index-item-image"
-                onClick={this._handleImageClick}
-                src={this.state.gathering.image}/>
+            <img  className="gathering-index-item-image"
+                  onClick={this._handleImageClick}
+                  src={this.state.gathering.image}/>
 
-          {buttons}
+            {buttons}
 
-          <div className="event-genre">Genre: {this.state.category}</div>
+            <div className="event-genre">Genre: {this.state.category}</div>
+          </div>
         </div>
+        <GatheringMap lat={this.state.gathering.lat} lng={this.state.gathering.lng} />
       </div>
     );
   }

@@ -67,7 +67,7 @@
 	var GatheringForm = __webpack_require__(280);
 	var CategoriesIndex = __webpack_require__(296);
 	var CategoryIndexItem = __webpack_require__(297);
-	var CategoryIndexShow = __webpack_require__(314);
+	var CategoryIndexShow = __webpack_require__(315);
 	var BookmarksIndex = __webpack_require__(307);
 	var BookmarkIndexItem = __webpack_require__(312);
 	var TicketsIndex = __webpack_require__(299);
@@ -39034,6 +39034,7 @@
 	var CategoryActions = __webpack_require__(283);
 	var SessionModal = __webpack_require__(264);
 	var hashHistory = __webpack_require__(172).hashHistory;
+	var GatheringMap = __webpack_require__(314);
 	
 	var GatheringIndexShow = React.createClass({
 	  displayName: 'GatheringIndexShow',
@@ -39184,93 +39185,98 @@
 	      { className: 'gathering-index-show' },
 	      React.createElement(
 	        'div',
-	        { className: 'gathering-index-show-left' },
-	        React.createElement(
-	          'h1',
-	          { id: 'event-header' },
-	          this.state.gathering.artist
-	        ),
-	        React.createElement(
-	          'p',
-	          { id: 'event-location' },
-	          React.createElement(
-	            'b',
-	            null,
-	            this.state.gathering.place_name
-	          ),
-	          React.createElement('br', null),
-	          this.state.gathering.location
-	        ),
+	        { className: 'gathering-index-show-top' },
 	        React.createElement(
 	          'div',
-	          { id: 'event-description' },
+	          { className: 'gathering-index-show-left' },
+	          React.createElement(
+	            'h1',
+	            { id: 'event-header' },
+	            this.state.gathering.artist
+	          ),
 	          React.createElement(
 	            'p',
-	            null,
-	            this.state.gathering.description
+	            { id: 'event-location' },
+	            React.createElement(
+	              'b',
+	              null,
+	              this.state.gathering.place_name
+	            ),
+	            React.createElement('br', null),
+	            this.state.gathering.location
+	          ),
+	          React.createElement(
+	            'div',
+	            { id: 'event-description' },
+	            React.createElement(
+	              'p',
+	              null,
+	              this.state.gathering.description
+	            )
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'event-fund' },
+	            'Event Progress'
+	          ),
+	          React.createElement(
+	            'div',
+	            { id: 'event-progress', style: containerStyle },
+	            React.createElement(Line, { percent: percentage,
+	              strokeWidth: '4',
+	              trailWidth: '4',
+	              strokeColor: '#F6682F'
+	            })
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'event-fund' },
+	            'GA TICKET: $',
+	            this.state.gathering.tix_price
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'event-fund' },
+	            'FUNDS TO DATE: $',
+	            this.state.gathering.funds
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'event-fund' },
+	            'GOAL: $',
+	            this.state.gathering.goal
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'event-fund' },
+	            'CAMPAIGN DATE: ',
+	            this._parseDate(this.state.gathering.start_date),
+	            ' until ',
+	            this._parseDate(this.state.gathering.end_date)
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'event-fund' },
+	            'FUNDING STATUS: ',
+	            this.state.gathering.status
 	          )
 	        ),
 	        React.createElement(
-	          'p',
-	          { className: 'event-fund' },
-	          'Event Progress'
-	        ),
-	        React.createElement(
 	          'div',
-	          { id: 'event-progress', style: containerStyle },
-	          React.createElement(Line, { percent: percentage,
-	            strokeWidth: '4',
-	            trailWidth: '4',
-	            strokeColor: '#F6682F'
-	          })
-	        ),
-	        React.createElement(
-	          'p',
-	          { className: 'event-fund' },
-	          'GA TICKET: $',
-	          this.state.gathering.tix_price
-	        ),
-	        React.createElement(
-	          'p',
-	          { className: 'event-fund' },
-	          'FUNDS TO DATE: $',
-	          this.state.gathering.funds
-	        ),
-	        React.createElement(
-	          'p',
-	          { className: 'event-fund' },
-	          'GOAL: $',
-	          this.state.gathering.goal
-	        ),
-	        React.createElement(
-	          'p',
-	          { className: 'event-fund' },
-	          'CAMPAIGN DATE: ',
-	          this._parseDate(this.state.gathering.start_date),
-	          ' until ',
-	          this._parseDate(this.state.gathering.end_date)
-	        ),
-	        React.createElement(
-	          'p',
-	          { className: 'event-fund' },
-	          'FUNDING STATUS: ',
-	          this.state.gathering.status
+	          { className: 'gathering-index-show-right' },
+	          React.createElement('img', { className: 'gathering-index-item-image',
+	            onClick: this._handleImageClick,
+	            src: this.state.gathering.image }),
+	          buttons,
+	          React.createElement(
+	            'div',
+	            { className: 'event-genre' },
+	            'Genre: ',
+	            this.state.category
+	          )
 	        )
 	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'gathering-index-show-right' },
-	        React.createElement('img', { className: 'gathering-index-item-image',
-	          onClick: this._handleImageClick,
-	          src: this.state.gathering.image }),
-	        buttons,
-	        React.createElement(
-	          'div',
-	          { className: 'event-genre' },
-	          'Genre: ',
-	          this.state.category
-	        )
-	      )
+	      React.createElement(GatheringMap, { lat: this.state.gathering.lat, lng: this.state.gathering.lng })
 	    );
 	  }
 	});
@@ -39279,6 +39285,61 @@
 
 /***/ },
 /* 314 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(33);
+	
+	var marker = void 0;
+	
+	function initMap(that) {
+	
+	  var refs = that.refs;
+	  var mapRef = refs.gatheringMap;
+	  var node = ReactDOM.findDOMNode(mapRef);
+	  var location = { lat: parseFloat(that.props.lat), lng: parseFloat(that.props.lng) };
+	  var map = new google.maps.Map(node, {
+	    zoom: 13,
+	    center: { lat: location.lat, lng: location.lng }
+	  });
+	
+	  marker = new google.maps.Marker({
+	    map: map,
+	    draggable: true,
+	    animation: google.maps.Animation.DROP,
+	    position: { lat: location.lat, lng: location.lng }
+	  });
+	  marker.addListener('click', toggleBounce);
+	}
+	
+	function toggleBounce() {
+	  if (marker.getAnimation() !== null) {
+	    marker.setAnimation(null);
+	  } else {
+	    marker.setAnimation(google.maps.Animation.BOUNCE);
+	  }
+	}
+	
+	var GatheringMap = React.createClass({
+	  displayName: 'GatheringMap',
+	  componentDidMount: function componentDidMount() {
+	    initMap(this);
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'gathering-index-show-bottom' },
+	      React.createElement('div', { id: 'gathering-map', ref: 'gatheringMap' })
+	    );
+	  }
+	});
+	
+	module.exports = GatheringMap;
+
+/***/ },
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
