@@ -154,7 +154,7 @@ const GatheringIndexShow = React.createClass({
         <div className="gathering-index-show-left">
 
             <h1 id="event-header">{this.state.gathering.artist}</h1>
-            <p id="event-location">{this.state.gathering.location}</p>
+            <p id="event-location"><b>{this.state.gathering.place_name}</b><br/>{this.state.gathering.location}</p>
             <div id="event-description">
             <p>{this.state.gathering.description}</p>
             </div>

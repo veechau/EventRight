@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707231332) do
+ActiveRecord::Schema.define(version: 20160722023541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,20 +36,23 @@ ActiveRecord::Schema.define(version: 20160707231332) do
   end
 
   create_table "gatherings", force: :cascade do |t|
-    t.string   "artist",       null: false
-    t.text     "location",     null: false
-    t.datetime "start_date",   null: false
-    t.datetime "end_date",     null: false
+    t.string   "artist",                                 null: false
+    t.text     "location",                               null: false
+    t.datetime "start_date",                             null: false
+    t.datetime "end_date",                               null: false
     t.text     "description"
     t.string   "image"
-    t.float    "tix_price",    null: false
-    t.float    "funds",        null: false
-    t.float    "goal",         null: false
-    t.string   "status",       null: false
-    t.integer  "organizer_id", null: false
-    t.integer  "category_id",  null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.float    "tix_price",                              null: false
+    t.float    "funds",                                  null: false
+    t.float    "goal",                                   null: false
+    t.string   "status",                                 null: false
+    t.integer  "organizer_id",                           null: false
+    t.integer  "category_id",                            null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "place_name",                             null: false
+    t.decimal  "lat",          precision: 15, scale: 10
+    t.decimal  "lng",          precision: 15, scale: 10
   end
 
   add_index "gatherings", ["category_id"], name: "index_gatherings_on_category_id", using: :btree

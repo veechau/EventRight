@@ -70,7 +70,12 @@ function initMap(that) {
 				(place.address_components[1] && place.address_components[1].short_name || ''),
 				(place.address_components[2] && place.address_components[2].short_name || '')
 			].join(' ');
-			that.setState({location: address});
+			that.setState({
+				place_name: place.name,
+	      location: place.formatted_address,
+				lat: place.geometry.location.lat(),
+				lng: place.geometry.location.lng()
+			});
 		}
 
 		infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
@@ -95,8 +100,6 @@ function initMap(that) {
 
 
 
-
-
 const GatheringForm = React.createClass({
 
 	contextTypes: {
@@ -106,7 +109,10 @@ const GatheringForm = React.createClass({
   getInitialState() {
     return {
       artist: "",
+			place_name: "",
       location: "",
+			lat: 37.7329486,
+			lng: -122.5029659,
       start_date: new Date(),
       end_date: "",
       description: "",
@@ -146,7 +152,10 @@ const GatheringForm = React.createClass({
 
     const formData = {
       artist: this.state.artist,
-      location: this.state.location,
+			place_name: this.state.place_name,
+			location: this.state.location,
+			lat: this.state.lat,
+			lng: this.state.lng,
       start_date: this.state.start_date,
       end_date: this.state.end_date,
       description: this.state.description,

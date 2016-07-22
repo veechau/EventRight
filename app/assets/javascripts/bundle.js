@@ -35185,7 +35185,12 @@
 			var address = '';
 			if (place.address_components) {
 				address = [place.address_components[0] && place.address_components[0].short_name || '', place.address_components[1] && place.address_components[1].short_name || '', place.address_components[2] && place.address_components[2].short_name || ''].join(' ');
-				that.setState({ location: address });
+				that.setState({
+					place_name: place.name,
+					location: place.formatted_address,
+					lat: place.geometry.location.lat(),
+					lng: place.geometry.location.lng()
+				});
 			}
 	
 			infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
@@ -35219,7 +35224,10 @@
 		getInitialState: function getInitialState() {
 			return {
 				artist: "",
+				place_name: "",
 				location: "",
+				lat: 37.7329486,
+				lng: -122.5029659,
 				start_date: new Date(),
 				end_date: "",
 				description: "",
@@ -35254,7 +35262,10 @@
 	
 			var formData = {
 				artist: this.state.artist,
+				place_name: this.state.place_name,
 				location: this.state.location,
+				lat: this.state.lat,
+				lng: this.state.lng,
 				start_date: this.state.start_date,
 				end_date: this.state.end_date,
 				description: this.state.description,
@@ -39182,6 +39193,12 @@
 	        React.createElement(
 	          'p',
 	          { id: 'event-location' },
+	          React.createElement(
+	            'b',
+	            null,
+	            this.state.gathering.place_name
+	          ),
+	          React.createElement('br', null),
 	          this.state.gathering.location
 	        ),
 	        React.createElement(
