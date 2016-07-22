@@ -270,6 +270,7 @@ div.nav-links-item:hover {
 .gathering-modal {
   position: relative;
   width: 120% !important;
+  overflow-y: scroll;
 }
 
 .gathering-modal-content {
