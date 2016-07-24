@@ -83,7 +83,7 @@
 	    Route,
 	    { path: '/', component: App },
 	    React.createElement(IndexRoute, { component: Landing }),
-	    React.createElement(Route, { path: '/home', component: UserLanding }),
+	    React.createElement(Route, { path: '/home', component: UserLanding, onEnter: _ensureLoggedIn }),
 	    React.createElement(Route, { path: '/login', component: LoginForm }),
 	    React.createElement(Route, { path: '/signup', component: SignupForm }),
 	    React.createElement(Route, { path: '/events', component: GatheringsIndex }),
@@ -38056,7 +38056,7 @@
 	      { className: 'user-landing-page' },
 	      React.createElement(
 	        'div',
-	        { className: 'user-info' },
+	        { className: 'user-welcome' },
 	        React.createElement(
 	          'h1',
 	          null,
@@ -38069,8 +38069,43 @@
 	      React.createElement(
 	        'div',
 	        { className: 'user-dash' },
-	        React.createElement(BookmarksIndex, null),
-	        React.createElement(TicketsIndex, null)
+	        React.createElement(
+	          'div',
+	          { className: 'left-dash' },
+	          React.createElement(
+	            'div',
+	            { className: 'user-img' },
+	            React.createElement('img', { src: this.state.currentUser.avatar })
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'right-dash' },
+	          React.createElement(
+	            'div',
+	            null,
+	            'Username: ',
+	            this.state.currentUser.username
+	          ),
+	          React.createElement(
+	            'div',
+	            null,
+	            'First Name: ',
+	            this.state.currentUser.first_name
+	          ),
+	          React.createElement(
+	            'div',
+	            null,
+	            'Last Name: ',
+	            this.state.currentUser.last_name
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'user-dash-buttons' },
+	            React.createElement(BookmarksIndex, null),
+	            React.createElement(TicketsIndex, null)
+	          )
+	        )
 	      ),
 	      React.createElement(
 	        'div',

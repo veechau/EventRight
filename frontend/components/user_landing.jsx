@@ -26,12 +26,24 @@ const Landing = React.createClass({
 
     return(
       <div className="user-landing-page">
-        <div className="user-info">
+        <div className="user-welcome">
         <h1>Welcome back, {this.state.currentUser.first_name} {this.state.currentUser.last_name}</h1>
         </div>
         <div className="user-dash">
-            <BookmarksIndex />
-            <TicketsIndex />
+        <div className="left-dash">
+          <div className="user-img">
+          <img src={this.state.currentUser.avatar}/>
+          </div>
+        </div>
+        <div className="right-dash">
+          <div>Username: {this.state.currentUser.username}</div>
+          <div>First Name: {this.state.currentUser.first_name}</div>
+          <div>Last Name: {this.state.currentUser.last_name}</div>
+          <div className="user-dash-buttons">
+              <BookmarksIndex />
+              <TicketsIndex />
+          </div>
+        </div>
         </div>
         <div id="user-dash-explore">
         <h1 className="user-landing-header">Explore Events</h1>

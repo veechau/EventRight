@@ -13,7 +13,7 @@ require 'faker'
   first_name: "Jane",
   last_name: "Doe",
   password: "Password",
-  avatar: "https://holder.ninja/150x150,,8bd,fff.svg",
+  avatar: "https://res.cloudinary.com/vechau/image/upload/c_fill,h_300,w_300/v1469345082/user_profile_whueuf.jpg",
   balance: 500
 });
 
@@ -23,7 +23,7 @@ require 'faker'
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     password: "Password",
-    avatar: "https://holder.ninja/150x150,,8bd,fff.svg",
+    avatar: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1468016827/user-icon-big_f66luo.png",
     balance: rand(1000)
     })
 end
@@ -89,7 +89,10 @@ Gathering.create({
   goal: (45 * 100),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 4
+  category_id: 4,
+  place_name: "The Greek Theatre",
+  lat: 37.873908,
+  lng: -122.253835
 })
 
 Gathering.create({
@@ -104,7 +107,10 @@ Gathering.create({
   goal: 20000,
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 4
+  category_id: 4,
+  place_name: "Bill Graham Civic Auditorium",
+  lat: 37.7780125,
+  lng: -122.48767
 })
 
 Gathering.create({
@@ -119,7 +125,10 @@ Gathering.create({
   goal: (3600),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 4
+  category_id: 4,
+  place_name: "The Masonic",
+  lat: 37.7911585,
+  lng: -122.4831498
 })
 
 Gathering.create({
@@ -134,7 +143,10 @@ Gathering.create({
   goal: 20000,
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 1
+  category_id: 1,
+  place_name: "Shoreline Amphitheatre",
+  lat: 37.4267782,
+  lng: -122.0829164
 })
 
 Gathering.create({
@@ -149,7 +161,10 @@ Gathering.create({
   goal: (70 * 250),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 5
+  category_id: 5,
+  place_name: "The Warfield",
+  lat: 37.7824468,
+  lng: -122.3947093
 })
 
 Gathering.create({
@@ -164,7 +179,10 @@ Gathering.create({
   goal: 20000,
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 6
+  category_id: 6,
+  place_name: "Shoreline Amphitheatre",
+  lat: 37.4267782,
+  lng: -122.0829164
 })
 
 Gathering.create({
@@ -179,7 +197,10 @@ Gathering.create({
   goal: (150 * 100),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 6
+  category_id: 6,
+  place_name: "Shoreline Amphitheatre",
+  lat: 37.4267782,
+  lng: -122.0829164
 })
 
 Gathering.create({
@@ -194,7 +215,10 @@ Gathering.create({
   goal: (150 * 200),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 3
+  category_id: 3,
+  place_name: "Shoreline Amphitheatre",
+  lat: 37.4267782,
+  lng: -122.0829164
 })
 
 Gathering.create({
@@ -210,7 +234,10 @@ Gathering.create({
   goal: (50 * 200),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 8
+  category_id: 8,
+  place_name: "The Masonic",
+  lat: 37.7911585,
+  lng: -122.4831498
 })
 
 Gathering.create({
@@ -225,7 +252,10 @@ Gathering.create({
   goal: (100 * 200),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 6
+  category_id: 6,
+  place_name: "SAP Center",
+  lat: 37.3327498,
+  lng: -121.9034312
 })
 
 Gathering.create({
@@ -240,7 +270,10 @@ Gathering.create({
   goal: (50 * 250),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 8
+  category_id: 8,
+  place_name: "Shoreline Amphitheatre",
+  lat: 37.4267782,
+  lng: -122.0829164
 })
 
 Gathering.create({
@@ -249,13 +282,16 @@ Gathering.create({
   start_date: Faker::Date.between(2.days.ago, Date.today),
   end_date: Faker::Date.between(300.days.from_now, 1.year.from_now),
   description: "Born Joel Zimmerman on January 5, 1981, masked EDM hitmaker and celebrity DJ Deadmau5 rose to prominence when his track \"Faxing Berlin\" found its way onto the playlist of legendary DJ/producer Pete Tong's radio show. Deadmau5 soon became an important figure in the world of progressive house music, with his songs appearing on more than 15 compilations (including In Search of Sunrise, Vol. 6: Ibiza). ",
-  image: "https://res.cloudinary.com/vechau/image/upload/v1467987157/Artists/deadmau5.jpg",
+  image: "https://res.cloudinary.com/vechau/image/upload/e_grayscale/v1467987157/Artists/deadmau5.jpg",
   tix_price: 60,
   funds: (60 * 190),
   goal: (60 * 300),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 5
+  category_id: 5,
+  place_name: "The Fox Theatre",
+  lat: 37.8082478,
+  lng: -122.2535868
 })
 
 Gathering.create({
@@ -270,7 +306,10 @@ Gathering.create({
   goal: (60 * 240),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 1
+  category_id: 1,
+  place_name: "Shoreline Amphitheatre",
+  lat: 37.4267782,
+  lng: -122.0829164
 })
 
 Gathering.create({
@@ -285,7 +324,10 @@ Gathering.create({
   goal: (50 * 200),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 7
+  category_id: 7,
+  place_name: "Shoreline Amphitheatre",
+  lat: 37.4267782,
+  lng: -122.0829164
 })
 
 Gathering.create({
@@ -300,7 +342,10 @@ Gathering.create({
   goal: (50 * 300),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 2
+  category_id: 2,
+  place_name: "The Fox Theatre",
+  lat: 37.8082478,
+  lng: -122.2535868
 })
 
 Gathering.create({
@@ -315,7 +360,10 @@ Gathering.create({
   goal: (50 * 250),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 2
+  category_id: 2,
+  place_name: "The Greek Theatre",
+  lat: 37.873908,
+  lng: -122.253835
 })
 
 Gathering.create({
@@ -330,7 +378,10 @@ Gathering.create({
   goal: (30 * 20),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 1
+  category_id: 1,
+  place_name: "MEZZANINE",
+  lat: 37.7825106,
+  lng: -122.4781997
 })
 
 Gathering.create({
@@ -345,7 +396,10 @@ Gathering.create({
   goal: (50 * 300),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 8
+  category_id: 8,
+  place_name: "The Masonic",
+  lat: 37.7911585,
+  lng: -122.4831498
 })
 
 Gathering.create({
@@ -360,7 +414,10 @@ Gathering.create({
   goal: (50 * 300),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 7
+  category_id: 7,
+  place_name: "Mighty",
+  lat: 37.7605584,
+  lng: -122.4173902
 })
 
 Gathering.create({
@@ -375,7 +432,10 @@ Gathering.create({
   goal: (70 * 220),
   status: "ongoing",
   organizer_id: rand(User.all.count) + 1,
-  category_id: 5
+  category_id: 5,
+  place_name: "Craneway Pavilion",
+  lat: 37.909595,
+  lng: -122.358239
 })
 
 # Gathering.create({

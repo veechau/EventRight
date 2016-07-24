@@ -340,7 +340,7 @@ div.nav-links-item:hover {
   text-align: center;;
 }
 
-.user-info {
+.user-welcome {
   display: flex;
   justify-content: flex-start;
   font-family: 'Quicksand', sans-serif;
@@ -348,8 +348,22 @@ div.nav-links-item:hover {
 
 .user-dash {
   display: flex;
+  width: 70%;
   justify-content: space-around;
+}
 
+.user-dash-left {
+  width: 100%;
+}
+
+.user-dash-right {
+  width: 100%;
+}
+
+.user-dash-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .user-dash-modal {
@@ -358,10 +372,6 @@ div.nav-links-item:hover {
   padding: 2px;
   color: #666A73;
   overflow-y: scroll;
-}
-
-.user-dash-modal-content {
-
 }
 
 .user-dash-modal-x {
@@ -388,13 +398,6 @@ div.nav-links-item:hover {
   justify-content: space-around;
   overflow-y: scroll;
 }
-/*
-.user-dash-bookmark ul {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-around;
-}*/
 
 .user-dash-tickets ul {
   display: flex;
@@ -407,6 +410,7 @@ div.nav-links-item:hover {
   border: 1px solid #F6682F;
   border-radius: 3px;
   padding: 5px;
+  text-align: center;
 }
 
 .user-dash-link:hover {
@@ -425,11 +429,12 @@ div.nav-links-item:hover {
 .tickets-index-item {
   display: flex;
   align-items: center;
-  justify-content:
-  padding: 5px;
+  justify-content: center;
+  padding: 10px;
 }
 
 .tickets-index-item  img {
+  border: 1px solid #D2D6DF;
   margin-right: 10px;
   width: 400px;
   height: auto;
@@ -492,6 +497,10 @@ div.nav-links-item:hover {
 
 
 /*Event Show*/
+.gatherings-index {
+  display: flex;
+}
+
 .gathering-index-show {
   display: flex;
   flex-direction: column;
@@ -516,7 +525,7 @@ div.nav-links-item:hover {
 
 .gathering-index-show-bottom {
   height: 40vh;
-  width: 65vw;
+  width: 75vw;
 }
 
 .gathering-index-show-left {
@@ -567,6 +576,12 @@ div.nav-links-item:hover {
 .gathering-button:disabled {
   color: #CCCCCC;
   border: 1px solid #CCCCCC;
+}
+
+#gathering-map {
+  display: flex;
+  width: 100%;
+  margin: auto;
 }
 
 #event-progress {
