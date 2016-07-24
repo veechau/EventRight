@@ -18,6 +18,8 @@ const SignupForm = React.createClass({
       password: "",
       first_name: "",
       last_name: "",
+			email: "",
+			address: "",
       avatar: "",
       balance: 0,
     };
@@ -57,6 +59,8 @@ const SignupForm = React.createClass({
 			password: this.state.password,
       first_name: this.state.first_name,
       last_name: this.state.last_name,
+			email: this.state.email,
+			address: this.state.address,
       avatar: this.state.avatar,
       balance: this.state.balance,
 		};
@@ -131,7 +135,25 @@ const SignupForm = React.createClass({
             </label>
 
             <br />
-            <label> Avatar URL:
+            <label> Email:
+              { this.fieldErrors("email") }
+              <input type="text"
+                value={this.state.email}
+                onChange={this.update("email")}
+                className="login-input" />
+            </label>
+
+            <br />
+            <label> Address:
+              { this.fieldErrors("address") }
+              <input type="text"
+                value={this.state.address}
+                onChange={this.update("address")}
+                className="login-input" />
+            </label>
+
+            <br />
+            <label> Profile Picture:
               { this.fieldErrors("avatar") }
               <input type="text"
                 value={this.state.avatar}
@@ -139,7 +161,7 @@ const SignupForm = React.createClass({
                 className="login-input" />
             </label>
 
-      
+
             <label>
               { this.fieldErrors("balance") }
               <input hidden="number"
@@ -150,7 +172,7 @@ const SignupForm = React.createClass({
 
 		        <br />
 						<input type="submit" value="Submit" />
-						<button onClick={this._handleLogIn}>Demo User</button>
+						<button className="demo-user-button" onClick={this._handleLogIn}>Demo User</button>
 					</div>
 				</form>
 			</div>

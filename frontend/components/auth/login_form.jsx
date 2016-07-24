@@ -78,7 +78,10 @@ const LoginForm = React.createClass({
 
 			<div className="login-form-container">
 				<form onSubmit={this._handleSubmit} className="login-form-box">
-	        Sign In
+
+				<div className="login-form-header">
+					Log In
+				</div>
 					<br/>
 
 	        { this.fieldErrors("base") }

@@ -14,7 +14,9 @@ require 'faker'
   last_name: "Doe",
   password: "Password",
   avatar: "https://res.cloudinary.com/vechau/image/upload/c_fill,h_300,w_300/v1469345082/user_profile_whueuf.jpg",
-  balance: 500
+  balance: 500,
+  email: "demo_user@eventright.us",
+  address: "123 Fake St, San Francisco, CA 94108"
 });
 
 10.times do
@@ -24,7 +26,9 @@ require 'faker'
     last_name: Faker::Name.last_name,
     password: "Password",
     avatar: "https://res.cloudinary.com/vechau/image/upload/c_scale,h_300/v1468016827/user-icon-big_f66luo.png",
-    balance: rand(1000)
+    balance: rand(1000),
+    email: "demo_user@eventright.us",
+    address: "123 Fake St, San Francisco, CA 94108"
     })
 end
 

@@ -93,8 +93,8 @@ const GatheringIndexShow = React.createClass({
       BookmarkActions.deleteBookmark(this.state.gathering_id, currentUser.id);
     }
   },
-  _handleImgClick(){
-    hashHistory.push(`events/${this.state.gathering.id}`);
+  _handleImageClick(){
+    hashHistory.push(`events/${this.state.gathering_id}`);
   },
   _parseDate(date){
     const monthNames = [

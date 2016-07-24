@@ -5,13 +5,13 @@ class Gathering < ActiveRecord::Base
   validate :tix_price_cannot_be_greater_than_goal
 
   after_initialize :add_default_image_to_events
+  after_initialize :set_defaults
 
   belongs_to :category
   belongs_to :organizer, class_name: 'User'
   has_many :tickets, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
 
-  after_initialize :set_defaults
 
   private
 

@@ -26,7 +26,7 @@ const Landing = React.createClass({
 
     return(
       <div className="user-landing-page">
-        <div className="user-welcome">
+        <div className="user-landing-header">
         <h1>Welcome back, {this.state.currentUser.first_name} {this.state.currentUser.last_name}</h1>
         </div>
         <div className="user-dash">

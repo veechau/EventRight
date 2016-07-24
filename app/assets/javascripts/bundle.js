@@ -33887,21 +33887,21 @@
 	var SignupForm = __webpack_require__(276);
 	
 	var modalStyle = {
-	  width: '100%',
-	  height: '100%',
+	  width: '80%',
+	  height: '80%',
 	  backgroundColor: 'fade(#4B4E4F, 80%)',
 	  opacity: '0.3'
 	};
 	
 	var backdropStyle = {
+	  width: '100%',
 	  border: '0px solid transparent'
 	};
 	
 	var contentStyle = {
-	  width: '40%',
+	  width: '100%',
 	  margin: 'auto',
-	  marginTop: '55px',
-	  border: '1px solid #D2D6DF',
+	  marginTop: '20px',
 	  borderRadius: '8px'
 	};
 	
@@ -34645,7 +34645,11 @@
 				React.createElement(
 					'form',
 					{ onSubmit: this._handleSubmit, className: 'login-form-box' },
-					'Sign In',
+					React.createElement(
+						'div',
+						{ className: 'login-form-header' },
+						'Log In'
+					),
 					React.createElement('br', null),
 					this.fieldErrors("base"),
 					React.createElement(
@@ -34772,6 +34776,8 @@
 	      password: "",
 	      first_name: "",
 	      last_name: "",
+	      email: "",
+	      address: "",
 	      avatar: "",
 	      balance: 0
 	    };
@@ -34805,6 +34811,8 @@
 	      password: this.state.password,
 	      first_name: this.state.first_name,
 	      last_name: this.state.last_name,
+	      email: this.state.email,
+	      address: this.state.address,
 	      avatar: this.state.avatar,
 	      balance: this.state.balance
 	    };
@@ -34905,7 +34913,29 @@
 	          React.createElement(
 	            'label',
 	            null,
-	            ' Avatar URL:',
+	            ' Email:',
+	            this.fieldErrors("email"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.email,
+	              onChange: this.update("email"),
+	              className: 'login-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Address:',
+	            this.fieldErrors("address"),
+	            React.createElement('input', { type: 'text',
+	              value: this.state.address,
+	              onChange: this.update("address"),
+	              className: 'login-input' })
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'label',
+	            null,
+	            ' Profile Picture:',
 	            this.fieldErrors("avatar"),
 	            React.createElement('input', { type: 'text',
 	              value: this.state.avatar,
@@ -34925,7 +34955,7 @@
 	          React.createElement('input', { type: 'submit', value: 'Submit' }),
 	          React.createElement(
 	            'button',
-	            { onClick: this._handleLogIn },
+	            { className: 'demo-user-button', onClick: this._handleLogIn },
 	            'Demo User'
 	          )
 	        )
@@ -35039,8 +35069,8 @@
 	var GatheringStore = __webpack_require__(277);
 	
 	var modalStyle = {
-	  width: '100%',
-	  height: '100%',
+	  width: '70%',
+	  height: '70%',
 	  backgroundColor: 'fade(#4B4E4F, 80%)',
 	  opacity: '0.3'
 	};
@@ -35052,10 +35082,10 @@
 	};
 	
 	var contentStyle = {
-	  width: '40%',
+	  width: '70%',
 	  margin: 'auto',
-	  marginTop: '55px',
-	  border: '1px solid #D2D6DF',
+	  marginTop: '20px',
+	  // border: '1px solid #D2D6DF',
 	  borderRadius: '8px'
 	};
 	
@@ -35313,7 +35343,7 @@
 					'Create an Event'
 				),
 				React.createElement('input', { id: 'pac-input', ref: 'pacInput', className: 'controls', type: 'text',
-					placeholder: 'Enter location here' }),
+					placeholder: 'Enter Venue here' }),
 				React.createElement(
 					'div',
 					{ id: 'type-selector', ref: 'typeSelector', className: 'controls' },
@@ -38056,7 +38086,7 @@
 	      { className: 'user-landing-page' },
 	      React.createElement(
 	        'div',
-	        { className: 'user-welcome' },
+	        { className: 'user-landing-header' },
 	        React.createElement(
 	          'h1',
 	          null,
@@ -38690,7 +38720,6 @@
 	  width: '100%',
 	  margin: 'auto',
 	  marginTop: '20px',
-	  // border: '1px solid #D2D6DF',
 	  borderRadius: '8px'
 	};
 	
@@ -39152,8 +39181,8 @@
 	      BookmarkActions.deleteBookmark(this.state.gathering_id, currentUser.id);
 	    }
 	  },
-	  _handleImgClick: function _handleImgClick() {
-	    hashHistory.push('events/' + this.state.gathering.id);
+	  _handleImageClick: function _handleImageClick() {
+	    hashHistory.push('events/' + this.state.gathering_id);
 	  },
 	  _parseDate: function _parseDate(date) {
 	    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

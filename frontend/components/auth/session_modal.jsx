@@ -5,21 +5,21 @@ const LoginForm = require('./login_form');
 const SignupForm = require('./signup_form');
 
 const modalStyle = {
-  width: '100%',
-  height: '100%',
+  width: '80%',
+  height: '80%',
   backgroundColor: 'fade(#4B4E4F, 80%)',
   opacity: '0.3',
 };
 
 const backdropStyle = {
-  border: '0px solid transparent',
+  width: '100%',
+  border: '0px solid transparent'
 };
 
 const contentStyle = {
-  width: '40%',
+  width: '100%',
   margin: 'auto',
-  marginTop: '55px',
-  border: '1px solid #D2D6DF',
+  marginTop: '20px',
   borderRadius: '8px'
 };
 

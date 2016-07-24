@@ -191,7 +191,7 @@ const GatheringForm = React.createClass({
 					Create an Event
 				</div>
 				<input id="pac-input" ref="pacInput" className="controls" type="text"
-				placeholder="Enter location here"/>
+				placeholder="Enter Venue here"/>
 				<div id="type-selector" ref="typeSelector" className="controls">
 					<input type="radio" name="type" ref="changetypeAll" defaultChecked/>
 					<label htmlFor="changetype-all">All</label>

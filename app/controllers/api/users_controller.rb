@@ -15,10 +15,10 @@ class Api::UsersController < ApplicationController
     @user = User.find(params[:id]).includes(:tickets, :bookmarks, :gatherings)
     render :show
   end
-  
+
   private
 
   def user_params
-    params.require(:user).permit(:username, :password, :first_name, :last_name, :avatar, :balance)
+    params.require(:user).permit(:username, :password, :first_name, :last_name, :avatar, :balance, :email, :address)
   end
 end
