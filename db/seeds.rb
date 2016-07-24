@@ -478,7 +478,7 @@ Gathering.create({
     })
 end
 
-3.times do
+4.times do
   Bookmark.create({
     user_id: 1,
     gathering_id: rand(Gathering.all.count) + 1
