@@ -376,12 +376,21 @@ div.nav-links-item:hover {
   width: 100%;
 }
 
+.left-dash {
+  border-top: 1px solid #F6682F;
+  border-left: 1px solid #F6682F;
+  border-bottom: 1px solid #F6682F;
+}
+
 .right-dash {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
+  border-top: 1px solid #F6682F;
+  border-right: 1px solid #F6682F;
+  border-bottom: 1px solid #F6682F;
 }
 
 .right-dash > div {
