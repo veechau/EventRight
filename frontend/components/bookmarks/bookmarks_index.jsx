@@ -78,7 +78,7 @@ const BookmarksIndex = React.createClass({
       <div>
         <div
           className="user-dash-link"
-          onClick={this.showModal}>Go To My Bookmarks</div>
+          onClick={this.showModal}>View My Bookmarks</div>
         <Modal  ref="modal"
                 className="user-dash-modal"
                 modalStyle={modalStyle}

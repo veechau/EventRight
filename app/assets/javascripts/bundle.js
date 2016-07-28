@@ -38250,7 +38250,7 @@
 	      React.createElement(
 	        'div',
 	        { onClick: this.showModal },
-	        'Go To My Tickets'
+	        'View My Tickets'
 	      ),
 	      React.createElement(
 	        Modal,
@@ -38774,7 +38774,7 @@
 	        {
 	          className: 'user-dash-link',
 	          onClick: this.showModal },
-	        'Go To My Bookmarks'
+	        'View My Bookmarks'
 	      ),
 	      React.createElement(
 	        Modal,

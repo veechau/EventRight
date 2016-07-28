@@ -166,7 +166,7 @@ div.nav-links-item:hover {
 .app-slider-div img {
   height: auto;
   min-height: 800px;
-  width: 100vw;
+  width: 100%;
   top: calc(-80vh/3);
   position: absolute;
 }

@@ -81,7 +81,7 @@ const TicketsIndex = React.createClass({
     }
     return (
       <div className="user-dash-link">
-        <div onClick={this.showModal}>Go To My Tickets</div>
+        <div onClick={this.showModal}>View My Tickets</div>
         <Modal  ref="modal"
                 className="user-dash-modal"
                 modalStyle={modalStyle}
