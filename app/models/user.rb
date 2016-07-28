@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates :password, length: {minimum: 6, allow_nil: true}
 
   after_initialize :ensure_session_token
+  after_initialize :add_default_image_to_users
   before_validation :ensure_session_token_uniqueness
 
   has_many :gatherings, dependent: :destroy,
@@ -43,6 +44,10 @@ class User < ActiveRecord::Base
     @user = User.find_by(username: username)
     return nil unless @user
     @user.is_password?(password) ? @user : nil
+  end
+
+  def add_default_image_to_users
+    self.avatar = "https://res.cloudinary.com/vechau/image/upload/c_fill,h_300,w_300/v1469726545/hipsterlogogenerator_1469726517488_pzneml.png" unless self.avatar.length > 15
   end
 
   private
