@@ -8,9 +8,7 @@ EventRight is a full-stack web application inspired by EventBrite with a Kicksta
 
 [github]: https://github.com/SJern/EventRight
 
-Special thanks to [Steven Cheong][github] for contributing to the project. Users can now add or remove their favorite messages!
-
-Special thanks to Steven Cheong for implementing Google Maps API and Google Places API. Users are now able to create events by inputting the venue name instead of the venue address. In addition, the event location is visualized when viewing an event.
+Special thanks to [Steven Cheong][github] for implementing Google Maps API and Google Places API. Users are now able to create events by inputting the venue name instead of the venue address. In addition, the event location is visualized when viewing an event.
 
 ## Features & Implementation
 
