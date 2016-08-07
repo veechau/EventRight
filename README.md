@@ -6,6 +6,12 @@
 
 EventRight is a full-stack web application inspired by EventBrite with a Kickstarter flair. This app allow its users to organize and/or contribute to an existing campaign to bring their favorite artists to their city. EventRight utilizes Ruby on Rails on the backend, a PostgreSQL database, and React.js with a Flux architectural framework on the frontend.  
 
+[github]: https://github.com/SJern/EventRight
+
+Special thanks to [Steven Cheong][github] for contributing to the project. Users can now add or remove their favorite messages!
+
+Special thanks to Steven Cheong for implementing Google Maps API and Google Places API. Users are now able to create events by inputting the venue name instead of the venue address. In addition, the event location is visualized when viewing an event.
+
 ## Features & Implementation
 
 ### Single-Page App
