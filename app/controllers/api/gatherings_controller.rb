@@ -21,6 +21,10 @@ class Api::GatheringsController < ApplicationController
   def show
     @gathering = Gathering.find(params[:id]).includes(:tickets, :bookmarks)
     @gathering.funds = @gathering.tickets.count * @gathering.tix_price
+    
+    @gathering.status = "completed" if @gatering.funds > @gathering.goal && Time.now <= @gathering.end_date
+
+    @gathering.status = "incomplete" if @gatering.funds < @gathering.goal && Time.now > @gathering.end_date
     render :show
   end
 
