@@ -26770,7 +26770,7 @@
 	var SessionStore = __webpack_require__(236);
 	
 	var Nav = __webpack_require__(259);
-	var AppSlider = __webpack_require__(287);
+	var Footer = __webpack_require__(316);
 	
 	var GatheringsIndex = __webpack_require__(293);
 	
@@ -26801,7 +26801,8 @@
 	        ),
 	        React.createElement(Nav, null)
 	      ),
-	      this.props.children
+	      this.props.children,
+	      React.createElement(Footer, null)
 	    );
 	  }
 	});
@@ -39484,6 +39485,81 @@
 	});
 	
 	module.exports = CategoryIndexShow;
+
+/***/ },
+/* 316 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var Link = __webpack_require__(172).Link;
+	
+	var Footer = React.createClass({
+	  displayName: 'Footer',
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'footer-container' },
+	      React.createElement(
+	        'div',
+	        { className: 'footer-links' },
+	        React.createElement(
+	          'a',
+	          { href: 'http://www.veronicachau.com/' },
+	          React.createElement(
+	            'i',
+	            { className: 'material-icons md-36' },
+	            ''
+	          ),
+	          'About'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'footer-links' },
+	        React.createElement(
+	          'a',
+	          { href: 'https://github.com/veechau/EventRight' },
+	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_100/v1469542908/github_pjne0n.png' }),
+	          'Learn More'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'footer-links' },
+	        React.createElement(
+	          'a',
+	          { href: 'https://github.com/SJern/EventRight' },
+	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_100/v1469542908/github_pjne0n.png' }),
+	          'Our Team'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'footer-links' },
+	        React.createElement(
+	          'a',
+	          { href: 'https://github.com/veechau' },
+	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_100/v1469542908/linkedin_hqazex.png' }),
+	          'Careers'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'footer-links' },
+	        React.createElement(
+	          'a',
+	          { href: 'https://angel.co/veronica-chau' },
+	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/v1470871847/AngelCo_mseq8h.png' }),
+	          'Contact Us'
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = Footer;
 
 /***/ }
 /******/ ]);
