@@ -17,7 +17,7 @@ const Footer = React.createClass({
         </div>
         <div className="footer-links">
           <a href="https://github.com/SJern/EventRight">
-          <img src="https://res.cloudinary.com/vechau/image/upload/c_scale,h_100/v1469542908/github_pjne0n.png"/>
+          <img src="https://res.cloudinary.com/vechau/image/upload/v1470872393/fork_qdvgbj.png"/>
           Our Team</a>
         </div>
         <div className="footer-links">
