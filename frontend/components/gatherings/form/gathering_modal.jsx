@@ -21,7 +21,6 @@ const contentStyle = {
   width: '70%',
   margin: 'auto',
   marginTop: '20px',
-  // border: '1px solid #D2D6DF',
   borderRadius: '8px'
 };
 
@@ -48,7 +47,7 @@ const GatheringModal = React.createClass({
     render: function() {
         return (
             <div className="nav-links-item">
-              <div onClick={this.showModal}>Create Event</div>
+              <div onClick={this.showModal}><i className="material-icons">&#xE878;</i></div>
               <Modal  ref="modal"
                       className="gathering-modal"
                       modalStyle={modalStyle}

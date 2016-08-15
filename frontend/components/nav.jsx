@@ -37,20 +37,12 @@ const Nav = React.createClass({
     hashHistory.push('/home');
   },
 
-  _fillIcon(){
-   $('#nav-icon').attr('src', 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_48/v1468016827/user-icon-big_-hover_sdiiuf.png');
-  },
-
-  _unfillIcon(){
-   $('#nav-icon').attr('src', 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_48/v1468016827/user-icon-big_f66luo.png');
-  },
-
-
   greeting() {
     let nav = (
       <nav className="nav-links">
         <div className="nav-links-item" onClick={ this._handleLogIn }>
-        Demo User</div>
+        <i className="material-icons">&#xE8E8;</i>
+        </div>
         <SessionModal content="login"/>
         <SessionModal content="signup"/>
       </nav>
@@ -61,18 +53,22 @@ const Nav = React.createClass({
         <nav className="nav-links">
         <div
             className="nav-links-item"
-            onClick={this._goToLanding}>Home</div>
+            onClick={this._goToLanding}><i className="material-icons">&#xE88A;</i></div>
+
         <GatheringModal />
+
           <div
                 className="nav-links-item"
-                onClick={this._handleLogOut}>Logout</div>
+                onClick={this._handleLogOut}><i className="material-icons">&#xE879;</i>
+          </div>
           <div
                 className="nav-links-item"
+                id="nav-links-user"
                 onMouseOver={this._fillIcon}
                 onMouseOut={this._unfillIcon}
                 onClick={this._accountInfo}>
-                <img id="nav-icon" src="https://res.cloudinary.com/vechau/image/upload/c_scale,h_48/v1468016827/user-icon-big_f66luo.png"/>
-                </div>
+                <i className="material-icons">&#xE851;</i>
+          </div>
         </nav>
       );
     }

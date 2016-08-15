@@ -35,10 +35,10 @@ const SessionModal = React.createClass({
       let buttontext = "";
       if (this.props.content === "login"){
         formContent = < LoginForm />;
-        buttontext = "Login";
+        buttontext = <i className="material-icons">&#xE7FD;</i>;
       } else {
         formContent = < SignupForm />;
-        buttontext = "Signup";
+        buttontext = <i className="material-icons">&#xE7FE;</i>;
       }
         return (
             <div className="nav-links-item">

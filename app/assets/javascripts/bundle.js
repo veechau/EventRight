@@ -33678,12 +33678,6 @@
 	  _accountInfo: function _accountInfo() {
 	    hashHistory.push('/home');
 	  },
-	  _fillIcon: function _fillIcon() {
-	    $('#nav-icon').attr('src', 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_48/v1468016827/user-icon-big_-hover_sdiiuf.png');
-	  },
-	  _unfillIcon: function _unfillIcon() {
-	    $('#nav-icon').attr('src', 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_48/v1468016827/user-icon-big_f66luo.png');
-	  },
 	  greeting: function greeting() {
 	    var nav = React.createElement(
 	      'nav',
@@ -33691,7 +33685,11 @@
 	      React.createElement(
 	        'div',
 	        { className: 'nav-links-item', onClick: this._handleLogIn },
-	        'Demo User'
+	        React.createElement(
+	          'i',
+	          { className: 'material-icons' },
+	          ''
+	        )
 	      ),
 	      React.createElement(SessionModal, { content: 'login' }),
 	      React.createElement(SessionModal, { content: 'signup' })
@@ -33706,7 +33704,11 @@
 	          {
 	            className: 'nav-links-item',
 	            onClick: this._goToLanding },
-	          'Home'
+	          React.createElement(
+	            'i',
+	            { className: 'material-icons' },
+	            ''
+	          )
 	        ),
 	        React.createElement(GatheringModal, null),
 	        React.createElement(
@@ -33714,16 +33716,25 @@
 	          {
 	            className: 'nav-links-item',
 	            onClick: this._handleLogOut },
-	          'Logout'
+	          React.createElement(
+	            'i',
+	            { className: 'material-icons' },
+	            ''
+	          )
 	        ),
 	        React.createElement(
 	          'div',
 	          {
 	            className: 'nav-links-item',
+	            id: 'nav-links-user',
 	            onMouseOver: this._fillIcon,
 	            onMouseOut: this._unfillIcon,
 	            onClick: this._accountInfo },
-	          React.createElement('img', { id: 'nav-icon', src: 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_48/v1468016827/user-icon-big_f66luo.png' })
+	          React.createElement(
+	            'i',
+	            { className: 'material-icons' },
+	            ''
+	          )
 	        )
 	      );
 	    }
@@ -33920,10 +33931,18 @@
 	    var buttontext = "";
 	    if (this.props.content === "login") {
 	      formContent = React.createElement(LoginForm, null);
-	      buttontext = "Login";
+	      buttontext = React.createElement(
+	        'i',
+	        { className: 'material-icons' },
+	        ''
+	      );
 	    } else {
 	      formContent = React.createElement(SignupForm, null);
-	      buttontext = "Signup";
+	      buttontext = React.createElement(
+	        'i',
+	        { className: 'material-icons' },
+	        ''
+	      );
 	    }
 	    return React.createElement(
 	      'div',
@@ -35086,7 +35105,6 @@
 	  width: '70%',
 	  margin: 'auto',
 	  marginTop: '20px',
-	  // border: '1px solid #D2D6DF',
 	  borderRadius: '8px'
 	};
 	
@@ -35115,7 +35133,11 @@
 	      React.createElement(
 	        'div',
 	        { onClick: this.showModal },
-	        'Create Event'
+	        React.createElement(
+	          'i',
+	          { className: 'material-icons' },
+	          ''
+	        )
 	      ),
 	      React.createElement(
 	        Modal,

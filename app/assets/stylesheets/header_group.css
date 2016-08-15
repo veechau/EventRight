@@ -45,3 +45,9 @@ div.nav-links-item:hover {
   cursor: pointer;
   color: #00a8f2;
 }
+
+@media screen and (max-width: 500px) {
+  div.nav-links-item{
+    padding-right: 2px;
+  }
+}
