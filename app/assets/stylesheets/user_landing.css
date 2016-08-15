@@ -86,6 +86,7 @@
 
 .user-dash-explore-index {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -156,4 +157,14 @@
 
 .bookmark-index-item:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+  .user-dash {
+    width: 100%;
+    flex-direction: column;
+  }
+  .left-dash, .right-dash {
+    border-style: none;
+  }
 }
