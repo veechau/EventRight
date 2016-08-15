@@ -1,0 +1,130 @@
+
+/*Event Show*/
+.gatherings-index {
+  display: flex;
+}
+
+.gathering-index-show {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #D2D6DF;
+  border-left: 1px solid #D2D6DF;
+  border-right: 1px solid #D2D6DF;
+}
+
+.gathering-index-show:last-child{
+  border-bottom: 1px solid #D2D6DF;
+}
+
+.gathering-index-show-top {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  width: 80vw;
+}
+
+.gathering-index-show-bottom {
+  height: 40vh;
+  width: 75vw;
+}
+
+.gathering-index-show-left {
+  display: flex;
+  width: 500px;
+  padding-left: 10px;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+}
+
+.gathering-index-show-right {
+  display: flex;
+  padding-right: 5px;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.gathering-buttons {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+}
+
+.gathering-button {
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  border: 1px solid #F6682F;
+  color: #000000;
+  padding: 5px;
+  margin: 3px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+
+.gathering-button:hover {
+  background-color: #F6682F;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.gathering-button:disabled {
+  color: #CCCCCC;
+  border: 1px solid #CCCCCC;
+}
+
+#gathering-map {
+  display: flex;
+  width: 90%;
+  margin: auto;
+}
+
+#event-progress {
+  height: 30px;
+}
+
+#event-header {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+#event-location {
+  font-size: 0.8em;
+  color: #666A73;
+  margin-bottom: 15px;
+}
+
+#event-dates {
+  font-size: 1em;
+  margin-bottom: 15px;
+}
+
+#event-description {
+  font-size: 0.8em;
+  /*height: 100px;*/
+  width: 500px;
+  overflow-y: scroll;
+  padding: 2px;
+  /*border: 1px solid #D2D6DF;*/
+  margin-bottom: 15px;
+}
+
+.event-fund {
+  color: #666A73;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+
+.event-genre {
+  margin: 2px;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}

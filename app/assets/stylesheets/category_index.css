@@ -1,0 +1,28 @@
+
+/*Category Index*/
+
+.categories-index {
+  display: flex;
+  justify-content: center;
+  width: 100%
+}
+
+.categories-index ul{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+.category-index-item-image {
+  display: flex;
+  float: left;
+  width: 250px;
+  height: 250px;
+  margin: 25px 10px;
+}
+
+.category-index-item-image:hover {
+  cursor: pointer;
+}

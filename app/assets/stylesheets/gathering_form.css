@@ -1,0 +1,62 @@
+
+/*Gathering Form*/
+
+.gathering-modal {
+  position: relative;
+  width: 120% !important;
+  overflow-y: scroll;
+}
+
+.gathering-modal-content {
+  background-color: #FFFFFF;
+  border-radius: 7px;
+  padding: 2px;
+  color: #666A73;
+}
+
+.gathering-modal-x {
+  text-align: right;
+  padding: 5px;
+}
+
+/*Gathering Form*/
+.gathering-form-box {
+  flex: 1;
+  width: 60%;
+  align-self: center;
+}
+
+.gathering-form-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  margin: auto;
+  /*padding: 0 40px 40px 40px;*/
+}
+
+.gathering-form {
+  display: flex;
+  position: block;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 10px;
+  z-index: 2;
+}
+
+.gathering-form-header {
+  font-size: 2em;
+  text-align: center;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.gathering-form label {
+  display: flex;
+  justify-content: space-between;
+}
+
+#category-dropdown {
+  display: flex;
+}

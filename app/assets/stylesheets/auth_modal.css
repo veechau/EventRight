@@ -1,0 +1,45 @@
+
+/*Login/Signup Form*/
+
+.session-modal {
+  position: relative;
+}
+
+.session-modal-content {
+  background-color: #FFFFFF;
+  border-radius: 7px;
+  padding: 2px;
+  color: #666A73;
+}
+
+.session-modal-x {
+  text-align: right;
+  padding: 5px;
+}
+
+.login-form-container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  margin: auto;
+  padding: 40px;
+}
+
+.login-form {
+  display: flex;
+  position: block;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+}
+
+.login-form-header {
+  font-size: 2em;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.login-form label {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,41 @@
+
+/*Category Show*/
+.category-index-show {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  margin-top: 15px;
+  width: 65%
+}
+
+.category-index-show-left {
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.category-index-show-right {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.category-index-show-right h1 {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.category-index-show-right p {
+  font-size: 0.8em;
+}
+
+.category-index-show-events {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 30px 0;
+}
+
+.category-index-show img {
+  width: 300px;
+}

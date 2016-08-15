@@ -57,21 +57,21 @@
 	var hashHistory = ReactRouter.hashHistory;
 	
 	var App = __webpack_require__(235);
-	var Landing = __webpack_require__(295);
-	var UserLanding = __webpack_require__(298);
+	var Landing = __webpack_require__(290);
+	var UserLanding = __webpack_require__(299);
 	var LoginForm = __webpack_require__(274);
 	var SignupForm = __webpack_require__(276);
-	var GatheringsIndex = __webpack_require__(293);
-	var GatheringIndexItem = __webpack_require__(294);
-	var GatheringIndexShow = __webpack_require__(313);
+	var GatheringsIndex = __webpack_require__(288);
+	var GatheringIndexItem = __webpack_require__(289);
+	var GatheringIndexShow = __webpack_require__(314);
 	var GatheringForm = __webpack_require__(280);
-	var CategoriesIndex = __webpack_require__(296);
-	var CategoryIndexItem = __webpack_require__(297);
-	var CategoryIndexShow = __webpack_require__(315);
-	var BookmarksIndex = __webpack_require__(307);
-	var BookmarkIndexItem = __webpack_require__(312);
-	var TicketsIndex = __webpack_require__(299);
-	var TicketIndexItem = __webpack_require__(304);
+	var CategoriesIndex = __webpack_require__(297);
+	var CategoryIndexItem = __webpack_require__(298);
+	var CategoryIndexShow = __webpack_require__(316);
+	var BookmarksIndex = __webpack_require__(308);
+	var BookmarkIndexItem = __webpack_require__(313);
+	var TicketsIndex = __webpack_require__(300);
+	var TicketIndexItem = __webpack_require__(305);
 	
 	var SessionStore = __webpack_require__(236);
 	var SessionActions = __webpack_require__(260);
@@ -26770,9 +26770,9 @@
 	var SessionStore = __webpack_require__(236);
 	
 	var Nav = __webpack_require__(259);
-	var Footer = __webpack_require__(316);
+	var Footer = __webpack_require__(287);
 	
-	var GatheringsIndex = __webpack_require__(293);
+	var GatheringsIndex = __webpack_require__(288);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -35821,11 +35821,221 @@
 /* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var Link = __webpack_require__(172).Link;
+	
+	var Footer = React.createClass({
+	  displayName: 'Footer',
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'footer-container' },
+	      React.createElement(
+	        'div',
+	        { className: 'footer-links' },
+	        React.createElement(
+	          'a',
+	          { href: 'http://www.veronicachau.com/' },
+	          React.createElement(
+	            'i',
+	            { className: 'material-icons md-36' },
+	            ''
+	          ),
+	          'About'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'footer-links' },
+	        React.createElement(
+	          'a',
+	          { href: 'https://github.com/veechau/EventRight' },
+	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_100/v1469542908/github_pjne0n.png' }),
+	          'Learn More'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'footer-links' },
+	        React.createElement(
+	          'a',
+	          { href: 'https://github.com/SJern/EventRight' },
+	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/v1470872393/fork_qdvgbj.png' }),
+	          'Our Team'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'footer-links' },
+	        React.createElement(
+	          'a',
+	          { href: 'https://github.com/veechau' },
+	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_100/v1469542908/linkedin_hqazex.png' }),
+	          'Careers'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'footer-links' },
+	        React.createElement(
+	          'a',
+	          { href: 'https://angel.co/veronica-chau' },
+	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/v1470871847/AngelCo_mseq8h.png' }),
+	          'Contact Us'
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = Footer;
+
+/***/ },
+/* 288 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var GatheringStore = __webpack_require__(277);
+	var GatheringActions = __webpack_require__(281);
+	var GatheringIndexItem = __webpack_require__(289);
+	
+	var GatheringsIndex = React.createClass({
+	  displayName: 'GatheringsIndex',
+	  getInitialState: function getInitialState() {
+	    return { gatherings: [] };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.gatheringListener = GatheringStore.addListener(this._onChange);
+	    GatheringActions.fetchGatherings();
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.gatheringListener.remove();
+	  },
+	  _onChange: function _onChange() {
+	    this.setState({ gatherings: GatheringStore.all() });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'gatherings-index' },
+	      React.createElement(
+	        'ul',
+	        null,
+	        this.state.gatherings.map(function (gathering) {
+	          return React.createElement(
+	            'li',
+	            { key: gathering.id },
+	            React.createElement(GatheringIndexItem, {
+	              gathering: gathering })
+	          );
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = GatheringsIndex;
+
+/***/ },
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	/* eslint max-len: "off" */
+	
+	var React = __webpack_require__(1);
+	var hashHistory = __webpack_require__(172).hashHistory;
+	
+	var GatheringIndexItem = React.createClass({
+	  displayName: 'GatheringIndexItem',
+	  _handleImgClick: function _handleImgClick() {
+	    hashHistory.push('events/' + this.props.gathering.id);
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'gathering-index-item-image',
+	        onClick: this._handleImgClick },
+	      React.createElement('img', { src: this.props.gathering.image }),
+	      React.createElement(
+	        'p',
+	        {
+	          className: 'gathering-name' },
+	        this.props.gathering.artist
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = GatheringIndexItem;
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	/* eslint max-len: "off" */
+	
+	var React = __webpack_require__(1);
+	var SessionStore = __webpack_require__(236);
+	var AppSlider = __webpack_require__(291);
+	var GatheringsIndex = __webpack_require__(288);
+	var CategoriesIndex = __webpack_require__(297);
+	
+	var Landing = React.createClass({
+	  displayName: 'Landing',
+	  _scrollDown: function _scrollDown() {
+	    $('html,body').animate({ scrollTop: $(".categories-index").offset().top }, 'slow');
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'landing-page' },
+	      React.createElement(
+	        'div',
+	        { id: 'welcome-text' },
+	        'Welcome to EventRight'
+	      ),
+	      React.createElement(
+	        'p',
+	        { id: 'welcome-intro' },
+	        'Crowdfund your favorite artist to perform in your city!'
+	      ),
+	      React.createElement(
+	        'p',
+	        { id: 'welcome-p' },
+	        'Scroll down to explore more!'
+	      ),
+	      React.createElement(
+	        'div',
+	        { onMouseOver: this._scrollDown },
+	        React.createElement('img', {
+	          id: 'welcome-arrow',
+	          src: 'https://res.cloudinary.com/vechau/image/upload/v1467965179/down-arrow-white_ozozli.png' })
+	      ),
+	      React.createElement(AppSlider, { id: 'app-slider-div' }),
+	      React.createElement(CategoriesIndex, null)
+	    );
+	  }
+	});
+	
+	module.exports = Landing;
+
+/***/ },
+/* 291 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* eslint max-len: "off" */
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var Carousel = __webpack_require__(288);
+	var Carousel = __webpack_require__(292);
 	
 	var Decorators = [{
 	  component: React.createClass({
@@ -35947,18 +36157,18 @@
 	module.exports = AppSlider;
 
 /***/ },
-/* 288 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Carousel = __webpack_require__(289);
+	var Carousel = __webpack_require__(293);
 	
 	module.exports = Carousel;
 
 
 /***/ },
-/* 289 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35979,11 +36189,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _kwReactTweenState = __webpack_require__(290);
+	var _kwReactTweenState = __webpack_require__(294);
 	
 	var _kwReactTweenState2 = _interopRequireDefault(_kwReactTweenState);
 	
-	var _decorators = __webpack_require__(291);
+	var _decorators = __webpack_require__(295);
 	
 	var _decorators2 = _interopRequireDefault(_decorators);
 	
@@ -35991,7 +36201,7 @@
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _exenv = __webpack_require__(292);
+	var _exenv = __webpack_require__(296);
 	
 	var _exenv2 = _interopRequireDefault(_exenv);
 	
@@ -36891,7 +37101,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 290 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function webpackUniversalModuleDefinition(root, factory) {
@@ -37654,7 +37864,7 @@
 	//# sourceMappingURL=index.js.map
 
 /***/ },
-/* 291 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37795,7 +38005,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 292 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -37841,142 +38051,7 @@
 
 
 /***/ },
-/* 293 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	var GatheringStore = __webpack_require__(277);
-	var GatheringActions = __webpack_require__(281);
-	var GatheringIndexItem = __webpack_require__(294);
-	
-	var GatheringsIndex = React.createClass({
-	  displayName: 'GatheringsIndex',
-	  getInitialState: function getInitialState() {
-	    return { gatherings: [] };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    this.gatheringListener = GatheringStore.addListener(this._onChange);
-	    GatheringActions.fetchGatherings();
-	  },
-	  componentWillUnmount: function componentWillUnmount() {
-	    this.gatheringListener.remove();
-	  },
-	  _onChange: function _onChange() {
-	    this.setState({ gatherings: GatheringStore.all() });
-	  },
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'gatherings-index' },
-	      React.createElement(
-	        'ul',
-	        null,
-	        this.state.gatherings.map(function (gathering) {
-	          return React.createElement(
-	            'li',
-	            { key: gathering.id },
-	            React.createElement(GatheringIndexItem, {
-	              gathering: gathering })
-	          );
-	        })
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = GatheringsIndex;
-
-/***/ },
-/* 294 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	/* eslint max-len: "off" */
-	
-	var React = __webpack_require__(1);
-	var hashHistory = __webpack_require__(172).hashHistory;
-	
-	var GatheringIndexItem = React.createClass({
-	  displayName: 'GatheringIndexItem',
-	  _handleImgClick: function _handleImgClick() {
-	    hashHistory.push('events/' + this.props.gathering.id);
-	  },
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'gathering-index-item-image',
-	        onClick: this._handleImgClick },
-	      React.createElement('img', { src: this.props.gathering.image }),
-	      React.createElement(
-	        'p',
-	        {
-	          className: 'gathering-name' },
-	        this.props.gathering.artist
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = GatheringIndexItem;
-
-/***/ },
-/* 295 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	/* eslint max-len: "off" */
-	
-	var React = __webpack_require__(1);
-	var SessionStore = __webpack_require__(236);
-	var AppSlider = __webpack_require__(287);
-	var GatheringsIndex = __webpack_require__(293);
-	var CategoriesIndex = __webpack_require__(296);
-	
-	var Landing = React.createClass({
-	  displayName: 'Landing',
-	  _scrollDown: function _scrollDown() {
-	    $('html,body').animate({ scrollTop: $(".categories-index").offset().top }, 'slow');
-	  },
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'landing-page' },
-	      React.createElement(
-	        'div',
-	        { id: 'welcome-text' },
-	        'Welcome to EventRight'
-	      ),
-	      React.createElement(
-	        'p',
-	        { id: 'welcome-intro' },
-	        'Crowdfund your favorite artist to perform in your city!'
-	      ),
-	      React.createElement(
-	        'p',
-	        { id: 'welcome-p' },
-	        'Scroll down to explore more!'
-	      ),
-	      React.createElement(
-	        'div',
-	        { onMouseOver: this._scrollDown },
-	        React.createElement('img', {
-	          id: 'welcome-arrow',
-	          src: 'https://res.cloudinary.com/vechau/image/upload/v1467965179/down-arrow-white_ozozli.png' })
-	      ),
-	      React.createElement(AppSlider, { id: 'app-slider-div' }),
-	      React.createElement(CategoriesIndex, null)
-	    );
-	  }
-	});
-	
-	module.exports = Landing;
-
-/***/ },
-/* 296 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37984,7 +38059,7 @@
 	var React = __webpack_require__(1);
 	var CategoryStore = __webpack_require__(286);
 	var CategoryActions = __webpack_require__(283);
-	var CategoryIndexItem = __webpack_require__(297);
+	var CategoryIndexItem = __webpack_require__(298);
 	
 	var CategoriesIndex = React.createClass({
 	  displayName: 'CategoriesIndex',
@@ -38024,7 +38099,7 @@
 	module.exports = CategoriesIndex;
 
 /***/ },
-/* 297 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38051,7 +38126,7 @@
 	module.exports = CategoriesIndexItem;
 
 /***/ },
-/* 298 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38059,11 +38134,11 @@
 	var React = __webpack_require__(1);
 	var SessionStore = __webpack_require__(236);
 	var SessionActions = __webpack_require__(260);
-	var AppSlider = __webpack_require__(287);
-	var GatheringsIndex = __webpack_require__(293);
-	var CategoriesIndex = __webpack_require__(296);
-	var TicketsIndex = __webpack_require__(299);
-	var BookmarksIndex = __webpack_require__(307);
+	var AppSlider = __webpack_require__(291);
+	var GatheringsIndex = __webpack_require__(288);
+	var CategoriesIndex = __webpack_require__(297);
+	var TicketsIndex = __webpack_require__(300);
+	var BookmarksIndex = __webpack_require__(308);
 	
 	var Landing = React.createClass({
 	  displayName: 'Landing',
@@ -38159,7 +38234,7 @@
 	module.exports = Landing;
 
 /***/ },
-/* 299 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38167,9 +38242,9 @@
 	var React = __webpack_require__(1);
 	var Modal = __webpack_require__(265);
 	
-	var TicketStore = __webpack_require__(300);
-	var TicketActions = __webpack_require__(302);
-	var TicketIndexItem = __webpack_require__(304);
+	var TicketStore = __webpack_require__(301);
+	var TicketActions = __webpack_require__(303);
+	var TicketIndexItem = __webpack_require__(305);
 	var GatheringActions = __webpack_require__(281);
 	var GatheringStore = __webpack_require__(277);
 	var SessionStore = __webpack_require__(236);
@@ -38284,14 +38359,14 @@
 	module.exports = TicketsIndex;
 
 /***/ },
-/* 300 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var AppDispatcher = __webpack_require__(237);
 	var Store = __webpack_require__(241).Store;
-	var TicketConstants = __webpack_require__(301);
+	var TicketConstants = __webpack_require__(302);
 	
 	var TicketStore = new Store(AppDispatcher);
 	
@@ -38352,7 +38427,7 @@
 	module.exports = TicketStore;
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38366,14 +38441,14 @@
 	module.exports = BookmarkConstants;
 
 /***/ },
-/* 302 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var AppDispatcher = __webpack_require__(237);
-	var TicketConstants = __webpack_require__(301);
-	var TicketApiUtil = __webpack_require__(303);
+	var TicketConstants = __webpack_require__(302);
+	var TicketApiUtil = __webpack_require__(304);
 	var ErrorActions = __webpack_require__(262);
 	
 	var TicketActions = {
@@ -38420,7 +38495,7 @@
 	module.exports = TicketActions;
 
 /***/ },
-/* 303 */
+/* 304 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38493,7 +38568,7 @@
 	module.exports = TicketApiUtil;
 
 /***/ },
-/* 304 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38501,7 +38576,7 @@
 	/* eslint max-len: "off" */
 	
 	var React = __webpack_require__(1);
-	var Line = __webpack_require__(305).Line;
+	var Line = __webpack_require__(306).Line;
 	var hashHistory = __webpack_require__(172).hashHistory;
 	var GatheringStore = __webpack_require__(277);
 	var GatheringActions = __webpack_require__(281);
@@ -38585,15 +38660,15 @@
 	module.exports = TicketsIndexItem;
 
 /***/ },
-/* 305 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(306);
+	module.exports = __webpack_require__(307);
 
 /***/ },
-/* 306 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38690,7 +38765,7 @@
 	};
 
 /***/ },
-/* 307 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38698,9 +38773,9 @@
 	var React = __webpack_require__(1);
 	var Modal = __webpack_require__(265);
 	
-	var BookmarkStore = __webpack_require__(308);
-	var BookmarkActions = __webpack_require__(310);
-	var BookmarkIndexItem = __webpack_require__(312);
+	var BookmarkStore = __webpack_require__(309);
+	var BookmarkActions = __webpack_require__(311);
+	var BookmarkIndexItem = __webpack_require__(313);
 	var GatheringActions = __webpack_require__(281);
 	var GatheringStore = __webpack_require__(277);
 	var SessionStore = __webpack_require__(236);
@@ -38808,14 +38883,14 @@
 	module.exports = BookmarksIndex;
 
 /***/ },
-/* 308 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var AppDispatcher = __webpack_require__(237);
 	var Store = __webpack_require__(241).Store;
-	var BookmarkConstants = __webpack_require__(309);
+	var BookmarkConstants = __webpack_require__(310);
 	
 	var BookmarkStore = new Store(AppDispatcher);
 	
@@ -38884,7 +38959,7 @@
 	module.exports = BookmarkStore;
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38898,14 +38973,14 @@
 	module.exports = BookmarkConstants;
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var AppDispatcher = __webpack_require__(237);
-	var BookmarkConstants = __webpack_require__(309);
-	var BookmarkApiUtil = __webpack_require__(311);
+	var BookmarkConstants = __webpack_require__(310);
+	var BookmarkApiUtil = __webpack_require__(312);
 	var ErrorActions = __webpack_require__(262);
 	
 	var BookmarkActions = {
@@ -38946,7 +39021,7 @@
 	module.exports = BookmarkActions;
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -39019,7 +39094,7 @@
 	module.exports = BookmarkApiUtil;
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39078,7 +39153,7 @@
 	module.exports = BookmarkIndexItem;
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39086,20 +39161,20 @@
 	/* eslint max-len: "off" */
 	
 	var React = __webpack_require__(1);
-	var Line = __webpack_require__(305).Line;
+	var Line = __webpack_require__(306).Line;
 	var GatheringStore = __webpack_require__(277);
 	var GatheringActions = __webpack_require__(281);
-	var TicketStore = __webpack_require__(300);
-	var TicketActions = __webpack_require__(302);
-	var BookmarkStore = __webpack_require__(308);
-	var BookmarkActions = __webpack_require__(310);
+	var TicketStore = __webpack_require__(301);
+	var TicketActions = __webpack_require__(303);
+	var BookmarkStore = __webpack_require__(309);
+	var BookmarkActions = __webpack_require__(311);
 	var SessionStore = __webpack_require__(236);
 	var SessionActions = __webpack_require__(260);
 	var CategoryStore = __webpack_require__(286);
 	var CategoryActions = __webpack_require__(283);
 	var SessionModal = __webpack_require__(264);
 	var hashHistory = __webpack_require__(172).hashHistory;
-	var GatheringMap = __webpack_require__(314);
+	var GatheringMap = __webpack_require__(315);
 	
 	var GatheringIndexShow = React.createClass({
 	  displayName: 'GatheringIndexShow',
@@ -39349,7 +39424,7 @@
 	module.exports = GatheringIndexShow;
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39404,7 +39479,7 @@
 	module.exports = GatheringMap;
 
 /***/ },
-/* 315 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39416,7 +39491,7 @@
 	var CategoryActions = __webpack_require__(283);
 	var GatheringStore = __webpack_require__(277);
 	var GatheringActions = __webpack_require__(281);
-	var GatheringIndexShow = __webpack_require__(313);
+	var GatheringIndexShow = __webpack_require__(314);
 	var hashHistory = __webpack_require__(172).hashHistory;
 	
 	var CategoryIndexShow = React.createClass({
@@ -39485,81 +39560,6 @@
 	});
 	
 	module.exports = CategoryIndexShow;
-
-/***/ },
-/* 316 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	var Link = __webpack_require__(172).Link;
-	
-	var Footer = React.createClass({
-	  displayName: 'Footer',
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'footer-container' },
-	      React.createElement(
-	        'div',
-	        { className: 'footer-links' },
-	        React.createElement(
-	          'a',
-	          { href: 'http://www.veronicachau.com/' },
-	          React.createElement(
-	            'i',
-	            { className: 'material-icons md-36' },
-	            ''
-	          ),
-	          'About'
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'footer-links' },
-	        React.createElement(
-	          'a',
-	          { href: 'https://github.com/veechau/EventRight' },
-	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_100/v1469542908/github_pjne0n.png' }),
-	          'Learn More'
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'footer-links' },
-	        React.createElement(
-	          'a',
-	          { href: 'https://github.com/SJern/EventRight' },
-	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/v1470872393/fork_qdvgbj.png' }),
-	          'Our Team'
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'footer-links' },
-	        React.createElement(
-	          'a',
-	          { href: 'https://github.com/veechau' },
-	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_100/v1469542908/linkedin_hqazex.png' }),
-	          'Careers'
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'footer-links' },
-	        React.createElement(
-	          'a',
-	          { href: 'https://angel.co/veronica-chau' },
-	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/v1470871847/AngelCo_mseq8h.png' }),
-	          'Contact Us'
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = Footer;
 
 /***/ }
 /******/ ]);

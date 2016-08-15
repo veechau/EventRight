@@ -1,0 +1,36 @@
+/*Events Index*/
+
+.gatherings-index {
+  display: flex;
+  justify-content: center;
+  width: 100%
+}
+
+.gatherings-index ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gathering-index-item-image {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+
+.gathering-index-item-image:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 2px #888888;
+}
+
+.gathering-name {
+  padding: 2px;
+  color: #666A73;
+  font-size: 0.8em;
+  align-self: center;
+  text-transform: uppercase;
+}

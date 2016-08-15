@@ -1,0 +1,159 @@
+/*User Landing Page*/
+.user-landing-page {
+  width: 90%;
+  margin: 20px auto 0 auto;
+}
+
+.user-landing-header {
+  display: block;
+  font-family: 'Quicksand', sans-serif;
+  margin: 20px 0px;
+  text-align: center;;
+}
+
+.user-welcome {
+  display: flex;
+  justify-content: flex-start;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.user-dash {
+  display: flex;
+  margin: auto;
+  height: 60%;
+  width: 70%;
+  justify-content: center;
+}
+
+.user-dash-left {
+  width: 100%;
+}
+
+.user-dash-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.left-dash {
+  border-top: 1px solid #F6682F;
+  border-left: 1px solid #F6682F;
+  border-bottom: 1px solid #F6682F;
+}
+
+.right-dash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-top: 1px solid #F6682F;
+  border-right: 1px solid #F6682F;
+  border-bottom: 1px solid #F6682F;
+}
+
+.right-dash > div {
+  padding: 5px;
+}
+
+.user-dash-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-dash-modal {
+  background-color: #FFFFFF;
+  border-radius: 7px;
+  padding: 2px;
+  color: #666A73;
+  overflow-y: scroll;
+}
+
+.user-dash-modal-x {
+  text-align: right;
+  padding: 5px;
+}
+
+.user-dash-explore {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.user-dash-explore-index {
+  display: flex;
+  justify-content: center;
+}
+
+.user-dash-bookmark, .user-dash-tickets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;;
+  justify-content: space-around;
+  overflow-y: scroll;
+}
+
+.user-dash-tickets ul {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+}
+
+.user-dash-link {
+  font-family: 'Quicksand', sans-serif;
+  border: 1px solid #F6682F;
+  border-radius: 3px;
+  padding: 5px;
+  text-align: center;
+  margin: 5px 0;
+}
+
+.user-dash-link:hover {
+  background-color: #F6682F;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.user-dash-text {
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  color: #F6682F;
+  font-size: 2.5em;
+}
+
+
+.tickets-index-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.tickets-index-item  img {
+  border: 1px solid #D2D6DF;
+  margin-right: 10px;
+  width: 400px;
+  height: auto;
+}
+
+.tickets-index-item  img:hover {
+  cursor: pointer;
+}
+
+.tickets-index-item > img, .tickets-index-item > div {
+  width: 40%;
+}
+
+.bookmark-index-item {
+  width: 300px;
+  margin: 5px 0;
+  padding: 5px;
+}
+
+.bookmark-index-item:hover {
+  cursor: pointer;
+}

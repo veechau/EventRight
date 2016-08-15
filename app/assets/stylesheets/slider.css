@@ -1,0 +1,74 @@
+/*Banner / Slider*/
+
+.app-slider-div {
+  height: 100vh;
+}
+
+.app-slider-div div{
+  overflow-y: hidden;
+  height: 85vh;
+  align-items: center;
+}
+
+.app-slider-div img {
+  height: auto;
+  min-height: 800px;
+  width: 100%;
+  top: calc(-80vh/3);
+  position: absolute;
+}
+
+
+#welcome-text {
+  position: absolute;
+  top: calc(20%);
+  left: calc(100%/2 - 233.135px);
+  margin-bottom: 30%;
+  font-family: 'Pacifico', sans-serif;
+  text-shadow: 1px 1px #CCCCCC;
+  font-size: 3em;
+  color: #FFFFFF;
+  z-index: 2;
+}
+
+#welcome-intro {
+  position: absolute;
+  top: calc(100% - 200px);
+  left: calc(100%/2 - 260.43px);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1em;
+  text-transform: uppercase;
+  text-shadow: 1px 1px #CCCCCC;
+  color: #FFFFFF;
+  z-index: 2;
+}
+
+#welcome-p {
+  position: absolute;
+  top: calc(100% - 175px);
+  left: calc(100%/2 - 115.375px);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1em;
+  text-shadow: 1px 1px #CCCCCC;
+  color: #FFFFFF;
+  z-index: 2;
+}
+
+#welcome-arrow {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: calc(100% - 155px);
+  left: calc(100%/2 - 50px);
+  z-index: 2;
+}
+
+#welcome-arrow:hover {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: calc(100% - 120px);
+  left: calc(100%/2 - 50px);
+  z-index: 2;
+  cursor: pointer;
+}
