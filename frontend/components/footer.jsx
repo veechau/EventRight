@@ -21,7 +21,7 @@ const Footer = React.createClass({
           Our Team</a>
         </div>
         <div className="footer-links">
-        <a href="https://github.com/veechau">
+        <a href="https://www.linkedin.com/in/veronica-chau">
         <img src="https://res.cloudinary.com/vechau/image/upload/c_scale,h_100/v1469542908/linkedin_hqazex.png"/>
         Careers</a>
         </div>
