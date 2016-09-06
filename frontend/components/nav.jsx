@@ -41,7 +41,7 @@ const Nav = React.createClass({
     let nav = (
       <nav className="nav-links">
         <div className="nav-links-item" onClick={ this._handleLogIn }>
-        <i className="material-icons">&#xE8E8;</i>
+        <i className="material-icons">&#xE85E;</i>
         </div>
         <SessionModal content="login"/>
         <SessionModal content="signup"/>

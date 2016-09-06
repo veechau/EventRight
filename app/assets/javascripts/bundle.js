@@ -33688,7 +33688,7 @@
 	        React.createElement(
 	          'i',
 	          { className: 'material-icons' },
-	          ''
+	          ''
 	        )
 	      ),
 	      React.createElement(SessionModal, { content: 'login' }),
@@ -35089,22 +35089,21 @@
 	var GatheringStore = __webpack_require__(277);
 	
 	var modalStyle = {
-	  width: '70%',
-	  height: '70%',
+	  width: '80%',
+	  height: '80%',
 	  backgroundColor: 'fade(#4B4E4F, 80%)',
 	  opacity: '0.3'
 	};
 	
 	var backdropStyle = {
 	  width: '100%',
-	  height: '100%',
 	  border: '0px solid transparent'
 	};
 	
 	var contentStyle = {
-	  width: '70%',
+	  width: '100%',
 	  margin: 'auto',
-	  marginTop: '20px',
+	  // marginTop: '20px',
 	  borderRadius: '8px'
 	};
 	

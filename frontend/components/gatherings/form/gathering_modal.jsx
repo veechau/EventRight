@@ -5,22 +5,21 @@ const GatheringForm = require('./gathering_form');
 const GatheringStore = require('../../../stores/gathering_store');
 
 const modalStyle = {
-  width: '70%',
-  height: '70%',
+  width: '80%',
+  height: '80%',
   backgroundColor: 'fade(#4B4E4F, 80%)',
   opacity: '0.3',
 };
 
 const backdropStyle = {
   width: '100%',
-  height: '100%',
   border: '0px solid transparent',
 };
 
 const contentStyle = {
-  width: '70%',
+  width: '100%',
   margin: 'auto',
-  marginTop: '20px',
+  // marginTop: '20px',
   borderRadius: '8px'
 };
 

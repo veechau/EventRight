@@ -3,7 +3,7 @@
 
 .gathering-modal {
   position: relative;
-  width: 120% !important;
+  width: 80% !important;
   overflow-y: scroll;
 }
 
@@ -22,17 +22,16 @@
 /*Gathering Form*/
 .gathering-form-box {
   flex: 1;
-  width: 60%;
+  width: 80%;
   align-self: center;
 }
 
 .gathering-form-container {
   display: flex;
-  flex-direction: column;
   position: relative;
   justify-content: center;
+  flex-direction: column;
   margin: auto;
-  /*padding: 0 40px 40px 40px;*/
 }
 
 .gathering-form {
