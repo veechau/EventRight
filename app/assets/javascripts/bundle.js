@@ -35893,7 +35893,7 @@
 	        { className: 'footer-links' },
 	        React.createElement(
 	          'a',
-	          { href: 'https://github.com/veechau' },
+	          { href: 'https://www.linkedin.com/in/veronica-chau' },
 	          React.createElement('img', { src: 'https://res.cloudinary.com/vechau/image/upload/c_scale,h_100/v1469542908/linkedin_hqazex.png' }),
 	          'Careers'
 	        )
