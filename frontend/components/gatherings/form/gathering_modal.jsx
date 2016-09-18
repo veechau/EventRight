@@ -1,5 +1,6 @@
 const React = require('react');
 const Modal = require('boron/DropModal');
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 const GatheringForm = require('./gathering_form');
 const GatheringStore = require('../../../stores/gathering_store');
@@ -19,7 +20,6 @@ const backdropStyle = {
 const contentStyle = {
   width: '100%',
   margin: 'auto',
-  // marginTop: '20px',
   borderRadius: '8px'
 };
 
@@ -44,9 +44,16 @@ const GatheringModal = React.createClass({
         this.refs.modal.hide();
     },
     render: function() {
+
+        let creatEventTT = (
+          <Tooltip id="tooltip">Create an Event</Tooltip>
+        )
+
         return (
             <div className="nav-links-item">
-              <div onClick={this.showModal}><i className="material-icons">&#xE878;</i></div>
+              <OverlayTrigger placement="bottom" overlay={creatEventTT}>
+                <div onClick={this.showModal}><i className="material-icons">&#xE878;</i></div>
+              </OverlayTrigger>
               <Modal  ref="modal"
                       className="gathering-modal"
                       modalStyle={modalStyle}

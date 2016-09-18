@@ -3,11 +3,11 @@
 .header-group {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 0;
   width: 100%;
   border-top: 1px solid #D2D6DF;
   border-bottom: 1px solid #D2D6DF;
-  align-items: center;
 }
 
 .header-link {
@@ -24,6 +24,7 @@
 
 .header-link:hover {
   color: #F69A2F;
+  text-decoration: none;
   cursor: pointer;
 }
 

@@ -74,7 +74,7 @@
 }
 
 
-@media screen and (max-width: 700px) {
+@media all and (max-width: 700px) {
   .app-slider-div, .app-slider-div div{
     display: none;
   }
@@ -86,7 +86,6 @@
     top: 0;
     left: 0;
     margin: auto;
-    /*padding: 0 30px;*/
     height: 400px;
     background-image: url("https://res.cloudinary.com/vechau/image/upload/c_scale,h_600/v1470426773/concert1_lwg25i.jpg");
     background-position: center;

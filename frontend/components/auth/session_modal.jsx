@@ -4,6 +4,8 @@ const Modal = require('boron/DropModal');
 const LoginForm = require('./login_form');
 const SignupForm = require('./signup_form');
 
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+
 const modalStyle = {
   width: '80%',
   height: '80%',
@@ -31,18 +33,27 @@ const SessionModal = React.createClass({
         this.refs.modal.hide();
     },
     render: function() {
+
       let formContent = "";
       let buttontext = "";
+      let tooltip = (
+        <Tooltip id="tooltip">Login!</Tooltip>
+      )
       if (this.props.content === "login"){
         formContent = < LoginForm />;
         buttontext = <i className="material-icons">&#xE7FD;</i>;
       } else {
         formContent = < SignupForm />;
         buttontext = <i className="material-icons">&#xE7FE;</i>;
+        tooltip = (
+          <Tooltip id="tooltip">Sign Up!</Tooltip>
+        )
       }
         return (
             <div className="nav-links-item">
+            <OverlayTrigger placement="bottom" overlay={tooltip}>
               <div onClick={this.showModal}>{buttontext}</div>
+            </OverlayTrigger>
               <Modal  ref="modal"
                       className="session-modal"
                       modalStyle={modalStyle}
